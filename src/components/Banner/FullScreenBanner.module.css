@@ -1,0 +1,103 @@
+.Banner {
+    position: relative;
+    display: flex;
+    padding: 0 90px 100px 100px;
+    align-items: flex-end;
+}
+
+.bannerImage {
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    height: 100svh;
+    width: 100%;
+
+    opacity: .1;
+    filter: blur(5px);
+    
+    background-size: cover;
+}
+
+.bannerImage::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(0deg, var(--background)  0%, rgba(255,255,255,0) 100%);
+}
+
+.bannerInfoContainer {
+    height: fit-content;
+    width: 50%;
+}
+
+.bannerInfoContainer .bannerBaseInfo {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    min-width: 100px;
+    
+}
+
+.bannerTitle {
+    color: var(--titleColor);
+    font-size: var(--bannerTitle);
+}
+
+.bannerChar {
+  width: 50%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.bannerDescription {
+    width: 100%;
+}
+
+.bannerText, .bannerText * {
+    font-size: var(--bannerText);
+}
+
+.load {
+    background-color: var(--02dp);
+    color: transparent;
+    background: linear-gradient(90deg, var(--00dp) 25%,var(--02dp) 50%,var(--01dp) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1s infinite linear !important;
+}
+
+@keyframes shimmer {
+    0% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: -100%;
+    }
+}
+
+.bannerBaseInfo, .bannerTitle, .bannerDescription {
+    opacity: 1;
+    animation: text-animate .5s linear forwards;
+}
+
+.bannerDescriptionLoad {
+    height: 100px;
+    width: 75%;
+}
+
+@keyframes text-animate {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

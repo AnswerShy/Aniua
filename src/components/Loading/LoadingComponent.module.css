@@ -1,0 +1,43 @@
+.loadingWrapper {
+    height: 100svh;
+    width: 100%;
+
+    z-index: 9999;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+
+    background-color: var(--background);
+    animation: bg 2s ease-in-out;
+}
+
+@keyframes bg {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.loadingText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: xxx-large;
+    user-select: none;
+}
+
+.hidden {
+    display: none;
+}

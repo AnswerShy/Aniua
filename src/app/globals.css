@@ -1,0 +1,119 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@0;1&display=swap'); */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --black: #121212;
+    /* --primaryColor: #a73939; */
+    --primaryColor: white;
+
+    --00dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 2%);
+    --01dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 7%);
+    --02dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 12%);
+    --03dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 17%);
+
+    --background: var(--00dp);
+    --foreground: #ffffffab;
+
+    --titleColor: white;
+    --textColor: var(--foreground);
+
+    --button: color-mix(in oklab, var(--01dp) 45%, transparent);
+    --buttonHover: color-mix(in oklab, var(--03dp) 50%, transparent);
+
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    --shadowHover: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    --shadow02dp: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    --shadow03dp: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    --shadow04dp: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    --shadow05dp: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+
+    --posterWidth: 150px;
+    --posterHeight: 210px;
+
+    --bluredFilter: blur(5px);
+    --borderRad: 12px;
+
+    --loadGradient: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%);
+
+    --titleSize: 2.5rem;
+    --textSize: 1.5rem;
+
+    --subtext: 24px;
+    --subtitle: 24px;
+
+    --bannerTitle: 6rem;
+    --bannerText: 2rem;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #121212;
+    --foreground: #ededed;
+
+    --button: color-mix(in oklab, var(--background) 10%, white)
+    --buttonHover: #171717;
+  }
+} */
+
+body {
+    color: var(--foreground);
+    background: var(--background);
+    font-weight: 400;
+}
+
+h1 {
+    width: fit-content;
+    text-align: left;
+    color: var(--foreground);
+
+    color: var(--titleColor);
+    font-size: var(--titleSize);
+}
+
+h2 {
+    height: fit-content;
+    font-size: var(--textSize);
+}
+
+p,
+span,
+a {
+  font-size: var(--textSize);
+    width: fit-content;
+    text-align: left;
+    color: var(--textColor);
+}
+
+a:hover {
+    cursor: pointer;
+    color: white;
+}
+
+span > :nth-child(1) {
+    color: var(--whiteTransparent);
+}
+
+section {
+    height: 100svh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 90px 15%;
+    justify-content: space-between;
+    scroll-snap-align: center;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--03dp);
+}

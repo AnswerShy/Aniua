@@ -1,0 +1,10 @@
+.row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.subrowTitle {
+    font-size: xx-large;
+    width: fit-content;
+}

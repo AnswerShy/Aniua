@@ -1,0 +1,51 @@
+.card {
+    width: var(--posterWidth);
+    height: fit-content;
+    cursor: pointer; 
+
+    transition: all 0.1s cubic-bezier(.25,.8,.25,1);
+
+    padding: 5px;
+
+    border-radius: 12px;
+}
+
+.cardContainer {
+    width: 100%;
+    height: var(--posterHeight);
+    border-radius: calc(var(--borderRad) - 5px);
+    background-size: cover;
+    
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.card:hover {
+    background-color: var(--03dp);
+    box-shadow: var(--shadow03dp);
+    transform: scale(1.2);
+}
+
+.cardTitle {
+    text-align: center;
+    text-wrap: nowrap;
+    width: 100%;
+    overflow-x: clip;
+
+    font-size: medium;
+}
+
+.load, .load * {
+    background-color: var(--02dp);
+    color: transparent;
+    background: var(--loadGradient);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+    0% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: -100%;
+    }
+}
