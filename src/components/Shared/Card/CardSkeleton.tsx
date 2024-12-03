@@ -3,7 +3,7 @@ import styles from "./Card.module.css";
 const CardSkeleton = () => {
     return (
         <section style={{ justifyContent: "center", alignContent: "center", height: "auto" }}>
-            <section style={{ padding: "0", display: "grid", gridTemplateColumns: "repeat(9, minmax(0, 160px))", gap: "0", height: "auto" }}>
+            <section style={{padding: "0", display: "grid", gridTemplateColumns: "repeat(6, var(--posterWidth))", gap: "15px", height: "auto"}}>
                 {Array.from({ length: 16 }).map((_, i) => (
                     <div key={i} className={`${styles.card}`}>
                         <div className={`${styles.cardContainer} ${styles.load}`} />
