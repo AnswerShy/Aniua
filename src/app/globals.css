@@ -117,3 +117,15 @@ section {
 ::-webkit-scrollbar-thumb {
     background: var(--03dp);
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    background-color: var(--01dp);
+    padding: 15px;
+    border-radius: 12px;
+}
