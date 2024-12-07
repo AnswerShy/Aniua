@@ -22,9 +22,9 @@ export default function Login() {
         const formdata = new FormData();
         formdata.append("username", username);
         formdata.append("password", password);
-
+        console.log(process.env.NEXT_PUBLIC_BASE_URL)
         try {
-            const res = await fetch(`${process.env.BASE_URL}login/`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}login/`, {
                 method: "POST",
                 headers: myHeaders,
                 body: formdata,

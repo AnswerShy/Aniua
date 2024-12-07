@@ -1,14 +1,14 @@
 "use client";
 import styles from "./Header.module.css";
 
-
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Dropdown } from "../Shared/SharedComponents";
 import clsx from "clsx";
 
 import { isLoggined, TransitionLink } from "@/utils/customUtils";
-import { MenuIcon, NotificationsOutlinedIcon, ArrowForwardIcon } from "@/utils/icons"
+import { MenuIcon, NotificationsOutlinedIcon, ArrowForwardIcon } from "@/utils/icons";
+import Image from "next/image";
 
 export default function Header() {
     const pathname = usePathname();
@@ -32,6 +32,7 @@ export default function Header() {
     };
 
     useEffect(() => {
+        console.log(isLoggined());
         setIsLoggined(isLoggined());
     }, []);
 
@@ -54,7 +55,7 @@ export default function Header() {
             </nav>
             <nav className={clsx(`${styles.sideMenu} ${styles.headerDesktop}`, isMenuOpened ? "translate-x-0" : "-translate-x-full")}>
                 <div className={`${styles.leftHeader}`}>
-                    <TransitionLink url={`/`}>ANIUA</TransitionLink>
+                    <TransitionLink className="text-4xl" url={`/`}>ANIUA</TransitionLink>
                     {currentPath !== "" ? <Dropdown currentState={currentPath} actionList={paths} /> : null}
                 </div>
                 <div className={`${styles.topMenu}`}>
@@ -69,14 +70,24 @@ export default function Header() {
                         <>
                             <div>366/|\</div>
                             <div>
-                                <NotificationsOutlinedIcon sx={{ fontSize: "1.5rem" }} />
+                                <NotificationsOutlinedIcon sx={{ fontSize: "2rem" }} />
                             </div>
-                            <div className={`${styles.button} ${styles.pfpContainer}`}>
-                                <div className={styles.pfp} style={{ backgroundImage: "url(/pfp.jpg)" }}></div>
+                            <div className="w-16 h-16 relative p-2 flex rounded-xl">
+                                <Image
+                                    src={"/pfp.jpg"}
+                                    className="w-full rounded-xl"
+                                    width={100}
+                                    height={100}
+                                    style={{ objectFit: "cover" }}
+                                    alt="profile picture"
+                                ></Image>
                             </div>
                         </>
                     ) : (
-                        <TransitionLink url={`/Login`}>Login<ArrowForwardIcon sx={{ fontSize: "35px"}}/></TransitionLink>  
+                        <TransitionLink url={`/Login`}>
+                            Login
+                            <ArrowForwardIcon sx={{ fontSize: "35px" }} />
+                        </TransitionLink>
                     )}
                 </div>
             </nav>
