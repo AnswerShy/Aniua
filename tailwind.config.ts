@@ -11,6 +11,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        c01dp: "var(--01dp)",
+        transparent01dp: "var(--t01dp)"
       },
     },
   },

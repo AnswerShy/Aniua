@@ -1,64 +1,24 @@
-.headerWrapper {
-    width: 100%;
-    min-width: 900px;
-
-    margin: 10px 0;
-
-    display: flex;
-    padding: 0 15%;
-
-    align-items: center;
-    font-size: x-large;
-
-    position: fixed;
-    z-index: 10;
+.headerMobile {
+    @apply flex w-full flex-row fixed items-center p-4 z-50 xl:hidden;
+    backdrop-filter: blur(6px);
+    transition: all .2s linear;
+    @apply cursor-pointer;
 }
 
-.header {
-    width: 50%;
-    display: flex;
-    gap: 15px;
-    align-items: center;
+.sideMenu {
+    @apply flex flex-col fixed top-16 items-start p-4 w-3/4 justify-between h-[92svh] bg-c01dp z-50;
+    transition: all .2s linear;
 }
 
-.left {
-    justify-content: flex-start;
+.leftHeader {
+    @apply text-2xl hidden xl:flex flex-col items-center xl:flex-row xl:gap-4
 }
 
-.right {
-    justify-content: flex-end;
+.topMenu {
+    @apply flex xl:hidden flex-col items-start gap-4
 }
 
-.button {
-    padding: 15px;
-    background-color: var(--button);
-    backdrop-filter: var(--bluredFilter);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    height: 70px;
-    min-width: 70px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    justify-content: center;
-    background-size: cover;
-    transition: all .5s;
+.headerDesktop {
+    @apply xl:top-0 xl:flex xl:translate-x-0 xl:w-full xl:h-min xl:flex-row xl:items-center bg-transparent01dp xl:justify-between xl:px-[25%];
+    backdrop-filter: blur(6px);
 }
-
-.button:hover {
-    cursor: pointer;
-    background-color: var(--buttonHover);
-
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-
-.pfpContainer {
-    padding: 5px;
-}
-
-.pfp {
-    border-radius: 7px;
-    height: 100%;
-    width: 100%;
-    background-size: cover;
-}
-

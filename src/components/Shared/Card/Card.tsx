@@ -1,7 +1,7 @@
 'use client'
 
 import styles from "./Card.module.css";
-import TransitionLink from "@/utils/onClickAnimation";
+import TransitionLink from "@/utils/custom/onClickAnimation";
 
 interface cardProps {
     image: string | "/next.svg";

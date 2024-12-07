@@ -3,7 +3,7 @@ import Image from "next/image";
 import { animeBannerInterface } from "@/interfaces/animeBannerInteface";
 import { useState } from "react";
 
-import descriptionCutter from "@/utils/descriptionCutter";
+import descriptionCutter from "@/utils/custom/descriptionCutter";
 import Link from "next/link";
 
 import styles from "./InfoBlock.module.css"

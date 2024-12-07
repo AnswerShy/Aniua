@@ -21,7 +21,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" style={{ scrollSnapType: "y mandatory" }}>
+        <html lang="en">
             <body className={`${roboto.className} antialiased`}>
                 <Loading />
                 <Header />

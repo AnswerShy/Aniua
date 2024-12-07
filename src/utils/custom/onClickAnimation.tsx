@@ -17,7 +17,6 @@ const TransitionLink: React.FC<TransitionLinkProps> = ({url, isVision = null, ch
         if (isVision) {
             isVision();
         }
-        console.log("transition button clicked")
         document.getElementById("transition")?.classList.remove("hidden")
         await sleep(1000)
         router.push(url)

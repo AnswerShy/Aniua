@@ -24,7 +24,7 @@ export default function Login() {
         formdata.append("password", password);
 
         try {
-            const res = await fetch("https://api.aniua.top/login/", {
+            const res = await fetch(`${process.env.BASE_URL}login/`, {
                 method: "POST",
                 headers: myHeaders,
                 body: formdata,

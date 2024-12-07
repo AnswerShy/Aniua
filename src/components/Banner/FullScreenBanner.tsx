@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import descriptionCutter from "@/utils/descriptionCutter";
+import descriptionCutter from "@/utils/custom/descriptionCutter";
 import { animeBannerInterface } from "@/interfaces/animeBannerInteface";
 import styles from "./FullScreenBanner.module.css"
 import Image from "next/image";

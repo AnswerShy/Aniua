@@ -8,3 +8,10 @@
     font-size: xxx-large;
     width: fit-content;
 }
+
+@media screen and (min-width: 376px) {
+    .subrowTitle {
+        font-size: xx-large;
+        width: fit-content;
+    }    
+}

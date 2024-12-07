@@ -7,18 +7,16 @@
 
 .dropdownButton {
     cursor: pointer;
-    padding: 15px;
-    background-color: var(--button);
-    backdrop-filter: var(--bluredFilter);
     border-radius: 12px;
     display: flex;
     align-items: center;
-    height: 70px;
     min-width: 70px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     justify-content: center;
     background-size: cover;
     transition: all .5s;
+}
+.dropdownButton:hover {
+    color: white;
 }
 
 .option {
@@ -30,7 +28,7 @@
 .option:hover .dropdown {
     background-color: var(--button);
 }
-.option:hover, .dropdownButton:hover {
+.option:hover {
     background-color: var(--buttonHover);
 }
 
