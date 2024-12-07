@@ -4,7 +4,7 @@ import styles from "./Header.module.css";
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Dropdown from "@/components/Shared/DropDown/DropDown";
+import { Dropdown } from "../Shared/SharedComponents";
 import clsx from "clsx";
 
 import { isLoggined, TransitionLink } from "@/utils/customUtils";

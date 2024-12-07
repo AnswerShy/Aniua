@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./DropDown.module.css";
 import TransitionLink from "@/utils/custom/onClickAnimation";
 
-import { KeyboardArrowDownIcon } from "@/utils/icons"
+import { KeyboardArrowDownIcon } from "@/utils/icons";
 
 interface DropdownProps {
     currentState: string;
@@ -40,7 +40,7 @@ const Dropdown = ({ currentState, actionList, assetsList, changeState, className
     ) : (
         <>
             <div className={`${styles.dropdownMenu} ${className}`} onClick={handleVisible}>
-                <div className={`${styles.dropdownButton}`}>{assetsList && assetsList[Number(currentState)]}</div>
+                <div className={`${styles.dropdownButton}`}>{assetsList && assetsList[Number(currentState)]}<KeyboardArrowDownIcon sx={{ fontSize: "1.5rem" }} /></div>
                 <div className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}>
                     {assetsList &&
                         assetsList.map((studio, index) => (
