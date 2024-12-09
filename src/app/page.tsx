@@ -1,6 +1,4 @@
-import Card from "@/components/Shared/Card/Card";
-import Row from "@/components/Shared/containers/Row";
-import SubRow from "@/components/Shared/containers/Subrow";
+import { Card, Row, SubRow, Section } from "@/components/Shared/SharedComponents"; 
 import { animeCardInterface } from "@/interfaces/animeCardInterface";
 import { fetchCommunityChoice } from "@/models/fetchAnimeList";
 
@@ -8,7 +6,7 @@ export default async function Home() {
     const communityChoice = (await fetchCommunityChoice()) as animeCardInterface[];
     return (
         <>
-            <section>
+            <Section>
                 <Row>
                     <SubRow title="Last uploaded episodes" widthState="4/4">
                         <div className="row-components">ііііііііііііііііііііііііііііііііііііііііііііііі</div>
@@ -26,8 +24,8 @@ export default async function Home() {
                         <div className="row-components">ііііііііііііііііііііііііііііііііііііііііііііііі</div>
                     </SubRow>
                 </Row>
-            </section>
-            <section>
+            </Section>
+            <Section>
                 <Row>
                     <SubRow title="Explore new" widthState="4/4">
                         <div className="row-components">ііііііііііііііііііііііііііііііііііііііііііііііі</div>
@@ -38,7 +36,7 @@ export default async function Home() {
                         <div className="row-components">ііііііііііііііііііііііііііііііііііііііііііііііі</div>
                     </SubRow>
                 </Row>
-            </section>
+            </Section>
         </>
     );
 }

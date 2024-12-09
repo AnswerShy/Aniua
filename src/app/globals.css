@@ -42,8 +42,8 @@
     --titleSize: 2.5rem;
     --textSize: 1.5rem;
 
-    --subtext: 24px;
-    --subtitle: 24px;
+    --subtext: 1.275rem;
+    --subtitle: 1.5rem;
 
     --bannerTitle: 6rem;
     --bannerText: 2rem;
@@ -95,19 +95,6 @@ a:hover {
 
 span > :nth-child(1) {
     color: var(--whiteTransparent);
-}
-
-section {
-    height: 100svh;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    padding: 90px 15%;
-    justify-content: space-between;
-    scroll-snap-align: center;
 }
 
 ::-webkit-scrollbar {

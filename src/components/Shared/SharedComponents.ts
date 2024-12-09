@@ -7,3 +7,4 @@ export { default as CardSkeletonBlock } from "@/components/Shared/Card/CardSkele
 export { default as Row } from "@/components/Shared/containers/Row";
 export { default as SubRow } from "@/components/Shared/containers/Subrow";
 
+export { default as Section } from "@/components/Shared/containers/Section";

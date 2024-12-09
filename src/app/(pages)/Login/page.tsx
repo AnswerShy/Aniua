@@ -3,6 +3,7 @@
 import { useState } from "react";
 import CustomButton from "@/components/Shared/Button/Button";
 import { useRouter } from "next/navigation"
+import { Section } from "@/components/Shared/SharedComponents";
 
 interface loginResponse {
     user_token: string,
@@ -50,13 +51,13 @@ export default function Login() {
     };
 
     return (
-        <section style={{ justifyContent: "center" }}>
+        <Section>
             <form onSubmit={handleLogin}>
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <CustomButton type="submit">Login</CustomButton>
                 {error && <p>{error}</p>}
             </form>
-        </section>
+        </Section>
     );
 }
