@@ -5,11 +5,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation"
 import { Section, CustomButton } from "@/components/Shared/SharedComponents";
 
-interface loginResponse {
-    user_token: string,
-    message: string,
-    success: boolean
-}
+// interface loginResponse {
+//     user_token: string,
+//     message: string,
+//     success: boolean
+// }
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -19,34 +19,30 @@ export default function Login() {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        const myHeaders = new Headers();
-        const formdata = new FormData();
-        formdata.append("username", username);
-        formdata.append("password", password);
-        console.log(process.env.NEXT_PUBLIC_BASE_URL)
+
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}login/`, {
+            const res = await fetch("/api/login", {
                 method: "POST",
-                headers: myHeaders,
-                body: formdata,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),
             });
+
             if (res.ok) {
-                const resJson = await res.json() as loginResponse
-                if(resJson.success) {
+                const resJson = await res.json();
+                if (resJson.success) {
                     document.cookie = `authToken=${resJson.user_token}; max-age=${7*24*60*60}; Secure; SameSite=Strict; Path=/;`;
-                    setError("Успішний вхід")
-                    router.push("/")
+                    setError("Успішний вхід");
+                    router.push("/");
+                } else {
+                    setError(resJson.message);
                 }
-                else {
-                    setError(resJson.message)
-                }
-                
             } else {
-                console.log("Invalid credentials");
-                setError("error");
+                setError("Login failed");
             }
         } catch (e) {
-            console.log(`Something went wrong: ${e}`);
+            console.error(`Something went wrong: ${e}`);
         }
     };
 
