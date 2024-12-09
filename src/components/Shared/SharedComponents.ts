@@ -1,5 +1,5 @@
 export { default as Dropdown } from "@/components/Shared/DropDown/DropDown";
-export { default as Button } from "@/components/Shared/Button/Button";
+export { default as CustomButton } from "@/components/Shared/Button/Button";
 
 export { default as Card } from "@/components/Shared/Card/Card";
 export { default as CardSkeletonBlock } from "@/components/Shared/Card/CardSkeleton";

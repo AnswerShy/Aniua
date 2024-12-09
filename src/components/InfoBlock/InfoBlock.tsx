@@ -7,6 +7,7 @@ import descriptionCutter from "@/utils/custom/descriptionCutter";
 import Link from "next/link";
 
 import styles from "./InfoBlock.module.css"
+import { Section } from "../Shared/SharedComponents";
 
 interface Props {
     infoData: animeBannerInterface;
@@ -52,7 +53,7 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
     };
 
     return (
-        <section>
+        <Section typeOfSection={"flexThreeCols"}>
             <div className="flex flex-col w-full md:w-[250px]">
                 <Image src={infoData.poster} alt={infoData.title} className="rounded-xl self-center" height={350} width={250} />
                 <button className="w-full py-2.5 rounded-xl bg-b_t mt-5 text-white text-2xl">add to</button>
@@ -100,7 +101,7 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
                     </div>
                 </div>
             </div>
-        </section>
+        </Section>
     );
 };
 

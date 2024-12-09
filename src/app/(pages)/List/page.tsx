@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import { fetchList } from "@/models/fetchAnimeList";
 import { animeCardInterface } from "@/interfaces/animeCardInterface";
-import { Section } from "@/components/Shared/SharedComponents";
-import Card from "@/components/Shared/Card/Card";
+import { Section, Card } from "@/components/Shared/SharedComponents";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -14,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const listPage: React.FC<animeCardInterface> = async () => {
     const anime = (await fetchList()) as animeCardInterface[];
     return (
-        <Section isGrid={true}>
+        <Section typeOfSection={"grid"}>
             {anime.map((el, index) => (
                 <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
             ))}

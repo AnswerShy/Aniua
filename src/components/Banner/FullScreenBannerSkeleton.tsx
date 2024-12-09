@@ -1,8 +1,9 @@
+import { Section } from "../Shared/SharedComponents";
 import styles from "./FullScreenBanner.module.css"
 
 const BannerSkeleton = () => {
     return (
-        <section className={styles.Banner}>
+        <Section typeOfSection={"Banner"}>
             <div className={styles.bannerInfoContainer}>
                 <h1 className={`${styles.bannerTitle} ${styles.load}`}>TITLE</h1>
                 <div className={styles.bannerBaseInfo}>
@@ -13,7 +14,7 @@ const BannerSkeleton = () => {
                 <p className={`${styles.bannerDescriptionLoad} ${styles.load}`}>...</p>
             </div>
             {/* {bannerChar ? <div className="bannerChar" style={{ backgroundImage: `url(${bannerChar})` }}></div> : null} */}
-        </section>
+        </Section>
     );
 };
 

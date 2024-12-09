@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import CustomButton from "@/components/Shared/Button/Button";
+
 import { useRouter } from "next/navigation"
-import { Section } from "@/components/Shared/SharedComponents";
+import { Section, CustomButton } from "@/components/Shared/SharedComponents";
 
 interface loginResponse {
     user_token: string,

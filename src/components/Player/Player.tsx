@@ -1,10 +1,9 @@
 "use client";
 import styles from "./Player.module.css";
 import { EpisodeListInterface } from "@/interfaces/animeEpisodeListInterface";
-import CustomButton from "@/components/Shared/Button/Button";
+import { CustomButton, Dropdown, Section } from "@/components/Shared/SharedComponents";
 import { useCallback, useEffect, useState } from "react";
 import { Episode } from "@/models/fetchAnimePlayer";
-import Dropdown from "@/components/Shared/DropDown/DropDown";
 
 interface PlayerProps {
     episodesList: EpisodeListInterface[];
@@ -65,7 +64,7 @@ const Player = ({ episodesList }: PlayerProps) => {
     }, [episodesList, handleEpisode]);
 
     return (
-        <section style={{ alignContent: "space-between", justifyContent: "center", paddingTop: "75px" }}>
+        <Section>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                 <h1>{episodeTitle}</h1>
                 <h2>{episodeJPTitle}</h2>
@@ -83,7 +82,7 @@ const Player = ({ episodesList }: PlayerProps) => {
                     </CustomButton>
                 ))}
             </div>
-        </section>
+        </Section>
     );
 };
 

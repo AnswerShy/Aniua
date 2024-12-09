@@ -5,6 +5,7 @@ import descriptionCutter from "@/utils/custom/descriptionCutter";
 import { animeBannerInterface } from "@/interfaces/animeBannerInteface";
 import styles from "./FullScreenBanner.module.css"
 import Image from "next/image";
+import { Section } from "../Shared/SharedComponents";
 
 
 interface Banner_props {
@@ -32,7 +33,7 @@ const genresDisplay = (genres: animeBannerInterface["genres"]): JSX.Element | nu
 
 const Banner: React.FC<Banner_props> = ({ bannerImage, bannerTitle, bannerYear, bannerGenres, bannerDesc, bannerTypeNews = false }) => {
     return (
-        <section className={styles.Banner}>
+        <Section typeOfSection={"Banner"}>
             <Image src={bannerImage ? bannerImage : ""} className={styles.bannerImage} alt="animeImage" fill objectFit={'cover'}/>
             {/* <div className={styles.bannerImage} style={{ backgroundImage: `url(${bannerImage})` }}></div> */}
             <div className={styles.bannerInfoContainer}>
@@ -47,7 +48,7 @@ const Banner: React.FC<Banner_props> = ({ bannerImage, bannerTitle, bannerYear, 
                 <p className={`${styles.bannerDescription} ${styles.bannerText}`}>{descriptionCutter(bannerDesc, 25)}...</p>
             </div>
             {/* {bannerChar ? <div className="bannerChar" style={{ backgroundImage: `url(${bannerChar})` }}></div> : null} */}
-        </section>
+        </Section>
     );
 };
 
