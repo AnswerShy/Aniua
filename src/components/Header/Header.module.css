@@ -5,8 +5,13 @@
     @apply cursor-pointer;
 }
 
+.headerDesktop {
+    @apply hidden xl:block;
+    @apply xl:py-0 xl:text-xl xl:top-0 xl:flex xl:translate-x-0 xl:w-full xl:h-min xl:flex-row xl:items-center bg-transparent01dp xl:justify-between xl:px-[25%];
+}
+
 .sideMenu {
-    @apply flex flex-col fixed top-16 items-start p-4 w-3/4 justify-between h-[92svh] bg-c01dp z-50;
+    @apply block xl:hidden flex flex-col fixed top-16 items-start p-4 w-3/4 justify-between h-[92svh] bg-c01dp z-50;
     transition: all .2s linear;
 }
 
@@ -18,7 +23,9 @@
     @apply flex xl:hidden flex-col items-start gap-4
 }
 
-.headerDesktop {
-    @apply xl:py-0 xl:text-xl xl:top-0 xl:flex xl:translate-x-0 xl:w-full xl:h-min xl:flex-row xl:items-center bg-transparent01dp xl:justify-between xl:px-[25%];
+.botMenu {
+    @apply flex flex-row-reverse justify-center items-center gap-4
 }
+
+
 
