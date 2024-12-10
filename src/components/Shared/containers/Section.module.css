@@ -16,3 +16,7 @@
 .flexThreeColsSectionStyle {
     @apply px-60 py-16 h-svh justify-around flex flex-row
 }
+
+.ProfileSectionStyle {
+    @apply p-32 h-svh flex flex-row justify-between
+}
