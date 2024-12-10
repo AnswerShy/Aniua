@@ -117,3 +117,15 @@ input {
     padding: 15px;
     border-radius: 12px;
 }
+
+.title {
+    @apply text-5xl leading-relaxed font-bold tracking-widest
+}
+
+.text {
+    @apply text-4xl font-normal text-white
+}
+
+.subText {
+    @apply text-3xl font-thin
+}
