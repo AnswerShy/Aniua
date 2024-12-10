@@ -1,3 +1,10 @@
+.dropdownMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
+}
+
 .optionsWrap {
     position: absolute;
     display: flex;
@@ -7,13 +14,16 @@
     overflow: hidden;
 
     width: fit-content;
-    height: max-content;
     padding: 5px;
 
     background-color: var(--t01dp);
 
+    top: 100%;
+
     border-radius: 12px;
     box-shadow: var(--shadowHover);
+
+    @apply hidden xl:block    
 }
 
 /* ONLY ANIMATION BLOCK */
@@ -25,7 +35,7 @@
     visibility: hidden;
     transform: scaleY(0);
     transform-origin: top right;
-    
+
 }
 
 .dropdownMenu:hover {
@@ -33,7 +43,8 @@
     cursor: pointer;
 }
 
-.visibleOptionWrap, .dropdownMenu:hover .optionsWrap {
+.visibleOptionWrap,
+.dropdownMenu:hover .optionsWrap {
     opacity: 1;
     visibility: visible;
     transform: scaleY(1);

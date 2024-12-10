@@ -7,14 +7,15 @@ import TransitionLink from "@/utils/custom/onClickAnimation";
 import { KeyboardArrowDownIcon } from "@/utils/icons";
 
 interface DropdownProps {
-    currentState: string;
+    currentState?: string;
+    children?: React.ReactNode;
     // actionList: Record<string, () => void>;
     actionList?: Record<string, string>;
     assetsList?: string[];
     changeState?: (index: number) => void;
     className?: string;
 }
-const Dropdown = ({ currentState, actionList, assetsList, changeState, className }: DropdownProps) => {
+const Dropdown = ({ currentState, actionList, assetsList, changeState, children, className }: DropdownProps) => {
     const [visible, setVision] = useState(true);
     const handleVisible = () => setVision((prev) => !prev);
 
@@ -26,10 +27,14 @@ const Dropdown = ({ currentState, actionList, assetsList, changeState, className
     return actionList ? (
         <>
             <div className={`${styles.dropdownMenu}`} onClick={handleVisible}>
-                <div className={`${styles.dropdownButton}`}>
-                    {currentState.charAt(0).toUpperCase() + currentState.slice(1)}
-                    <KeyboardArrowDownIcon sx={{ fontSize: "1.5rem" }} />
-                </div>
+                {children ? (
+                    children
+                ) : (
+                    <div className={`${styles.dropdownButton} ${className}`}>
+                        {currentState && currentState.charAt(0).toUpperCase() + currentState.slice(1)}
+                        <KeyboardArrowDownIcon sx={{ fontSize: "1.5rem" }} />
+                    </div>
+                )}
                 <div className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}>
                     {Object.entries(actionList).map(([key, action]) => (
                         <TransitionLink url={action} key={key} className={styles.option} isVision={handleVisible}>

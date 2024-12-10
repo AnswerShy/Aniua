@@ -9,12 +9,14 @@ import clsx from "clsx";
 import { isLoggined, TransitionLink } from "@/utils/customUtils";
 import { MenuIcon, NotificationsOutlinedIcon, ArrowForwardIcon } from "@/utils/icons";
 import Image from "next/image";
+import useUserProfile from "@/hooks/useUserProfile";
 
 export default function Header() {
     const pathname = usePathname();
     const [currentPath, setCurrentPath] = useState("");
     const [isLogginedSession, setIsLoggined] = useState(false);
     const [isMenuOpened, setMenuOpened] = useState(false);
+    const userData = useUserProfile();
 
     useEffect(() => {
         if (pathname === "/") {
@@ -55,7 +57,9 @@ export default function Header() {
             </nav>
             <nav className={clsx(`${styles.sideMenu} ${styles.headerDesktop}`, isMenuOpened ? "translate-x-0" : "-translate-x-full")}>
                 <div className={`${styles.leftHeader}`}>
-                    <TransitionLink className="text-4xl" url={`/`}>ANIUA</TransitionLink>
+                    <TransitionLink className="text-4xl" url={`/`}>
+                        ANIUA
+                    </TransitionLink>
                     {currentPath !== "" ? <Dropdown currentState={currentPath} actionList={paths} /> : null}
                 </div>
                 <div className={`${styles.topMenu}`}>
@@ -68,20 +72,23 @@ export default function Header() {
                 <div className="flex flex-row-reverse items-center md:flex-row md:gap-4">
                     {isLogginedSession ? (
                         <>
-                            <div>366/|\</div>
+                            <div>{userData?.money}/|\</div>
                             <div>
                                 <NotificationsOutlinedIcon sx={{ fontSize: "2rem" }} />
                             </div>
-                            <div className="w-16 h-16 relative p-2 flex rounded-xl">
-                                <Image
-                                    src={"/pfp.jpg"}
-                                    className="w-full rounded-xl"
-                                    width={100}
-                                    height={100}
-                                    style={{ objectFit: "cover" }}
-                                    alt="profile picture"
-                                ></Image>
-                            </div>
+                            <TransitionLink url="/Profile" className="size-16 relative p-2 flex rounded-xl">
+                                {userData?.avatar ? (
+                                    <Image
+                                        src={userData.avatar}
+                                        className="w-full h-full rounded-xl"
+                                        fill
+                                        objectFit="cover"
+                                        alt="profile picture"
+                                    ></Image>
+                                ) : (
+                                    <div className="w-full h-full bg-black rounded-xl"></div>
+                                )}
+                            </TransitionLink>
                         </>
                     ) : (
                         <TransitionLink url={`/Login`}>
