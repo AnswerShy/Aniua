@@ -14,6 +14,9 @@ export default {
         c01dp: "var(--01dp)",
         transparent01dp: "var(--t01dp)"
       },
+      height: {
+        'calc-screen-minus-4rem': 'calc(100svh - 4rem)',
+      },
     },
   },
   plugins: [],
