@@ -84,7 +84,7 @@ export default function Header() {
                     {isLogginedSession ? (
                         <>
                             <div>{userData?.money}/|\</div>
-                            <Dropdown actionList={pathsProfile}>
+                            <Dropdown actionList={pathsProfile} isLeft={false}>
                                 <div className="size-16 relative p-2 flex rounded-xl">
                                     {userData?.avatar ? (
                                         <div className="size-full relative">
