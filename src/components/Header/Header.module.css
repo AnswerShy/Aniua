@@ -1,13 +1,12 @@
 .headerMobile {
-    @apply flex w-full flex-row fixed items-center p-4 z-50 xl:hidden;
-    backdrop-filter: blur(6px);
+    @apply flex w-full flex-row fixed items-center p-4 z-50 xl:hidden backdrop-blur-sm;
     transition: all .2s linear;
     @apply cursor-pointer;
 }
 
 .headerDesktop {
-    @apply hidden fixed z-50;
-    @apply xl:py-0 xl:text-xl xl:top-0 xl:flex xl:translate-x-0 xl:w-full xl:h-min xl:flex-row xl:items-center bg-transparent01dp xl:justify-between xl:px-[25%];
+    @apply hidden fixed z-50 transition-colors duration-500;
+    @apply xl:py-0 xl:text-xl xl:top-0 xl:flex xl:translate-x-0 xl:w-full xl:h-min xl:flex-row xl:items-center xl:justify-between xl:px-[25%];
 }
 
 .sideMenu {

@@ -16,6 +16,7 @@ export default function Header() {
     const [currentPath, setCurrentPath] = useState("");
     const [isLogginedSession, setIsLoggined] = useState(false);
     const [isMenuOpened, setMenuOpened] = useState(false);
+    const [isScroll, setScroll] = useState(false);
     const userData = useUserProfile();
 
     useEffect(() => {
@@ -27,27 +28,37 @@ export default function Header() {
         } else {
             setCurrentPath(pathname.slice(1));
         }
-    }, [pathname]);
+    }, [pathname]); // Load current path state 
 
     const menuHandler = () => {
         setMenuOpened((prev) => !prev);
-    };
+    }; // Side menu handler for mobile
+
+    const changeColorOnScroll = () => {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                setScroll(true)
+            } else {
+                setScroll(false)
+            }
+        })
+    } // Header scroll handler 
 
     useEffect(() => {
-        console.log(isLoggined());
         setIsLoggined(isLoggined());
-    }, []);
+        changeColorOnScroll()
+    }, []); // Do scripts on start
 
     const paths = {
         home: "/",
         list: "/List",
         onepiece: "/Anime/one-piece",
-    };
+    }; // Paths for navigation dropdown menu
 
     const pathsProfile = {
         profile: "/Profile",
         settings: "/Profile/Settings",
-    };
+    }; // Paths for profile dropdown menu
 
     return (
         <header>
@@ -62,7 +73,7 @@ export default function Header() {
                 <div>{currentPath}</div>
             </nav>
             {/* Desktop Header */}
-            <nav className={`${styles.headerDesktop}`}>
+            <nav className={clsx(`${styles.headerDesktop}`, isScroll ? "bg-transparent01dp backdrop-blur-sm" : "bg-transparent")}>
                 <div className={`${styles.leftHeader}`}>
                     <TransitionLink className="text-4xl" url={`/`}>
                         ANIUA
@@ -119,23 +130,22 @@ export default function Header() {
                     {isLogginedSession ? (
                         <>
                             <div>{userData?.money}/|\</div>
-                            <TransitionLink url={'/Profile'} className="size-16 relative p-2 flex rounded-xl">
-
-                                    {userData?.avatar ? (
-                                        <div className="size-full relative">
-                                            <Image
-                                                src={userData.avatar}
-                                                className="w-full h-full rounded-xl"
-                                                fill
-                                                objectFit="cover"
-                                                alt="profile picture"
-                                            ></Image>
-                                        </div>
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center bg-transparent01dp rounded-xl">
-                                            <Person sx={{ fontSize: "2rem" }} />
-                                        </div>
-                                    )}
+                            <TransitionLink url={"/Profile"} className="size-16 relative p-2 flex rounded-xl">
+                                {userData?.avatar ? (
+                                    <div className="size-full relative">
+                                        <Image
+                                            src={userData.avatar}
+                                            className="w-full h-full rounded-xl"
+                                            fill
+                                            objectFit="cover"
+                                            alt="profile picture"
+                                        ></Image>
+                                    </div>
+                                ) : (
+                                    <div className="w-full h-full flex items-center justify-center bg-transparent01dp rounded-xl">
+                                        <Person sx={{ fontSize: "2rem" }} />
+                                    </div>
+                                )}
                             </TransitionLink>
                         </>
                     ) : (
