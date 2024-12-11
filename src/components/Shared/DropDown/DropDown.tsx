@@ -7,15 +7,19 @@ import TransitionLink from "@/utils/custom/onClickAnimation";
 import { KeyboardArrowDownIcon } from "@/utils/icons";
 
 interface DropdownProps {
-    currentState?: string;
-    children?: React.ReactNode;
-    // actionList: Record<string, () => void>;
-    actionList?: Record<string, string>;
-    assetsList?: string[];
-    changeState?: (index: number) => void;
+    currentState?: string; //For show current state
+    children?: React.ReactNode; //For show current state as Node
+
+    /* Container of dropdown with enum of actions */
+    actionList?: Record<string, string>; //Enum of action, example home: '/'
+    /* OR */ 
+    assetsList?: string[]; //Array of objects for dropdown 
+    changeState?: (index: number) => void; //Changer of the state for assetsList
+    
     className?: string;
+    isLeft?: boolean;
 }
-const Dropdown = ({ currentState, actionList, assetsList, changeState, children, className }: DropdownProps) => {
+const Dropdown = ({ currentState, actionList, assetsList, changeState, children, className, isLeft = true }: DropdownProps) => {
     const [visible, setVision] = useState(true);
     const handleVisible = () => setVision((prev) => !prev);
 
@@ -26,7 +30,7 @@ const Dropdown = ({ currentState, actionList, assetsList, changeState, children,
 
     return actionList ? (
         <>
-            <div className={`${styles.dropdownMenu}`} onClick={handleVisible}>
+            <div className={`${styles.dropdownMenu} ${isLeft ? "items-start" : "items-end"}`} onClick={handleVisible}>
                 {children ? (
                     children
                 ) : (
