@@ -5,7 +5,7 @@ export default function isLoggined() {
             acc[key] = value;
             return acc;
         }, {} as Record<string, string>);
-        return !!cookies["authToken"]; 
+        if (cookies["authToken"] !== undefined) return !!cookies["authToken"];
     }
     return false;
 }

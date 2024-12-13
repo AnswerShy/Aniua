@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { UserProfileInterface } from "@/interfaces/userProfile";
+import { isLoggined } from "@/utils/customUtils";
 
 const useUserProfile = () => {
     const [userData, setUserData] = useState<UserProfileInterface | null>(null);
+    const userToken: string | boolean = isLoggined();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,10 +21,10 @@ const useUserProfile = () => {
             }
         };
 
-        fetchData();
-    }, []);
+        if (userToken) fetchData();
+    }, [userToken]);
 
     return userData;
-}
+};
 
-export default useUserProfile
+export default useUserProfile;

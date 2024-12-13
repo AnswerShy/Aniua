@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Dropdown } from "../Shared/SharedComponents";
 import clsx from "clsx";
 
-import { isLoggined, TransitionLink } from "@/utils/customUtils";
+import { TransitionLink } from "@/utils/customUtils";
 import { MenuIcon, ArrowForwardIcon, Person } from "@/utils/icons";
 import Image from "next/image";
 import useUserProfile from "@/hooks/useUserProfile";
@@ -14,10 +14,23 @@ import useUserProfile from "@/hooks/useUserProfile";
 export default function Header() {
     const pathname = usePathname();
     const [currentPath, setCurrentPath] = useState("");
-    const [isLogginedSession, setIsLoggined] = useState(false);
     const [isMenuOpened, setMenuOpened] = useState(false);
     const [isScroll, setScroll] = useState(false);
     const userData = useUserProfile();
+
+    const menuHandler = () => {
+        setMenuOpened((prev) => !prev);
+    }; // Side menu handler for mobile
+
+    const changeColorOnScroll = () => {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                setScroll(true);
+            } else {
+                setScroll(false);
+            }
+        });
+    }; // Header scroll handler
 
     useEffect(() => {
         if (pathname === "/") {
@@ -28,26 +41,8 @@ export default function Header() {
         } else {
             setCurrentPath(pathname.slice(1));
         }
-    }, [pathname]); // Load current path state 
-
-    const menuHandler = () => {
-        setMenuOpened((prev) => !prev);
-    }; // Side menu handler for mobile
-
-    const changeColorOnScroll = () => {
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 50) {
-                setScroll(true)
-            } else {
-                setScroll(false)
-            }
-        })
-    } // Header scroll handler 
-
-    useEffect(() => {
-        setIsLoggined(isLoggined());
-        changeColorOnScroll()
-    }, []); // Do scripts on start
+        changeColorOnScroll();
+    }, [pathname]); // Load current path state
 
     const paths = {
         home: "/",
@@ -81,7 +76,7 @@ export default function Header() {
                     {currentPath !== "" ? <Dropdown currentState={currentPath} actionList={paths} /> : null}
                 </div>
                 <div className="flex flex-row items-center">
-                    {isLogginedSession ? (
+                    {userData ? (
                         <>
                             <div>{userData?.money}/|\</div>
                             <Dropdown actionList={pathsProfile} isLeft={false}>
@@ -127,7 +122,7 @@ export default function Header() {
                     ))}
                 </div>
                 <div className={`${styles.botMenu}`}>
-                    {isLogginedSession ? (
+                    {userData ? (
                         <>
                             <div>{userData?.money}/|\</div>
                             <TransitionLink url={"/Profile"} className="size-16 relative p-2 flex rounded-xl">

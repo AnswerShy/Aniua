@@ -1,24 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Section } from "@/components/Shared/SharedComponents";
+import { CustomButtonStyles } from "@/components/Shared/SharedComponents";
+import { TextField } from "@/components/Shared/SharedComponents";
+import { useRouter } from "next/navigation";
 
-import { useRouter } from "next/navigation"
-import { Section, CustomButton } from "@/components/Shared/SharedComponents";
-
-// interface loginResponse {
-//     user_token: string,
-//     message: string,
-//     success: boolean
-// }
+import { LoginForms } from "./loginFormType";
 
 export default function Login() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const router = useRouter()
+    const router = useRouter();
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const {
+        handleSubmit,
+        control,
+        formState: { errors, isValid },
+    } = useForm<LoginForms>();
+
+    const handleLogin: SubmitHandler<LoginForms> = async (data) => {
+        const { username, password } = data;
 
         try {
             const res = await fetch("/api/login", {
@@ -32,28 +32,45 @@ export default function Login() {
             if (res.ok) {
                 const resJson = await res.json();
                 if (resJson.success) {
-                    document.cookie = `authToken=${resJson.user_token}; max-age=${7*24*60*60}; Secure; SameSite=Strict; Path=/;`;
-                    setError("Успішний вхід");
+                    document.cookie = `authToken=${resJson.user_token}; max-age=${7 * 24 * 60 * 60}; Secure; SameSite=Strict; Path=/;`;
                     router.push("/");
-                } else {
-                    setError(resJson.message);
                 }
             } else {
-                setError("Login failed");
+                console.error("Login failed");
             }
         } catch (e) {
-            console.error(`Something went wrong: ${e}`);
+            console.error(e);
         }
     };
 
     return (
-        <Section>
-            <form onSubmit={handleLogin}>
-                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <CustomButton type="submit">Login</CustomButton>
-                {error && <p>{error}</p>}
-            </form>
-        </Section>
+        <>
+            <Section typeOfSection={"center"}>
+                <form onSubmit={handleSubmit(handleLogin)} className="w-1/4 rounded-xl py-16 px-16 flex flex-col gap-4">
+                    <Controller
+                        control={control}
+                        name="username"
+                        rules={{
+                            required: "Required field",
+                            minLength: { value: 2, message: "More than 2 symbols" },
+                        }}
+                        render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.username?.message} ref={ref} type={"login"} />}
+                    />
+                    <Controller
+                        control={control}
+                        name="password"
+                        rules={{
+                            required: "Required field",
+                            minLength: { value: 8, message: "More than 8 symbols" },
+                        }}
+                        render={({ field: { ref, ...field } }) => (
+                            <TextField {...field} errorString={errors.password?.message} ref={ref} type={"password"} />
+                        )}
+                    />
+
+                    <input type="submit" className={CustomButtonStyles.button} disabled={!isValid} />
+                </form>
+            </Section>
+        </>
     );
 }

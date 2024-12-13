@@ -17,6 +17,10 @@
     @apply px-60 py-16 h-svh justify-around flex flex-row
 }
 
-.ProfileSectionStyle {
+.profileSectionStyle {
     @apply p-32 h-svh flex flex-row justify-between
+}
+
+.centerSectionStyle {
+    @apply px-60 py-16 flex justify-center h-svh items-center
 }
