@@ -1,0 +1,7 @@
+.profileRowUp {
+    @apply flex flex-row justify-between w-full;
+}
+
+.profileRowDown {
+    @apply flex flex-row justify-between w-full items-end;
+}

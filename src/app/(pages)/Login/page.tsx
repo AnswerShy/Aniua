@@ -46,7 +46,7 @@ export default function Login() {
     return (
         <>
             <Section typeOfSection={"center"}>
-                <form onSubmit={handleSubmit(handleLogin)} className="w-1/4 rounded-xl py-16 px-16 flex flex-col gap-4">
+                <form onSubmit={handleSubmit(handleLogin)} className="w-full lg:w-1/4 rounded-xl py-16 px-16 flex flex-col gap-4">
                     <Controller
                         control={control}
                         name="username"

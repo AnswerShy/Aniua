@@ -34,7 +34,7 @@
 
 .bannerInfoContainer {
     height: fit-content;
-    width: 50%;
+    @apply w-full md:w-1/2;
 }
 
 .bannerInfoContainer .bannerBaseInfo {
@@ -60,6 +60,7 @@
 
 .bannerDescription {
     width: 100%;
+    @apply hidden md:block
 }
 
 .bannerText, .bannerText * {
