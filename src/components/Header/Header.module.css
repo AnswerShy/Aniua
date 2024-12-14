@@ -1,5 +1,5 @@
 .headerMobile {
-    @apply flex w-full flex-row fixed items-center p-4 z-50 xl:hidden backdrop-blur-sm;
+    @apply flex w-full flex-row fixed items-center p-4 z-50 top-0 xl:hidden backdrop-blur-sm;
     transition: all .2s linear;
     @apply cursor-pointer;
 }
