@@ -16,14 +16,18 @@
 }
 
 .subrowComponentsWrap {
-    overflow-x: hidden;
-    height: fit-content;
-    padding: 5px; 
+    padding: 5px;
+    padding-top: 15px;
     display: grid;
     grid-template-columns: repeat(5, var(--posterWidth)); 
     gap: 5px; 
-    height: auto; 
-    overflow-x: clip;
+    height: 96%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.subrowComponentsWrap::-webkit-scrollbar {
+    height: 0;
 }
 
 /* DESKTOP */
@@ -37,5 +41,14 @@
     .subrowWrap {
         @apply p-4;
         width: var(--subrow-width);
+    }
+    .subrowComponentsWrap {
+        padding: 5px; 
+        display: grid;
+        grid-template-columns: repeat(5, var(--posterWidth)); 
+        gap: 5px; 
+        height: auto; 
+        overflow-x: clip;
+        overflow-y: unset;
     }
 }
