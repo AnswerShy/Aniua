@@ -1,4 +1,4 @@
-import { Card, Row, SubRow, Section } from "@/components/Shared/SharedComponents"; 
+import { Card, Row, SubRow, Section } from "@/components/Shared/SharedComponents";
 import { animeCardInterface } from "@/interfaces/animeCardInterface";
 import { fetchCommunityChoice } from "@/models/fetchAnimeList";
 
@@ -14,11 +14,9 @@ export default async function Home() {
                 </Row>
                 <Row>
                     <SubRow title="Community choice" widthState="3/4">
-                        <div className="row-components" style={{padding: "0", display: "grid", gridTemplateColumns: "repeat(5, var(--posterWidth))", gap: "5px", height: "auto"}}>
-                            {communityChoice.map((el, index) => (
-                                <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
-                            ))}
-                        </div>
+                        {communityChoice.map((el, index) => (
+                            <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
+                        ))}
                     </SubRow>
                     <SubRow title="Authors selections" widthState="1/4">
                         <div className="row-components">ііііііііііііііііііііііііііііііііііііііііііііііі</div>

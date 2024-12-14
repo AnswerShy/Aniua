@@ -13,9 +13,11 @@ const SubRow: React.FC<{
         "4/4": "100%",
     };
     return (
-        <div style={{ width: `${widthClasses[widthState]}` }}>
+        <div style={{ "--subrow-width": widthClasses[widthState] } as React.CSSProperties} className={styles.subrowWrap}>
             <p className={styles.subrowTitle}>{title}</p>
-            <div className="subrow-components">{children}</div>
+            <div className={styles.subrowComponentsWrap}>
+                {children}
+            </div>
         </div>
     );
 };

@@ -1,26 +1,23 @@
 import React from "react";
-import styles from "./Section.module.css"
+import styles from "./Section.module.css";
 
 interface SectionProps {
     children: React.ReactNode;
     typeOfSection?: "grid" | "flex" | "flexThreeCols" | "Banner" | "Profile" | "center";
 }
 
-
 const Section: React.FC<SectionProps> = ({ children, typeOfSection = "flex" }) => {
     const widthClasses: { [key: string]: string } = {
-        "grid": styles.gridSectionStyle,
-        "flex": styles.flexSectionStyle,
-        "flexThreeCols": styles.flexThreeColsSectionStyle,
-        "Banner": styles.bannerSectionStyle,
-        "Profile": styles.profileSectionStyle,
-        "center": styles.centerSectionStyle
+        grid: styles.gridSectionStyle,
+        flex: styles.flexSectionStyle,
+        flexThreeCols: styles.flexThreeColsSectionStyle,
+        Banner: styles.bannerSectionStyle,
+        Profile: styles.profileSectionStyle,
+        center: styles.centerSectionStyle,
     };
     return (
-        <section style={{ justifyContent: "center", alignContent: "center", height: "auto" }}>
-            <section className={widthClasses[typeOfSection]}>
-                {children}
-            </section>
+        <section className={widthClasses[typeOfSection]}>
+            {children}
         </section>
     );
 };

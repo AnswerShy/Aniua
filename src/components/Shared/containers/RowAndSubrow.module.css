@@ -1,17 +1,41 @@
+/* MOBILE */
+
 .row {
+    @apply flex flex-col xl:flex-row;
+}
+
+.subrowWrap {
+    @apply p-4;
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .subrowTitle {
-    font-size: xxx-large;
-    width: fit-content;
+    font-size: xx-large;
+    width: max-content;
+    overflow-x: hidden;
 }
 
-@media screen and (min-width: 376px) {
+.subrowComponentsWrap {
+    overflow-x: hidden;
+    height: fit-content;
+    padding: 5px; 
+    display: grid;
+    grid-template-columns: repeat(5, var(--posterWidth)); 
+    gap: 5px; 
+    height: auto; 
+    overflow-x: clip;
+}
+
+/* DESKTOP */
+
+@media screen and (min-width: 1280px) {
     .subrowTitle {
-        font-size: xx-large;
-        width: fit-content;
-    }    
+        font-size: xxx-large;
+        width: max-content;
+        overflow-x: hidden;
+    }
+    .subrowWrap {
+        @apply p-4;
+        width: var(--subrow-width);
+    }
 }
