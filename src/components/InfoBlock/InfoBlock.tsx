@@ -15,7 +15,7 @@ interface Props {
 
 const genres = (year: number, genres: animeBannerInterface["genres"]) => {
     return (
-        <div className="flex gap-5 mt-[12.5px] w-max">
+        <div>
             <p>{year}</p>
             <p>•</p>
             {genres.length > 0 ? (
@@ -54,14 +54,17 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
 
     return (
         <Section typeOfSection={"flexThreeCols"}>
-            <div className="flex flex-col w-full md:w-[250px]">
+            <div className={styles.posterColumn}>
                 <Image src={infoData.poster} alt={infoData.title} className="rounded-xl self-center" height={350} width={250} />
                 <button className="w-full py-2.5 rounded-xl bg-b_t mt-5 text-white text-2xl">add to</button>
             </div>
 
-            <div className="w-full sm:w-min lg:w-min xl:w-[670px]">
-                <h1>{infoData.title}</h1>
-                {genres(infoData.year, infoData.genres)}
+            <div className={styles.titleDescColumn}>
+                <div className={styles.infoRow}>
+                    <h1>{infoData.title}</h1>
+                    {genres(infoData.year, infoData.genres)}
+                </div>
+
 
                 <h1>Description</h1>
                 <p id="desc" className="mt-[12.5px]">
@@ -72,12 +75,13 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
                 </p>
             </div>
 
-            <div className="w-full lg:w-[270px]">
-                <div>
+            <div className={styles.detailColumn}>
+                <div className={styles.infoRow}>
                     <h1>Rate</h1>
-                    <p className="">{infoData.mal_score}</p>
+                    <p>{infoData.mal_score}</p>
                 </div>
-                <div className="">
+
+                <div>
                     <h1>Details</h1>
                     <div className={styles.subBlock}>
                         <span className={styles.subRow}>
