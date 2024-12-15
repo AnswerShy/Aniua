@@ -125,7 +125,7 @@ export default function Header() {
                     {userData ? (
                         <>
                             <div>{userData?.money}/|\</div>
-                            <TransitionLink url={"/Profile"} className="size-16 relative p-2 flex rounded-xl">
+                            <TransitionLink url={"/Profile"} className="size-16 relative p-2 flex rounded-xl" isVision={menuHandler}>
                                 {userData?.avatar ? (
                                     <div className="size-full relative">
                                         <Image

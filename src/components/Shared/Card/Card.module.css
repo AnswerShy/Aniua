@@ -20,7 +20,7 @@
     background-color: var(--03dp);
     box-shadow: var(--shadow03dp);
     transform: scale(1.2);
-    z-index: 50;
+    z-index: 2;
 }
 
 .cardTitle {
