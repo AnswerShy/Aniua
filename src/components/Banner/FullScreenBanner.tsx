@@ -34,7 +34,7 @@ const genresDisplay = (genres: animeBannerInterface["genres"]): JSX.Element | nu
 const Banner: React.FC<Banner_props> = ({ bannerImage, bannerTitle, bannerYear, bannerGenres, bannerDesc, bannerTypeNews = false }) => {
     return (
         <Section typeOfSection={"Banner"}>
-            <Image src={bannerImage ? bannerImage : ""} className={styles.bannerImage} alt="animeImage" fill objectFit={'cover'}/>
+            <Image src={bannerImage ? bannerImage : ""} className={styles.bannerBackgroundImage} alt="animeImage" fill/>
             <div className={styles.bannerInfoContainer}>
                 <h1 className={styles.bannerTitle}>{bannerTitle}</h1>
                 {bannerTypeNews ? null : (

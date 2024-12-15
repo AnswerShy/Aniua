@@ -1,11 +1,4 @@
-.Banner {
-    position: relative;
-    display: flex;
-    padding: 0 90px 100px 100px;
-    align-items: flex-end;
-}
-
-.bannerImage {
+.bannerBackgroundImage {
     z-index: -1;
     position: absolute;
     left: 0;
@@ -17,10 +10,11 @@
     opacity: .1;
     filter: blur(5px);
     
-    background-size: cover;
+    object-fit: cover;
+    object-position: top;
 }
 
-.bannerImage::after {
+.bannerBackgroundImage::after {
     content: "";
     position: absolute;
     top: 0;
@@ -34,7 +28,6 @@
 
 .bannerInfoContainer {
     height: fit-content;
-    @apply w-full md:w-1/2;
 }
 
 .bannerInfoContainer .bannerBaseInfo {
@@ -42,7 +35,7 @@
     flex-direction: row;
     column-gap: 10px;
     min-width: 100px;
-    
+    @apply w-full flex-wrap md:flex-nowrap md:w-1/2;
 }
 
 .bannerTitle {
@@ -59,8 +52,7 @@
 }
 
 .bannerDescription {
-    width: 100%;
-    @apply hidden md:block
+    @apply hidden lg:block lg:w-1/2
 }
 
 .bannerText, .bannerText * {
