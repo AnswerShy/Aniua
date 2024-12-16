@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 
         console.log(formData)
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}login/`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}login/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",

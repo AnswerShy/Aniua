@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
         const cookieHeader = `csrftoken=${csrftoken}; sessionid=${sessionid}`;
 
-        const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}user/`);
+        const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}user/`);
         url.searchParams.append("token", authToken);
 
         const response = await fetch(url.toString(), {
