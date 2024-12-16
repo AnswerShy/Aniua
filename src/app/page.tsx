@@ -9,7 +9,7 @@ export default async function Home() {
             <Section>
                 <Row>
                     <SubRow title="Last uploaded episodes" widthState="4/4">
-                        <div className="row-components">ііііііііііііііііііііііііііііііііііііііііііііііі</div>
+                        <div className="row-components">in backend dev</div>
                     </SubRow>
                 </Row>
                 <Row>
@@ -19,19 +19,19 @@ export default async function Home() {
                         ))}
                     </SubRow>
                     <SubRow title="Authors selections" widthState="1/4">
-                        <div className="row-components">ііііііііііііііііііііііііііііііііііііііііііііііі</div>
+                        <div className="row-components">in backend dev</div>
                     </SubRow>
                 </Row>
             </Section>
             <Section>
                 <Row>
                     <SubRow title="Explore new" widthState="4/4">
-                        <div className="row-components">ііііііііііііііііііііііііііііііііііііііііііііііі</div>
+                        <div className="row-components">in backend dev</div>
                     </SubRow>
                 </Row>
                 <Row>
                     <SubRow title="Last club`s discussion" widthState="4/4">
-                        <div className="row-components">ііііііііііііііііііііііііііііііііііііііііііііііі</div>
+                        <div className="row-components">in backend dev</div>
                     </SubRow>
                 </Row>
             </Section>
