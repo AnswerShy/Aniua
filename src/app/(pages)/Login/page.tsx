@@ -6,8 +6,6 @@ import { CustomButtonStyles } from "@/components/Shared/SharedComponents";
 import { TextField } from "@/components/Shared/SharedComponents";
 import { useRouter } from "next/navigation";
 
-import { LoginForms } from "./loginFormType";
-
 export default function Login() {
     const router = useRouter();
 
@@ -15,7 +13,9 @@ export default function Login() {
         handleSubmit,
         control,
         formState: { errors, isValid },
-    } = useForm<LoginForms>();
+    } = useForm<LoginForms>({
+        mode: "all",
+    });
 
     const handleLogin: SubmitHandler<LoginForms> = async (data) => {
         const { username, password } = data;
