@@ -7,7 +7,7 @@ import { Dropdown } from "../Shared/SharedComponents";
 import clsx from "clsx";
 
 import { TransitionLink } from "@/utils/customUtils";
-import { MenuIcon, ArrowForwardIcon, Person } from "@/utils/icons";
+import { MenuIcon, Person } from "@/utils/icons";
 import Image from "next/image";
 import useUserProfile from "@/hooks/useUserProfile";
 
@@ -68,14 +68,14 @@ export default function Header() {
                 <div>{currentPath}</div>
             </nav>
             {/* Desktop Header */}
-            <nav className={clsx(`${styles.headerDesktop}`, isScroll ? "bg-transparent01dp backdrop-blur-sm" : "bg-transparent")}>
-                <div className={`${styles.leftHeader}`}>
+            <nav className={clsx(`${styles.headerDesktop}`, isScroll ? "bg-c01dp" : "bg-transparent")}>
+                <div className={styles.leftHeader}>
                     <TransitionLink className="text-4xl" url={`/`}>
                         ANIUA
                     </TransitionLink>
                     {currentPath !== "" ? <Dropdown currentState={currentPath} actionList={paths} /> : null}
                 </div>
-                <div className="flex flex-row items-center">
+                <div className={styles.rightHeader}>
                     {userData ? (
                         <>
                             <div>{userData?.money}/|\</div>
@@ -100,10 +100,14 @@ export default function Header() {
                             </Dropdown>
                         </>
                     ) : (
-                        <TransitionLink url={`/Login`}>
-                            Login
-                            <ArrowForwardIcon sx={{ fontSize: "35px" }} />
-                        </TransitionLink>
+                        <>
+                            <TransitionLink url={`/Registration`}>
+                                Registration
+                            </TransitionLink>
+                            <TransitionLink url={`/Login`}>
+                                Login
+                            </TransitionLink>
+                        </>
                     )}
                 </div>
             </nav>
@@ -146,7 +150,6 @@ export default function Header() {
                     ) : (
                         <TransitionLink url={`/Login`}>
                             Login
-                            <ArrowForwardIcon sx={{ fontSize: "35px" }} />
                         </TransitionLink>
                     )}
                 </div>
