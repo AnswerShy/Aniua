@@ -1,4 +1,4 @@
-export interface EpisodeListInterface {
+interface EpisodeListInterface {
     id: number,
     episode_number: number,
     title: {

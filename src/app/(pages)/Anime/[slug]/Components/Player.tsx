@@ -2,11 +2,14 @@
 
 import styles from "./Player.module.css";
 import { CustomButton, Dropdown, Section } from "@/components/Shared/SharedComponents";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import handleEpisode from "../Helpers/handeEpisode";
+import { useEpisodeList } from "@/hooks/useEpisodeList";
 
-const Player = ({ episodesList }: PlayerProps) => {
+const Player = ({slug}: {slug: string}) => {
+  const [episodesList, loading] = useEpisodeList(slug)
+
   const [playerState, setPlayerState] = useState<playerStateInterface>({
     chooseStudio: 0,
     studiosList: [],
@@ -16,22 +19,25 @@ const Player = ({ episodesList }: PlayerProps) => {
     isPlayerLoading: false,
   });
 
-  const handleStudio = (index: number) => setPlayerState((prevState) => ({ ...prevState, chooseStudio: index }));
+  const handleStudio = useCallback((index: number) => {
+    setPlayerState((prevState) => ({ ...prevState, chooseStudio: index }));
+  }, []);
 
   useEffect(() => {
     setPlayerState((prevState) => ({ ...prevState, isPlayerLoading: false }));
   }, [playerState.episodeUrl]);
 
   useEffect(() => {
+    console.log(episodesList);
     if (episodesList?.[0]?.id) {
       setPlayerState((prevState) => ({ ...prevState, studiosList: [] }));
-      handleEpisode(setPlayerState, episodesList[0].id);
+      handleEpisode(setPlayerState, episodesList[0].id, episodesList[0]);
     } else {
       setPlayerState((prevState) => ({ ...prevState, episodeTitle: "Any player founded" }));
     }
   }, [episodesList]);
 
-  return (
+  return !loading ? (
     <Section>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <h1>{playerState.episodeTitle}</h1>
@@ -57,14 +63,14 @@ const Player = ({ episodesList }: PlayerProps) => {
         )}
       </div>
       <div className={styles.episodeWrapper}>
-        {episodesList.map((element, index) => (
-          <CustomButton key={index} onClick={() => handleEpisode(setPlayerState, element.id)}>
+        {episodesList && episodesList.map((element, index) => (
+          <CustomButton key={index} onClick={() => handleEpisode(setPlayerState, element.id, episodesList[index])}>
             {element.episode_number}
           </CustomButton>
         ))}
       </div>
     </Section>
-  );
+  ) : (<h1>loading...</h1>)
 };
 
 export default Player;
