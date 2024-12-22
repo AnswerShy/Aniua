@@ -4,8 +4,7 @@ import { animeCardInterface } from "@/interfaces/animeCardInterface";
 import { Section, Card } from "@/components/Shared/SharedComponents";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
-import { fetchAnimeList } from "../Helpers/fetchAnimeList";
-
+import AnimeServiceInstance from "@/app/api";
 let page = 2;
 
 const ListSectionLoader = () => {
@@ -15,7 +14,7 @@ const ListSectionLoader = () => {
 
     useEffect(() => {
         if (inView && !isEnd) {
-            fetchAnimeList(page)
+            AnimeServiceInstance.fetchAnimeList(page)
                 .then((data) => {
                     setAnime((prev) => [...prev, ...data]);
                     if (data.length < 18) setSsEnd(true);

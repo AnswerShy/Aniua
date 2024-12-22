@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
     try {
-        const page: string = req.nextUrl.searchParams.get("page") || "1";
-
+        const searchParams = req.nextUrl.searchParams;
         const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}filter/`);
-        url.searchParams.append("page", page);
-        url.searchParams.append("limit", "18");
+        
+        searchParams.forEach((value, key) => {
+            url.searchParams.append(key, value);
+        });
 
         const response = await fetch(url.toString(), {
             method: "GET",
@@ -17,7 +18,7 @@ export async function GET(req: NextRequest) {
         });
 
         if (!response.ok) {
-            return NextResponse.json({ message: `Failed to fetch anime list ${page}`  }, { status: response.status });
+            return NextResponse.json({ message: `Failed to fetch anime list`  }, { status: response.status });
         }
 
         const responseBody = await response.json();

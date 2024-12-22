@@ -1,9 +1,9 @@
 import { Card, Row, SubRow, Section } from "@/components/Shared/SharedComponents";
-import { animeCardInterface } from "@/interfaces/animeCardInterface";
-import { fetchCommunityChoice } from "@/models/fetchAnimeList";
+import AnimeServiceInstance from "@/app/api";
 
 export default async function Home() {
-    const communityChoice = (await fetchCommunityChoice()) as animeCardInterface[];
+    const communityChoice = await AnimeServiceInstance.fetchCommunityChoice();
+    console.log(communityChoice);
     return (
         <>
             <Section>

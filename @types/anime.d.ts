@@ -1,4 +1,4 @@
-export interface animeBannerInterface {
+interface animeInformationInterface {
     poster: string;
     title: string;
     year: number;
@@ -9,4 +9,13 @@ export interface animeBannerInterface {
     type: { title: string };
     status: string;
     studio: string;
+}
+
+interface animeCardInterface {
+    id: number;
+    title: string;
+    episode: {present: number, last: number},
+    poster: string;
+    status: string;
+    slug: string;
 }

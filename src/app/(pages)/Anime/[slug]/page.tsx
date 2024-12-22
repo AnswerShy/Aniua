@@ -1,8 +1,8 @@
 import Banner from "@/components/Banner/FullScreenBanner";
-import fetchAnime from "@/models/fetchAnimeBanner";
 import InfoBlock from "@/components/InfoBlock/InfoBlock";
 import Player from "./Components/Player";
 import { Metadata } from "next";
+import AnimeServiceInstance from "@/app/api";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const { slug } = params;
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function AnimePage({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const data = await fetchAnime(slug);
+  const data = await AnimeServiceInstance.fetchAnimeInfo(slug);
   return (
     <>
       <Banner bannerImage={data.poster} bannerTitle={data.title} bannerDesc={data.description} bannerGenres={data.genres} bannerYear={data.year} />

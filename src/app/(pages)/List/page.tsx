@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { animeCardInterface } from "@/interfaces/animeCardInterface";
 import { Section, Card } from "@/components/Shared/SharedComponents";
 import ListSectionLoader from "./Components/ListSectionLoader";
-import { fetchAnimeList } from "./Helpers/fetchAnimeList";
+import AnimeServiceInstance from "@/app/api";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const listPage: React.FC<animeCardInterface> = async () => {
-    const anime = await fetchAnimeList()
+    const anime = await AnimeServiceInstance.fetchAnimeList()
     return (
         <>
             <Section typeOfSection={"grid"}>
