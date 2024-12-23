@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
+    console.log("user profile route fetched");
     try {
         const cookies = req.cookies;
         const authToken = cookies.get("authToken")?.value;

@@ -17,7 +17,6 @@ export default function Header() {
     const [isMenuOpened, setMenuOpened] = useState(false);
     const [isScroll, setScroll] = useState(false);
     const userData = useUserProfile();
-
     const menuHandler = () => {
         setMenuOpened((prev) => !prev);
     }; // Side menu handler for mobile
@@ -76,7 +75,7 @@ export default function Header() {
                     {currentPath !== "" ? <Dropdown currentState={currentPath} actionList={paths} /> : null}
                 </div>
                 <div className={styles.rightHeader}>
-                    {userData ? (
+                    {userData.username ? (
                         <>
                             <div>{userData?.money}/|\</div>
                             <Dropdown actionList={pathsProfile} isLeft={false}>
@@ -126,7 +125,7 @@ export default function Header() {
                     ))}
                 </div>
                 <div className={`${styles.botMenu}`}>
-                    {userData ? (
+                    {userData.username ? (
                         <>
                             <div>{userData?.money}/|\</div>
                             <TransitionLink url={"/Profile"} className="size-16 relative p-2 flex rounded-xl" isVision={menuHandler}>

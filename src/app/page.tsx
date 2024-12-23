@@ -3,7 +3,6 @@ import AnimeServiceInstance from "@/app/api";
 
 export default async function Home() {
     const communityChoice = await AnimeServiceInstance.fetchCommunityChoice();
-    console.log(communityChoice);
     return (
         <>
             <Section>

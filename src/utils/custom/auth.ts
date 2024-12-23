@@ -1,11 +1,11 @@
 export default function isLoggined() {
-    if (typeof document !== "undefined") {
-        const cookies = document.cookie.split(";").reduce((acc, cookie) => {
-            const [key, value] = cookie.trim().split("=");
-            acc[key] = value;
-            return acc;
-        }, {} as Record<string, string>);
-        if (cookies["authToken"] !== undefined) return !!cookies["authToken"];
-    }
-    return false;
+    if (typeof document === "undefined") return false;
+
+    const getCookie = (name: string) => 
+        document.cookie
+            .split("; ")
+            .find(row => row.startsWith(name + "="))
+            ?.split("=")[1];
+
+    return Boolean(getCookie("authToken"));
 }
