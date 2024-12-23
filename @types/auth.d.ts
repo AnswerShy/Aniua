@@ -1,11 +1,11 @@
 interface LoginForms {
-    username: string;
-    password: string;
-};
+  username: string;
+  password: string;
+}
 
 interface RegistrationForms {
-    username: string,
-    email: string,
-    password1: string,
-    password2: string,
+  username: string;
+  email: string;
+  password1: string;
+  password2: string;
 }

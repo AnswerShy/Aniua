@@ -1,21 +1,25 @@
-"use client";
+'use client';
 
-import styles from "./Player.module.css";
-import { CustomButton, Dropdown, Section } from "@/components/Shared/SharedComponents";
-import { useCallback, useEffect, useState } from "react";
+import styles from './Player.module.css';
+import {
+  CustomButton,
+  Dropdown,
+  Section,
+} from '@/components/Shared/SharedComponents';
+import { useCallback, useEffect, useState } from 'react';
 
-import handleEpisode from "../Helpers/handeEpisode";
-import { useEpisodeList } from "@/hooks/useEpisodeList";
+import handleEpisode from '../Helpers/handeEpisode';
+import { useEpisodeList } from '@/hooks/useEpisodeList';
 
-const Player = ({slug}: {slug: string}) => {
-  const [episodesList, loading] = useEpisodeList(slug)
+const Player = ({ slug }: { slug: string }) => {
+  const [episodesList, loading] = useEpisodeList(slug);
 
   const [playerState, setPlayerState] = useState<playerStateInterface>({
     chooseStudio: 0,
     studiosList: [],
     episodeUrl: null,
-    episodeTitle: "",
-    episodeJPTitle: "",
+    episodeTitle: '',
+    episodeJPTitle: '',
     isPlayerLoading: false,
   });
 
@@ -33,13 +37,22 @@ const Player = ({slug}: {slug: string}) => {
       setPlayerState((prevState) => ({ ...prevState, studiosList: [] }));
       handleEpisode(setPlayerState, episodesList[0].id, episodesList[0]);
     } else {
-      setPlayerState((prevState) => ({ ...prevState, episodeTitle: "Any player founded" }));
+      setPlayerState((prevState) => ({
+        ...prevState,
+        episodeTitle: 'Any player founded',
+      }));
     }
   }, [episodesList]);
 
   return !loading ? (
     <Section>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <h1>{playerState.episodeTitle}</h1>
         <h2>{playerState.episodeJPTitle}</h2>
       </div>
@@ -55,7 +68,10 @@ const Player = ({slug}: {slug: string}) => {
           ) : null}
         </div>
         {!playerState.isPlayerLoading ? (
-          <iframe className={styles.playerFrame} src={playerState.episodeUrl ? playerState.episodeUrl : undefined} />
+          <iframe
+            className={styles.playerFrame}
+            src={playerState.episodeUrl ? playerState.episodeUrl : undefined}
+          />
         ) : (
           <div className={styles.playerFrame}>
             <h1>Loading...</h1>
@@ -63,14 +79,22 @@ const Player = ({slug}: {slug: string}) => {
         )}
       </div>
       <div className={styles.episodeWrapper}>
-        {episodesList && episodesList.map((element, index) => (
-          <CustomButton key={index} onClick={() => handleEpisode(setPlayerState, element.id, episodesList[index])}>
-            {element.episode_number}
-          </CustomButton>
-        ))}
+        {episodesList &&
+          episodesList.map((element, index) => (
+            <CustomButton
+              key={index}
+              onClick={() =>
+                handleEpisode(setPlayerState, element.id, episodesList[index])
+              }
+            >
+              {element.episode_number}
+            </CustomButton>
+          ))}
       </div>
     </Section>
-  ) : (<h1>loading...</h1>)
+  ) : (
+    <h1>loading...</h1>
+  );
 };
 
 export default Player;

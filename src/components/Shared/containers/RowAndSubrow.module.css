@@ -1,54 +1,54 @@
 /* MOBILE */
 
 .row {
-    @apply flex flex-col xl:flex-row;
+  @apply flex flex-col xl:flex-row;
 }
 
 .subrowWrap {
-    @apply p-4;
-    width: 100%;
+  @apply p-4;
+  width: 100%;
 }
 
 .subrowTitle {
-    font-size: xx-large;
-    width: max-content;
-    overflow-x: hidden;
+  font-size: xx-large;
+  width: max-content;
+  overflow-x: hidden;
 }
 
 .subrowComponentsWrap {
-    padding: 5px;
-    padding-top: 15px;
-    display: grid;
-    grid-template-columns: repeat(5, var(--posterWidth)); 
-    gap: 5px; 
-    height: 96%;
-    overflow-x: scroll;
-    overflow-y: hidden;
+  padding: 5px;
+  padding-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(5, var(--posterWidth));
+  gap: 5px;
+  height: 96%;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .subrowComponentsWrap::-webkit-scrollbar {
-    height: 0;
+  height: 0;
 }
 
 /* DESKTOP */
 
 @media screen and (min-width: 1280px) {
-    .subrowTitle {
-        font-size: xxx-large;
-        width: max-content;
-        overflow-x: hidden;
-    }
-    .subrowWrap {
-        @apply p-4;
-        width: var(--subrow-width);
-    }
-    .subrowComponentsWrap {
-        padding: 5px; 
-        display: grid;
-        grid-template-columns: repeat(5, var(--posterWidth)); 
-        gap: 5px; 
-        height: auto; 
-        overflow-x: clip;
-        overflow-y: unset;
-    }
+  .subrowTitle {
+    font-size: xxx-large;
+    width: max-content;
+    overflow-x: hidden;
+  }
+  .subrowWrap {
+    @apply p-4;
+    width: var(--subrow-width);
+  }
+  .subrowComponentsWrap {
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(5, var(--posterWidth));
+    gap: 5px;
+    height: auto;
+    overflow-x: clip;
+    overflow-y: unset;
+  }
 }

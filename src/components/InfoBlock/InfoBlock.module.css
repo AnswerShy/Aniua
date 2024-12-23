@@ -1,33 +1,33 @@
 .posterColumn {
-    @apply w-full flex flex-col justify-start items-center lg:w-[250px];
+  @apply w-full flex flex-col justify-start items-center lg:w-[250px];
 }
 
 .titleDescColumn {
-    @apply w-full lg:w-min xl:w-[670px];
+  @apply w-full lg:w-min xl:w-[670px];
 }
 
 .detailColumn {
-    @apply w-full lg:w-[270px];
+  @apply w-full lg:w-[270px];
 }
 
 .infoRow {
-    @apply min-h-0 md:min-h-32
+  @apply min-h-0 md:min-h-32;
 }
 
 .subText {
-    position: absolute;
-    top: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .subBlock {
-    display: flex;
-    margin-top: 1.25rem;
-    flex-direction: column;
-    border-radius: 0.75rem;
+  display: flex;
+  margin-top: 1.25rem;
+  flex-direction: column;
+  border-radius: 0.75rem;
 }
 
 .subRow {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }

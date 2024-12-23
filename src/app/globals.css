@@ -5,48 +5,54 @@
 @tailwind utilities;
 
 :root {
-    --black: #121212;
-    /* --primaryColor: #a73939; */
-    --primaryColor: white;
+  --black: #121212;
+  /* --primaryColor: #a73939; */
+  --primaryColor: white;
 
-    --00dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 2%);
-    --01dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 7%);
-    --t01dp: color-mix(in oklab, var(--01dp) 75%, transparent);
-    --02dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 12%);
-    --03dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 17%);
+  --00dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 2%);
+  --01dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 7%);
+  --t01dp: color-mix(in oklab, var(--01dp) 75%, transparent);
+  --02dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 12%);
+  --03dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 17%);
 
-    --background: var(--00dp);
-    --foreground: #ffffffab;
+  --background: var(--00dp);
+  --foreground: #ffffffab;
 
-    --titleColor: white;
-    --textColor: var(--foreground);
+  --titleColor: white;
+  --textColor: var(--foreground);
 
-    --button: color-mix(in oklab, var(--01dp) 45%, transparent);
-    --buttonHover: color-mix(in oklab, var(--03dp) 50%, transparent);
+  --button: color-mix(in oklab, var(--01dp) 45%, transparent);
+  --buttonHover: color-mix(in oklab, var(--03dp) 50%, transparent);
 
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    --shadowHover: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    --shadow02dp: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    --shadow03dp: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    --shadow04dp: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    --shadow05dp: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadowHover: 0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
+  --shadow02dp: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --shadow03dp: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  --shadow04dp: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  --shadow05dp: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 
-    --posterWidth: 192px;
-    --posterHeight: 313px;
+  --posterWidth: 192px;
+  --posterHeight: 313px;
 
-    --bluredFilter: blur(5px);
-    --borderRad: 12px;
+  --bluredFilter: blur(5px);
+  --borderRad: 12px;
 
-    --loadGradient: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%);
+  --loadGradient: linear-gradient(
+    90deg,
+    var(--00dp) 25%,
+    var(--02dp) 50%,
+    var(--01dp) 75%
+  );
 
-    --titleSize: 2.5rem;
-    --textSize: 1.5rem;
+  --titleSize: 2.5rem;
+  --textSize: 1.5rem;
 
-    --subtext: 1.275rem;
-    --subtitle: 1.5rem;
+  --subtext: 1.275rem;
+  --subtitle: 1.5rem;
 
-    --bannerTitle: 6rem;
-    --bannerText: 2rem;
+  --bannerTitle: 6rem;
+  --bannerText: 2rem;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -60,72 +66,72 @@
 } */
 
 body {
-    color: var(--foreground);
-    background: var(--background);
-    font-weight: 400;
+  color: var(--foreground);
+  background: var(--background);
+  font-weight: 400;
 }
 
 h1 {
-    width: fit-content;
-    text-align: left;
-    color: var(--foreground);
+  width: fit-content;
+  text-align: left;
+  color: var(--foreground);
 
-    color: var(--titleColor);
-    font-size: var(--titleSize);
+  color: var(--titleColor);
+  font-size: var(--titleSize);
 }
 
 h2 {
-    height: fit-content;
-    font-size: var(--textSize);
+  height: fit-content;
+  font-size: var(--textSize);
 }
 
 p,
 span,
 a {
   font-size: var(--textSize);
-    width: fit-content;
-    text-align: left;
-    color: var(--textColor);
+  width: fit-content;
+  text-align: left;
+  color: var(--textColor);
 }
 
 a:hover {
-    cursor: pointer;
-    color: white;
+  cursor: pointer;
+  color: white;
 }
 
 span > :nth-child(1) {
-    color: var(--whiteTransparent);
+  color: var(--whiteTransparent);
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
-    background-color: transparent;
+  width: 5px;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--03dp);
+  background: var(--03dp);
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 input {
-    background-color: var(--01dp);
-    padding: 15px;
-    border-radius: 12px;
+  background-color: var(--01dp);
+  padding: 15px;
+  border-radius: 12px;
 }
 
 .title {
-    @apply text-5xl leading-relaxed font-bold tracking-widest
+  @apply text-5xl leading-relaxed font-bold tracking-widest;
 }
 
 .text {
-    @apply text-4xl font-normal text-white
+  @apply text-4xl font-normal text-white;
 }
 
 .subText {
-    @apply text-3xl font-thin
+  @apply text-3xl font-thin;
 }

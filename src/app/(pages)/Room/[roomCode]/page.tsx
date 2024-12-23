@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
 import { useParams } from 'next/navigation';
 import SocketClient from '@/components/Room/Room';
 
 const Room = () => {
   const params = useParams();
-  const roomCode = params?.roomCode
+  const roomCode = params?.roomCode;
 
   if (!roomCode || typeof roomCode !== 'string') {
     return <div>Loading...</div>;
@@ -13,7 +13,7 @@ const Room = () => {
 
   return (
     <div>
-      <SocketClient roomCode={ roomCode } />
+      <SocketClient roomCode={roomCode} />
     </div>
   );
 };

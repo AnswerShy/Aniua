@@ -1,8 +1,12 @@
 // Desc: Helper function to handle the episode change in the player component
-import AnimeServiceInstance from "@/app/api";
-import { Dispatch, SetStateAction } from "react";
+import AnimeServiceInstance from '@/app/api';
+import { Dispatch, SetStateAction } from 'react';
 
-async function handleEpisode(playerState: Dispatch<SetStateAction<playerStateInterface>>, id: number, episodesList: EpisodeListInterface) {
+async function handleEpisode(
+  playerState: Dispatch<SetStateAction<playerStateInterface>>,
+  id: number,
+  episodesList: EpisodeListInterface,
+) {
   playerState((prevState) => ({ ...prevState, playerLoad: true }));
   const newEpisode = await AnimeServiceInstance.fetchEpisode(id);
   playerState((prevState) => ({

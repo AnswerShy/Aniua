@@ -1,47 +1,47 @@
 .playerFrame {
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-    border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  border-radius: 12px;
 }
 
-.episodeWrapper{
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
+.episodeWrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
 }
 
 .playerWrapper {
-    width: 100%;
-    height: 80%;
+  width: 100%;
+  height: 80%;
 
-    position: relative;
+  position: relative;
 }
 
 .playerWrapper:hover .playerButtonsWrapper {
-    opacity: 1;
+  opacity: 1;
 }
 
 .playerButtonsWrapper {
-    position: absolute;
+  position: absolute;
 
-    top: 15px;
-    left: 15px;
+  top: 15px;
+  left: 15px;
 
-    opacity: 0;
-    transition: all .1s linear;
+  opacity: 0;
+  transition: all 0.1s linear;
 }
 
 .playerLoad {
-    animation: shimmer 1s infinite linear !important;
+  animation: shimmer 1s infinite linear !important;
 }
 
 @keyframes shimmer {
-    0% {
-      background-position: 100%;
-    }
-    100% {
-      background-position: -100%;
-    }
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
 }

@@ -1,8 +1,10 @@
-import AnimeServiceInstance from "@/app/api";
-import { useEffect, useState } from "react";
+import AnimeServiceInstance from '@/app/api';
+import { useEffect, useState } from 'react';
 
 export const useEpisodeList = (slug: string) => {
-  const [episodesList, setEpisodesList] = useState<EpisodeListInterface[] | null>(null);
+  const [episodesList, setEpisodesList] = useState<
+    EpisodeListInterface[] | null
+  >(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -1,31 +1,31 @@
 .headerMobile {
-    @apply flex w-full flex-row fixed items-center p-4 z-50 top-0 xl:hidden backdrop-blur-sm;
-    transition: all .2s linear;
-    @apply cursor-pointer;
+  @apply flex w-full flex-row fixed items-center p-4 z-50 top-0 xl:hidden backdrop-blur-sm;
+  transition: all 0.2s linear;
+  @apply cursor-pointer;
 }
 
 .headerDesktop {
-    @apply hidden fixed z-50 transition-colors duration-500;
-    @apply xl:py-0 xl:text-xl xl:top-0 xl:flex xl:translate-x-0 xl:w-full xl:h-16 xl:flex-row xl:items-center xl:justify-between xl:px-[25%];
+  @apply hidden fixed z-50 transition-colors duration-500;
+  @apply xl:py-0 xl:text-xl xl:top-0 xl:flex xl:translate-x-0 xl:w-full xl:h-16 xl:flex-row xl:items-center xl:justify-between xl:px-[25%];
 }
 
 .sideMenu {
-    @apply flex xl:hidden flex-col fixed top-16 items-start p-4 w-3/4 justify-between h-calc-screen-minus-4rem bg-c01dp z-50;
-    transition: all .2s linear;
+  @apply flex xl:hidden flex-col fixed top-16 items-start p-4 w-3/4 justify-between h-calc-screen-minus-4rem bg-c01dp z-50;
+  transition: all 0.2s linear;
 }
 
 .leftHeader {
-    @apply text-2xl hidden xl:flex flex-col items-center xl:flex-row xl:gap-4
+  @apply text-2xl hidden xl:flex flex-col items-center xl:flex-row xl:gap-4;
 }
 
 .rightHeader {
-    @apply flex flex-row items-center gap-4;
+  @apply flex flex-row items-center gap-4;
 }
 
 .topMenu {
-    @apply flex xl:hidden flex-col items-start gap-4
+  @apply flex xl:hidden flex-col items-start gap-4;
 }
 
 .botMenu {
-    @apply flex flex-row-reverse justify-center items-center gap-4
+  @apply flex flex-row-reverse justify-center items-center gap-4;
 }

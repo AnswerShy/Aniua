@@ -1,27 +1,27 @@
-import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 
 interface UserStateStore {
   user: UserProfileInterface;
   hydrated: boolean;
-  setHydrated: (value: boolean) => void,
+  setHydrated: (value: boolean) => void;
   setUser: (user: UserProfileInterface) => void;
   removeUser: () => void;
 }
 
 const defaultUser: UserProfileInterface = {
   id: 0,
-  username: "",
-  avatar: "",
-  description: "",
-  website: "",
-  github: "",
-  twitter: "",
-  telegram: "",
-  home: "",
-  first_name: "",
-  last_name: "",
-  anime_name: "",
+  username: '',
+  avatar: '',
+  description: '',
+  website: '',
+  github: '',
+  twitter: '',
+  telegram: '',
+  home: '',
+  first_name: '',
+  last_name: '',
+  anime_name: '',
   money: 0,
   verified: false,
   date_joined: new Date(),
@@ -30,13 +30,13 @@ const defaultUser: UserProfileInterface = {
   is_active: false,
   last_activity: new Date(),
   xp: 0,
-  css: "",
+  css: '',
   comments_count: 0,
   reviews_count: 0,
-  achievements: [""],
-  anime_lists: [""],
+  achievements: [''],
+  anime_lists: [''],
   success: false,
-}
+};
 
 export const useUserStore = create<UserStateStore>()(
   devtools(
@@ -49,17 +49,17 @@ export const useUserStore = create<UserStateStore>()(
         removeUser: () => set({ user: defaultUser }),
       }),
       {
-        name: "userStore",
+        name: 'userStore',
         onRehydrateStorage: () => (state) => {
           if (state && !state?.user) {
             state.user = defaultUser;
           }
           state?.setHydrated(true);
         },
-      }
+      },
     ),
     {
-      name: "userStore",
-    }
-  )
+      name: 'userStore',
+    },
+  ),
 );

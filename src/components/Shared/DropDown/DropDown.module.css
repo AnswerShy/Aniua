@@ -1,53 +1,52 @@
 .dropdownMenu {
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .optionsWrap {
-    position: absolute;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    flex-direction: column;
-    overflow: hidden;
+  position: absolute;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
 
-    width: fit-content;
-    padding: 5px;
+  width: fit-content;
+  padding: 5px;
 
-    background-color: var(--t01dp);
-    backdrop-filter: blur(5px);
+  background-color: var(--t01dp);
+  backdrop-filter: blur(5px);
 
-    top: 100%;
+  top: 100%;
 
-    border-radius: 12px;
-    box-shadow: var(--shadowHover);
+  border-radius: 12px;
+  box-shadow: var(--shadowHover);
 
-    @apply hidden xl:block    
+  @apply hidden xl:block;
 }
 
 /* ONLY ANIMATION BLOCK */
 
 .optionsWrap {
-    transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
-    opacity: 0;
-    visibility: hidden;
-    transform: scaleY(0);
-    transform-origin: top right;
-
+  opacity: 0;
+  visibility: hidden;
+  transform: scaleY(0);
+  transform-origin: top right;
 }
 
 .dropdownMenu:hover {
-    color: white;
-    cursor: pointer;
+  color: white;
+  cursor: pointer;
 }
 
 .visibleOptionWrap,
 .dropdownMenu:hover .optionsWrap {
-    opacity: 1;
-    visibility: visible;
-    transform: scaleY(1);
-    color: white;
-    cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  transform: scaleY(1);
+  color: white;
+  cursor: pointer;
 }
