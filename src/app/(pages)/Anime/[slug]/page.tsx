@@ -1,8 +1,8 @@
 import Banner from '@/components/Banner/FullScreenBanner';
 import InfoBlock from '@/components/InfoBlock/InfoBlock';
-import Player from './Components/Player';
 import { Metadata } from 'next';
 import AnimeServiceInstance from '@/app/api';
+import PlayerProvider from './Components/PlayerProvider';
 
 export async function generateMetadata({
   params,
@@ -33,7 +33,7 @@ export default async function AnimePage({
         bannerYear={data.year}
       />
       <InfoBlock infoData={data} />
-      <Player slug={slug} />
+      <PlayerProvider slug={slug} />
     </>
   );
 }

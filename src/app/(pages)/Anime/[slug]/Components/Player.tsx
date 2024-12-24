@@ -6,45 +6,22 @@ import {
   Dropdown,
   Section,
 } from '@/components/Shared/SharedComponents';
-import { useCallback, useEffect, useState } from 'react';
 
-import handleEpisode from '../Helpers/handeEpisode';
-import { useEpisodeList } from '@/hooks/useEpisodeList';
+import { handleEpisode } from '@/utils/customUtils';
+import { Dispatch, SetStateAction } from 'react';
 
-const Player = ({ slug }: { slug: string }) => {
-  const [episodesList, loading] = useEpisodeList(slug);
-
-  const [playerState, setPlayerState] = useState<playerStateInterface>({
-    chooseStudio: 0,
-    studiosList: [],
-    episodeUrl: null,
-    episodeTitle: '',
-    episodeJPTitle: '',
-    isPlayerLoading: false,
-  });
-
-  const handleStudio = useCallback((index: number) => {
-    setPlayerState((prevState) => ({ ...prevState, chooseStudio: index }));
-  }, []);
-
-  useEffect(() => {
-    setPlayerState((prevState) => ({ ...prevState, isPlayerLoading: false }));
-  }, [playerState.episodeUrl]);
-
-  useEffect(() => {
-    console.log(episodesList);
-    if (episodesList?.[0]?.id) {
-      setPlayerState((prevState) => ({ ...prevState, studiosList: [] }));
-      handleEpisode(setPlayerState, episodesList[0].id, episodesList[0]);
-    } else {
-      setPlayerState((prevState) => ({
-        ...prevState,
-        episodeTitle: 'Any player founded',
-      }));
-    }
-  }, [episodesList]);
-
-  return !loading ? (
+const Player = ({
+  playerState,
+  setPlayerState,
+  handleStudio,
+  episodesList,
+}: {
+  playerState: playerStateInterface;
+  setPlayerState: Dispatch<SetStateAction<playerStateInterface>>;
+  handleStudio: (index: number) => void;
+  episodesList: EpisodeListInterface[] | null;
+}) => {
+  return (
     <Section>
       <div
         style={{
@@ -92,8 +69,6 @@ const Player = ({ slug }: { slug: string }) => {
           ))}
       </div>
     </Section>
-  ) : (
-    <h1>loading...</h1>
   );
 };
 

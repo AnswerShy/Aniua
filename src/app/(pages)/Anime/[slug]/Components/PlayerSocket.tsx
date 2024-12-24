@@ -1,17 +1,18 @@
-// components/SocketClient.tsx
+import { Section } from '@/components/Shared/SharedComponents';
 import { useEffect, useState } from 'react';
+import styles from './Player.module.css';
 
 interface SocketClientProps {
   roomCode: string;
 }
 
-const SocketClient: React.FC<SocketClientProps> = ({ roomCode }) => {
+const PlayerSocket: React.FC<SocketClientProps> = ({ roomCode }) => {
   const [ws, setWs] = useState<WebSocket | null>(null);
 
   useEffect(() => {
     if (!roomCode) return;
 
-    const socket = new WebSocket('ws://localhost:3000');
+    const socket = new WebSocket(process.env.NEXT_PUBLIC_WS_URL as string);
 
     setWs(socket);
 
@@ -83,18 +84,23 @@ const SocketClient: React.FC<SocketClientProps> = ({ roomCode }) => {
   }, [ws]);
 
   return (
-    <div
-      style={{ top: '50%', position: 'absolute', color: '#a94444 !important' }}
-    >
-      <h1>Room: {roomCode}</h1>
-      <iframe
-        id="myIframe"
-        src="https://moonanime.art/iframe/vxguiwozjg/?i=12"
-        width="600"
-        height="400"
-      ></iframe>
-    </div>
+    <Section>
+      <div className={styles.playerWrapper}>
+        {roomCode ? (
+          <iframe
+            id="myIframe"
+            src="https://moonanime.art/iframe/vxguiwozjg/?i=12"
+            width="600"
+            height="400"
+          ></iframe>
+        ) : (
+          <div className={styles.playerFrame}>
+            <h1>Loading...</h1>
+          </div>
+        )}
+      </div>
+    </Section>
   );
 };
 
-export default SocketClient;
+export default PlayerSocket;
