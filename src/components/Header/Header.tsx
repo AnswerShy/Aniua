@@ -58,10 +58,7 @@ export default function Header() {
     <header>
       {/* Mobile Header */}
       <nav
-        className={clsx(
-          `${styles.headerMobile}`,
-          isMenuOpened ? 'bg-c01dp' : 'bg-transparent01dp',
-        )}
+        className={clsx(`${styles.headerMobile}`, isMenuOpened ? 'bg-c01dp' : 'bg-transparent01dp')}
         onClick={() => {
           menuHandler();
         }}
@@ -70,19 +67,12 @@ export default function Header() {
         <div>{currentPath}</div>
       </nav>
       {/* Desktop Header */}
-      <nav
-        className={clsx(
-          `${styles.headerDesktop}`,
-          isScroll ? 'bg-c01dp' : 'bg-transparent',
-        )}
-      >
+      <nav className={clsx(`${styles.headerDesktop}`, isScroll ? 'bg-c01dp' : 'bg-transparent')}>
         <div className={styles.leftHeader}>
           <TransitionLink className="text-4xl" url={`/`}>
             ANIUA
           </TransitionLink>
-          {currentPath !== '' ? (
-            <Dropdown currentState={currentPath} actionList={paths} />
-          ) : null}
+          {currentPath !== '' ? <Dropdown currentState={currentPath} actionList={paths} /> : null}
         </div>
         <div className={styles.rightHeader}>
           {userData.username ? (
@@ -110,21 +100,14 @@ export default function Header() {
             </>
           ) : (
             <>
-              <TransitionLink url={`/Registration`}>
-                Registration
-              </TransitionLink>
+              <TransitionLink url={`/Registration`}>Registration</TransitionLink>
               <TransitionLink url={`/Login`}>Login</TransitionLink>
             </>
           )}
         </div>
       </nav>
       {/* Side Menu For Mobile */}
-      <nav
-        className={clsx(
-          `${styles.sideMenu}`,
-          isMenuOpened ? 'translate-x-0' : '-translate-x-full',
-        )}
-      >
+      <nav className={clsx(`${styles.sideMenu}`, isMenuOpened ? 'translate-x-0' : '-translate-x-full')}>
         <div className={`${styles.topMenu}`}>
           {Object.entries(paths).map(([key, action]) => (
             <TransitionLink url={action} key={key} isVision={menuHandler}>

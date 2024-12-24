@@ -58,12 +58,7 @@ export default function Login() {
               minLength: { value: 2, message: 'More than 2 symbols' },
             }}
             render={({ field: { ref, ...field } }) => (
-              <TextField
-                {...field}
-                errorString={errors.username?.message}
-                ref={ref}
-                type={'login'}
-              />
+              <TextField {...field} errorString={errors.username?.message} ref={ref} type={'login'} />
             )}
           />
           <Controller
@@ -74,20 +69,11 @@ export default function Login() {
               minLength: { value: 8, message: 'More than 8 symbols' },
             }}
             render={({ field: { ref, ...field } }) => (
-              <TextField
-                {...field}
-                errorString={errors.password?.message}
-                ref={ref}
-                type={'password'}
-              />
+              <TextField {...field} errorString={errors.password?.message} ref={ref} type={'password'} />
             )}
           />
 
-          <input
-            type="submit"
-            className={CustomButtonStyles.button}
-            disabled={!isValid}
-          />
+          <input type="submit" className={CustomButtonStyles.button} disabled={!isValid} />
         </form>
       </Section>
     </>

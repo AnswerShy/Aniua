@@ -19,10 +19,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      return NextResponse.json(
-        { message: 'Login failed' },
-        { status: response.status },
-      );
+      return NextResponse.json({ message: 'Login failed' }, { status: response.status });
     }
 
     const setCookieHeader = response.headers.get('set-cookie');
@@ -36,9 +33,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(await response.json());
   } catch (error) {
     console.error('Error in login handler:', error);
-    return NextResponse.json(
-      { message: 'Internal server error' },
-      { status: 500 },
-    );
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }

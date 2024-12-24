@@ -62,9 +62,7 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
           height={350}
           width={250}
         />
-        <button className="w-full py-2.5 rounded-xl bg-b_t mt-5 text-white text-2xl">
-          add to
-        </button>
+        <button className="w-full py-2.5 rounded-xl bg-b_t mt-5 text-white text-2xl">add to</button>
       </div>
 
       <div className={styles.titleDescColumn}>
@@ -108,9 +106,7 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
             </span>
             <span className={styles.subRow}>
               <p>Studio: </p>
-              <a className={styles.subText}>
-                {infoData.studio ? infoData.studio : 'Unknown'}
-              </a>
+              <a className={styles.subText}>{infoData.studio ? infoData.studio : 'Unknown'}</a>
             </span>
           </div>
         </div>

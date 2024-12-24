@@ -14,9 +14,7 @@ const SubRow: React.FC<{
   };
   return (
     <div
-      style={
-        { '--subrow-width': widthClasses[widthState] } as React.CSSProperties
-      }
+      style={{ '--subrow-width': widthClasses[widthState] } as React.CSSProperties}
       className={styles.subrowWrap}
     >
       <p className={styles.subrowTitle}>{title}</p>

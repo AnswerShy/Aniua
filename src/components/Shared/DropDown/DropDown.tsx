@@ -38,29 +38,18 @@ const Dropdown = ({
 
   return actionList ? (
     <>
-      <div
-        className={`${styles.dropdownMenu} ${isLeft ? 'items-start' : 'items-end'}`}
-        onClick={handleVisible}
-      >
+      <div className={`${styles.dropdownMenu} ${isLeft ? 'items-start' : 'items-end'}`} onClick={handleVisible}>
         {children ? (
           children
         ) : (
           <div className={`${styles.dropdownButton} ${className}`}>
-            {currentState &&
-              currentState.charAt(0).toUpperCase() + currentState.slice(1)}
+            {currentState && currentState.charAt(0).toUpperCase() + currentState.slice(1)}
             <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
           </div>
         )}
-        <div
-          className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}
-        >
+        <div className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}>
           {Object.entries(actionList).map(([key, action]) => (
-            <TransitionLink
-              url={action}
-              key={key}
-              className={styles.option}
-              isVision={handleVisible}
-            >
+            <TransitionLink url={action} key={key} className={styles.option} isVision={handleVisible}>
               {key.charAt(0).toUpperCase() + key.slice(1)}
             </TransitionLink>
           ))}
@@ -69,24 +58,15 @@ const Dropdown = ({
     </>
   ) : (
     <>
-      <div
-        className={`${styles.dropdownMenu} ${className}`}
-        onClick={handleVisible}
-      >
+      <div className={`${styles.dropdownMenu} ${className}`} onClick={handleVisible}>
         <div className={`${styles.dropdownButton}`}>
           {assetsList && assetsList[Number(currentState)]}
           <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
         </div>
-        <div
-          className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}
-        >
+        <div className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}>
           {assetsList &&
             assetsList.map((studio, index) => (
-              <div
-                key={index}
-                className={styles.option}
-                onClick={() => handleOptionSelect(index)}
-              >
+              <div key={index} className={styles.option} onClick={() => handleOptionSelect(index)}>
                 {studio.charAt(0).toUpperCase() + studio.slice(1)}
               </div>
             ))}

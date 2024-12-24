@@ -9,12 +9,7 @@ interface TransitionLinkProps extends React.HTMLAttributes<HTMLDivElement> {
   isVision?: () => void | null;
 }
 
-const TransitionLink: React.FC<TransitionLinkProps> = ({
-  url,
-  isVision = null,
-  children,
-  className,
-}) => {
+const TransitionLink: React.FC<TransitionLinkProps> = ({ url, isVision = null, children, className }) => {
   const router = useRouter();
 
   const doLink = async (url: string, event: React.MouseEvent) => {
@@ -31,10 +26,7 @@ const TransitionLink: React.FC<TransitionLinkProps> = ({
 
   return (
     <Link href={url} className={className}>
-      <div
-        onClick={(event) => doLink(url, event)}
-        className="relative w-full h-full rounded-xl"
-      >
+      <div onClick={(event) => doLink(url, event)} className="relative w-full h-full rounded-xl">
         {children}
       </div>
     </Link>

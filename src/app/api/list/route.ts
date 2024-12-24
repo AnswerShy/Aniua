@@ -18,19 +18,13 @@ export async function GET(req: NextRequest) {
     });
 
     if (!response.ok) {
-      return NextResponse.json(
-        { message: `Failed to fetch anime list` },
-        { status: response.status },
-      );
+      return NextResponse.json({ message: `Failed to fetch anime list` }, { status: response.status });
     }
 
     const responseBody = await response.json();
     return NextResponse.json(responseBody.titles);
   } catch (error) {
     console.error('Error in login handler:', error);
-    return NextResponse.json(
-      { message: 'Internal server error' },
-      { status: 500 },
-    );
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }

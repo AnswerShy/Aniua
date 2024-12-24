@@ -1,9 +1,4 @@
-import {
-  Card,
-  Row,
-  SubRow,
-  Section,
-} from '@/components/Shared/SharedComponents';
+import { Card, Row, SubRow, Section } from '@/components/Shared/SharedComponents';
 import AnimeServiceInstance from '@/app/api';
 
 export default async function Home() {
@@ -19,12 +14,7 @@ export default async function Home() {
         <Row>
           <SubRow title="Community choice" widthState="3/4">
             {communityChoice.map((el, index) => (
-              <Card
-                key={index}
-                image={el.poster}
-                title={el.title}
-                slug={el.slug}
-              ></Card>
+              <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
             ))}
           </SubRow>
           <SubRow title="Authors selections" widthState="1/4">

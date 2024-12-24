@@ -4,9 +4,7 @@ export async function GET(req: NextRequest) {
   try {
     const title: number = Number(req.nextUrl.searchParams.get('title')) || 0;
 
-    const url = new URL(
-      `${process.env.NEXT_PUBLIC_API_URL}episode/get/${title}`,
-    );
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}episode/get/${title}`);
     url.searchParams.append('slug', title.toString());
 
     const response = await fetch(url.toString(), {
@@ -28,9 +26,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(responseBody);
   } catch (error) {
     console.error('Error in login handler:', error);
-    return NextResponse.json(
-      { message: 'Internal server error' },
-      { status: 500 },
-    );
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }

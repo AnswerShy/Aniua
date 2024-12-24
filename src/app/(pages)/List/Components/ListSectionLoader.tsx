@@ -30,19 +30,10 @@ const ListSectionLoader = () => {
     <>
       <Section typeOfSection={'grid'}>
         {anime.map((el: animeCardInterface, index: number) => (
-          <Card
-            key={index}
-            image={el.poster}
-            title={el.title}
-            slug={el.slug}
-          ></Card>
+          <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
         ))}
       </Section>
-      {isEnd ? (
-        <h1>END OF LIST</h1>
-      ) : (
-        <div className="w-full h-10" ref={ref}></div>
-      )}
+      {isEnd ? <h1>END OF LIST</h1> : <div className="w-full h-10" ref={ref}></div>}
     </>
   );
 };

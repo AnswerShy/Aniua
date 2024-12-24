@@ -13,22 +13,16 @@ export async function POST(req: NextRequest) {
 
     console.log(formData);
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}register/`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: formData.toString(),
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}register/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-    );
+      body: formData.toString(),
+    });
 
     if (!response.ok) {
-      return NextResponse.json(
-        { message: 'registration failed' },
-        { status: response.status },
-      );
+      return NextResponse.json({ message: 'registration failed' }, { status: response.status });
     }
 
     const setCookieHeader = response.headers.get('set-cookie');
@@ -42,9 +36,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(await response.json());
   } catch (error) {
     console.error('Error in register handler:', error);
-    return NextResponse.json(
-      { message: 'Internal server error' },
-      { status: 500 },
-    );
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }

@@ -13,17 +13,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ type = 'text', onChange, errorString, ...rest }, ref) => (
     <>
       <div className={styles.fieldWrap}>
-        <input
-          ref={ref}
-          type={type}
-          onChange={onChange}
-          placeholder=" "
-          className={styles.fieldText}
-          {...rest}
-        />
-        <label className={styles.fieldLabel}>
-          {type.charAt(0).toUpperCase() + type.slice(1)}
-        </label>
+        <input ref={ref} type={type} onChange={onChange} placeholder=" " className={styles.fieldText} {...rest} />
+        <label className={styles.fieldLabel}>{type.charAt(0).toUpperCase() + type.slice(1)}</label>
       </div>
       {errorString && (
         <div className={styles.fieldError}>

@@ -31,13 +31,7 @@ const useUserProfile = () => {
     } else if (!userToken && userStoredData.username) {
       removeUserFromStore();
     }
-  }, [
-    removeUserFromStore,
-    setUserToStore,
-    userStoredData.username,
-    userToken,
-    hydrated,
-  ]);
+  }, [removeUserFromStore, setUserToStore, userStoredData.username, userToken, hydrated]);
 
   return userStoredData;
 };

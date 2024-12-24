@@ -17,9 +17,7 @@ interface Banner_props {
   bannerTypeNews?: boolean;
 }
 
-const genresDisplay = (
-  genres: animeBannerInterface['genres'],
-): JSX.Element | null => {
+const genresDisplay = (genres: animeBannerInterface['genres']): JSX.Element | null => {
   return genres ? (
     <>
       {genres.map((el, index) => (
@@ -41,23 +39,14 @@ const Banner: React.FC<Banner_props> = ({
 }) => {
   return (
     <Section typeOfSection={'Banner'}>
-      <Image
-        src={bannerImage ? bannerImage : ''}
-        className={styles.bannerBackgroundImage}
-        alt="animeImage"
-        fill
-      />
+      <Image src={bannerImage ? bannerImage : ''} className={styles.bannerBackgroundImage} alt="animeImage" fill />
       <div className={styles.bannerInfoContainer}>
         <h1 className={styles.bannerTitle}>{bannerTitle}</h1>
         {bannerTypeNews ? null : (
           <div className={`${styles.bannerBaseInfo} ${styles.bannerText}`}>
             <p>{bannerYear ? bannerYear : null}</p>
             <span>•</span>
-            {bannerGenres && bannerGenres.length > 0 ? (
-              genresDisplay(bannerGenres)
-            ) : (
-              <p>unknow genres (?)</p>
-            )}
+            {bannerGenres && bannerGenres.length > 0 ? genresDisplay(bannerGenres) : <p>unknow genres (?)</p>}
           </div>
         )}
         <p className={`${styles.bannerDescription} ${styles.bannerText}`}>

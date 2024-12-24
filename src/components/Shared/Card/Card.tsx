@@ -12,10 +12,7 @@ interface cardProps {
 const Card: React.FC<cardProps> = ({ image, title, slug }) => {
   return (
     <TransitionLink url={`/Anime/${slug}`} className={styles.card}>
-      <div
-        className={styles.cardImage}
-        style={{ backgroundImage: `url(${image})` }}
-      />
+      <div className={styles.cardImage} style={{ backgroundImage: `url(${image})` }} />
       <p className={styles.cardTitle} title={title}>
         {title}
       </p>

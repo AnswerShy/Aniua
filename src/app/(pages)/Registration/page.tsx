@@ -59,12 +59,7 @@ export default function Registration() {
               minLength: { value: 2, message: 'More than 2 symbols' },
             }}
             render={({ field: { ref, ...field } }) => (
-              <TextField
-                {...field}
-                errorString={errors.username?.message}
-                ref={ref}
-                type={'username'}
-              />
+              <TextField {...field} errorString={errors.username?.message} ref={ref} type={'username'} />
             )}
           />
           <Controller
@@ -78,12 +73,7 @@ export default function Registration() {
               required: 'Required field',
             }}
             render={({ field: { ref, ...field } }) => (
-              <TextField
-                {...field}
-                errorString={errors.email?.message}
-                ref={ref}
-                type={'email'}
-              />
+              <TextField {...field} errorString={errors.email?.message} ref={ref} type={'email'} />
             )}
           />
           <Controller
@@ -94,12 +84,7 @@ export default function Registration() {
               minLength: { value: 8, message: 'More than 8 symbols' },
             }}
             render={({ field: { ref, ...field } }) => (
-              <TextField
-                {...field}
-                errorString={errors.password1?.message}
-                ref={ref}
-                type={'password'}
-              />
+              <TextField {...field} errorString={errors.password1?.message} ref={ref} type={'password'} />
             )}
           />
           <Controller
@@ -115,20 +100,11 @@ export default function Registration() {
               minLength: { value: 8, message: 'More than 8 symbols' },
             }}
             render={({ field: { ref, ...field } }) => (
-              <TextField
-                {...field}
-                errorString={errors.password2?.message}
-                ref={ref}
-                type={'password'}
-              />
+              <TextField {...field} errorString={errors.password2?.message} ref={ref} type={'password'} />
             )}
           />
 
-          <input
-            type="submit"
-            className={CustomButtonStyles.button}
-            disabled={!isValid}
-          />
+          <input type="submit" className={CustomButtonStyles.button} disabled={!isValid} />
         </form>
       </Section>
     </>

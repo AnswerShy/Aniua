@@ -1,7 +1,4 @@
-export default function descriptionCutter(
-  originalText?: string,
-  countOfWords: number = 25,
-) {
+export default function descriptionCutter(originalText?: string, countOfWords: number = 25) {
   const wordsInText = originalText?.split(' ');
   if (wordsInText) {
     const result = wordsInText.slice(0, countOfWords);
