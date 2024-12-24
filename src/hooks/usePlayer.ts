@@ -3,9 +3,7 @@ import AnimeServiceInstance from '@/app/api';
 import { useCallback, useEffect, useState } from 'react';
 
 export const usePlayer = (slug: string) => {
-  const [episodesList, setEpisodesList] = useState<
-    EpisodeListInterface[] | null
-  >(null);
+  const [episodesList, setEpisodesList] = useState<EpisodeListInterface[] | null>(null);
 
   useEffect(() => {
     const fetchEpisodes = async () => {

@@ -4,11 +4,7 @@ import { Metadata } from 'next';
 import AnimeServiceInstance from '@/app/api';
 import PlayerProvider from './Components/PlayerProvider';
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const { slug } = params;
   return {
     title: `${slug.toUpperCase()} - Aniua`,
@@ -16,11 +12,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function AnimePage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function AnimePage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const data = await AnimeServiceInstance.fetchAnimeInfo(slug);
   return (

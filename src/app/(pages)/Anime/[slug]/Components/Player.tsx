@@ -1,26 +1,34 @@
 'use client';
 
 import styles from './Player.module.css';
-import {
-  CustomButton,
-  Dropdown,
-  Section,
-} from '@/components/Shared/SharedComponents';
+import { CustomButton, Dropdown, Section } from '@/components/Shared/SharedComponents';
+import { usePlayerSocket } from '@/hooks/usePlayerSocket';
 
 import { handleEpisode } from '@/utils/customUtils';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 
 const Player = ({
   playerState,
   setPlayerState,
   handleStudio,
   episodesList,
+  room,
 }: {
   playerState: playerStateInterface;
   setPlayerState: Dispatch<SetStateAction<playerStateInterface>>;
   handleStudio: (index: number) => void;
   episodesList: EpisodeListInterface[] | null;
+  room: string | null;
 }) => {
+  const frameRef = useRef<HTMLIFrameElement | null>(null);
+  const { setVideoUrl } = usePlayerSocket(room, frameRef.current);
+  useEffect(() => {
+    if (playerState.episodeUrl) {
+      console.log(playerState.episodeUrl);
+      setVideoUrl(playerState.episodeUrl);
+    }
+  }, [playerState.episodeUrl, setVideoUrl]);
+
   return (
     <Section>
       <div
@@ -46,6 +54,7 @@ const Player = ({
         </div>
         {!playerState.isPlayerLoading ? (
           <iframe
+            ref={frameRef}
             className={styles.playerFrame}
             src={playerState.episodeUrl ? playerState.episodeUrl : undefined}
           />
@@ -60,9 +69,7 @@ const Player = ({
           episodesList.map((element, index) => (
             <CustomButton
               key={index}
-              onClick={() =>
-                handleEpisode(setPlayerState, element.id, episodesList[index])
-              }
+              onClick={() => handleEpisode(setPlayerState, element.id, episodesList[index])}
             >
               {element.episode_number}
             </CustomButton>

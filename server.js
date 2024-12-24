@@ -38,13 +38,10 @@ app.prepare().then(() => {
           if (!rooms.has(roomCode)) {
             rooms.set(roomCode, new Set());
           }
-          rooms.get(roomCode).add(ws); // Add the client to the room
-          ws.roomCode = roomCode; // Associate WebSocket with roomCode
+          rooms.get(roomCode).add(ws);
+          ws.roomCode = roomCode;
           console.log(`Client joined room: ${roomCode}`);
-        } else if (
-          message.command === 'player_play' ||
-          message.command === 'player_pause'
-        ) {
+        } else if (message.command === 'player_play' || message.command === 'player_pause') {
           const room = rooms.get(ws.roomCode);
           if (room) {
             for (const client of room) {
@@ -53,7 +50,7 @@ app.prepare().then(() => {
               }
             }
           }
-        } else if (message.command === 'player_seek') {
+        } else if (message.command === 'player_seek' || message.command === 'player_url') {
           console.log(`send: ${message.command}`);
           const room = rooms.get(ws.roomCode);
           if (room) {
