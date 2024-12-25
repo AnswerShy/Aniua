@@ -13,4 +13,5 @@ export { default as SubRow } from '@/components/Shared/containers/Subrow';
 
 export { default as Section } from '@/components/Shared/containers/Section';
 
-export { default as CustomTitle } from '@/components/Shared/CustomTitle/CustomTitle';
+export { default as Typography } from '@/components/Shared/Typography/Typography';
+export { variantMap as TypographyType } from '@/components/Shared/Typography/Typography';

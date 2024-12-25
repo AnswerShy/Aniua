@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styles from './DropDown.module.css';
 import TransitionLink from '@/utils/custom/onClickAnimation';
+import { TypographyType } from '../SharedComponents';
 
 import { KeyboardArrowDownIcon } from '@/utils/icons';
 
@@ -16,7 +17,6 @@ interface DropdownProps {
   assetsList?: string[]; //Array of objects for dropdown
   changeState?: (index: number) => void; //Changer of the state for assetsList
 
-  className?: string;
   isLeft?: boolean;
 }
 const Dropdown = ({
@@ -25,7 +25,6 @@ const Dropdown = ({
   assetsList,
   changeState,
   children,
-  className,
   isLeft = true,
 }: DropdownProps) => {
   const [visible, setVision] = useState(true);
@@ -42,7 +41,7 @@ const Dropdown = ({
         {children ? (
           children
         ) : (
-          <div className={`${styles.dropdownButton} ${className}`}>
+          <div className={`${TypographyType["button"].className}`}>
             {currentState && currentState.charAt(0).toUpperCase() + currentState.slice(1)}
             <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
           </div>
@@ -58,7 +57,7 @@ const Dropdown = ({
     </>
   ) : (
     <>
-      <div className={`${styles.dropdownMenu} ${className}`} onClick={handleVisible}>
+      <div className={`${TypographyType["button"].className}`} onClick={handleVisible}>
         <div className={`${styles.dropdownButton}`}>
           {assetsList && assetsList[Number(currentState)]}
           <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />

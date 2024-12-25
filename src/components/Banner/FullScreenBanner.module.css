@@ -33,6 +33,7 @@
 .bannerInfoContainer .bannerBaseInfo {
   display: flex;
   flex-direction: row;
+  align-items: center;
   column-gap: 10px;
   min-width: 100px;
   @apply w-full flex-wrap md:flex-nowrap md:w-1/2;

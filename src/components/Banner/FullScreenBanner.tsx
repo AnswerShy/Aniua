@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import descriptionCutter from '@/utils/custom/descriptionCutter';
 import styles from './FullScreenBanner.module.css';
 import Image from 'next/image';
-import { Section } from '../Shared/SharedComponents';
+import { Section, Typography, TypographyType } from '../Shared/SharedComponents';
+import { TransitionLink } from '@/utils/customUtils';
 
 interface Banner_props {
   bannerImage: string | null;
@@ -20,9 +20,9 @@ const genresDisplay = (genres: animeBannerInterface['genres']): JSX.Element | nu
   return genres ? (
     <>
       {genres.map((el, index) => (
-        <Link key={index} href={`/list/${el.slug}`}>
+        <TransitionLink className={TypographyType["h2"].className} key={index} url={`/genres/${el.slug}`}>
           {el.title}
-        </Link>
+        </TransitionLink>
       ))}
     </>
   ) : null;
@@ -40,12 +40,12 @@ const Banner: React.FC<Banner_props> = ({
     <Section typeOfSection={'Banner'}>
       <Image src={bannerImage ? bannerImage : ''} className={styles.bannerBackgroundImage} alt="animeImage" fill />
       <div className={styles.bannerInfoContainer}>
-        <h1 className={styles.bannerTitle}>{bannerTitle}</h1>
+        <Typography variant='h1'>{bannerTitle}</Typography>
         {bannerTypeNews ? null : (
           <div className={`${styles.bannerBaseInfo} ${styles.bannerText}`}>
-            <p>{bannerYear ? bannerYear : null}</p>
+            <Typography variant='body1'>{bannerYear ? bannerYear : null}</Typography>
             <span>•</span>
-            {bannerGenres && bannerGenres.length > 0 ? genresDisplay(bannerGenres) : <p>unknow genres (?)</p>}
+            {bannerGenres && bannerGenres.length > 0 ? genresDisplay(bannerGenres) : <Typography variant='body1'>unknow genres</Typography>}
           </div>
         )}
         <p className={`${styles.bannerDescription} ${styles.bannerText}`}>

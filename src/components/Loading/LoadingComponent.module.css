@@ -34,7 +34,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  font-size: xxx-large;
+  font-size: 12rem;
+  font-weight: 400;
   user-select: none;
 }
 

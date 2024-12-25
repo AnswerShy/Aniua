@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { TypographyType } from '@/components/Shared/SharedComponents';
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -25,7 +26,7 @@ const TransitionLink: React.FC<TransitionLinkProps> = ({ url, isVision = null, c
   };
 
   return (
-    <Link href={url} className={className}>
+    <Link href={url} className={`${TypographyType["button"].className} ${className}`}>
       <div onClick={(event) => doLink(url, event)} className="relative w-full h-full rounded-xl">
         {children}
       </div>

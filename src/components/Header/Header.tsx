@@ -69,7 +69,7 @@ export default function Header() {
       {/* Desktop Header */}
       <nav className={clsx(`${styles.headerDesktop}`, isScroll ? 'bg-c01dp' : 'bg-transparent')}>
         <div className={styles.leftHeader}>
-          <TransitionLink className="text-4xl" url={`/`}>
+          <TransitionLink className="font-semibold" url={`/`}>
             ANIUA
           </TransitionLink>
           {currentPath !== '' ? <Dropdown currentState={currentPath} actionList={paths} /> : null}

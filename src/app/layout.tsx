@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header/Header';
 import Loading from '@/components/Loading/LoadingComponent';
+import dictionary from '@/dictionaries/ua.json';
 
 const roboto = Roboto_Condensed({
   weight: '400',
@@ -12,7 +13,7 @@ const roboto = Roboto_Condensed({
 
 export const metadata: Metadata = {
   title: 'Aniua',
-  description: 'Дивитись аніме українською онлайн у високій якості.',
+  description: dictionary.description.home,
 };
 
 export default function RootLayout({

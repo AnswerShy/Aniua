@@ -1,6 +1,6 @@
 'use client';
 
-import { CustomTitle, Section } from '../Shared/SharedComponents';
+import { Section, Typography } from '../Shared/SharedComponents';
 import styles from './Profile.module.css';
 import Image from 'next/image';
 import { Telegram } from '@mui/icons-material';
@@ -15,7 +15,7 @@ export default function Profile() {
         <>
           <div className={styles.profileRowUp}>
             <div>
-              {userData.username && <CustomTitle title={userData.username} />}
+              {userData.username && <Typography variant="h1"> {userData.username} </Typography>}
               <h2 className="text">{userData.first_name ? userData.first_name : '...'}</h2>
               <h2 className="subText">{userData.description ? userData.description : '...'}</h2>
             </div>
