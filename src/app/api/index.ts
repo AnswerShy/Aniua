@@ -1,6 +1,6 @@
 class AnimeService {
   async fetchAnimeInfo(slug: string): Promise<animeInformationInterface> {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/anime/${slug}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}anime/${slug}`, {
       method: 'GET',
       cache: 'force-cache',
       next: {
@@ -33,7 +33,7 @@ class AnimeService {
   }
 
   async fetchAnimeList(page: number = 1): Promise<Array<animeCardInterface>> {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/list?page=${page}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}filter/?page=${page}&limit=18`, {
       method: 'GET',
       cache: 'force-cache',
       next: {
@@ -44,11 +44,11 @@ class AnimeService {
       throw new Error(`Failed to fetch: ${res.status}`);
     }
     const finalRes = await res.json();
-    return finalRes as animeCardInterface[];
+    return finalRes.titles as animeCardInterface[];
   }
 
   async fetchCommunityChoice(): Promise<Array<animeCardInterface>> {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/list?limit=5&order=rating`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}filter/?limit=5&order=rating`, {
       method: 'GET',
       cache: 'force-cache',
       next: {
@@ -59,7 +59,7 @@ class AnimeService {
       throw new Error(`Failed to fetch: ${res.status}`);
     }
     const finalRes = await res.json();
-    return finalRes as animeCardInterface[];
+    return finalRes.titles as animeCardInterface[];
   }
 }
 

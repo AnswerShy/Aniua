@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import { animeBannerInterface } from '@/interfaces/animeBannerInteface';
 import { useState } from 'react';
 
 import descriptionCutter from '@/utils/custom/descriptionCutter';

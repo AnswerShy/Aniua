@@ -41,16 +41,7 @@ app.prepare().then(() => {
           rooms.get(roomCode).add(ws);
           ws.roomCode = roomCode;
           console.log(`Client joined room: ${roomCode}`);
-        } else if (message.command === 'player_play' || message.command === 'player_pause') {
-          const room = rooms.get(ws.roomCode);
-          if (room) {
-            for (const client of room) {
-              if (client !== ws && client.readyState === client.OPEN) {
-                client.send(JSON.stringify({ command: message.command }));
-              }
-            }
-          }
-        } else if (message.command === 'player_seek' || message.command === 'player_url') {
+        } else if (['player_play', 'player_pause', 'player_seek', 'player_url'].includes(message.command)) {
           console.log(`send: ${message.command}`);
           const room = rooms.get(ws.roomCode);
           if (room) {
@@ -73,7 +64,6 @@ app.prepare().then(() => {
 
     ws.on('close', () => {
       console.log('WebSocket connection closed');
-      clearInterval(interval);
     });
 
     ws.on('error', (error) => {

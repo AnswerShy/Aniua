@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import descriptionCutter from '@/utils/custom/descriptionCutter';
-import { animeBannerInterface } from '@/interfaces/animeBannerInteface';
 import styles from './FullScreenBanner.module.css';
 import Image from 'next/image';
 import { Section } from '../Shared/SharedComponents';

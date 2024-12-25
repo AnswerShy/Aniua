@@ -15,7 +15,7 @@ export default function Profile() {
         <>
           <div className={styles.profileRowUp}>
             <div>
-              <CustomTitle title={userData.username} />
+              {userData.username && <CustomTitle title={userData.username} />}
               <h2 className="text">{userData.first_name ? userData.first_name : '...'}</h2>
               <h2 className="subText">{userData.description ? userData.description : '...'}</h2>
             </div>
