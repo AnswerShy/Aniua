@@ -2,11 +2,10 @@ interface animeBannerInterface {
   poster: string;
   title: string;
   year: number;
-  genres: [{ title: string; slug: string }];
+  genres: AnimeGenres[];
   description: string;
-  episode: { present: number; last: number };
+  episode: AnimeEpisodes;
   mal_score: number;
   type: { title: string };
   status: string;
-  studio: string;
 }

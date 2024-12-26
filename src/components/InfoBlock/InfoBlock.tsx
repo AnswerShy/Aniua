@@ -9,17 +9,17 @@ import styles from './InfoBlock.module.css';
 import { Section } from '../Shared/SharedComponents';
 
 interface Props {
-  infoData: animeBannerInterface;
+  infoData: AnimeDataInterface;
 }
 
-const genres = (year: number, genres: animeBannerInterface['genres']) => {
+const genres = (year: number, genres: AnimeGenres[]) => {
   return (
     <div>
       <p>{year}</p>
       <p>•</p>
       {genres.length > 0 ? (
-        genres.map((el, index) => (
-          <Link key={index} href={`/list/${el.slug}`}>
+        genres.map((el) => (
+          <Link key={el.id} href={`/list/${el.slug}`}>
             {el.title}
           </Link>
         ))
@@ -50,7 +50,6 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
       setIsFullTextDisplayed(true);
     }
   };
-
   return (
     <Section typeOfSection={'flexThreeCols'}>
       <div className={styles.posterColumn}>
@@ -99,13 +98,9 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
             <span className={styles.subRow}>
               <p>Episodes: </p>
               <a className={styles.subText}>
-                {infoData.episode.present ? infoData.episode.present : '?'} /{' '}
+                {infoData.is_ongoing && infoData.episode.present ? infoData.episode.present : '? / '}
                 {infoData.episode.last ? infoData.episode.last : '?'}
               </a>
-            </span>
-            <span className={styles.subRow}>
-              <p>Studio: </p>
-              <a className={styles.subText}>{infoData.studio ? infoData.studio : 'Unknown'}</a>
             </span>
           </div>
         </div>
