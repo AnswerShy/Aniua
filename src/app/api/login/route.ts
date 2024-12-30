@@ -8,8 +8,6 @@ export async function POST(req: NextRequest) {
     formData.append('username', username);
     formData.append('password', password);
 
-    console.log(formData);
-
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}login/`, {
       method: 'POST',
       headers: {
@@ -26,6 +24,7 @@ export async function POST(req: NextRequest) {
 
     if (setCookieHeader) {
       const nextResponse = NextResponse.json(await response.json());
+
       nextResponse.headers.set('Set-Cookie', setCookieHeader);
       return nextResponse;
     }

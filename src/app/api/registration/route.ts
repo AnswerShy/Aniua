@@ -11,8 +11,6 @@ export async function POST(req: NextRequest) {
       password2,
     });
 
-    console.log(formData);
-
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}register/`, {
       method: 'POST',
       headers: {
