@@ -1,13 +1,21 @@
 'use client';
 
-import { Section, Typography } from '../Shared/SharedComponents';
+import { Section, Typography } from '../../../components/Shared/SharedComponents';
 import styles from './Profile.module.css';
 import Image from 'next/image';
 import { Telegram } from '@mui/icons-material';
 import useUserProfile from '@/hooks/useUserProfile';
+import AnimeServiceInstance from '@/app/api';
+import { useEffect, useState } from 'react';
+import { PieChart } from '@mui/x-charts/PieChart';
 
-export default function Profile() {
+export default function ProfileComponent() {
   const userData = useUserProfile();
+  const [chart, setChart] = useState<chartData[]>([]);
+
+  useEffect(() => {
+    AnimeServiceInstance.fetchUserListContent().then((data) => setChart(data));
+  }, []);
 
   return (
     <Section typeOfSection={'Profile'}>
@@ -36,7 +44,25 @@ export default function Profile() {
             <div>
               <Telegram sx={{ fontSize: '5rem' }} />
             </div>
-            <div className="size-64 rounded-xl bg-slate-400">s</div>
+            <div className="size-64 rounded-xl">
+              <PieChart
+                colors={['#fff']}
+                slotProps={{ legend: { hidden: true } }}
+                series={[
+                  {
+                    data: chart,
+                    innerRadius: 30,
+                    outerRadius: 100,
+                    paddingAngle: 5,
+                    cornerRadius: 5,
+                    startAngle: -45,
+                    endAngle: 225,
+                    cx: 150,
+                    cy: 150,
+                  },
+                ]}
+              />
+            </div>
           </div>
         </>
       ) : (
