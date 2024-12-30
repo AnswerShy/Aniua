@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './RowAndSubrow.module.css';
 import { Typography } from '../SharedComponents';
 
-
 const SubRow: React.FC<{
   widthState?: '1/4' | '2/4' | '3/4' | '4/4';
   title: string;
@@ -19,7 +18,7 @@ const SubRow: React.FC<{
       style={{ '--subrow-width': widthClasses[widthState] } as React.CSSProperties}
       className={styles.subrowWrap}
     >
-      <Typography variant='h2'>{title}</Typography>
+      <Typography variant="h2">{title}</Typography>
       <div className={styles.subrowComponentsWrap}>{children}</div>
     </div>
   );

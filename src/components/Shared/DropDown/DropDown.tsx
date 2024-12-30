@@ -41,7 +41,7 @@ const Dropdown = ({
         {children ? (
           children
         ) : (
-          <div className={`${TypographyType["button"].className}`}>
+          <div className={`${TypographyType['button'].className}`}>
             {currentState && currentState.charAt(0).toUpperCase() + currentState.slice(1)}
             <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
           </div>
@@ -57,7 +57,7 @@ const Dropdown = ({
     </>
   ) : (
     <>
-      <div className={`${TypographyType["button"].className}`} onClick={handleVisible}>
+      <div className={`${TypographyType['button'].className}`} onClick={handleVisible}>
         <div className={`${styles.dropdownButton}`}>
           {assetsList && assetsList[Number(currentState)]}
           <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />

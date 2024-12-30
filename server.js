@@ -73,6 +73,5 @@ app.prepare().then(() => {
 
   server.listen(port, hostname, () => {
     console.log(`> Ready on http://${hostname}:${port}`);
-    console.log(`> WebSocket server running on ws://${hostname}:3001`);
   });
 });

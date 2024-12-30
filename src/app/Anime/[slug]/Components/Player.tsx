@@ -24,7 +24,6 @@ const Player = ({
   const { setVideoUrl } = usePlayerSocket(room, frameRef.current);
   useEffect(() => {
     if (playerState.episodeUrl) {
-      console.log(playerState.episodeUrl);
       setVideoUrl(playerState.episodeUrl);
     }
   }, [playerState.episodeUrl, setVideoUrl]);
