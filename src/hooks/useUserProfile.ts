@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { isLoggined } from '@/utils/customUtils';
 import { useUserStore } from '@/stores/store';
 
 const useUserProfile = () => {
@@ -7,7 +6,7 @@ const useUserProfile = () => {
   const setUserToStore = useUserStore((state) => state.setUser);
   const removeUserFromStore = useUserStore((state) => state.removeUser);
   const hydrated = useUserStore((state) => state.hydrated);
-  const userToken: string | boolean = isLoggined();
+  const userToken: string | boolean = localStorage.getItem('isLoggedIn') === 'true';
 
   useEffect(() => {
     if (!hydrated) return;
@@ -26,7 +25,6 @@ const useUserProfile = () => {
       }
     };
     if (userToken && userStoredData?.username === '') {
-      console.log('fetching user profile');
       fetchUserProfile();
     } else if (!userToken && userStoredData.username) {
       removeUserFromStore();
