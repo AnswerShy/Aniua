@@ -13,7 +13,7 @@ class AnimeService {
   }
 
   async fetchAnimeInfo(slug: string): Promise<AnimeDataInterface> {
-    const res = await fetch(`${this.domain}anime/${slug}`, this.getFetchOptions());
+    const res = await fetch(`${this.domain}/api/anime/${slug}`, this.getFetchOptions());
     if (!res.ok) {
       throw new Error(`Failed to fetch: ${res.status}`);
     }
@@ -35,7 +35,7 @@ class AnimeService {
       throw new Error(`Failed to fetch: ${request.status}`);
     }
     const result = await request.json();
-    return result.players;
+    return result;
   }
 
   async fetchAnimeList(page: number = 1): Promise<Array<AnimeDataInterface>> {

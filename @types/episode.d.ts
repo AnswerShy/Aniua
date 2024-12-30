@@ -1,3 +1,17 @@
+type Video = {
+  studio: string;
+  video_url: string;
+  poster: string;
+  date: string;
+  subtitles: boolean;
+  player: string;
+}
+
+interface PlayersInEpisode {
+  studio: string;
+  videos: Video[];
+}
+
 interface EpisodeListInterface {
   id: number;
   episode_number: number;
@@ -15,4 +29,5 @@ interface EpisodeListInterface {
     dislikes: number;
   };
   description: string;
+  players: PlayersInEpisode[];
 }

@@ -27,7 +27,6 @@ const Player = ({
       setVideoUrl(playerState.episodeUrl);
     }
   }, [playerState.episodeUrl, setVideoUrl]);
-
   return (
     <Section>
       <div
@@ -42,9 +41,8 @@ const Player = ({
       </div>
       <div className={styles.playerWrapper}>
         <div className={styles.playerButtonsWrapper}>
-          {playerState.studiosList && playerState.studiosList.length > 1 ? (
+          {playerState.studiosList && playerState.studiosList.length > 0 ? (
             <Dropdown
-              className={styles.playerButton}
               currentState={playerState.chooseStudio.toString()}
               assetsList={playerState.studiosList}
               changeState={handleStudio}
@@ -68,7 +66,12 @@ const Player = ({
           episodesList.map((element, index) => (
             <CustomButton
               key={index}
-              onClick={() => handleEpisode(setPlayerState, element.id, episodesList[index])}
+              onClick={() => handleEpisode({
+                playerState: setPlayerState,
+                id: episodesList[0].id,
+                studio: playerState.chooseStudio,
+                episodesList: episodesList[0],
+              })}
             >
               {element.episode_number}
             </CustomButton>

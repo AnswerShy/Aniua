@@ -2,20 +2,32 @@
 import AnimeServiceInstance from '@/app/api';
 import { Dispatch, SetStateAction } from 'react';
 
-async function handleEpisode(
-  playerState: Dispatch<SetStateAction<playerStateInterface>>,
-  id: number,
-  episodesList: EpisodeListInterface,
-) {
-  playerState((prevState) => ({ ...prevState, playerLoad: true }));
-  const newEpisode = await AnimeServiceInstance.fetchEpisode(id);
-  playerState((prevState) => ({
-    ...prevState,
-    episodeUrl: newEpisode[0].videos[0].video_url,
-    episodeTitle: episodesList.title.ua,
-    episodeJPTitle: episodesList.title.jp,
-    playerLoad: false,
-  }));
+interface handeEpisodeInterface {
+  playerState: Dispatch<SetStateAction<playerStateInterface>>;
+  id: number;
+  studio?: number;
+  episodesList: EpisodeListInterface;
+}
+
+async function handleEpisode({playerState, id, studio = 0, episodesList}: handeEpisodeInterface) {
+  playerState((prevState) => ({ ...prevState, isPlayerLoading: true }));
+  try {
+    const newEpisode = await AnimeServiceInstance.fetchEpisode(id);
+    const studios: string[] = newEpisode.players.map((player: PlayersInEpisode) => player.studio);;
+    const episodeUrl: string | null = newEpisode.players[studio].videos[0].video_url;
+
+    playerState((prevState) => ({
+      ...prevState,
+      episodeUrl: episodeUrl || '',
+      episodeTitle: episodesList.title.ua,
+      episodeJPTitle: episodesList.title.jp,
+      studiosList: studios,
+      playerLoad: false,
+    }));
+  } catch (error) {
+    console.error("Error fetching episode data:", error);
+    playerState((prevState) => ({ ...prevState, isPlayerLoading: false }));
+  }
 }
 
 export default handleEpisode;

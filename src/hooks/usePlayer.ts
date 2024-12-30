@@ -22,9 +22,20 @@ export const usePlayer = (slug: string) => {
     isPlayerLoading: false,
   });
 
-  const handleStudio = useCallback((index: number) => {
-    setPlayerState((prevState) => ({ ...prevState, chooseStudio: index }));
-  }, []);
+  const handleStudio = useCallback(
+    (index: number) => {
+      setPlayerState((prevState) => ({ ...prevState, chooseStudio: index }));
+      if (episodesList && episodesList[0]?.id) {
+        handleEpisode({
+          playerState: setPlayerState,
+          id: episodesList[0].id,
+          studio: index,
+          episodesList: episodesList[0],
+        });
+      }
+    },
+    [episodesList]
+  );
 
   useEffect(() => {
     setPlayerState((prevState) => ({ ...prevState, isPlayerLoading: false }));
@@ -33,14 +44,19 @@ export const usePlayer = (slug: string) => {
   useEffect(() => {
     if (episodesList?.[0]?.id) {
       setPlayerState((prevState) => ({ ...prevState, studiosList: [] }));
-      handleEpisode(setPlayerState, episodesList[0].id, episodesList[0]);
+      handleEpisode({
+        playerState: setPlayerState,
+        id: episodesList[0].id,
+        studio: playerState.chooseStudio,
+        episodesList: episodesList[0],
+      });
     } else {
       setPlayerState((prevState) => ({
         ...prevState,
-        episodeTitle: 'Any player founded',
+        episodeTitle: 'No episodes found',
       }));
     }
-  }, [episodesList]);
+  }, [episodesList, playerState.chooseStudio]);
 
   return { playerState, setPlayerState, handleStudio, episodesList };
 };
