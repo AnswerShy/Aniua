@@ -2,10 +2,9 @@ import { Card, Row, SubRow, Section, Typography } from '@/components/Shared/Shar
 import AnimeServiceInstance from '@/app/api';
 import { i18n } from '@/utils/customUtils';
 
-
 export default async function Home() {
   const communityChoice = await AnimeServiceInstance.fetchCommunityChoice();
-  console.log(i18n.t('home.Last uploaded episodes'))
+
   return (
     <>
       <Section>

@@ -34,7 +34,7 @@ export const usePlayer = (slug: string) => {
         });
       }
     },
-    [episodesList]
+    [episodesList],
   );
 
   useEffect(() => {

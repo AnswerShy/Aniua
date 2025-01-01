@@ -34,7 +34,7 @@
   --posterWidth: 192px;
   --posterHeight: 313px;
 
-  --bluredFilter: blur(5px);
+  --blurredFilter: blur(5px);
   --borderRad: 12px;
 
   --loadGradient: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%);

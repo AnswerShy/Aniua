@@ -5,7 +5,7 @@ type Video = {
   date: string;
   subtitles: boolean;
   player: string;
-}
+};
 
 interface PlayersInEpisode {
   studio: string;

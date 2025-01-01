@@ -66,12 +66,14 @@ const Player = ({
           episodesList.map((element, index) => (
             <CustomButton
               key={index}
-              onClick={() => handleEpisode({
-                playerState: setPlayerState,
-                id: episodesList[0].id,
-                studio: playerState.chooseStudio,
-                episodesList: episodesList[0],
-              })}
+              onClick={() =>
+                handleEpisode({
+                  playerState: setPlayerState,
+                  id: episodesList[0].id,
+                  studio: playerState.chooseStudio,
+                  episodesList: episodesList[0],
+                })
+              }
             >
               {element.episode_number}
             </CustomButton>
