@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header/Header';
 import Loading from '@/components/Loading/LoadingComponent';
-import dictionary from '@/dictionaries/ua.json';
+import { i18n } from '@/utils/customUtils';
 
 const roboto = Roboto_Condensed({
   weight: '400',
@@ -13,7 +13,7 @@ const roboto = Roboto_Condensed({
 
 export const metadata: Metadata = {
   title: 'Aniua',
-  description: dictionary.description.home,
+  description: i18n.t('description.home'),
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html>
       <body className={`${roboto.className} antialiased`}>
         <Loading />
         <Header />
