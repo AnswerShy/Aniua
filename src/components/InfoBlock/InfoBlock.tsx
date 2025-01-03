@@ -24,7 +24,7 @@ const genres = (year: number, genres: AnimeGenres[]) => {
           </Link>
         ))
       ) : (
-        <p>unknow genres (?)</p>
+        <p>unknown genres (?)</p>
       )}
     </div>
   );
@@ -33,7 +33,7 @@ const genres = (year: number, genres: AnimeGenres[]) => {
 const InfoBlock: React.FC<Props> = ({ infoData }) => {
   const slicedText = descriptionCutter(infoData.description, 50);
 
-  const [displaedText, setFullDescription] = useState(slicedText);
+  const [displayedText, setFullDescription] = useState(slicedText);
   const [isFullTextDisplayed, setIsFullTextDisplayed] = useState(false);
 
   const descHandler = () => {
@@ -71,7 +71,7 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
 
         <h1>Description</h1>
         <p id="desc" className="mt-[12.5px]">
-          {displaedText}
+          {displayedText}
           <a onClick={descHandler} id="descriptionButton">
             {' ...More'}
           </a>

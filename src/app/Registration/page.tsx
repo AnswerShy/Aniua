@@ -33,7 +33,7 @@ export default function Registration() {
       if (res.ok) {
         const resJson = await res.json();
         if (resJson.success) {
-          document.cookie = `authToken=${resJson.user_token}; max-age=${7 * 24 * 60 * 60}; Secure; SameSite=Strict; Path=/;`;
+          localStorage.setItem('isLoggedIn', 'true');
           router.push('/');
         }
       } else {

@@ -15,8 +15,15 @@ const ListSectionLoader = () => {
   useEffect(() => {
     if (inView && !isEnd) {
       AnimeServiceInstance.fetchAnimeList(page)
-        .then((data) => {
-          setAnime((prev) => [...prev, ...data]);
+        .then((data: AnimeDataInterface[]) => {
+          const transformedData = data.map((item) => ({
+            ...item,
+            episode: {
+              ...item.episode,
+              present: item.episode.present ?? 0,
+            },
+          }));
+          setAnime((prev) => [...prev, ...transformedData as animeCardInterface[]]);
           if (data.length < 18) setSsEnd(true);
           page++;
         })

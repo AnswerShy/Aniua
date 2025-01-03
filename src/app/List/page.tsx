@@ -16,7 +16,7 @@ const listPage: React.FC<animeCardInterface> = async () => {
   return (
     <>
       <Section typeOfSection={'grid'}>
-        {anime.map((el: animeCardInterface, index: number) => (
+        {anime.map((el: AnimeDataInterface, index: number) => (
           <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
         ))}
       </Section>

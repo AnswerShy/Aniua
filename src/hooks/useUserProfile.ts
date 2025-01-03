@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useUserStore } from '@/stores/store';
 
 const useUserProfile = () => {
@@ -6,11 +6,15 @@ const useUserProfile = () => {
   const setUserToStore = useUserStore((state) => state.setUser);
   const removeUserFromStore = useUserStore((state) => state.removeUser);
   const hydrated = useUserStore((state) => state.hydrated);
-  const userToken: string | boolean = localStorage.getItem('isLoggedIn') === 'true';
+  const [userToken, setUserToken] = useState<string | boolean>(false);
 
   useEffect(() => {
     if (!hydrated) return;
 
+    if (typeof window !== 'undefined') {
+      setUserToken(localStorage.getItem('isLoggedIn') === 'true');
+    }
+    
     const fetchUserProfile = async () => {
       try {
         const res = await fetch('/api/profile');
