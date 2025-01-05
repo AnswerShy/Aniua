@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
-    "dev:next": "next dev --turbopack",
+    "dev:next": "next dev --turbopack --hostname 0.0.0.0",
     "build": "next build",
     "start": "NODE_ENV=production nodemon server.js",
     "lint": "next lint && prettier --write .",

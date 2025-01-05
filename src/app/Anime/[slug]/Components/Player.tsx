@@ -56,8 +56,8 @@ const Player = ({
             src={playerState.episodeUrl ? playerState.episodeUrl : undefined}
           />
         ) : (
-          <div className={styles.playerFrame}>
-            <h1>Loading...</h1>
+          <div className={styles.playerFrame + ' ' + styles.playerLoad}>
+            <h1 className={styles.playerLoadText}>Loading...</h1>
           </div>
         )}
       </div>
@@ -69,9 +69,9 @@ const Player = ({
               onClick={() =>
                 handleEpisode({
                   playerState: setPlayerState,
-                  id: episodesList[0].id,
+                  id: episodesList[index].id,
                   studio: playerState.chooseStudio,
-                  episodesList: episodesList[0],
+                  episodesList: episodesList[index],
                 })
               }
             >

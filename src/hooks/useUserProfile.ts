@@ -14,7 +14,7 @@ const useUserProfile = () => {
     if (typeof window !== 'undefined') {
       setUserToken(localStorage.getItem('isLoggedIn') === 'true');
     }
-    
+
     const fetchUserProfile = async () => {
       try {
         const res = await fetch('/api/profile');

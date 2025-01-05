@@ -23,7 +23,7 @@ const ListSectionLoader = () => {
               present: item.episode.present ?? 0,
             },
           }));
-          setAnime((prev) => [...prev, ...transformedData as animeCardInterface[]]);
+          setAnime((prev) => [...prev, ...(transformedData as animeCardInterface[])]);
           if (data.length < 18) setSsEnd(true);
           page++;
         })

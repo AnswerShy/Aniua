@@ -18,8 +18,12 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: `Failed to fetch anime list ${slug}` }, { status: response.status });
     }
 
-    const responseBody = await response.json();
-    return NextResponse.json(responseBody);
+    const responseBody = NextResponse.json(await response.json());
+    responseBody.headers.set('Access-Control-Allow-Origin', '*');
+    responseBody.headers.set('Access-Control-Allow-Methods', 'GET');
+    responseBody.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+
+    return responseBody;
   } catch (error) {
     console.error('Error in login handler:', error);
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });

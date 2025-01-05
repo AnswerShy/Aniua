@@ -4,6 +4,7 @@
   border: none;
   outline: none;
   border-radius: 12px;
+  position: relative;
 }
 
 .episodeWrapper {
@@ -34,7 +35,16 @@
 }
 
 .playerLoad {
+  background: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%);
+  background-size: 200% 100%;
   animation: shimmer 1s infinite linear !important;
+}
+
+.playerLoadText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes shimmer {
