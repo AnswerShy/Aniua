@@ -7,6 +7,8 @@ interface UserStateStore {
   setHydrated: (value: boolean) => void;
   setUser: (user: UserProfileInterface) => void;
   removeUser: () => void;
+  isLoggedIn: boolean;
+  setLoginState: (loggedIn: boolean) => void;
 }
 
 const defaultUser: UserProfileInterface = {
@@ -47,6 +49,11 @@ export const useUserStore = create<UserStateStore>()(
         setHydrated: (value: boolean) => set({ hydrated: value }),
         setUser: (user: UserProfileInterface) => set({ user }),
         removeUser: () => set({ user: defaultUser }),
+        isLoggedIn: false,
+        setLoginState: (loggedIn: boolean) => {
+          localStorage.setItem('isLoggedIn', loggedIn ? 'true' : 'false');
+          set({ isLoggedIn: loggedIn });
+        },
       }),
       {
         name: 'userStore',

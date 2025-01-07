@@ -17,6 +17,7 @@ export default function Header() {
   const [isMenuOpened, setMenuOpened] = useState(false);
   const [isScroll, setScroll] = useState(false);
   const userData = useUserProfile();
+
   const menuHandler = () => {
     setMenuOpened((prev) => !prev);
   }; // Side menu handler for mobile

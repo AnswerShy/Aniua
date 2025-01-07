@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useUserStore } from '@/stores/store';
 
 const useUserProfile = () => {
@@ -6,14 +6,10 @@ const useUserProfile = () => {
   const setUserToStore = useUserStore((state) => state.setUser);
   const removeUserFromStore = useUserStore((state) => state.removeUser);
   const hydrated = useUserStore((state) => state.hydrated);
-  const [userToken, setUserToken] = useState<string | boolean>(false);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
   useEffect(() => {
     if (!hydrated) return;
-
-    if (typeof window !== 'undefined') {
-      setUserToken(localStorage.getItem('isLoggedIn') === 'true');
-    }
 
     const fetchUserProfile = async () => {
       try {
@@ -28,12 +24,13 @@ const useUserProfile = () => {
         console.error('Error fetching user data:', error);
       }
     };
-    if (userToken && userStoredData?.username === '') {
+
+    if (isLoggedIn && userStoredData?.username === '') {
       fetchUserProfile();
-    } else if (!userToken && userStoredData.username) {
+    } else if (!isLoggedIn && userStoredData.username) {
       removeUserFromStore();
     }
-  }, [removeUserFromStore, setUserToStore, userStoredData.username, userToken, hydrated]);
+  }, [removeUserFromStore, setUserToStore, userStoredData.username, isLoggedIn, hydrated]);
 
   return userStoredData;
 };

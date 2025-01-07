@@ -5,6 +5,7 @@ import { Section } from '@/components/Shared/SharedComponents';
 import { CustomButtonStyles } from '@/components/Shared/SharedComponents';
 import { TextField } from '@/components/Shared/SharedComponents';
 import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/stores/store';
 
 export default function Login() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function Login() {
       if (res.ok) {
         const resJson = await res.json();
         if (resJson.success) {
-          localStorage.setItem('isLoggedIn', 'true');
+          useUserStore.getState().setLoginState(true);
           router.push('/');
         }
       } else {
