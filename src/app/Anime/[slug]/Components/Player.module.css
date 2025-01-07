@@ -22,6 +22,9 @@
 
 .playerWrapper:hover .playerButtonsWrapper {
   opacity: 1;
+  z-index: 2;
+  transition: all 0.1s linear;
+  cursor: pointer;
 }
 
 .playerButtonsWrapper {

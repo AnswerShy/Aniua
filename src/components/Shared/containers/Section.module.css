@@ -12,7 +12,7 @@
 
 .flexThreeColsSectionStyle {
   @apply px-4 flex flex-col h-max;
-  @apply lg:h-svh lg:flex-row lg:px-0 lg:py-16 lg:justify-evenly; /* TABLET */
+  @apply lg:h-svh lg:flex-row lg:px-0 lg:py-24 lg:justify-evenly; /* TABLET */
   @apply xl:px-[10%] xl:gap-4; /* DESKTOP */
 }
 

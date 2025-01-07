@@ -35,6 +35,8 @@
   visibility: hidden;
   transform: scaleY(0);
   transform-origin: top right;
+
+  width: max-content;
 }
 
 .dropdownMenu:hover {

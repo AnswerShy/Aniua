@@ -14,7 +14,7 @@ interface Props {
 
 const genres = (year: number, genres: AnimeGenres[]) => {
   return (
-    <div>
+    <div className={styles.genresRow}>
       <p>{year}</p>
       <p>•</p>
       {genres.length > 0 ? (

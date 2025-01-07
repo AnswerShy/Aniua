@@ -14,6 +14,11 @@
   @apply min-h-0 md:min-h-32;
 }
 
+.genresRow {
+  display: flex;
+  gap: 15px;
+}
+
 .subText {
   position: absolute;
   top: 0;
