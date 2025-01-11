@@ -19,13 +19,13 @@ commit_msg=$(cat "$commit_msg_file")
 # modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/🔧FIX/')
 
 if echo "$commit_msg" | grep -q "^FIX"; then
-  modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/🔧FIX/')
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/:hammer:FIX/')
 elif echo "$commit_msg" | grep -q "^COSMETIC"; then
-  modified_msg=$(echo "$commit_msg" | sed -E 's/^COSMETIC/✨COSMETIC/')
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^COSMETIC/:sparkles:COSMETIC/')
 elif echo "$commit_msg" | grep -q "^NEW"; then
-  modified_msg=$(echo "$commit_msg" | sed -E 's/^NEW/🔥NEW/')
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^NEW/:fire:NEW/')
 elif echo "$commit_msg" | grep -q "^BUILD FIXES"; then
-  modified_msg=$(echo "$commit_msg" | sed -E 's/^BUILD FIXES/📦️BUILD FIXES/')
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^BUILD FIXES/:package:BUILD FIXES/')
 else
   echo "Error: Commit message must start with 'FIX', 'COSMETIC', or 'NEW'. Please rewrite the message."
   exit 1
