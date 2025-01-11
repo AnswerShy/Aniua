@@ -1,1 +1,50 @@
+#!/bin/sh
+
+# Ensure the script exits if an error occurs
+set -e
+
+# Path to the commit message file
+commit_msg_file=".git/COMMIT_EDITMSG"
+
+# Check if the commit message file exists
+if [ ! -f "$commit_msg_file" ]; then
+  echo "Error: Commit message file not found."
+  exit 1
+fi
+
+# Read the commit message
+commit_msg=$(cat "$commit_msg_file")
+
+# Prepend emoji to messages starting with "FIX"
+# modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/🔧FIX/')
+
+if echo "$commit_msg" | grep -q "^FIX"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/🔧FIX/')
+elif echo "$commit_msg" | grep -q "^COSMETIC"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^COSMETIC/✨COSMETIC/')
+elif echo "$commit_msg" | grep -q "^NEW"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^NEW/🔥NEW/')
+elif echo "$commit_msg" | grep -q "^BUILD FIXES"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^BUILD FIXES/📦️BUILD FIXES/')
+else
+  echo "Error: Commit message must start with 'FIX', 'COSMETIC', or 'NEW'. Please rewrite the message."
+  exit 1
+fi
+
+# Save the modified commit message back to the file
+echo "$modified_msg" > "$commit_msg_file"
+
+# Stage the modified commit message file
+git add "$commit_msg_file"
+
 npm run lint && git add .
+
+# Pretty Table for Modified Commit Message
+echo "###########################################"
+echo "#          Commit Message Modified        #"
+printf "| %-40s |\n" "$modified_msg"
+echo "###########################################"
+
+# Pretty Table for DONE!
+echo "#                DONE!                     #"
+echo "###########################################"
