@@ -3,7 +3,7 @@ import ua from '@/locales/ua.json';
 
 i18next.init({
   lng: 'uk',
-  debug: true,
+  debug: false,
   resources: {
     uk: {
       translation: ua,

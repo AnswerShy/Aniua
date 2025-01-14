@@ -17,6 +17,7 @@ export const usePlayer = (slug: string) => {
     chooseStudio: 0,
     studiosList: [],
     episodeUrl: null,
+    episodeENTitle: '',
     episodeTitle: '',
     episodeJPTitle: '',
     isPlayerLoading: false,

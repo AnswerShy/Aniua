@@ -6,6 +6,7 @@ import TransitionLink from '@/utils/custom/onClickAnimation';
 import { TypographyType } from '../SharedComponents';
 
 import { KeyboardArrowDownIcon } from '@/utils/icons';
+import { getTranslatedText } from '@/utils/customUtils';
 
 interface DropdownProps {
   currentState?: string; //For show current state
@@ -42,14 +43,14 @@ const Dropdown = ({
           children
         ) : (
           <div className={`${TypographyType['button'].className}`}>
-            {currentState && currentState.charAt(0).toUpperCase() + currentState.slice(1)}
+            {currentState && getTranslatedText('paths', currentState)}
             <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
           </div>
         )}
         <div className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}>
           {Object.entries(actionList).map(([key, action]) => (
             <TransitionLink url={action} key={key} className={styles.option} isVision={handleVisible}>
-              {key.charAt(0).toUpperCase() + key.slice(1)}
+              {getTranslatedText('paths', key)}
             </TransitionLink>
           ))}
         </div>

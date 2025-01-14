@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 import styles from './InfoBlock.module.css';
 import { Section } from '../Shared/SharedComponents';
+import { i18n } from '@/utils/customUtils';
 
 interface Props {
   infoData: AnimeDataInterface;
@@ -40,12 +41,12 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
     const moreLessButton = document.getElementById('descriptionButton');
     if (isFullTextDisplayed) {
       setFullDescription(slicedText);
-      if (moreLessButton) moreLessButton.innerHTML = ' ...More';
+      if (moreLessButton) moreLessButton.innerHTML = ` ...${i18n.t('info.more')}`;
       document.getElementById('desc')?.classList.add('text-justify');
       setIsFullTextDisplayed(false);
     } else {
       setFullDescription(infoData.description);
-      if (moreLessButton) moreLessButton.innerHTML = ' ...Less';
+      if (moreLessButton) moreLessButton.innerHTML = ` ...${i18n.t('info.less')}`;
       document.getElementById('desc')?.classList.remove('text-justify');
       setIsFullTextDisplayed(true);
     }
@@ -69,34 +70,34 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
           {genres(infoData.year, infoData.genres)}
         </div>
 
-        <h1>Description</h1>
+        <h1>{i18n.t('info.Description')}</h1>
         <p id="desc" className="mt-[12.5px]">
           {displayedText}
           <a onClick={descHandler} id="descriptionButton">
-            {' ...More'}
+            {` ...${i18n.t('info.more')}`}
           </a>
         </p>
       </div>
 
       <div className={styles.detailColumn}>
         <div className={styles.infoRow}>
-          <h1>Rate</h1>
+          <h1>{i18n.t('info.Rate')}</h1>
           <p>{infoData.mal_score}</p>
         </div>
 
         <div>
-          <h1>Details</h1>
+          <h1>{i18n.t('info.Details')}</h1>
           <div className={styles.subBlock}>
             <span className={styles.subRow}>
-              <p>Type: </p>
+              <p>{i18n.t('info.Type')}: </p>
               <a className={styles.subText}>{infoData.type.title}</a>
             </span>
             <span className={styles.subRow}>
-              <p>Status: </p>
+              <p>{i18n.t('info.Status')}: </p>
               <a className={styles.subText}>{infoData.status}</a>
             </span>
             <span className={styles.subRow}>
-              <p>Episodes: </p>
+              <p>{i18n.t('info.Episodes')}: </p>
               <a className={styles.subText}>
                 {infoData.is_ongoing && infoData.episode.present ? infoData.episode.present : '? / '}
                 {infoData.episode.last ? infoData.episode.last : '?'}

@@ -6,10 +6,11 @@ import { useEffect, useState } from 'react';
 import { Dropdown } from '../Shared/SharedComponents';
 import clsx from 'clsx';
 
-import { TransitionLink } from '@/utils/customUtils';
+import { getTranslatedText, TransitionLink } from '@/utils/customUtils';
 import { MenuIcon, Person } from '@/utils/icons';
 import Image from 'next/image';
 import useUserProfile from '@/hooks/useUserProfile';
+import { paths, pathsProfile } from '@/constants/headersconst';
 
 export default function Header() {
   const pathname = usePathname();
@@ -43,17 +44,6 @@ export default function Header() {
     }
     changeColorOnScroll();
   }, [pathname]); // Load current path state
-
-  const paths = {
-    home: '/',
-    list: '/List',
-    onepiece: '/Anime/one-piece',
-  }; // Paths for navigation dropdown menu
-
-  const pathsProfile = {
-    profile: '/Profile',
-    settings: '/Profile/Settings',
-  }; // Paths for profile dropdown menu
 
   return (
     <header>
@@ -101,8 +91,8 @@ export default function Header() {
             </>
           ) : (
             <>
-              <TransitionLink url={`/Registration`}>Registration</TransitionLink>
-              <TransitionLink url={`/Login`}>Login</TransitionLink>
+              <TransitionLink url={`/Registration`}>{getTranslatedText('header', 'Registration')}</TransitionLink>
+              <TransitionLink url={`/Login`}>{getTranslatedText('header', 'Login')}</TransitionLink>
             </>
           )}
         </div>
@@ -112,12 +102,12 @@ export default function Header() {
         <div className={`${styles.topMenu}`}>
           {Object.entries(paths).map(([key, action]) => (
             <TransitionLink url={action} key={key} isVision={menuHandler}>
-              {key.charAt(0).toUpperCase() + key.slice(1)}
+              {getTranslatedText('paths', key)}
             </TransitionLink>
           ))}
           {Object.entries(pathsProfile).map(([key, action]) => (
             <TransitionLink url={action} key={key} isVision={menuHandler}>
-              {key.charAt(0).toUpperCase() + key.slice(1)}
+              {getTranslatedText('paths', key)}
             </TransitionLink>
           ))}
         </div>
@@ -148,7 +138,10 @@ export default function Header() {
               </TransitionLink>
             </>
           ) : (
-            <TransitionLink url={`/Login`}>Login</TransitionLink>
+            <>
+              <TransitionLink url={`/Registration`}>{getTranslatedText('header', 'Registration')}</TransitionLink>
+              <TransitionLink url={`/Login`}>{getTranslatedText('header', 'Login')}</TransitionLink>
+            </>
           )}
         </div>
       </nav>

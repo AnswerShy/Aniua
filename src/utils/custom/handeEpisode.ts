@@ -19,6 +19,7 @@ async function handleEpisode({ playerState, id, studio = 0, episodesList }: hand
     playerState((prevState) => ({
       ...prevState,
       episodeUrl: episodeUrl || '',
+      episodeENTitle: episodesList.title.en,
       episodeTitle: episodesList.title.ua,
       episodeJPTitle: episodesList.title.jp,
       studiosList: studios,

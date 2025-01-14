@@ -1,6 +1,7 @@
 {
   "description": {
-    "home": "Дивитись аніме українською онлайн у високій якості!"
+    "home": "Дивитись аніме українською онлайн у високій якості!",
+    "anime": "Дивитись {{anime}} українською онлайн у високій якості!"
   },
   "home": {
     "Last uploaded episodes": "Останні випущені епізоди",
@@ -8,5 +9,37 @@
     "Authors selections": "Вибір авторів",
     "Explore new": "Досліджуйте нове",
     "Last clubs discussion": "Останні обговорення клубів"
+  },
+  "info": {
+    "Description": "Опис",
+    "Rate": "Оцінка",
+    "Details": "Деталі",
+    "Type": "Тип",
+    "Status": "Статус",
+    "Episodes": "Серій",
+    "more": "більше",
+    "less": "менше"
+  },
+  "login": {
+    "Required field": "Обов'язкове поле",
+    "More than": "Необхідне не менше {{count}} символів",
+    "No math": "Поля не співподають",
+    "username": "Логін",
+    "email": "Пошта",
+    "login": "Логін",
+    "password": "Пароль",
+    "passwordRepeat": "Повторіть пароль",
+    "SubmitLogin": "Увійти",
+    "SubmitRegistration": "Зареєструватися"
+  },
+  "header": {
+    "registration": "Реєстрація",
+    "login": "Увійти"
+  },
+  "paths": {
+    "home": "Головна",
+    "list": "Список",
+    "profile": "Профіль",
+    "settings": "Налаштування"
   }
 }

@@ -6,6 +6,7 @@ import { CustomButtonStyles } from '@/components/Shared/SharedComponents';
 import { TextField } from '@/components/Shared/SharedComponents';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/stores/store';
+import { i18n } from '@/utils/customUtils';
 
 export default function Login() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function Login() {
     control,
     formState: { errors, isValid },
   } = useForm<LoginForms>({
-    mode: 'all',
+    mode: 'onBlur',
   });
 
   const handleLogin: SubmitHandler<LoginForms> = async (data) => {
@@ -55,8 +56,8 @@ export default function Login() {
             control={control}
             name="username"
             rules={{
-              required: 'Required field',
-              minLength: { value: 2, message: 'More than 2 symbols' },
+              required: i18n.t('login.Required field'),
+              minLength: { value: 2, message: i18n.t('login.More than', { count: 2 }) },
             }}
             render={({ field: { ref, ...field } }) => (
               <TextField {...field} errorString={errors.username?.message} ref={ref} type={'login'} />
@@ -66,15 +67,20 @@ export default function Login() {
             control={control}
             name="password"
             rules={{
-              required: 'Required field',
-              minLength: { value: 8, message: 'More than 8 symbols' },
+              required: i18n.t('login.Required field'),
+              minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
             }}
             render={({ field: { ref, ...field } }) => (
               <TextField {...field} errorString={errors.password?.message} ref={ref} type={'password'} />
             )}
           />
 
-          <input type="submit" className={CustomButtonStyles.button} disabled={!isValid} />
+          <input
+            type="submit"
+            className={CustomButtonStyles.button}
+            disabled={!isValid}
+            value={i18n.t('login.SubmitLogin')}
+          />
         </form>
       </Section>
     </>

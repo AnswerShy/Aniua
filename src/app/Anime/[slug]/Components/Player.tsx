@@ -5,6 +5,7 @@ import { CustomButton, Dropdown, Section } from '@/components/Shared/SharedCompo
 import { usePlayerSocket } from '@/hooks/usePlayerSocket';
 
 import { handleEpisode } from '@/utils/customUtils';
+import i18next from 'i18next';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 const Player = ({
@@ -35,6 +36,9 @@ const Player = ({
     }
   }, [playerState.episodeUrl, setVideoUrl]);
 
+  const language = i18next.language;
+  const title = language === 'uk';
+
   return (
     <Section>
       <div
@@ -44,7 +48,7 @@ const Player = ({
           alignItems: 'center',
         }}
       >
-        <h1>{playerState.episodeTitle}</h1>
+        <h1>{title ? playerState.episodeTitle : playerState.episodeENTitle}</h1>
         <h2>{playerState.episodeJPTitle}</h2>
       </div>
       <div className={styles.playerWrapper}>

@@ -1,10 +1,9 @@
 'use client';
 
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { Section } from '@/components/Shared/SharedComponents';
-import { CustomButtonStyles } from '@/components/Shared/SharedComponents';
-import { TextField } from '@/components/Shared/SharedComponents';
+import { CustomButtonStyles, TextField, Section } from '@/components/Shared/SharedComponents';
 import { useRouter } from 'next/navigation';
+import { i18n } from '@/utils/customUtils';
 
 export default function Registration() {
   const router = useRouter();
@@ -55,7 +54,7 @@ export default function Registration() {
             control={control}
             name="username"
             rules={{
-              required: 'Required field',
+              required: i18n.t('login.Required field'),
               minLength: { value: 2, message: 'More than 2 symbols' },
             }}
             render={({ field: { ref, ...field } }) => (
@@ -70,7 +69,7 @@ export default function Registration() {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 message: 'invalid email address',
               },
-              required: 'Required field',
+              required: i18n.t('login.Required field'),
             }}
             render={({ field: { ref, ...field } }) => (
               <TextField {...field} errorString={errors.email?.message} ref={ref} type={'email'} />
@@ -80,8 +79,8 @@ export default function Registration() {
             control={control}
             name="password1"
             rules={{
-              required: 'Required field',
-              minLength: { value: 8, message: 'More than 8 symbols' },
+              required: i18n.t('login.Required field'),
+              minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
             }}
             render={({ field: { ref, ...field } }) => (
               <TextField {...field} errorString={errors.password1?.message} ref={ref} type={'password'} />
@@ -93,18 +92,29 @@ export default function Registration() {
             rules={{
               validate: (val: string) => {
                 if (watch('password1') !== val) {
-                  return 'Your passwords do no match';
+                  return i18n.t('login.No math');
                 }
               },
-              required: 'Required field',
-              minLength: { value: 8, message: 'More than 8 symbols' },
+              required: i18n.t('login.Required field'),
+              minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
             }}
             render={({ field: { ref, ...field } }) => (
-              <TextField {...field} errorString={errors.password2?.message} ref={ref} type={'password'} />
+              <TextField
+                {...field}
+                errorString={errors.password2?.message}
+                ref={ref}
+                type={'password'}
+                label={'passwordRepeat'}
+              />
             )}
           />
 
-          <input type="submit" className={CustomButtonStyles.button} disabled={!isValid} />
+          <input
+            type="submit"
+            className={CustomButtonStyles.button}
+            disabled={!isValid}
+            value={i18n.t('login.SubmitRegistration')}
+          />
         </form>
       </Section>
     </>

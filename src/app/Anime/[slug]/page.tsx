@@ -3,12 +3,18 @@ import InfoBlock from '@/components/InfoBlock/InfoBlock';
 import { Metadata } from 'next';
 import AnimeServiceInstance from '@/app/api';
 import PlayerProvider from './Components/PlayerProvider';
+import { i18n } from '@/utils/customUtils';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
+  const data = await AnimeServiceInstance.fetchAnimeInfo(slug);
+
+  const language = i18n.language;
+  const title = language === 'uk' ? data.title : data.title_en;
+
   return {
-    title: `${slug.toUpperCase()} - Aniua`,
-    description: `Дивитись аніме на Aniua онлайн у високій якості`,
+    title: `${title} - Aniua`,
+    description: i18n.t('description.anime', { anime: title }),
   };
 }
 
