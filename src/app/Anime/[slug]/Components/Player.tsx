@@ -5,7 +5,7 @@ import { CustomButton, Dropdown, Section } from '@/components/Shared/SharedCompo
 import { usePlayerSocket } from '@/hooks/usePlayerSocket';
 
 import { handleEpisode } from '@/utils/customUtils';
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 const Player = ({
   playerState,
@@ -21,12 +21,20 @@ const Player = ({
   room: string | null;
 }) => {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
-  const { setVideoUrl } = usePlayerSocket(room, frameRef.current);
+  const [isIframeMounted, setIsIframeMounted] = useState(false);
+
+  const onIframeLoad = () => {
+    setIsIframeMounted(true);
+  };
+
+  const { setVideoUrl } = usePlayerSocket(room, isIframeMounted ? frameRef.current : null);
+
   useEffect(() => {
     if (playerState.episodeUrl) {
       setVideoUrl(playerState.episodeUrl);
     }
   }, [playerState.episodeUrl, setVideoUrl]);
+
   return (
     <Section>
       <div
@@ -49,17 +57,12 @@ const Player = ({
             />
           ) : null}
         </div>
-        {!playerState.isPlayerLoading ? (
-          <iframe
-            ref={frameRef}
-            className={styles.playerFrame}
-            src={playerState.episodeUrl ? playerState.episodeUrl : undefined}
-          />
-        ) : (
-          <div className={styles.playerFrame + ' ' + styles.playerLoad}>
-            <h1 className={styles.playerLoadText}>Loading...</h1>
-          </div>
-        )}
+        <iframe
+          ref={frameRef}
+          className={`${styles.playerFrame} ${!playerState.isPlayerLoading ? '' : styles.playerLoad}`}
+          src={playerState.episodeUrl ? playerState.episodeUrl : undefined}
+          onLoad={onIframeLoad}
+        />
       </div>
       <div className={styles.episodeWrapper}>
         {episodesList &&

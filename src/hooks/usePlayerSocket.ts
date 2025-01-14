@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { getSocket } from '../socket';
 
 const iframeCommands = {
   player_play: 'player_play',
@@ -12,86 +13,96 @@ const envCommands = {
 } as const;
 
 export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameElement | null) => {
-  const [ws, setWs] = useState<WebSocket | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
+
+  if (!roomCode) {
+    return {
+      sendMessageToIframe: () => {},
+      envCommands: { player_url: 'player_url', chat_message: 'chat_message' } as const,
+      setVideoUrl: () => {}, // Default no-op function
+    };
+  }
 
   const sendMessageToIframe = useCallback(
     (messageToFrame: string, additional?: string | null) => {
-      console.log(messageToFrame, additional);
+      if (!iframe) {
+        console.error('Iframe is not accessible');
+        return;
+      }
+
+      if (!iframe?.contentWindow) {
+        console.error('Iframe contentWindow is not accessible');
+        return;
+      }
+
+      console.log('Sending message to iframe:', { command: messageToFrame, additional });
       const message = additional
         ? { command: messageToFrame, seek: Number(additional) }
         : { command: messageToFrame };
-      iframe?.contentWindow?.postMessage(message, '*');
+      iframe.contentWindow.postMessage(message, '*');
     },
     [iframe],
   );
 
   useEffect(() => {
-    if (!roomCode) return;
-    const socket = new WebSocket(process.env.NEXT_PUBLIC_WS_URL as string);
+    const socket = getSocket();
+    socket.emit('join', { roomCode });
 
-    setWs(socket);
-
-    socket.onopen = () => {
-      console.log('WebSocket connection opened');
-      socket.send(JSON.stringify({ command: 'join', roomCode }));
-    };
-
-    socket.onmessage = (event) => {
-      const { command, additional } = JSON.parse(event.data);
+    socket.on('message', (data: { command: string; additional?: string }) => {
+      const { command, additional } = data;
       if (command in iframeCommands) {
-        sendMessageToIframe(command, additional);
-      } else if (command == envCommands.player_url) {
+        sendMessageToIframe(command, additional || null);
+      } else if (command === envCommands.player_url) {
         console.log(command, additional);
-        iframe?.setAttribute('src', additional);
-      } else if (command == envCommands.chat_message) {
+        iframe?.setAttribute('src', additional || '');
+      } else if (command === envCommands.chat_message) {
         console.log(command, additional);
       }
-    };
-
-    socket.onclose = () => {
-      console.log('WebSocket connection closed');
-    };
-
-    socket.onerror = (error) => {
-      console.error('WebSocket error:', error);
-    };
+    });
 
     return () => {
-      socket.close();
+      socket.off('message'); // Clean up listener
     };
   }, [roomCode, sendMessageToIframe, iframe]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      if (typeof message === 'object') {
+      const socket = getSocket();
+      if (typeof message === 'object' && socket.connected) {
         if (message.event === 'start' || message.event === 'play') {
-          ws?.send(JSON.stringify({ command: iframeCommands.player_play }));
+          console.log('Emitting play command', message);
+          socket.emit('message', { command: iframeCommands.player_play });
         }
         if (message.event === 'pause') {
-          ws?.send(JSON.stringify({ command: iframeCommands.player_pause }));
+          console.log('Emitting pause command', message);
+          socket.emit('message', { command: iframeCommands.player_pause });
         }
         if (message.event === 'userseek') {
-          ws?.send(
-            JSON.stringify({
-              command: iframeCommands.player_seek,
-              additional: `${message.data}`,
-            }),
-          );
+          console.log('Emitting seek command', message);
+          socket.emit('message', {
+            command: iframeCommands.player_seek,
+            additional: `${message.data}`,
+          });
         }
+      } else {
+        console.warn('Socket not connected, cannot emit');
       }
     };
+
     window.addEventListener('message', handleMessage);
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, [ws]);
+  }, []);
 
   useEffect(() => {
-    console.log('handlePlayerUrl', videoUrl);
-    if (videoUrl) ws?.send(JSON.stringify({ command: envCommands.player_url, additional: videoUrl }));
-  }, [videoUrl, ws]);
+    const socket = getSocket();
+    if (videoUrl) {
+      console.log('Sending player_url:', videoUrl);
+      socket.emit('message', { command: envCommands.player_url, additional: videoUrl });
+    }
+  }, [videoUrl]);
 
   return { sendMessageToIframe, envCommands, setVideoUrl };
 };

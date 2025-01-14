@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function AnimePage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+  const { slug } = await params;
   const data = await AnimeServiceInstance.fetchAnimeInfo(slug);
   return (
     <>

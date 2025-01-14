@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
   try {
-    const { slug } = params;
+    const { slug } = await params;
     const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}anime/${slug}`);
     const response = await fetch(url.toString(), {
       method: 'GET',

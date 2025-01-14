@@ -1,6 +1,6 @@
-import { createServer } from 'http';
+import { createServer } from 'node:http';
 import next from 'next';
-import { WebSocketServer } from 'ws';
+import { Server } from 'socket.io';
 
 const dev = process.env.NODE_ENV !== 'production';
 const hostname = 'localhost';
@@ -8,70 +8,64 @@ const port = 3000;
 const app = next({ dev, hostname, port });
 const handler = app.getRequestHandler();
 
+import onLobbyMessage from './server/lobbyCommands.js';
+
 const rooms = new Map();
 
 app.prepare().then(() => {
-  const server = createServer((req, res) => {
-    handler(req, res);
-  });
+  const httpServer = createServer(handler);
 
-  const wss = new WebSocketServer({ server });
+  const io = new Server(httpServer);
 
-  server.on('upgrade', (req, socket, head) => {
-    if (req.headers['upgrade']?.toLowerCase() === 'websocket') {
-      wss.handleUpgrade(req, socket, head, (ws) => {
-        wss.emit('connection', ws, req);
-      });
-    } else {
-      socket.destroy();
-    }
-  });
+  io.on('connection', (socket) => {
+    console.log('New Socket.IO connection established:', socket.id);
 
-  wss.on('connection', (ws) => {
-    console.log('New WebSocket connection established');
+    joinRoom(socket);
+    onLobbyMessage(socket, rooms);
 
-    ws.on('message', (data) => {
-      try {
-        const message = JSON.parse(data);
-        if (message.command === 'join') {
-          const { roomCode } = message;
-          if (!rooms.has(roomCode)) {
-            rooms.set(roomCode, new Set());
-          }
-          rooms.get(roomCode).add(ws);
-          ws.roomCode = roomCode;
-          console.log(`Client joined room: ${roomCode}`);
-        } else if (['player_play', 'player_pause', 'player_seek', 'player_url'].includes(message.command)) {
-          console.log(`send: ${message.command}`);
-          const room = rooms.get(ws.roomCode);
-          if (room) {
-            for (const client of room) {
-              if (client !== ws && client.readyState === client.OPEN) {
-                client.send(
-                  JSON.stringify({
-                    command: message.command,
-                    additional: message.additional,
-                  }),
-                );
-              }
-            }
-          }
-        }
-      } catch (err) {
-        console.error('Failed to parse message:', err.message);
-      }
+    socket.on('disconnect', () => {
+      console.log(`Socket disconnected: ${socket.id}`);
+      leaveRoom(socket);
     });
 
-    ws.on('close', () => {
-      console.log('WebSocket connection closed');
-    });
-
-    ws.on('error', (error) => {
-      console.error('WebSocket error occurred:', error);
+    socket.on('error', (error) => {
+      console.error('Socket error:', error);
     });
   });
 
-  server.listen(port, hostname, () => {
-    console.log(`> Ready on http://${hostname}:${port}`);
-  });
+  httpServer
+    .once('error', (err) => {
+      console.error(err);
+      process.exit(1);
+    })
+    .listen(port, () => {
+      console.log(`> Ready on http://${hostname}:${port}`);
+    });
 });
+
+// Function to handle room events
+function joinRoom(socket) {
+  socket.on('join', ({ roomCode }) => {
+    socket.join(roomCode);
+    if (!rooms.has(roomCode)) {
+      rooms.set(roomCode, new Set());
+    }
+    rooms.get(roomCode).add(socket.id);
+    console.log('[ROOM]: ', `Socket ${socket.id} joined room: ${roomCode}`);
+  });
+}
+
+// Function to leave room
+function leaveRoom(socket) {
+  const roomCode = socket.data.roomCode;
+  if (roomCode && rooms.has(roomCode)) {
+    rooms.get(roomCode).delete(socket);
+    console.log('[ROOM]: ', `Socket ${socket.id} left room: ${roomCode}`);
+
+    // Clean up empty rooms
+    if (rooms.get(roomCode).size === 0) {
+      rooms.delete(roomCode);
+      console.log('[ROOM]: ', `Room ${roomCode} deleted`);
+    }
+  }
+}
