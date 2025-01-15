@@ -1,51 +1,51 @@
-# #!/bin/sh
+#!/bin/sh
 
-# # Ensure the script exits if an error occurs
-# set -e
+# Ensure the script exits if an error occurs
+set -e
 
-# # Path to the commit message file
-# commit_msg_file=".git/COMMIT_EDITMSG"
+# Path to the commit message file
+commit_msg_file=".git/COMMIT_EDITMSG"
 
-# # Check if the commit message file exists
-# if [ ! -f "$commit_msg_file" ]; then
-#   echo "Error: Commit message file not found."
-#   exit 1
-# fi
+# Check if the commit message file exists
+if [ ! -f "$commit_msg_file" ]; then
+  echo "Error: Commit message file not found."
+  exit 1
+fi
 
-# # Read the commit message
-# commit_msg=$(cat "$commit_msg_file")
+# Read the commit message
+commit_msg=$(cat "$commit_msg_file")
 
-# # Prepend emoji to messages starting with "FIX"
-# # modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/🔧FIX/')
+# Prepend emoji to messages starting with "FIX"
+# modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/🔧FIX/')
 
-# if echo "$commit_msg" | grep -q "^FIX"; then
-#   modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/:hammer:FIX/')
-# elif echo "$commit_msg" | grep -q "^COSMETIC"; then
-#   modified_msg=$(echo "$commit_msg" | sed -E 's/^COSMETIC/:sparkles:COSMETIC/')
-# elif echo "$commit_msg" | grep -q "^NEW"; then
-#   modified_msg=$(echo "$commit_msg" | sed -E 's/^NEW/:fire:NEW/')
-# elif echo "$commit_msg" | grep -q "^BUILD FIXES"; then
-#   modified_msg=$(echo "$commit_msg" | sed -E 's/^BUILD FIXES/:package:BUILD FIXES/')
-# elif echo "$commit_msg" | grep -q "^UPDATE"; then
-#   modified_msg=$(echo "$commit_msg" | sed -E 's/^UPDATE/:zap:UPDATE/')
-# else
-#   echo "Error: Commit message must start with 'FIX', 'COSMETIC', 'BUILD FIXES', 'UPDATE' or 'NEW'. Please rewrite the message."
-#   exit 1
-# fi
+if echo "$commit_msg" | grep -q "^FIX"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/:hammer:FIX/')
+elif echo "$commit_msg" | grep -q "^COSMETIC"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^COSMETIC/:sparkles:COSMETIC/')
+elif echo "$commit_msg" | grep -q "^NEW"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^NEW/:fire:NEW/')
+elif echo "$commit_msg" | grep -q "^BUILD FIXES"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^BUILD FIXES/:package:BUILD FIXES/')
+elif echo "$commit_msg" | grep -q "^UPDATE"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^UPDATE/:zap:UPDATE/')
+else
+  echo "Error: Commit message must start with 'FIX', 'COSMETIC', 'BUILD FIXES', 'UPDATE' or 'NEW'. Please rewrite the message."
+  exit 1
+fi
 
-# # Save the modified commit message back to the file
-# echo "$modified_msg" > "$commit_msg_file"
+# Save the modified commit message back to the file
+echo "$modified_msg" > "$commit_msg_file"
 
-# # Stage the modified commit message file
-# git add "$commit_msg_file"
+# Stage the modified commit message file
+git add "$commit_msg_file"
 
 
-# # Pretty Table for Modified Commit Message
-# echo "###########################################"
-# echo "#          Commit Message Modified        #"
-# printf "| %-40s |\n" "$modified_msg"
-# echo "###########################################"
+# Pretty Table for Modified Commit Message
+echo "###########################################"
+echo "#          Commit Message Modified        #"
+printf "# %-40s #\n" "$modified_msg"
+echo "###########################################"
 
-# # Pretty Table for DONE!
-# echo "#                DONE!                     #"
-# echo "###########################################"
+# Pretty Table for DONE!
+echo "#                DONE!                     #"
+echo "###########################################"
