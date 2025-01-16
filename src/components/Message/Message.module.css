@@ -16,8 +16,9 @@
   display: flex;
   align-items: flex-start;
   word-wrap: break-word;
+  height: -moz-min-content;
   height: min-content;
-  width: 100%;
+  width: 88%;
   flex-direction: column;
 }
 

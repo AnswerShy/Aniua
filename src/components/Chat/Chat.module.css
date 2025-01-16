@@ -7,13 +7,17 @@
 }
 
 .chat {
-  width: 100%;
   display: flex;
   flex-direction: column;
+  max-width: 30%;
+  width: 100%;
 }
 
 .messageInputContainer {
   padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
 }
 
 .messageInput {
