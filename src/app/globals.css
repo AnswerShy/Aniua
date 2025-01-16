@@ -118,14 +118,9 @@ input {
   border-radius: 12px;
 }
 
-.title {
-  @apply text-5xl leading-relaxed font-bold tracking-widest;
-}
-
-.text {
-  @apply text-4xl font-normal text-white;
-}
-
-.subText {
-  @apply text-3xl font-thin;
+.layer1 {
+  background-color: var(--01dp);
+  border-radius: var(--borderRad);
+  box-shadow: var(--shadowHover);
+  padding: 15px;
 }

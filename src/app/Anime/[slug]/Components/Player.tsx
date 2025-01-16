@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './Player.module.css';
-import { CustomButton, Dropdown, Section } from '@/components/Shared/SharedComponents';
+import { CustomButton, Dropdown } from '@/components/Shared/SharedComponents';
 import { usePlayerSocket } from '@/hooks/usePlayerSocket';
 
 import { handleEpisode } from '@/utils/customUtils';
@@ -14,12 +14,14 @@ const Player = ({
   handleStudio,
   episodesList,
   room,
+  classname,
 }: {
   playerState: playerStateInterface;
   setPlayerState: Dispatch<SetStateAction<playerStateInterface>>;
   handleStudio: (index: number) => void;
   episodesList: EpisodeListInterface[] | null;
   room: string | null;
+  classname?: string | null;
 }) => {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
   const [isIframeMounted, setIsIframeMounted] = useState(false);
@@ -36,11 +38,8 @@ const Player = ({
     }
   }, [playerState.episodeUrl, setVideoUrl]);
 
-  const language = i18next.language;
-  const title = language === 'uk';
-
   return (
-    <Section>
+    <div className={styles.playerContainer + ` ${classname}`}>
       <div
         style={{
           display: 'flex',
@@ -48,7 +47,7 @@ const Player = ({
           alignItems: 'center',
         }}
       >
-        <h1>{title ? playerState.episodeTitle : playerState.episodeENTitle}</h1>
+        <h1>{i18next.language === 'uk' ? playerState.episodeTitle : playerState.episodeENTitle}</h1>
         <h2>{playerState.episodeJPTitle}</h2>
       </div>
       <div className={styles.playerWrapper}>
@@ -86,7 +85,7 @@ const Player = ({
             </CustomButton>
           ))}
       </div>
-    </Section>
+    </div>
   );
 };
 

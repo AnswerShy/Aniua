@@ -1,0 +1,33 @@
+.message {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  align-items: center;
+  position: relative;
+}
+
+.message:hover {
+  cursor: pointer;
+  background-color: var(--02dp);
+  border-radius: var(--borderRad);
+}
+
+.messageContainer {
+  display: flex;
+  align-items: flex-start;
+  word-wrap: break-word;
+  height: min-content;
+  width: 100%;
+  flex-direction: column;
+}
+
+.photo {
+  min-width: 50px;
+  min-height: 50px;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  position: relative;
+  object-fit: cover;
+}

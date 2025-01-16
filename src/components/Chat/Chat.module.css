@@ -1,0 +1,21 @@
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+}
+
+.chat {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.messageInputContainer {
+  padding: 15px;
+}
+
+.messageInput {
+  width: 100%;
+}
