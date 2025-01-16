@@ -1,33 +1,78 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useSocket } from '@/context/SocketContext';
+import { useUserStore } from '@/stores/store';
+
 import Message from '../Message/Message';
 import style from './Chat.module.css';
 
 function Chat() {
+  const socket = useSocket();
+  const userStoredData = useUserStore((state) => state.user);
+  const [messages, setMessages] = useState<{ username: string; avatar: string; message: string }[]>([]);
+  const [newMessage, setNewMessage] = useState('');
+
+  useEffect(() => {
+    console.log('Chat component socket:', socket.id);
+
+    socket.on(
+      'chat_message',
+      (data: { command: string; additional?: string; username: string; avatar: string }) => {
+        if (data.command === 'chat_message') {
+          setMessages((prev) => [
+            ...prev,
+            { username: data.username, avatar: data.avatar, message: data.additional || '' },
+          ]);
+        }
+      },
+    );
+
+    return () => {
+      socket.off('chat_message');
+    };
+  }, [socket]);
+
+  const sendMessage = () => {
+    if (newMessage.length < 1) return;
+
+    const username = userStoredData.username || 'Unknown User';
+    const avatar = userStoredData.avatar || 'pfp.jpg';
+
+    socket.emit('chat_message', {
+      command: 'chat_message',
+      additional: newMessage,
+      username: username,
+      avatar: avatar,
+    });
+
+    setMessages((prev) => [...prev, { username, avatar, message: newMessage }]);
+    setNewMessage('');
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  };
+
   return (
     <div className={style.chat + ` layer1`}>
       <div className={style.messagesContainer}>
-        <Message
-          photo="https://cdn.aniua.vip/images/monogatari-series-off--monster-season/characters/12_10RZHwXWMW3_110.webp"
-          username="Kirill"
-          msgContent="hi"
-        />
-        <Message
-          photo="https://cdn.aniua.vip/images/monogatari-series-off--monster-season/characters/12_10RZHwXWMW3_110.webp"
-          username="NotKirill"
-          msgContent="he will die rn"
-        />
-        <Message
-          photo="https://cdn.aniua.vip/images/monogatari-series-off--monster-season/characters/12_10RZHwXWMW3_110.webp"
-          username="Eugenue"
-          msgContent="cringe"
-        />
-        <Message
-          photo="https://cdn.aniua.vip/images/monogatari-series-off--monster-season/characters/12_10RZHwXWMW3_110.webp"
-          username="asdsad"
-          msgContent="fuck you"
-        />
+        {messages.map((msg, idx) => (
+          <Message key={idx} username={msg.username} msgContent={msg.message} photo={msg.avatar} />
+        ))}
       </div>
       <div className={style.messageInputContainer}>
-        <input placeholder="Enter message" type="text" className={style.messageInput} />
+        <input
+          placeholder="Enter message"
+          type="text"
+          value={newMessage}
+          className={style.messageInput}
+          onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={handleKeyPress}
+        />
+        <button onClick={sendMessage}>Send</button>
       </div>
     </div>
   );

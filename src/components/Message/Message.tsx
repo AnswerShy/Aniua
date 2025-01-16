@@ -21,7 +21,7 @@ function Message({ photo, username, msgContent }: MessageProps) {
       ></Image>
       <div className={style.messageContainer}>
         <Typography variant="h4">{username}</Typography>
-        <Typography variant="h3" classname="text-white">
+        <Typography variant="h3" classname="tracking-tight text-white w-full">
           {msgContent}
         </Typography>
       </div>

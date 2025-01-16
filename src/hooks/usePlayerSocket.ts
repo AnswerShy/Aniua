@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getSocket } from '../socket';
+import { useSocket } from '../context/SocketContext';
 
 const iframeCommands = {
   player_play: 'player_play',
@@ -13,6 +13,7 @@ const envCommands = {
 } as const;
 
 export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameElement | null) => {
+  const socket = useSocket();
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
   if (!roomCode) {
@@ -45,7 +46,6 @@ export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameEleme
   );
 
   useEffect(() => {
-    const socket = getSocket();
     socket.emit('join', { roomCode });
 
     socket.on('message', (data: { command: string; additional?: string }) => {
@@ -68,7 +68,6 @@ export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameEleme
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      const socket = getSocket();
       if (typeof message === 'object' && socket.connected) {
         if (message.event === 'start' || message.event === 'play') {
           console.log('Emitting play command', message);
@@ -97,7 +96,6 @@ export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameEleme
   }, []);
 
   useEffect(() => {
-    const socket = getSocket();
     if (videoUrl) {
       console.log('Sending player_url:', videoUrl);
       socket.emit('message', { command: envCommands.player_url, additional: videoUrl });
