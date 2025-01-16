@@ -11,12 +11,13 @@ export const variantMap: Record<Variant, { tag: keyof JSX.IntrinsicElements; cla
   button: { tag: 'button', className: 'font-medium text-xl' },
 };
 
-const Typography: React.FC<{ variant?: Variant; children: React.ReactNode }> = ({
+const Typography: React.FC<{ variant?: Variant; children: React.ReactNode; classname?: string }> = ({
   variant = 'body1',
+  classname,
   children,
 }) => {
   const { tag: Tag, className } = variantMap[variant];
-  return <Tag className={className}>{children}</Tag>;
+  return <Tag className={`${className} ${classname}`}>{children}</Tag>;
 };
 
 export default Typography;
