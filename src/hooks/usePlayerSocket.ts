@@ -15,6 +15,7 @@ const envCommands = {
 export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameElement | null) => {
   const socket = useSocket();
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  let time = 0;
 
   if (!roomCode) {
     return {
@@ -40,7 +41,7 @@ export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameEleme
       const message = additional
         ? { command: messageToFrame, seek: Number(additional) }
         : { command: messageToFrame };
-      iframe.contentWindow.postMessage(message, '*');
+      iframe?.contentWindow?.postMessage(message, '*');
     },
     [iframe],
   );
@@ -55,8 +56,26 @@ export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameEleme
       } else if (command === envCommands.player_url) {
         console.log(command, additional);
         iframe?.setAttribute('src', additional || '');
-      } else if (command === envCommands.chat_message) {
-        console.log(command, additional);
+        document.querySelector('iframe')?.setAttribute('src', additional || '');
+      }
+    });
+
+    socket.on('request_state', ({ requesterId }) => {
+      console.log(`[CLIENT]: Received state request from ${requesterId}`);
+
+      const videoUrl = iframe?.getAttribute('src') || null;
+      const timecode = time;
+      console.log(videoUrl, timecode);
+      socket.emit('send_state', { requesterId, videoUrl, timecode });
+    });
+
+    socket.on('state_update', ({ videoUrl, timecode }) => {
+      console.log(`@@@`, videoUrl, timecode);
+      if (videoUrl) {
+        document.querySelector('iframe')?.setAttribute('src', videoUrl);
+      }
+      if (timecode) {
+        sendMessageToIframe(iframeCommands.player_seek, `${timecode}`);
       }
     });
 
@@ -84,6 +103,10 @@ export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameEleme
             additional: `${message.data}`,
           });
         }
+        if (message.event === 'time') {
+          console.log(message.data);
+          time = message.data;
+        }
       } else {
         console.warn('Socket not connected, cannot emit');
       }
@@ -102,5 +125,5 @@ export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameEleme
     }
   }, [videoUrl]);
 
-  return { sendMessageToIframe, envCommands, setVideoUrl };
+  return { sendMessageToIframe, envCommands, setVideoUrl, videoUrl };
 };

@@ -23,6 +23,11 @@ app.prepare().then(() => {
     joinRoom(socket);
     onLobbyMessage(socket, rooms);
 
+    socket.on('send_state', ({ requesterId, videoUrl, timecode }) => {
+      console.log(`[SERVER]: Received state for ${requesterId}`);
+      io.to(requesterId).emit('state_update', { videoUrl, timecode });
+    });
+
     socket.on('disconnect', () => {
       console.log(`Socket disconnected: ${socket.id}`);
       leaveRoom(socket);
@@ -47,11 +52,22 @@ app.prepare().then(() => {
 function joinRoom(socket) {
   socket.on('join', ({ roomCode }) => {
     socket.join(roomCode);
+
     if (!rooms.has(roomCode)) {
-      rooms.set(roomCode, new Set());
+      rooms.set(roomCode, { users: new Set(), videoUrl: null, timecode: 0 });
     }
-    rooms.get(roomCode).add(socket.id);
-    console.log('[ROOM]: ', `Socket ${socket.id} joined room: ${roomCode}`);
+
+    const room = rooms.get(roomCode);
+    room.users.add(socket.id);
+
+    console.log(`[ROOM ${roomCode}]: Socket ${socket.id} joined`);
+
+    // Request state if not the first user
+    if (room.users.size > 1) {
+      const firstUserId = [...room.users][0]; // Get the first user in this room
+      socket.to(firstUserId).emit('request_state', { requesterId: socket.id, roomCode });
+      console.log(`[ROOM ${roomCode}]: State requested from first user: ${firstUserId}`);
+    }
   });
 }
 

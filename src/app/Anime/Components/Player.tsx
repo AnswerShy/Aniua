@@ -20,17 +20,23 @@ const Player = ({
   setPlayerState: Dispatch<SetStateAction<playerStateInterface>>;
   handleStudio: (index: number) => void;
   episodesList: EpisodeListInterface[] | null;
-  room: string | null;
+  room?: string | null;
   classname?: string | null;
 }) => {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
   const [isIframeMounted, setIsIframeMounted] = useState(false);
 
   const onIframeLoad = () => {
-    setIsIframeMounted(true);
+    if (frameRef.current?.contentWindow) {
+      console.log('Iframe contentWindow is accessible');
+      setIsIframeMounted(true);
+    } else {
+      console.error('Iframe contentWindow is not accessible');
+      setIsIframeMounted(false);
+    }
   };
 
-  const { setVideoUrl } = usePlayerSocket(room, isIframeMounted ? frameRef.current : null);
+  const { setVideoUrl, videoUrl } = usePlayerSocket(room ? room : null, isIframeMounted ? frameRef.current : null);
 
   useEffect(() => {
     if (playerState.episodeUrl) {
@@ -38,7 +44,11 @@ const Player = ({
     }
   }, [playerState.episodeUrl, setVideoUrl]);
 
-  return (
+  useEffect(() => {
+    console.log(videoUrl);
+  }, [videoUrl]);
+
+  return episodesList ? (
     <div className={styles.playerContainer + ` ${classname}`}>
       <div
         style={{
@@ -85,6 +95,15 @@ const Player = ({
             </CustomButton>
           ))}
       </div>
+    </div>
+  ) : (
+    <div className={styles.playerContainer + ` ${classname}`}>
+      <iframe
+        ref={frameRef}
+        className={`${styles.playerFrame} ${!playerState.isPlayerLoading ? '' : styles.playerLoad}`}
+        src={undefined}
+        onLoad={onIframeLoad}
+      />
     </div>
   );
 };

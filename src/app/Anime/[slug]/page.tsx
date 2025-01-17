@@ -2,8 +2,9 @@ import Banner from '@/components/Banner/FullScreenBanner';
 import InfoBlock from '@/components/InfoBlock/InfoBlock';
 import { Metadata } from 'next';
 import AnimeServiceInstance from '@/app/api';
-import PlayerProvider from './Components/PlayerProvider';
+import PlayerProvider from '../Components/PlayerProvider';
 import { i18n } from '@/utils/customUtils';
+import { SocketProvider } from '@/context/SocketContext';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const { slug } = await params;
@@ -22,7 +23,7 @@ export default async function AnimePage({ params }: { params: { slug: string } }
   const { slug } = await params;
   const data = await AnimeServiceInstance.fetchAnimeInfo(slug);
   return (
-    <>
+    <SocketProvider>
       <Banner
         bannerImage={data.poster}
         bannerTitle={data.title}
@@ -32,6 +33,6 @@ export default async function AnimePage({ params }: { params: { slug: string } }
       />
       <InfoBlock infoData={data} />
       <PlayerProvider slug={slug} />
-    </>
+    </SocketProvider>
   );
 }

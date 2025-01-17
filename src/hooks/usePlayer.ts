@@ -2,11 +2,12 @@ import { handleEpisode } from '@/utils/customUtils';
 import AnimeServiceInstance from '@/app/api';
 import { useCallback, useEffect, useState } from 'react';
 
-export const usePlayer = (slug: string) => {
+export const usePlayer = (slug: string | null) => {
   const [episodesList, setEpisodesList] = useState<EpisodeListInterface[] | null>(null);
 
   useEffect(() => {
     const fetchEpisodes = async () => {
+      if (!slug) return;
       const list = await AnimeServiceInstance.fetchEpisodeList(slug);
       setEpisodesList(list);
     };
