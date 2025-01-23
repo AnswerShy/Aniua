@@ -1,26 +1,28 @@
+import logWithTime from './log';
+
 export default function onLobbyMessage(socket, rooms) {
   try {
     socket.on('message', (data) => {
       const { command, additional } = data;
-      const roomCode = [...socket.rooms][1]; // Get the room code (first room is the socket ID)
+      const roomCode = [...socket.rooms][1];
       if (roomCode) {
-        console.log(`[Broadcasting in room ${roomCode}]:`, data);
+        logWithTime(`[Broadcasting in room ${roomCode}]: ${data}`);
         socket.to(roomCode).emit('message', { command, additional });
       } else {
-        console.warn('No roomCode found for socket:', socket.id);
+        logWithTime(`No roomCode found for socket: ${socket.id}`);
       }
     });
     socket.on('chat_message', (data) => {
       const { command, additional, username, avatar } = data;
-      const roomCode = [...socket.rooms][1]; // Get the room code (first room is the socket ID)
+      const roomCode = [...socket.rooms][1];
       if (roomCode) {
-        console.log(`[Broadcasting message in room ${roomCode}]:`, data);
+        logWithTime(`[Broadcasting message in room ${roomCode}]: ${data}`);
         socket.to(roomCode).emit('chat_message', { command, additional, username, avatar });
       } else {
-        console.warn('No roomCode found for socket:', socket.id);
+        logWithTime(`No roomCode found for socket: ${socket.id}`, 'error');
       }
     });
   } catch (err) {
-    console.error('Failed to parse message:', err.message);
+    logWithTime(`Failed to parse message: ${err.message}`, 'error');
   }
 }
