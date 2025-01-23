@@ -13,11 +13,11 @@ const envCommands = {
 } as const;
 
 export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameElement | null) => {
-  const socket = useSocket();
+  const socket = roomCode ? useSocket() : null;
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   let time = 0;
 
-  if (!roomCode) {
+  if (!socket) {
     return {
       sendMessageToIframe: () => {},
       envCommands: { player_url: 'player_url', chat_message: 'chat_message' } as const,

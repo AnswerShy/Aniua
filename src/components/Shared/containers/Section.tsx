@@ -6,7 +6,7 @@ interface SectionProps {
   typeOfSection?: 'grid' | 'flex' | 'flexThreeCols' | 'Banner' | 'Profile' | 'center';
 }
 
-const Section: React.FC<SectionProps> = ({ children, typeOfSection = 'flex' }) => {
+const Section: React.FC<SectionProps> = ({ children, typeOfSection = 'flex', ...props }) => {
   const widthClasses: { [key: string]: string } = {
     grid: styles.gridSectionStyle,
     flex: styles.flexSectionStyle,
@@ -15,7 +15,11 @@ const Section: React.FC<SectionProps> = ({ children, typeOfSection = 'flex' }) =
     Profile: styles.profileSectionStyle,
     center: styles.centerSectionStyle,
   };
-  return <section className={widthClasses[typeOfSection]}>{children}</section>;
+  return (
+    <section className={widthClasses[typeOfSection]} {...props}>
+      {children}
+    </section>
+  );
 };
 
 export default Section;
