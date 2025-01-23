@@ -1,4 +1,4 @@
-import logWithTime from './log';
+import logWithTime from './log.js';
 
 export function joinRoom(socket, rooms) {
   socket.on('join', ({ roomCode }) => {

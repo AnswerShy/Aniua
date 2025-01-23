@@ -1,4 +1,4 @@
-import logWithTime from './log';
+import logWithTime from './log.js';
 
 export default function onLobbyMessage(socket, rooms) {
   try {
