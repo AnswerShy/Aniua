@@ -26,9 +26,7 @@ app.prepare().then(() => {
       io.to(requesterId).emit('state_update', { videoUrl, timecode });
     });
 
-    socket.on('disconnect', () => {
-      leaveRoom(socket, rooms);
-    });
+    leaveRoom(socket, rooms);
 
     socket.on('error', (error) => {
       console.error('Socket error:', error);

@@ -22,15 +22,19 @@ export function joinRoom(socket, rooms) {
 }
 
 export function leaveRoom(socket, rooms) {
-  const roomCode = socket.data.roomCode;
+  socket.on('disconnect', () => {
+    console.log(`[SERVER]: User ${socket.id} disconnected.`);
 
-  if (roomCode && rooms.has(roomCode)) {
-    rooms.get(roomCode).delete(socket);
-    logWithTime(`[ROOM]: Socket ${socket.id} left room: ${roomCode}`);
+    for (const [roomName, users] of rooms.entries()) {
+      if (users instanceof Set && users.has(socket.id)) {
+        console.log(`[SERVER]: User ${socket.id} removed from room "${roomName}".`);
 
-    if (rooms.get(roomCode).size === 0) {
-      rooms.delete(roomCode);
-      logWithTime(`[ROOM]: Room ${roomCode} deleted`);
+        if (users.size === 0) {
+          rooms.delete(roomName);
+          console.log(`[SERVER]: Room "${roomName}" deleted as it is now empty.`);
+        }
+        break;
+      }
     }
-  }
+  });
 }
