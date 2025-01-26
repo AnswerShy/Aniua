@@ -10,6 +10,7 @@
   --primaryColor: white;
 
   --00dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 2%);
+  --t00dp: color-mix(in oklab, var(--00dp) 75%, transparent);
   --01dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 7%);
   --t01dp: color-mix(in oklab, var(--01dp) 75%, transparent);
   --02dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 12%);
@@ -116,6 +117,14 @@ input {
   background-color: var(--01dp);
   padding: 15px;
   border-radius: 12px;
+}
+
+input:hover {
+  cursor: pointer;
+}
+
+*:focus {
+  outline: solid 2px var(--primaryColor);
 }
 
 .layer1 {

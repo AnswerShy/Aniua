@@ -34,7 +34,9 @@
   },
   "header": {
     "registration": "Реєстрація",
-    "login": "Увійти"
+    "login": "Увійти",
+    "search": "Пошук...",
+    "noResults": "Нічого не знайдено"
   },
   "paths": {
     "home": "Головна",

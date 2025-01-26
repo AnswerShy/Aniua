@@ -11,6 +11,7 @@ import { MenuIcon, Person } from '@/utils/icons';
 import Image from 'next/image';
 import useUserProfile from '@/hooks/useUserProfile';
 import { paths, pathsProfile } from '@/constants/headersconst';
+import { SearchBar } from '../IndexComponent';
 
 export default function Header() {
   const pathname = usePathname();
@@ -66,6 +67,7 @@ export default function Header() {
           {currentPath !== '' ? <Dropdown currentState={currentPath} actionList={paths} /> : null}
         </div>
         <div className={styles.rightHeader}>
+          <SearchBar />
           {userData.username ? (
             <>
               <div>{userData?.money}/|\</div>

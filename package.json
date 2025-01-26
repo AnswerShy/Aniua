@@ -23,6 +23,7 @@
     "@mui/x-charts": "^7.23.2",
     "clsx": "^2.1.1",
     "i18next": "^24.2.0",
+    "lodash.debounce": "^4.0.8",
     "next": "15.0.3",
     "nodemon": "^3.1.7",
     "react": "^18.3.1",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

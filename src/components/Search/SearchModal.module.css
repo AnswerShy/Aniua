@@ -1,0 +1,27 @@
+.modal {
+  width: 100%;
+  height: 100svh;
+  position: fixed;
+
+  z-index: 1000;
+  top: 0;
+
+  background: var(--t00dp);
+  backdrop-filter: blur(5px);
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  margin: 25px;
+}
+
+.searchbar {
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+}

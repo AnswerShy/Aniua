@@ -5,6 +5,7 @@ import './globals.css';
 import Header from '@/components/Header/Header';
 import Loading from '@/components/Loading/LoadingComponent';
 import { i18n } from '@/utils/customUtils';
+import { SearchProvider } from '@/context/SearchContext';
 
 const roboto = Roboto_Condensed({
   weight: '400',
@@ -24,9 +25,11 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${roboto.className} antialiased`}>
-        <Loading />
-        <Header />
-        {children}
+        <SearchProvider>
+          <Loading />
+          <Header />
+          {children}
+        </SearchProvider>
       </body>
     </html>
   );
