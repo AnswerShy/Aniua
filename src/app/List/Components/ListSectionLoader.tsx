@@ -4,7 +4,7 @@ import { animeCardInterface } from '@/interfaces/animeCardInterface';
 import { Section, Card } from '@/components/Shared/SharedComponents';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
-import AnimeServiceInstance from '@/app/api';
+
 let page = 2;
 
 const ListSectionLoader = () => {
@@ -14,7 +14,8 @@ const ListSectionLoader = () => {
 
   useEffect(() => {
     if (inView && !isEnd) {
-      AnimeServiceInstance.fetchAnimeList(page)
+      fetch(`/api/list?page=${page}`)
+        .then((res) => res.json())
         .then((data: AnimeDataInterface[]) => {
           const transformedData = data.map((item) => ({
             ...item,
