@@ -7,6 +7,7 @@ import { TextField } from '@/components/Shared/SharedComponents';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/stores/store';
 import { i18n } from '@/utils/customUtils';
+import toast from 'react-hot-toast';
 
 export default function Login() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function Login() {
     control,
     formState: { errors, isValid },
   } = useForm<LoginForms>({
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const handleLogin: SubmitHandler<LoginForms> = async (data) => {
@@ -36,11 +37,13 @@ export default function Login() {
         if (resJson.success) {
           useUserStore.getState().setLoginState(true);
           router.push('/');
+        } else {
+          toast.error(i18n.t('toast.LoginFailedUser'));
+          console.error(i18n.t('toast.LoginFailedUser'));
         }
-      } else {
-        console.error('Login failed');
       }
     } catch (e) {
+      toast.error(i18n.t('toast.ServerError'));
       console.error(e);
     }
   };

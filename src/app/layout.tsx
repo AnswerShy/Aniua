@@ -6,6 +6,7 @@ import Header from '@/components/Header/Header';
 import Loading from '@/components/Loading/LoadingComponent';
 import { i18n } from '@/utils/customUtils';
 import { SearchProvider } from '@/context/SearchContext';
+import { Toaster } from 'react-hot-toast';
 
 const roboto = Roboto_Condensed({
   weight: '400',
@@ -27,6 +28,14 @@ export default function RootLayout({
       <body className={`${roboto.className} antialiased`}>
         <SearchProvider>
           <Loading />
+          <Toaster
+            toastOptions={{
+              style: {
+                background: 'var(--03dp)',
+                color: '#fff',
+              },
+            }}
+          />
           <Header />
           {children}
         </SearchProvider>

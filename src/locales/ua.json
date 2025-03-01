@@ -43,5 +43,11 @@
     "list": "Список",
     "profile": "Профіль",
     "settings": "Налаштування"
+  },
+  "toast": {
+    "LoginFailedUser": "Логін або пароль невірний",
+    "ServerError": "Помилка сервера",
+    "RegistrationFailed": "Помилка реєстрації",
+    "RegistrationSuccess": "Реєстрація пройшла успішно"
   }
 }
