@@ -4,6 +4,10 @@
   position: relative;
 }
 
+.option:focus {
+  color: var(--primaryColor);
+}
+
 .optionsWrap {
   position: absolute;
   display: flex;

@@ -77,7 +77,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       const input = document.getElementById('modal-search-input');
       input?.focus();
 
-      const outsideElements = document.querySelectorAll<HTMLElement>('body *:not(#modal):not(script):not(style)');
+      const outsideElements = document.querySelectorAll<HTMLElement>(
+        'body *:not(#modal):not(script):not(style) *:has(tabindex)',
+      );
       outsideElements.forEach((el) => {
         if (!modalRef.current?.contains(el)) {
           el.setAttribute('tabindex', '-1');
@@ -88,9 +90,11 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
 
     return () => {
-      const outsideElements = document.querySelectorAll<HTMLElement>('body *:not(#modal):not(script):not(style)');
+      const outsideElements = document.querySelectorAll<HTMLElement>(
+        'body *:not(#modal):not(script):not(style) *:has(tabindex)',
+      );
       outsideElements.forEach((el) => {
-        el.removeAttribute('tabindex');
+        el.setAttribute('tabindex', '0');
       });
     };
   }, [isOpen]);

@@ -7,6 +7,7 @@ import { TypographyType } from '../SharedComponents';
 
 import { KeyboardArrowDownIcon } from '@/utils/icons';
 import { getTranslatedText } from '@/utils/customUtils';
+import { KeyboardArrowUp } from '@mui/icons-material';
 
 interface DropdownProps {
   currentState?: string; //For show current state
@@ -20,6 +21,7 @@ interface DropdownProps {
 
   isLeft?: boolean;
 }
+
 const Dropdown = ({
   currentState,
   actionList,
@@ -38,13 +40,24 @@ const Dropdown = ({
 
   return actionList ? (
     <>
-      <div className={`${styles.dropdownMenu} ${isLeft ? 'items-start' : 'items-end'}`} onClick={handleVisible}>
+      <button
+        tabIndex={0}
+        className={`${styles.dropdownMenu} ${isLeft ? 'items-start' : 'items-end'}`}
+        onClick={handleVisible}
+        aria-haspopup="listbox"
+        aria-expanded={visible}
+        aria-controls="dropdown-options"
+      >
         {children ? (
           children
         ) : (
-          <div className={`${TypographyType['button'].className}`}>
+          <div role="select" className={`${TypographyType['button'].className}`}>
             {currentState && getTranslatedText('paths', currentState)}
-            <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
+            {visible ? (
+              <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
+            ) : (
+              <KeyboardArrowUp sx={{ fontSize: '1.5rem' }} />
+            )}
           </div>
         )}
         <div className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}>
@@ -54,7 +67,7 @@ const Dropdown = ({
             </TransitionLink>
           ))}
         </div>
-      </div>
+      </button>
     </>
   ) : (
     <>
