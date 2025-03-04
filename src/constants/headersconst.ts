@@ -8,3 +8,7 @@ export const pathsProfile = {
   profile: '/Profile',
   settings: '/Profile/Settings',
 }; // Paths for profile dropdown menu
+
+export const pathsMoney = {
+  add: '/Money/Add',
+};

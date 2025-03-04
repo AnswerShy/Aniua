@@ -16,10 +16,11 @@
   background-position: 50% 50%;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
 .card:hover {
   background-color: var(--03dp);
   box-shadow: var(--shadow03dp);
-  transform: scale(1.2);
+  transform: scale(1.05);
   z-index: 2;
 }
 

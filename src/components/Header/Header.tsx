@@ -10,7 +10,7 @@ import { getTranslatedText, TransitionLink } from '@/utils/customUtils';
 import { MenuIcon, Person } from '@/utils/icons';
 import Image from 'next/image';
 import useUserProfile from '@/hooks/useUserProfile';
-import { paths, pathsProfile } from '@/constants/headersconst';
+import { paths, pathsProfile, pathsMoney } from '@/constants/headersconst';
 import { SearchBar } from '../IndexComponent';
 
 export default function Header() {
@@ -70,7 +70,9 @@ export default function Header() {
           <SearchBar />
           {userData.username ? (
             <>
-              <div>{userData?.money}/|\</div>
+              <Dropdown actionList={pathsMoney} isLeft={false}>
+                <div>{userData?.money}/|\</div>
+              </Dropdown>
               <Dropdown actionList={pathsProfile} isLeft={false}>
                 <div className="size-16 relative p-2 flex rounded-xl">
                   {userData?.avatar ? (

@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 :root {
-  --black: #121212;
+  --black: #0e0e0e;
   /* --primaryColor: #a73939; */
   --primaryColor: white;
 
-  --00dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 2%);
+  --00dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 0%);
   --t00dp: color-mix(in oklab, var(--00dp) 75%, transparent);
   --01dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 7%);
   --t01dp: color-mix(in oklab, var(--01dp) 75%, transparent);
@@ -114,7 +114,8 @@ form {
 }
 
 input {
-  background-color: var(--01dp);
+  background-color: var(--t00dp);
+  backdrop-filter: var(--blurredFilter);
   padding: 15px;
   border-radius: 12px;
 }
