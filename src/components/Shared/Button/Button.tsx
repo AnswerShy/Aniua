@@ -9,13 +9,17 @@ import { sleep } from '@/utils/customUtils';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   url?: string;
+  hideMenu?: () => void;
 }
 
-const CustomButton: React.FC<ButtonProps> = ({ url, children, ...props }) => {
+const CustomButton: React.FC<ButtonProps> = ({ url, hideMenu = null, children, ...props }) => {
   const router = useRouter();
 
   const doLink = async (url: string, event: React.MouseEvent) => {
     event.preventDefault();
+    if (hideMenu) {
+      hideMenu();
+    }
     document.getElementById('transition')?.classList.remove('hidden');
     await sleep(1000);
     router.push(url);
