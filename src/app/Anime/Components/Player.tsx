@@ -63,11 +63,20 @@ const Player = ({
       <div className={styles.playerWrapper}>
         <div className={styles.playerButtonsWrapper}>
           {playerState.studiosList && playerState.studiosList.length > 0 ? (
-            <Dropdown
-              currentState={playerState.chooseStudio.toString()}
-              assetsList={playerState.studiosList}
-              changeState={handleStudio}
-            />
+            <>
+              {console.log(playerState.studiosList[playerState.chooseStudio].toString())}
+              <Dropdown currentState={playerState.studiosList[playerState.chooseStudio].toString()}>
+                {Object.entries(playerState.studiosList).map((studio, index) => {
+                  return (
+                    <Dropdown.optionAction
+                      key={index}
+                      handleOptionSelectAction={() => handleStudio(index)}
+                      state={studio[1]}
+                    />
+                  );
+                })}
+              </Dropdown>
+            </>
           ) : null}
         </div>
         <iframe
