@@ -18,7 +18,9 @@ commit_msg=$(cat "$commit_msg_file")
 # Prepend emoji to messages starting with "FIX"
 # modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/🔧FIX/')
 
-if echo "$commit_msg" | grep -q "^FIX"; then
+if echo "$commit_msg" | grep -q "^REFACTORED"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^REFACTORED/:wrench:REFACTORED/')
+elif echo "$commit_msg" | grep -q "^FIX"; then
   modified_msg=$(echo "$commit_msg" | sed -E 's/^FIX/:hammer:FIX/')
 elif echo "$commit_msg" | grep -q "^COSMETIC"; then
   modified_msg=$(echo "$commit_msg" | sed -E 's/^COSMETIC/:sparkles:COSMETIC/')
