@@ -10,11 +10,14 @@ interface handleEpisodeInterface {
 }
 
 async function handleEpisode({ playerState, id, studio = 0, episodesList }: handleEpisodeInterface) {
-  playerState((prevState) => ({ ...prevState, isPlayerLoading: true }));
+  playerState((prevState) => ({ ...prevState, isPlayerLoading: true, episodeID: id }));
   try {
     const newEpisode = await AnimeServiceInstance.fetchEpisode(id);
     const studios: string[] = newEpisode.players.map((player: PlayersInEpisode) => player.studio);
     const episodeUrl: string | null = newEpisode.players[studio].videos[0].video_url;
+
+    console.log('Episode studio:', studio);
+    console.log('Episode studio:', id);
 
     playerState((prevState) => ({
       ...prevState,

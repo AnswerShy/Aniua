@@ -15,6 +15,7 @@ export const usePlayer = (slug: string | null) => {
   }, [slug]);
 
   const [playerState, setPlayerState] = useState<playerStateInterface>({
+    episodeID: 0,
     chooseStudio: 0,
     studiosList: [],
     episodeUrl: null,
@@ -27,14 +28,6 @@ export const usePlayer = (slug: string | null) => {
   const handleStudio = useCallback(
     (index: number) => {
       setPlayerState((prevState) => ({ ...prevState, chooseStudio: index }));
-      if (episodesList && episodesList[0]?.id) {
-        handleEpisode({
-          playerState: setPlayerState,
-          id: episodesList[0].id,
-          studio: index,
-          episodesList: episodesList[0],
-        });
-      }
     },
     [episodesList],
   );
@@ -48,7 +41,7 @@ export const usePlayer = (slug: string | null) => {
       setPlayerState((prevState) => ({ ...prevState, studiosList: [] }));
       handleEpisode({
         playerState: setPlayerState,
-        id: episodesList[0].id,
+        id: playerState.episodeID || episodesList[0].id,
         studio: playerState.chooseStudio,
         episodesList: episodesList[0],
       });
