@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './Player.module.css';
-import { CustomButton, Dropdown } from '@/components/Shared/SharedComponents';
+import { CustomButton, Dropdown, Typography } from '@/components/Shared/SharedComponents';
 import { usePlayerSocket } from '@/hooks/usePlayerSocket';
 
 import { handleEpisode } from '@/utils/customUtils';
@@ -48,73 +48,65 @@ const Player = ({
     console.log(videoUrl);
   }, [videoUrl]);
 
-  return episodesList ? (
+  return (
     <div className={styles.playerContainer + ` ${classname}`}>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <h1>{i18next.language === 'uk' ? playerState.episodeTitle : playerState.episodeENTitle}</h1>
-        <h2>{playerState.episodeJPTitle}</h2>
-      </div>
+      <EpisodeInfo episodeTitle={playerState.episodeTitle} episodeENTitle={playerState.episodeENTitle} episodeJPTitle={playerState.episodeJPTitle} />
+
       <div className={styles.playerWrapper}>
         <div className={styles.playerButtonsWrapper}>
-          {playerState.studiosList && playerState.studiosList.length > 0 ? (
-            <>
-              {console.log(playerState.studiosList[playerState.chooseStudio].toString())}
-              <Dropdown currentState={playerState.studiosList[playerState.chooseStudio].toString()}>
-                {Object.entries(playerState.studiosList).map((studio, index) => {
-                  return (
-                    <Dropdown.optionAction
-                      key={index}
-                      handleOptionSelectAction={() => handleStudio(index)}
-                      state={studio[1]}
-                    />
-                  );
-                })}
-              </Dropdown>
-            </>
-          ) : null}
+          <StudioDropdown studiosList={playerState.studiosList} chooseStudio={playerState.chooseStudio} handleStudio={handleStudio} />
         </div>
-        <iframe
-          ref={frameRef}
-          className={`${styles.playerFrame} ${!playerState.isPlayerLoading ? '' : styles.playerLoad}`}
-          src={playerState.episodeUrl ? playerState.episodeUrl : undefined}
-          onLoad={onIframeLoad}
-        />
+        <iframe ref={frameRef} className={`${styles.playerFrame} ${!playerState.isPlayerLoading ? '' : styles.playerLoad}`} src={playerState.episodeUrl ? playerState.episodeUrl : undefined} onLoad={onIframeLoad} />
       </div>
-      <div className={styles.episodeWrapper}>
-        {episodesList &&
-          episodesList.map((element, index) => (
-            <CustomButton
-              key={index}
-              onClick={() =>
-                handleEpisode({
-                  playerState: setPlayerState,
-                  id: episodesList[index].id,
-                  studio: playerState.chooseStudio,
-                  episodesList: episodesList[index],
-                })
-              }
-            >
-              {element.episode_number}
-            </CustomButton>
-          ))}
-      </div>
-    </div>
-  ) : (
-    <div className={styles.playerContainer + ` ${classname}`}>
-      <iframe
-        ref={frameRef}
-        className={`${styles.playerFrame} ${!playerState.isPlayerLoading ? '' : styles.playerLoad}`}
-        src={undefined}
-        onLoad={onIframeLoad}
-      />
+
+      {episodesList && <EpisodeList episodesList={episodesList} setPlayerState={setPlayerState} chooseStudio={playerState.chooseStudio} />}
     </div>
   );
 };
 
 export default Player;
+
+const EpisodeInfo = ({ episodeTitle, episodeENTitle, episodeJPTitle }: { episodeTitle: string | null; episodeENTitle: string | null; episodeJPTitle: string | null }) => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Typography variant="h2">{i18next.language === 'uk' ? episodeTitle : episodeENTitle}</Typography>
+      <Typography variant="h3">{episodeJPTitle}</Typography>
+    </div>
+  );
+};
+
+const StudioDropdown = ({ studiosList, chooseStudio, handleStudio }: { studiosList: string[]; chooseStudio: number; handleStudio: (index: number) => void }) => {
+  if (!studiosList || studiosList.length <= 1) return null;
+
+  return (
+    <Dropdown currentState={studiosList[chooseStudio]}>
+      {studiosList.map((studio, index) => (
+        <Dropdown.optionAction key={index} handleOptionSelectAction={() => handleStudio(index)} state={studio} />
+      ))}
+    </Dropdown>
+  );
+};
+
+const EpisodeList = ({ episodesList, setPlayerState, chooseStudio }: { episodesList: EpisodeListInterface[] | null; setPlayerState: Dispatch<SetStateAction<playerStateInterface>>; chooseStudio: number }) => {
+  if (!episodesList) return null;
+
+  return (
+    <div className={styles.episodeWrapper}>
+      {episodesList.map((element, index) => (
+        <CustomButton
+          key={index}
+          onClick={() =>
+            handleEpisode({
+              playerState: setPlayerState,
+              id: episodesList[index].id,
+              studio: chooseStudio,
+              episodesList: episodesList[index],
+            })
+          }
+        >
+          {element.episode_number}
+        </CustomButton>
+      ))}
+    </div>
+  );
+};
