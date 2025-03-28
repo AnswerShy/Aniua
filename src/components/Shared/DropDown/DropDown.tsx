@@ -2,90 +2,96 @@
 
 import { useState } from 'react';
 import styles from './DropDown.module.css';
-import TransitionLink from '@/utils/custom/onClickAnimation';
-import { TypographyType } from '../SharedComponents';
+import { CustomButton, TypographyType } from '../SharedComponents';
 
-import { KeyboardArrowDownIcon } from '@/utils/icons';
 import { getTranslatedText } from '@/utils/customUtils';
 import { KeyboardArrowUp } from '@mui/icons-material';
+import clsx from 'clsx';
+import React from 'react';
 
 interface DropdownProps {
   currentState?: string; //For show current state
   children?: React.ReactNode; //For show current state as Node
 
-  /* Container of dropdown with enum of actions */
-  actionList?: Record<string, string>; //Enum of action, example home: '/'
-  /* OR */
-  assetsList?: string[]; //Array of objects for dropdown
-  changeState?: (index: number) => void; //Changer of the state for assetsList
+  customElement?: React.ReactNode; //For show custom element
 
-  isLeft?: boolean;
+  isLeft?: boolean; //For change position of dropdown options menu
 }
 
-const Dropdown = ({
-  currentState,
-  actionList,
-  assetsList,
-  changeState,
-  children,
-  isLeft = true,
-}: DropdownProps) => {
-  const [visible, setVision] = useState(true);
+const Dropdown = ({ currentState, customElement, children, isLeft = true }: DropdownProps) => {
+  const [visible, setVision] = useState(false);
   const handleVisible = () => setVision((prev) => !prev);
 
-  const handleOptionSelect = (index: number) => {
-    if (changeState) changeState(index);
-    setVision(false);
-  };
+  const Icon = KeyboardArrowUp;
 
-  return actionList ? (
-    <>
-      <button
-        tabIndex={0}
-        className={`${styles.dropdownMenu} ${isLeft ? 'items-start' : 'items-end'}`}
-        onClick={handleVisible}
-        aria-haspopup="listbox"
-        aria-expanded={visible}
-        aria-controls="dropdown-options"
+  return (
+    <DropdownButton onClick={handleVisible} visible>
+      {/*If children is not provided, then show the default dropdown*/}
+      {customElement ?? (
+        <div role="select">
+          {currentState}
+          <Icon />
+        </div>
+      )}
+
+      {/*Options for the dropdown*/}
+      <div
+        className={`${styles.optionsWrap} ${!visible ? styles.hideOptions : null}`}
+        style={{ left: isLeft ? '0' : 'auto', right: isLeft ? 'auto' : '0' }}
       >
-        {children ? (
-          children
-        ) : (
-          <div role="select" className={`${TypographyType['button'].className}`}>
-            {currentState && getTranslatedText('paths', currentState)}
-            {visible ? (
-              <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
-            ) : (
-              <KeyboardArrowUp sx={{ fontSize: '1.5rem' }} />
-            )}
-          </div>
-        )}
-        <div className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}>
-          {Object.entries(actionList).map(([key, action]) => (
-            <TransitionLink url={action} key={key} className={styles.option} isVision={handleVisible}>
-              {getTranslatedText('paths', key)}
-            </TransitionLink>
-          ))}
-        </div>
-      </button>
-    </>
-  ) : (
-    <>
-      <div className={`${TypographyType['button'].className}`} onClick={handleVisible}>
-        <div className={`${styles.dropdownButton}`}>
-          {assetsList && assetsList[Number(currentState)]}
-          <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
-        </div>
-        <div className={`${styles.optionsWrap} ${!visible ? styles.visibleOptionWrap : null}`}>
-          {assetsList &&
-            assetsList.map((studio, index) => (
-              <div key={index} className={styles.option} onClick={() => handleOptionSelect(index)}>
-                {studio.charAt(0).toUpperCase() + studio.slice(1)}
-              </div>
-            ))}
-        </div>
+        {children}
       </div>
-    </>
+    </DropdownButton>
   );
 };
 export default Dropdown;
+
+const DropdownButton = ({
+  children,
+  onClick,
+  visible,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  visible: boolean;
+}) => (
+  <button
+    className={clsx(
+      `${styles.dropdownButton}`,
+      `${TypographyType['button'].className}`,
+      `${children ? styles.dropdownChildren : null}`,
+    )}
+    onClick={onClick}
+    aria-haspopup="listbox"
+    aria-expanded={visible}
+    aria-controls="dropdown-options"
+  >
+    {children}
+  </button>
+);
+
+const optionUrl = ({ href, state }: { href: string; state: string }) => {
+  return (
+    <>
+      <CustomButton url={href} classString={styles.option}>
+        {getTranslatedText('paths', state)}
+      </CustomButton>
+    </>
+  );
+};
+
+const optionAction = React.memo(
+  ({ handleOptionSelectAction, state }: { handleOptionSelectAction: () => void; state?: string }) => {
+    return (
+      <>
+        <div role="option" className={styles.option} onClick={() => handleOptionSelectAction()}>
+          {state && state.charAt(0).toUpperCase() + state.slice(1)}
+        </div>
+      </>
+    );
+  },
+);
+optionAction.displayName = 'OptionAction';
+
+Dropdown.optionUrl = optionUrl;
+Dropdown.optionAction = optionAction;

@@ -3,10 +3,10 @@ import styles from './Header.module.css';
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Dropdown } from '../Shared/SharedComponents';
+import { CustomButton, Dropdown } from '../Shared/SharedComponents';
 import clsx from 'clsx';
 
-import { getTranslatedText, TransitionLink } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils/customUtils';
 import { MenuIcon, Person } from '@/utils/icons';
 import Image from 'next/image';
 import useUserProfile from '@/hooks/useUserProfile';
@@ -17,22 +17,11 @@ export default function Header() {
   const pathname = usePathname();
   const [currentPath, setCurrentPath] = useState('');
   const [isMenuOpened, setMenuOpened] = useState(false);
-  const [isScroll, setScroll] = useState(false);
   const userData = useUserProfile();
 
   const menuHandler = () => {
     setMenuOpened((prev) => !prev);
   }; // Side menu handler for mobile
-
-  const changeColorOnScroll = () => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        setScroll(true);
-      } else {
-        setScroll(false);
-      }
-    });
-  }; // Header scroll handler
 
   useEffect(() => {
     if (pathname === '/') {
@@ -43,7 +32,6 @@ export default function Header() {
     } else {
       setCurrentPath(pathname.slice(1));
     }
-    changeColorOnScroll();
   }, [pathname]); // Load current path state
 
   return (
@@ -59,44 +47,38 @@ export default function Header() {
         <div>{currentPath}</div>
       </nav>
       {/* Desktop Header */}
-      <nav className={clsx(`${styles.headerDesktop}`, isScroll ? 'bg-c01dp' : 'bg-transparent')}>
+      <nav className={clsx(`${styles.headerDesktop}`)}>
         <div className={styles.leftHeader}>
-          <TransitionLink className="font-semibold" url={`/`}>
+          <CustomButton className="font-semibold" url={`/`}>
             ANIUA
-          </TransitionLink>
-          {currentPath !== '' ? <Dropdown currentState={currentPath} actionList={paths} /> : null}
+          </CustomButton>
+          {currentPath !== '' ? (
+            <Dropdown currentState={getTranslatedText('paths', currentPath)}>
+              {Object.entries(paths).map((path, index) => {
+                return <Dropdown.optionUrl key={index} href={path[1]} state={path[0]} />;
+              })}
+            </Dropdown>
+          ) : null}
         </div>
         <div className={styles.rightHeader}>
           <SearchBar />
           {userData.username ? (
             <>
-              <Dropdown actionList={pathsMoney} isLeft={false}>
-                <div>{userData?.money}/|\</div>
+              <Dropdown currentState={userData?.money?.toString()} isLeft={false}>
+                {Object.entries(pathsMoney).map((path, index) => {
+                  return <Dropdown.optionUrl key={index} href={path[1]} state={path[0]} />;
+                })}
               </Dropdown>
-              <Dropdown actionList={pathsProfile} isLeft={false}>
-                <div className="size-16 relative p-2 flex rounded-xl">
-                  {userData?.avatar ? (
-                    <div className="size-full relative">
-                      <Image
-                        src={userData.avatar}
-                        className="w-full h-full rounded-xl"
-                        fill
-                        objectFit="cover"
-                        alt="profile picture"
-                      ></Image>
-                    </div>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-transparent01dp rounded-xl">
-                      <Person sx={{ fontSize: '2rem' }} />
-                    </div>
-                  )}
-                </div>
+              <Dropdown customElement={<Avatar avatar={userData?.avatar} />} isLeft={false}>
+                {Object.entries(pathsProfile).map((path, index) => {
+                  return <Dropdown.optionUrl key={index} href={path[1]} state={path[0]} />;
+                })}
               </Dropdown>
             </>
           ) : (
             <>
-              <TransitionLink url={`/Registration`}>{getTranslatedText('header', 'Registration')}</TransitionLink>
-              <TransitionLink url={`/Login`}>{getTranslatedText('header', 'Login')}</TransitionLink>
+              <CustomButton url={`/Registration`}>{getTranslatedText('header', 'Registration')}</CustomButton>
+              <CustomButton url={`/Login`}>{getTranslatedText('header', 'Login')}</CustomButton>
             </>
           )}
         </div>
@@ -105,24 +87,24 @@ export default function Header() {
       <nav className={clsx(`${styles.sideMenu}`, isMenuOpened ? 'translate-x-0' : '-translate-x-full')}>
         <div className={`${styles.topMenu}`}>
           {Object.entries(paths).map(([key, action]) => (
-            <TransitionLink url={action} key={key} isVision={menuHandler}>
+            <CustomButton url={action} key={key} hideMenu={menuHandler}>
               {getTranslatedText('paths', key)}
-            </TransitionLink>
+            </CustomButton>
           ))}
           {Object.entries(pathsProfile).map(([key, action]) => (
-            <TransitionLink url={action} key={key} isVision={menuHandler}>
+            <CustomButton url={action} key={key} hideMenu={menuHandler}>
               {getTranslatedText('paths', key)}
-            </TransitionLink>
+            </CustomButton>
           ))}
         </div>
         <div className={`${styles.botMenu}`}>
           {userData.username ? (
             <>
               <div>{userData?.money}/|\</div>
-              <TransitionLink
+              <CustomButton
                 url={'/Profile'}
                 className="size-16 relative p-2 flex rounded-xl"
-                isVision={menuHandler}
+                hideMenu={menuHandler}
               >
                 {userData?.avatar ? (
                   <div className="size-full relative">
@@ -139,12 +121,12 @@ export default function Header() {
                     <Person sx={{ fontSize: '2rem' }} />
                   </div>
                 )}
-              </TransitionLink>
+              </CustomButton>
             </>
           ) : (
             <>
-              <TransitionLink url={`/Registration`}>{getTranslatedText('header', 'Registration')}</TransitionLink>
-              <TransitionLink url={`/Login`}>{getTranslatedText('header', 'Login')}</TransitionLink>
+              <CustomButton url={`/Registration`}>{getTranslatedText('header', 'Registration')}</CustomButton>
+              <CustomButton url={`/Login`}>{getTranslatedText('header', 'Login')}</CustomButton>
             </>
           )}
         </div>
@@ -152,3 +134,25 @@ export default function Header() {
     </header>
   );
 }
+
+const Avatar = ({ avatar }: { avatar?: string }) => {
+  return (
+    <div className="size-14 relative flex rounded-xl">
+      {avatar ? (
+        <div className="size-full relative">
+          <Image
+            src={avatar}
+            className="w-full h-full rounded-xl"
+            fill
+            objectFit="cover"
+            alt="profile picture"
+          ></Image>
+        </div>
+      ) : (
+        <div className="w-full h-full flex items-center justify-center bg-transparent01dp rounded-xl">
+          <Person sx={{ fontSize: '2rem' }} />
+        </div>
+      )}
+    </div>
+  );
+};
