@@ -46,10 +46,7 @@ export default function Registration() {
   return (
     <>
       <Section typeOfSection={'center'}>
-        <form
-          onSubmit={handleSubmit(handleRegistration)}
-          className="w-full lg:w-1/4 rounded-xl py-16 px-16 flex flex-col gap-4"
-        >
+        <form onSubmit={handleSubmit(handleRegistration)} className="w-full lg:w-1/4 rounded-xl py-16 px-16 flex flex-col gap-4">
           <Controller
             control={control}
             name="username"
@@ -57,9 +54,7 @@ export default function Registration() {
               required: i18n.t('login.Required field'),
               minLength: { value: 2, message: 'More than 2 symbols' },
             }}
-            render={({ field: { ref, ...field } }) => (
-              <TextField {...field} errorString={errors.username?.message} ref={ref} type={'username'} />
-            )}
+            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.username?.message} ref={ref} type={'username'} />}
           />
           <Controller
             control={control}
@@ -71,9 +66,7 @@ export default function Registration() {
               },
               required: i18n.t('login.Required field'),
             }}
-            render={({ field: { ref, ...field } }) => (
-              <TextField {...field} errorString={errors.email?.message} ref={ref} type={'email'} />
-            )}
+            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.email?.message} ref={ref} type={'email'} />}
           />
           <Controller
             control={control}
@@ -82,9 +75,7 @@ export default function Registration() {
               required: i18n.t('login.Required field'),
               minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
             }}
-            render={({ field: { ref, ...field } }) => (
-              <TextField {...field} errorString={errors.password1?.message} ref={ref} type={'password'} />
-            )}
+            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.password1?.message} ref={ref} type={'password'} />}
           />
           <Controller
             control={control}
@@ -98,23 +89,10 @@ export default function Registration() {
               required: i18n.t('login.Required field'),
               minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
             }}
-            render={({ field: { ref, ...field } }) => (
-              <TextField
-                {...field}
-                errorString={errors.password2?.message}
-                ref={ref}
-                type={'password'}
-                label={'passwordRepeat'}
-              />
-            )}
+            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.password2?.message} ref={ref} type={'password'} label={'passwordRepeat'} />}
           />
 
-          <input
-            type="submit"
-            className={CustomButtonStyles.button}
-            disabled={!isValid}
-            value={i18n.t('login.SubmitRegistration')}
-          />
+          <input type="submit" className={CustomButtonStyles.button} disabled={!isValid} value={i18n.t('login.SubmitRegistration')} />
         </form>
       </Section>
     </>

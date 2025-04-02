@@ -1,7 +1,8 @@
 'use client';
 
+import clsx from 'clsx';
+import { CustomButton, TypographyType } from '../SharedComponents';
 import styles from './Card.module.css';
-import TransitionLink from '@/utils/custom/onClickAnimation';
 
 interface cardProps {
   image: string | '/next.svg';
@@ -11,12 +12,12 @@ interface cardProps {
 
 const Card: React.FC<cardProps> = ({ image, title, slug }) => {
   return (
-    <TransitionLink url={`/Anime/${slug}`} className={styles.card}>
+    <CustomButton url={`/Anime/${slug}`} classString={styles.card}>
       <div className={styles.cardImage} style={{ backgroundImage: `url(${image})` }} />
-      <p className={styles.cardTitle} title={title}>
+      <p className={clsx(styles.cardTitle, TypographyType['button'].className)} title={title}>
         {title}
       </p>
-    </TransitionLink>
+    </CustomButton>
   );
 };
 
