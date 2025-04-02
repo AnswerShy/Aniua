@@ -1,4 +1,4 @@
-import { handleEpisode } from '@/utils/customUtils';
+import { handleEpisode, i18n } from '@/utils/customUtils';
 import AnimeServiceInstance from '@/app/api';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -22,7 +22,7 @@ export const usePlayer = (slug: string | null) => {
     episodeENTitle: '',
     episodeTitle: '',
     episodeJPTitle: '',
-    isPlayerLoading: false,
+    isPlayerLoading: true,
   });
 
   const handleStudio = useCallback(
@@ -46,10 +46,12 @@ export const usePlayer = (slug: string | null) => {
         episodesList: episodesList[0],
       });
     } else {
-      setPlayerState((prevState) => ({
-        ...prevState,
-        episodeTitle: 'No episodes found',
-      }));
+      if (!playerState.isPlayerLoading) {
+        setPlayerState((prevState) => ({
+          ...prevState,
+          episodeTitle: i18n.t('info.EpisodesNotFound'),
+        }));
+      }
     }
   }, [episodesList, playerState.chooseStudio]);
 
