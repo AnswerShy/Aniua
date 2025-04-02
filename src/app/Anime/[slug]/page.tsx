@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function AnimePage({ params }: { params: { slug: string } }) {
   const { slug } = await params;
   const data = await AnimeServiceInstance.fetchAnimeInfo(slug);
+
   return (
     <>
       <Banner bannerImage={data.poster} bannerTitle={data.title} bannerDesc={data.description} bannerGenres={data.genres} bannerYear={data.year} />

@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './Player.module.css';
-import { CustomButton, Dropdown, Typography } from '@/components/Shared/SharedComponents';
+import { CustomButton, CustomButtonStyles, Dropdown, Typography } from '@/components/Shared/SharedComponents';
 import { usePlayerSocket } from '@/hooks/usePlayerSocket';
 
 import { handleEpisode } from '@/utils/customUtils';
@@ -61,7 +61,7 @@ const Player = ({
             <StudioDropdown studiosList={playerState.studiosList} chooseStudio={playerState.chooseStudio} handleStudio={handleStudio} />
             <CustomButton onClick={startW2G}>W2G</CustomButton>
           </div>
-          <iframe ref={frameRef} className={`${styles.playerFrame} ${!playerState.isPlayerLoading ? '' : styles.playerLoad}`} src={playerState.episodeUrl ? playerState.episodeUrl : undefined} onLoad={onIframeLoad} />
+          <iframe ref={frameRef} allow="fullscreen" className={`${styles.playerFrame} ${!playerState.isPlayerLoading ? '' : styles.playerLoad}`} src={playerState.episodeUrl ? playerState.episodeUrl : undefined} onLoad={onIframeLoad} />
         </div>
       ) : null}
 
@@ -110,7 +110,7 @@ const EpisodeList = ({
       {episodesList.map((element, index) => (
         <CustomButton
           key={index}
-          classString={clsx(element.id == playerState.episodeID ? styles.activeEpisode : null)}
+          classString={clsx(element.is_filler ? null : CustomButtonStyles.buttonBG, element.id == playerState.episodeID ? styles.activeEpisode : null)}
           onClick={() =>
             handleEpisode({
               playerState: setPlayerState,
