@@ -6,3 +6,5 @@ export { default as Chat } from '@/components/Chat/Chat';
 
 export { default as SearchBar } from '@/components/Search/SearchBar';
 export { default as SearchModal } from '@/components/Search/SearchModal';
+
+export { default as Message } from '@/components/Message/Message';

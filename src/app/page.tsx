@@ -14,9 +14,7 @@ export default async function Home() {
             <Typography variant="h2">This is an H2 heading</Typography>
             <Typography variant="h3">This is an H1 heading</Typography>
             <Typography variant="h4">This is an H4 heading</Typography>
-            <Typography variant="body1">
-              This is body text for your main content. Its readable and styled for comfortable reading.
-            </Typography>
+            <Typography variant="body1">This is body text for your main content. Its readable and styled for comfortable reading.</Typography>
           </SubRow>
         </Row>
         <Row>
