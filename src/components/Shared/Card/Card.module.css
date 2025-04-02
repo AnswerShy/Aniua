@@ -1,6 +1,6 @@
 .card {
+  min-width: var(--posterWidth);
   width: var(--posterWidth);
-  height: fit-content;
   cursor: pointer;
   transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
   padding: 5px;
@@ -12,15 +12,17 @@
   width: 100%;
   height: var(--posterHeight);
   border-radius: calc(var(--borderRad) - 5px);
+  padding: 25px;
   background-size: cover;
   background-position: 50% 50%;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.card:hover {
+.card:hover,
+.card:focus {
   background-color: var(--03dp);
   box-shadow: var(--shadow03dp);
-  transform: scale(1.05);
+  transform: scale(1.02);
   z-index: 2;
 }
 
@@ -29,8 +31,7 @@
   text-wrap: nowrap;
   width: 100%;
   overflow-x: clip;
-
-  font-size: medium;
+  margin-top: 5px;
 }
 
 .load,

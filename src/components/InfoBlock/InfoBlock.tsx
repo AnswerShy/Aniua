@@ -6,8 +6,9 @@ import descriptionCutter from '@/utils/custom/descriptionCutter';
 import Link from 'next/link';
 
 import styles from './InfoBlock.module.css';
-import { Section } from '../Shared/SharedComponents';
+import { CustomButton, Dropdown, Section, Typography } from '../Shared/SharedComponents';
 import { i18n } from '@/utils/customUtils';
+import { paths } from '@/constants/headersconst';
 
 interface Props {
   infoData: AnimeDataInterface;
@@ -20,7 +21,7 @@ const genres = (year: number, genres: AnimeGenres[]) => {
       <p>•</p>
       {genres.length > 0 ? (
         genres.map((el) => (
-          <Link key={el.id} href={`/list/${el.slug}`}>
+          <Link key={el.id} href={`${paths.list}/${el.slug}`}>
             {el.title}
           </Link>
         ))
@@ -53,57 +54,40 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
   };
   return (
     <Section typeOfSection={'flexThreeCols'}>
+      {/* First column */}
       <div className={styles.posterColumn}>
-        <Image
-          src={infoData.poster}
-          alt={infoData.title}
-          className="rounded-xl self-center"
-          height={350}
-          width={250}
-        />
-        <button className="w-full py-2.5 rounded-xl bg-b_t mt-5 text-white text-2xl">add to</button>
+        <Image src={infoData.poster} alt={infoData.title} className="rounded-xl self-center" height={350} width={250} />
+        <Dropdown currentState={i18n.t('info.addToList')}></Dropdown>
       </div>
 
+      {/* Second column */}
       <div className={styles.titleDescColumn}>
         <div className={styles.infoRow}>
-          <h1>{infoData.title}</h1>
+          <Typography variant="h2">{infoData.title}</Typography>
           {genres(infoData.year, infoData.genres)}
         </div>
 
-        <h1>{i18n.t('info.Description')}</h1>
-        <p id="desc" className="mt-[12.5px]">
-          {displayedText}
-          <a onClick={descHandler} id="descriptionButton">
-            {` ...${i18n.t('info.more')}`}
-          </a>
-        </p>
+        <div>
+          <Typography variant="h2">{i18n.t('info.Description')}</Typography>
+          <Typography variant="body1" id="desc">
+            {displayedText}
+            <a onClick={descHandler} id="descriptionButton">
+              {` ...${i18n.t('info.more')}`}
+            </a>
+          </Typography>
+        </div>
       </div>
 
+      {/* Third column */}
       <div className={styles.detailColumn}>
-        <div className={styles.infoRow}>
-          <h1>{i18n.t('info.Rate')}</h1>
-          <p>{infoData.mal_score}</p>
-        </div>
-
-        <div>
-          <h1>{i18n.t('info.Details')}</h1>
-          <div className={styles.subBlock}>
-            <span className={styles.subRow}>
-              <p>{i18n.t('info.Type')}: </p>
-              <a className={styles.subText}>{infoData.type.title}</a>
-            </span>
-            <span className={styles.subRow}>
-              <p>{i18n.t('info.Status')}: </p>
-              <a className={styles.subText}>{infoData.status}</a>
-            </span>
-            <span className={styles.subRow}>
-              <p>{i18n.t('info.Episodes')}: </p>
-              <a className={styles.subText}>
-                {infoData.is_ongoing && infoData.episode.present ? infoData.episode.present : '? / '}
-                {infoData.episode.last ? infoData.episode.last : '?'}
-              </a>
-            </span>
-          </div>
+        <Typography variant="h2">{i18n.t('info.Details')}</Typography>
+        <div className={styles.subBlock}>
+          <DetailRow title={i18n.t('info.Type')} data={infoData.type.title} url={infoData.type.title} />
+          <DetailRow title={i18n.t('info.Status')} data={infoData.status} url={infoData.status} />
+          <DetailRow title={i18n.t('info.Episodes')} data={episodesInfo(infoData.episode.present, infoData.episode.last)} />
+          <DetailRow title={i18n.t('info.Rate')} data={infoData.mal_score} />
+          <DetailRow title={i18n.t('info.Year')} data={infoData.year} />
+          <DetailRowMultiplie title={i18n.t('info.Genres')} data={infoData.genres} />
         </div>
       </div>
     </Section>
@@ -111,3 +95,39 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
 };
 
 export default InfoBlock;
+
+const DetailRow = ({ title, data, url }: { title: string; data: string | number; url?: string }) => {
+  return (
+    <span className={styles.subRow}>
+      <p>{title}: </p>
+      {url ? (
+        <CustomButton url={`${paths.list}/${url}`} classString={styles.subText}>
+          {data}
+        </CustomButton>
+      ) : (
+        <div className={styles.subText}>{data}</div>
+      )}
+    </span>
+  );
+};
+
+const DetailRowMultiplie = ({ title, data }: { title: string; data: AnimeGenres[] }) => {
+  return (
+    <span className={styles.subRow}>
+      <p>{title}: </p>
+      <div className={styles.detailsArray}>
+        {Object.entries(data).map((element, key) => {
+          return (
+            <CustomButton key={key} url={`${paths.list}/${element[1].slug}`} classString={styles.subText}>
+              {element[1].title}
+            </CustomButton>
+          );
+        })}
+      </div>
+    </span>
+  );
+};
+
+const episodesInfo = (present: string | null, last: number | null): string => {
+  return `${present ? present : '? / '} ${last ? last : '?'}`;
+};

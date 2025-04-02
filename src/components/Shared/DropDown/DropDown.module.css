@@ -1,58 +1,80 @@
-.dropdownMenu {
+/* external view */
+
+.dropdownButton {
+  padding: 6px 4px 6px 8px;
   display: flex;
-  flex-direction: column;
+  gap: 55px;
+  /* min-height: var(--minButtonHeight);
+  min-width: var(--minButtonWidth); */
+
+  border-radius: var(--borderRad);
+  position: relative;
+  height: fit-content;
+}
+
+.dropdownChildren {
+  padding: 5px;
   position: relative;
 }
 
-.option:focus {
-  color: var(--primaryColor);
-}
+/* inside view */
 
+.dropdownButton:hover .optionsWrap,
 .optionsWrap {
   position: absolute;
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  flex-direction: column;
-  overflow: hidden;
-
-  width: fit-content;
-  padding: 5px;
-
-  background-color: var(--t01dp);
-  backdrop-filter: blur(5px);
-
   top: 100%;
 
-  border-radius: 12px;
-  box-shadow: var(--shadowHover);
+  display: flex;
+  flex-direction: column;
 
-  @apply hidden xl:block;
+  padding-top: 5px;
 }
 
-/* ONLY ANIMATION BLOCK */
-
-.optionsWrap {
-  transition: all 0.2s ease-in-out;
-
-  opacity: 0;
-  visibility: hidden;
-  transform: scaleY(0);
-  transform-origin: top right;
-
-  width: max-content;
+.hideOptions {
+  display: none;
 }
 
-.dropdownMenu:hover {
-  color: white;
+.option {
+  background-color: var(--02dp);
+  color: var(--textSemiColor);
+  padding: 6px 6px;
+  margin: 0;
+  width: 100%;
+}
+
+.option:hover {
   cursor: pointer;
+  color: var(--textColor);
 }
 
-.visibleOptionWrap,
-.dropdownMenu:hover .optionsWrap {
-  opacity: 1;
-  visibility: visible;
-  transform: scaleY(1);
-  color: white;
-  cursor: pointer;
+/* animation */
+
+.dropdownButton svg {
+  transition: transform 0.3s;
+}
+
+.dropdownButton:has(:not(.hideOptions)) svg {
+  transform: rotate(180deg);
+}
+
+.dropdownButton:has(.hideOptions) svg {
+  transform: rotate(0deg);
+}
+
+.dropdownButton:hover:has(.hideOptions) svg {
+  transform: rotate(180deg);
+}
+
+/* border radius */
+
+/* Apply rounded corners to the first dropdown option */
+.optionsWrap .option:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Apply rounded corners to the last dropdown option */
+.optionsWrap .option:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }

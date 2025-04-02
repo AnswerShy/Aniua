@@ -1,9 +1,3 @@
-.textField {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
 .fieldWrap {
   position: relative;
 }
@@ -17,7 +11,7 @@
   color: var(--textColor);
   transition: 0.1s ease-out;
   width: 100%;
-  background-color: transparent;
+  background-color: var(--01dp);
 }
 
 .fieldLabel {
@@ -26,7 +20,7 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  background-color: var(--background);
+  background-color: var(--01dp);
   color: var(--titleColor);
   padding: 0 0.3rem;
   margin: 0 0.5rem;
@@ -35,11 +29,16 @@
   pointer-events: none;
 }
 
+.fieldWrap:hover label {
+  background-color: var(--02dp);
+}
+
 .fieldText:focus {
   border-color: var(--primaryColor);
 }
 
 .fieldText:focus + label {
+  background-color: var(--02dp);
   color: var(--primaryColor);
   top: 0;
   transform: translateY(-50%) scale(0.9);

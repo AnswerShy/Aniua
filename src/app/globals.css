@@ -19,8 +19,10 @@
   --background: var(--00dp);
   --foreground: #ffffffab;
 
+  --textColor: rgb(255, 255, 255);
+  --textSemiColor: #ffffffab;
+
   --titleColor: white;
-  --textColor: var(--foreground);
 
   --button: color-mix(in oklab, var(--01dp) 45%, transparent);
   --buttonHover: color-mix(in oklab, var(--03dp) 50%, transparent);
@@ -47,7 +49,20 @@
   --subtitle: 1.5rem;
 
   --bannerTitle: 6rem;
-  --bannerText: 2rem;
+  --bannerText: 1.5rem;
+
+  --minButtonHeight: 40px;
+  --minButtonWidth: 40px;
+
+  --borderSize: 2px;
+  --border: var(--borderSize) solid var(--primaryColor);
+
+  --gapVar: 15px;
+
+  --loadingGradient: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%, var(--00dp) 100%);
+  --loadingAnim: shimmer 1s infinite linear !important;
+
+  --mdMaxWidth: 768px;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -63,7 +78,6 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-weight: 400;
 }
 
 h1 {
@@ -86,7 +100,7 @@ a {
   font-size: var(--textSize);
   width: fit-content;
   text-align: left;
-  color: var(--textColor);
+  color: var(--textSemiColor);
 }
 
 a:hover {
@@ -99,12 +113,22 @@ span > :nth-child(1) {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
   background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--03dp);
+  background: var(--01dp);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  width: 15px;
+  background-color: var(--03dp);
+}
+
+*::-webkit-scrollbar-thumb:hover ::-webkit-scrollbar {
+  width: 15px;
 }
 
 form {
@@ -113,19 +137,21 @@ form {
   gap: 15px;
 }
 
-input {
-  background-color: var(--t00dp);
-  backdrop-filter: var(--blurredFilter);
-  padding: 15px;
-  border-radius: 12px;
-}
-
-input:hover {
-  cursor: pointer;
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 *:focus {
-  outline: solid 2px var(--primaryColor);
+  z-index: 10;
+  outline: solid 1px var(--primaryColor);
 }
 
 .layer1 {
@@ -133,4 +159,53 @@ input:hover {
   border-radius: var(--borderRad);
   box-shadow: var(--shadowHover);
   padding: 15px;
+}
+
+.text-style-default {
+  font-size: 2rem;
+  color: var(--textColor);
+  font-weight: light;
+  line-height: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+
+/* Buttons and Inputs */
+
+input,
+button {
+  /* backdrop-filter: var(--blurredFilter); */
+  padding: 15px;
+  border-radius: 12px;
+}
+
+input:hover,
+button:hover {
+  background-color: var(--02dp);
+  cursor: pointer;
+  box-shadow: var(--shadowHover);
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  border: 1px solid var(--textColor);
+  -webkit-text-fill-color: var(--textColor);
+  background-color: var(--01dp);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:hover,
+textarea:-webkit-autofill:hover,
+select:-webkit-autofill:hover {
+  background-color: var(--02dp);
+  cursor: pointer;
+  box-shadow: var(--shadowHover);
 }

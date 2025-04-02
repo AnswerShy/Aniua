@@ -15,3 +15,5 @@ export { default as Section } from '@/components/Shared/containers/Section';
 
 export { default as Typography } from '@/components/Shared/Typography/Typography';
 export { variantMap as TypographyType } from '@/components/Shared/Typography/Typography';
+
+export { default as CreepingText } from '@/components/Shared/LineTextAnimation/CreepingText';

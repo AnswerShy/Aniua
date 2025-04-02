@@ -6,7 +6,10 @@
 
 .headerDesktop {
   @apply hidden fixed z-50 transition-colors duration-500;
-  @apply xl:py-0 xl:text-xl xl:top-0 xl:flex xl:translate-x-0 xl:w-full xl:h-16 xl:flex-row xl:items-center xl:justify-between xl:px-[25%];
+  @apply xl:py-[5px] xl:top-0 xl:flex xl:w-full xl:flex-row xl:items-center xl:justify-between xl:px-[25%];
+  backdrop-filter: var(--blurredFilter);
+  background-color: var(--t01dp);
+  border-bottom: 1px solid var(--02dp);
 }
 
 .sideMenu {
