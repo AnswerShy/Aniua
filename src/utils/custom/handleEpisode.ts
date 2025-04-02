@@ -9,22 +9,25 @@ interface handleEpisodeInterface {
   episodesList: EpisodeListInterface;
 }
 
-async function handleEpisode({ playerState, id, studio = 0, episodesList }: handleEpisodeInterface) {
+async function handleEpisode({ playerState, id, studio = 0 }: handleEpisodeInterface) {
   playerState((prevState) => ({ ...prevState, isPlayerLoading: true, episodeID: id }));
   try {
-    const newEpisode = await AnimeServiceInstance.fetchEpisode(id);
+    const newEpisode: EpisodeListInterface = await AnimeServiceInstance.fetchEpisode(id);
     const studios: string[] = newEpisode.players.map((player: PlayersInEpisode) => player.studio);
-    const episodeUrl: string | null = newEpisode.players[studio].videos[0].video_url;
+    let episodeUrl: string | null;
 
-    console.log('Episode studio:', studio);
-    console.log('Episode studio:', id);
+    if (newEpisode.players[studio]) {
+      episodeUrl = newEpisode.players[studio].videos[0].video_url;
+    } else {
+      episodeUrl = newEpisode.players[0].videos[0].video_url;
+    }
 
     playerState((prevState) => ({
       ...prevState,
       episodeUrl: episodeUrl || '',
-      episodeENTitle: episodesList.title.en,
-      episodeTitle: episodesList.title.ua,
-      episodeJPTitle: episodesList.title.jp,
+      episodeENTitle: newEpisode.title.en,
+      episodeTitle: newEpisode.title.ua,
+      episodeJPTitle: newEpisode.title.jp,
       studiosList: studios,
       playerLoad: false,
     }));

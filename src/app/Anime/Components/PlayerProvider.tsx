@@ -6,7 +6,7 @@ import { Chat } from '@/components/IndexComponent';
 import { Section } from '@/components/Shared/SharedComponents';
 import { useSearchParams } from 'next/navigation';
 import { SocketProvider } from '@/context/SocketContext';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const PlayerProvider = ({ slug, room }: { slug?: string; room?: string }) => {
   const { playerState, setPlayerState, handleStudio, episodesList } = usePlayer(slug ? slug : null);
@@ -20,11 +20,12 @@ const PlayerProvider = ({ slug, room }: { slug?: string; room?: string }) => {
     }
   }, [searchParams, roomCode]);
 
-  const reloadWithRoom = (newRoom: string) => {
+  const reloadWithRoom = useCallback(() => {
+    const newRoom = Math.random().toString(36).substring(2, 8);
     const url = new URL(window.location.href);
     url.searchParams.set('room', newRoom);
     window.location.href = url.toString();
-  };
+  }, []);
 
   useEffect(() => {
     if (roomCode) {
@@ -37,28 +38,13 @@ const PlayerProvider = ({ slug, room }: { slug?: string; room?: string }) => {
       {roomCode ? (
         <SocketProvider>
           <Section typeOfSection="flexThreeCols" id="player-section">
-            <Player
-              playerState={playerState}
-              setPlayerState={setPlayerState}
-              handleStudio={handleStudio}
-              episodesList={episodesList}
-              room={roomCode}
-              classname={room && 'layer1'}
-            />
+            <Player playerState={playerState} setPlayerState={setPlayerState} handleStudio={handleStudio} episodesList={episodesList} room={roomCode} classname={room && 'layer1'} />
             <Chat />
           </Section>
         </SocketProvider>
       ) : (
         <Section typeOfSection="flexThreeCols" id="player-section">
-          <Player
-            playerState={playerState}
-            setPlayerState={setPlayerState}
-            handleStudio={handleStudio}
-            episodesList={episodesList}
-            room={roomCode}
-            classname={room && 'layer1'}
-          />
-          <input type="button" value="Join Room" onClick={() => reloadWithRoom('qweqweqwe')} />
+          <Player startW2G={reloadWithRoom} playerState={playerState} setPlayerState={setPlayerState} handleStudio={handleStudio} episodesList={episodesList} room={roomCode} classname={room && 'layer1'} />
         </Section>
       )}
     </>
