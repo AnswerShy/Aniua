@@ -46,43 +46,7 @@ export default function Header() {
         <MenuIcon sx={{ fontSize: '35px' }} />
         <div>{currentPath}</div>
       </nav>
-      {/* Desktop Header */}
-      <nav className={clsx(`${styles.headerDesktop}`)}>
-        <div className={styles.leftHeader}>
-          <CustomButton className="font-semibold" url={`/`}>
-            ANIUA
-          </CustomButton>
-          {currentPath !== '' ? (
-            <Dropdown currentState={getTranslatedText('paths', currentPath)}>
-              {Object.entries(paths).map((path, index) => {
-                return <Dropdown.optionUrl key={index} href={path[1]} state={path[0]} />;
-              })}
-            </Dropdown>
-          ) : null}
-        </div>
-        <div className={styles.rightHeader}>
-          <SearchBar />
-          {userData.username ? (
-            <>
-              <Dropdown currentState={userData?.money?.toString()} isLeft={false}>
-                {Object.entries(pathsMoney).map((path, index) => {
-                  return <Dropdown.optionUrl key={index} href={path[1]} state={path[0]} />;
-                })}
-              </Dropdown>
-              <Dropdown customElement={<Avatar avatar={userData?.avatar} />} isLeft={false}>
-                {Object.entries(pathsProfile).map((path, index) => {
-                  return <Dropdown.optionUrl key={index} href={path[1]} state={path[0]} />;
-                })}
-              </Dropdown>
-            </>
-          ) : (
-            <>
-              <CustomButton url={`/Registration`}>{getTranslatedText('header', 'Registration')}</CustomButton>
-              <CustomButton url={`/Login`}>{getTranslatedText('header', 'Login')}</CustomButton>
-            </>
-          )}
-        </div>
-      </nav>
+
       {/* Side Menu For Mobile */}
       <nav className={clsx(`${styles.sideMenu}`, isMenuOpened ? 'translate-x-0' : '-translate-x-full')}>
         <div className={`${styles.topMenu}`}>
@@ -101,20 +65,10 @@ export default function Header() {
           {userData.username ? (
             <>
               <div>{userData?.money}/|\</div>
-              <CustomButton
-                url={'/Profile'}
-                className="size-16 relative p-2 flex rounded-xl"
-                hideMenu={menuHandler}
-              >
+              <CustomButton url={'/Profile'} className="size-16 relative p-2 flex rounded-xl" hideMenu={menuHandler}>
                 {userData?.avatar ? (
                   <div className="size-full relative">
-                    <Image
-                      src={userData.avatar}
-                      className="w-full h-full rounded-xl"
-                      fill
-                      objectFit="cover"
-                      alt="profile picture"
-                    ></Image>
+                    <Image src={userData.avatar} className="w-full h-full rounded-xl" fill objectFit="cover" alt="profile picture"></Image>
                   </div>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-transparent01dp rounded-xl">
@@ -131,22 +85,54 @@ export default function Header() {
           )}
         </div>
       </nav>
+
+      {/* Desktop Header */}
+      <nav className={clsx(`${styles.headerDesktop}`)}>
+        <div className={styles.leftHeader}>
+          <CustomButton className="font-semibold" url={`/`}>
+            ANIUA
+          </CustomButton>
+          {currentPath !== '' ? (
+            <Dropdown currentState={getTranslatedText('paths', currentPath)}>
+              {Object.entries(paths).map((path, index) => {
+                return <Dropdown.optionUrl key={index} href={path[1]} state={getTranslatedText('paths', path[0])} />;
+              })}
+            </Dropdown>
+          ) : null}
+        </div>
+        <div className={styles.rightHeader}>
+          <SearchBar />
+          {userData.username ? (
+            <>
+              <Dropdown currentState={userData?.money?.toString()} isLeft={false}>
+                {Object.entries(pathsMoney).map((path, index) => {
+                  return <Dropdown.optionUrl key={index} href={path[1]} state={getTranslatedText('paths', path[0])} />;
+                })}
+              </Dropdown>
+              <Dropdown customElement={<Avatar avatar={userData?.avatar} />} isLeft={false}>
+                {Object.entries(pathsProfile).map((path, index) => {
+                  return <Dropdown.optionUrl key={index} href={path[1]} state={getTranslatedText('paths', path[0])} />;
+                })}
+              </Dropdown>
+            </>
+          ) : (
+            <>
+              <CustomButton url={`/Registration`}>{getTranslatedText('header', 'Registration')}</CustomButton>
+              <CustomButton url={`/Login`}>{getTranslatedText('header', 'Login')}</CustomButton>
+            </>
+          )}
+        </div>
+      </nav>
     </header>
   );
 }
 
 const Avatar = ({ avatar }: { avatar?: string }) => {
   return (
-    <div className="size-14 relative flex rounded-xl">
+    <div className="size-12 relative flex rounded-xl">
       {avatar ? (
         <div className="size-full relative">
-          <Image
-            src={avatar}
-            className="w-full h-full rounded-xl"
-            fill
-            objectFit="cover"
-            alt="profile picture"
-          ></Image>
+          <Image src={avatar} className="w-full h-full rounded-xl" fill objectFit="cover" alt="profile picture"></Image>
         </div>
       ) : (
         <div className="w-full h-full flex items-center justify-center bg-transparent01dp rounded-xl">

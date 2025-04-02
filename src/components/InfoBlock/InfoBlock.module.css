@@ -1,9 +1,9 @@
 .posterColumn {
-  @apply w-full flex flex-col justify-start items-center lg:w-[250px];
+  @apply w-full flex flex-col justify-start items-center lg:w-[250px] gap-4;
 }
 
 .titleDescColumn {
-  @apply w-full lg:w-min xl:w-[670px];
+  @apply flex flex-col w-full lg:w-min xl:w-[670px] gap-4;
 }
 
 .detailColumn {
@@ -11,18 +11,17 @@
 }
 
 .infoRow {
-  @apply min-h-0 md:min-h-32;
+  @apply min-h-0 md:h-max;
 }
 
 .genresRow {
   display: flex;
-  gap: 15px;
+  gap: var(--gapVar);
 }
 
 .subText {
-  position: absolute;
-  top: 0;
-  right: 0;
+  width: fit-content;
+  text-align: right;
 }
 
 .subBlock {
@@ -30,9 +29,21 @@
   margin-top: 1.25rem;
   flex-direction: column;
   border-radius: 0.75rem;
+  background-color: var(--01dp);
+  padding: 10px;
 }
 
 .subRow {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: var(--gapVar);
   width: 100%;
+}
+
+.detailsArray {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--gapVar);
 }

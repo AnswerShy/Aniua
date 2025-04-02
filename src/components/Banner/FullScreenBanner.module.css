@@ -42,14 +42,16 @@
 .bannerTitle {
   color: var(--titleColor);
   font-size: var(--bannerTitle);
+  text-transform: uppercase;
 }
 
 .bannerChar {
-  width: 50%;
-  height: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom;
+  border-radius: var(--borderRad);
+  max-width: 35%;
+  position: relative !important;
+  width: fit-content !important;
+  margin-bottom: 5px;
+  @apply max-w-0 md:max-w-48 lg:max-w-96;
 }
 
 .bannerDescription {
@@ -64,18 +66,9 @@
 .load {
   background-color: var(--02dp);
   color: transparent;
-  background: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%);
+  background: var(loadingGradient);
   background-size: 200% 100%;
-  animation: shimmer 1s infinite linear !important;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 100%;
-  }
-  100% {
-    background-position: -100%;
-  }
+  animation: var(--loadingAnim);
 }
 
 .bannerBaseInfo,

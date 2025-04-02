@@ -1,10 +1,3 @@
-.playerContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-}
-
 .playerFrame {
   width: 100%;
   height: 100%;
@@ -15,25 +8,11 @@
   position: relative;
 }
 
-.episodeWrapper {
-  display: flex;
-  overflow-x: auto;
-  gap: 15px;
-  max-width: 55vw;
-}
-
 .playerWrapper {
   width: 100%;
   height: 80%;
 
   position: relative;
-}
-
-.playerWrapper:hover .playerButtonsWrapper {
-  opacity: 1;
-  z-index: 2;
-  transition: all 0.1s linear;
-  cursor: pointer;
 }
 
 .playerButtonsWrapper {
@@ -44,12 +23,16 @@
 
   opacity: 0;
   transition: all 0.1s linear;
+
+  display: flex;
+  align-items: center;
 }
 
 .playerLoad {
-  background: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%);
+  background: var(--loadingGradient);
   background-size: 200% 100%;
-  animation: shimmer 1s infinite linear !important;
+  animation: var(--loadingAnim);
+  border-radius: 12px;
 }
 
 .playerLoadText {
@@ -59,11 +42,39 @@
   transform: translate(-50%, -50%);
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: 100%;
+/* Player container */
+
+.playerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @apply w-full lg:w-3/4;
+}
+
+.playerWrapper:hover .playerButtonsWrapper {
+  opacity: 1;
+  z-index: 2;
+  transition: all 0.1s linear;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .playerButtonsWrapper {
+    opacity: 1;
+    z-index: 2;
   }
-  100% {
-    background-position: -100%;
-  }
+}
+
+/* Episode List */
+
+.episodeWrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.activeEpisode {
+  background-color: var(--02dp);
 }

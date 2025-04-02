@@ -6,13 +6,12 @@
 .bannerSectionStyle {
   position: relative;
   align-items: flex-end;
-
-  @apply px-16 py-16 h-svh flex flex-row justify-start;
+  @apply px-16 py-16 h-svh flex flex-row justify-around;
 }
 
 .flexThreeColsSectionStyle {
   @apply px-4 flex flex-col h-max;
-  @apply lg:h-svh lg:flex-row lg:px-0 lg:py-24 lg:justify-evenly; /* TABLET */
+  @apply lg:h-max lg:min-h-svh lg:flex-row lg:px-0 lg:py-24 lg:justify-evenly; /* TABLET */
   @apply xl:px-[10%] xl:gap-4; /* DESKTOP */
 }
 

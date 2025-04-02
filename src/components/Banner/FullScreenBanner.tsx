@@ -3,18 +3,32 @@
 import descriptionCutter from '@/utils/custom/descriptionCutter';
 import styles from './FullScreenBanner.module.css';
 import Image from 'next/image';
-import { Section, Typography, TypographyType } from '../Shared/SharedComponents';
+import { Section, Typography, TypographyType, CreepingText } from '../Shared/SharedComponents';
 import { TransitionLink } from '@/utils/customUtils';
+import clsx from 'clsx';
 
 interface Banner_props {
-  bannerImage: string | null;
-  bannerTitle: string | null;
+  bannerImage?: string | null;
+  bannerTitle: string;
   bannerYear?: number | null;
   bannerGenres?: AnimeGenres[] | null;
   bannerDesc: string;
   bannerChar?: string | null;
   bannerTypeNews?: boolean;
 }
+
+const Banner: React.FC<Banner_props> = ({ bannerImage, bannerTitle, bannerChar, bannerYear, bannerGenres, bannerDesc }) => {
+  const usePicAsBg = false;
+  return (
+    <Section typeOfSection={'Banner'}>
+      <InfoBlockBanner bannerTitle={bannerTitle} bannerYear={bannerYear} bannerGenres={bannerGenres} bannerDesc={bannerDesc} />
+      <Image src={bannerImage || bannerChar || ''} className={clsx(usePicAsBg ? styles.bannerBackgroundImage : styles.bannerChar)} alt="animeImage" width={250} height={350} />
+      <CreepingText text={bannerTitle} speed={20} />
+    </Section>
+  );
+};
+
+export default Banner;
 
 const genresDisplay = (genres: animeBannerInterface['genres']): JSX.Element | null => {
   return genres ? (
@@ -28,37 +42,18 @@ const genresDisplay = (genres: animeBannerInterface['genres']): JSX.Element | nu
   ) : null;
 };
 
-const Banner: React.FC<Banner_props> = ({
-  bannerImage,
-  bannerTitle,
-  bannerYear,
-  bannerGenres,
-  bannerDesc,
-  bannerTypeNews = false,
-}) => {
+const InfoBlockBanner = ({ bannerTitle, bannerYear, bannerGenres, bannerDesc }: Banner_props) => {
   return (
-    <Section typeOfSection={'Banner'}>
-      <Image src={bannerImage ? bannerImage : ''} className={styles.bannerBackgroundImage} alt="animeImage" fill />
-      <div className={styles.bannerInfoContainer}>
-        <Typography variant="h1">{bannerTitle}</Typography>
-        {bannerTypeNews ? null : (
-          <div className={`${styles.bannerBaseInfo} ${styles.bannerText}`}>
-            <Typography variant="body1">{bannerYear ? bannerYear : null}</Typography>
-            <span>•</span>
-            {bannerGenres && bannerGenres.length > 0 ? (
-              genresDisplay(bannerGenres)
-            ) : (
-              <Typography variant="body1">unknow genres</Typography>
-            )}
-          </div>
-        )}
-        <p className={`${styles.bannerDescription} ${styles.bannerText}`}>
-          {descriptionCutter(bannerDesc, 25)}...
-        </p>
+    <div className={styles.bannerInfoContainer}>
+      <Typography variant="h1" classname={styles.bannerTitle}>
+        {bannerTitle}
+      </Typography>
+      <div className={`${styles.bannerBaseInfo} ${styles.bannerText}`}>
+        <Typography variant="body1">{bannerYear ? bannerYear : null}</Typography>
+        <span>•</span>
+        {bannerGenres && bannerGenres.length > 0 ? genresDisplay(bannerGenres) : <Typography variant="body1">unknow genres</Typography>}
       </div>
-      {/* {bannerChar ? <div className="bannerChar" style={{ backgroundImage: `url(${bannerChar})` }}></div> : null} */}
-    </Section>
+      <p className={`${styles.bannerDescription} ${styles.bannerText}`}>{descriptionCutter(bannerDesc, 25)}...</p>
+    </div>
   );
 };
-
-export default Banner;

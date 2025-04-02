@@ -3,6 +3,8 @@
 import style from './SearchBar.module.css';
 import { i18n } from '@/utils/customUtils';
 import { useSearch } from '@/context/SearchContext';
+import clsx from 'clsx';
+import { TypographyType } from '../Shared/SharedComponents';
 
 function SearchBar() {
   const { openSearchModal } = useSearch();
@@ -16,15 +18,7 @@ function SearchBar() {
 
   return (
     <>
-      <input
-        type="button"
-        tabIndex={0}
-        className={style.searchbar}
-        aria-label={i18n.t('header.search')}
-        onClick={openSearchModal}
-        onKeyDown={handleKeyDown}
-        value={i18n.t('header.search')}
-      />
+      <input type="button" className={clsx(`${TypographyType['button'].className}`, style.searchbar)} aria-label={i18n.t('header.search')} onClick={openSearchModal} onKeyDown={handleKeyDown} value={i18n.t('header.search')} />
     </>
   );
 }

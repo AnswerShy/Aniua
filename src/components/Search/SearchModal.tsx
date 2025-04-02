@@ -4,7 +4,8 @@ import style from './SearchModal.module.css';
 import { i18n } from '@/utils/customUtils';
 import debounce from 'lodash.debounce';
 import Image from 'next/image';
-import { Typography } from '../Shared/SharedComponents';
+import { CustomButton, Typography } from '../Shared/SharedComponents';
+import clsx from 'clsx';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -78,7 +79,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       input?.focus();
 
       const outsideElements = document.querySelectorAll<HTMLElement>(
-        'body *:not(#modal):not(script):not(style) *:has(tabindex)',
+        'body *:not(#modal):not(script):not(style)', // *:has(tabindex)
       );
       outsideElements.forEach((el) => {
         if (!modalRef.current?.contains(el)) {
@@ -90,11 +91,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
 
     return () => {
-      const outsideElements = document.querySelectorAll<HTMLElement>(
-        'body *:not(#modal):not(script):not(style) *:has(tabindex)',
-      );
+      const outsideElements = document.querySelectorAll<HTMLElement>('body *:not(#modal):not(script):not(style)');
       outsideElements.forEach((el) => {
-        el.setAttribute('tabindex', '0');
+        el.removeAttribute('tabindex');
       });
     };
   }, [isOpen]);
@@ -132,25 +131,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         ESC ✖
       </button>
       <div className={style.searchbar}>
-        <input
-          id="modal-search-input"
-          type="text"
-          placeholder={i18n.t('header.search')}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="p-2 w-full rounded mb-4"
-        />
+        <input id="modal-search-input" className={clsx(style.searchInput, 'p-2 w-full rounded mb-4')} type="text" placeholder={i18n.t('header.search')} onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} />
         <div className="">
           {typeof results === 'string' ? (
             <p>{results}</p>
           ) : results && results.length > 0 ? (
             results.map((item: AnimeDataInterface, index: number) => (
-              <div key={index} className="flex flex-row gap-4 items-center w-full p-2">
+              <CustomButton key={index} classString="flex flex-row gap-4 items-center w-full p-2" url={`/Anime/${item.slug}`}>
                 <Image src={item.poster} alt={item.title_en} height={125} width={75} objectFit="cover" />
                 <Typography variant="h2">
                   {item.title} / {item.title_en}
                 </Typography>
-              </div>
+              </CustomButton>
             ))
           ) : !isLoading ? (
             <p>{i18n.t('header.noResults')}</p>

@@ -6,6 +6,8 @@ import { useUserStore } from '@/stores/store';
 
 import Message from '../Message/Message';
 import style from './Chat.module.css';
+import { TextField } from '../Shared/SharedComponents';
+import { i18n } from '@/utils/customUtils';
 
 function Chat() {
   const socket = useSocket();
@@ -16,17 +18,11 @@ function Chat() {
   useEffect(() => {
     console.log('Chat component socket:', socket.id);
 
-    socket.on(
-      'chat_message',
-      (data: { command: string; additional?: string; username: string; avatar: string }) => {
-        if (data.command === 'chat_message') {
-          setMessages((prev) => [
-            ...prev,
-            { username: data.username, avatar: data.avatar, message: data.additional || '' },
-          ]);
-        }
-      },
-    );
+    socket.on('chat_message', (data: { command: string; additional?: string; username: string; avatar: string }) => {
+      if (data.command === 'chat_message') {
+        setMessages((prev) => [...prev, { username: data.username, avatar: data.avatar, message: data.additional || '' }]);
+      }
+    });
 
     return () => {
       socket.off('chat_message');
@@ -64,15 +60,8 @@ function Chat() {
         ))}
       </div>
       <div className={style.messageInputContainer}>
-        <input
-          placeholder="Enter message"
-          type="text"
-          value={newMessage}
-          className={style.messageInput}
-          onChange={(e) => setNewMessage(e.target.value)}
-          onKeyDown={handleKeyPress}
-        />
-        <button onClick={sendMessage}>Send</button>
+        <TextField placeholder="Enter message" type="text" label={i18n.t(`chat.enterMessage`)} value={newMessage} onChange={(e) => setNewMessage(e.target.value)} onKeyDown={handleKeyPress} />
+        <button onClick={sendMessage}>{i18n.t(`chat.send`)}</button>
       </div>
     </div>
   );
