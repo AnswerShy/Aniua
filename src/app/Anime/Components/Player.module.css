@@ -10,8 +10,7 @@
 
 .playerWrapper {
   width: 100%;
-  height: 80%;
-
+  height: fit-content;
   position: relative;
 }
 
@@ -76,5 +75,5 @@
 }
 
 .activeEpisode {
-  background-color: var(--02dp);
+  background: var(--03dp) !important;
 }
