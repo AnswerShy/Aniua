@@ -9,7 +9,7 @@ export const getSocket = (): Socket => {
   if (!socket) {
     socket = io(URL, {
       transports: ['websocket'], // Use WebSocket for better performance
-      reconnection: true, // Automatically reconnect
+      reconnection: false, // Automatically reconnect
     });
 
     socket.on('connect', () => {

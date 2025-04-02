@@ -3,6 +3,7 @@ interface PlayerProps {
 }
 
 interface playerStateInterface {
+  episodeID: number;
   chooseStudio: number;
   studiosList: string[];
   episodeUrl: string | null;
