@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 import { useUserStore } from '@/stores/store';
+import AnimeServiceInstance from '@/app/api';
+import toast from 'react-hot-toast';
+import { i18n } from '@/utils/customUtils';
 
 const useUserProfile = () => {
   const userStoredData = useUserStore((state) => state.user);
@@ -13,23 +16,20 @@ const useUserProfile = () => {
 
     const fetchUserProfile = async () => {
       try {
-        const res = await fetch('/api/profile');
-        if (res.ok) {
-          const data = await res.json();
-          setUserToStore(data);
-        } else {
-          console.error('Failed to fetch user data');
+        const data = await AnimeServiceInstance.fetchProfile();
+        if (data.success !== 'true') {
+          removeUserFromStore();
         }
+        setUserToStore(data);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        if (isLoggedIn) {
+          toast.error(i18n.t('toast.fetchUserProfileError'));
+          console.error('Error fetching user data:', error);
+        }
       }
     };
 
-    if (isLoggedIn && userStoredData?.username === '') {
-      fetchUserProfile();
-    } else if (!isLoggedIn && userStoredData.username) {
-      removeUserFromStore();
-    }
+    fetchUserProfile();
   }, [removeUserFromStore, setUserToStore, userStoredData.username, isLoggedIn, hydrated]);
 
   return userStoredData;

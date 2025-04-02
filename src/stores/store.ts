@@ -4,11 +4,11 @@ import { devtools, persist } from 'zustand/middleware';
 interface UserStateStore {
   user: UserProfileInterface;
   hydrated: boolean;
+  isLoggedIn: boolean;
+  setLoginState: (loggedIn: boolean) => void;
   setHydrated: (value: boolean) => void;
   setUser: (user: UserProfileInterface) => void;
   removeUser: () => void;
-  isLoggedIn: boolean;
-  setLoginState: (loggedIn: boolean) => void;
 }
 
 const defaultUser: UserProfileInterface = {
@@ -46,13 +46,19 @@ export const useUserStore = create<UserStateStore>()(
       (set) => ({
         user: defaultUser,
         hydrated: false,
-        setHydrated: (value: boolean) => set({ hydrated: value }),
-        setUser: (user: UserProfileInterface) => set({ user }),
-        removeUser: () => set({ user: defaultUser }),
         isLoggedIn: false,
+        setHydrated: (value: boolean) => set({ hydrated: value }),
         setLoginState: (loggedIn: boolean) => {
           localStorage.setItem('isLoggedIn', loggedIn ? 'true' : 'false');
           set({ isLoggedIn: loggedIn });
+        },
+        setUser: (user: UserProfileInterface) => {
+          set({ user, isLoggedIn: true });
+          localStorage.setItem('isLoggedIn', 'true');
+        },
+        removeUser: () => {
+          set({ user: defaultUser, isLoggedIn: false });
+          localStorage.setItem('isLoggedIn', 'false');
         },
       }),
       {

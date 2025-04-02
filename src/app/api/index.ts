@@ -1,14 +1,18 @@
+import { i18n } from '@/utils/customUtils';
+import toast from 'react-hot-toast';
+
 class AnimeService {
   private domain = process.env.NEXT_PUBLIC_BASE_URL;
   private api = process.env.NEXT_PUBLIC_API_URL;
 
-  private getFetchOptions(method: string = 'GET', cache: RequestCache = 'force-cache'): RequestInit {
+  private getFetchOptions<T>(method: 'GET' | 'POST' = 'GET', body: T | null = null, cache: RequestCache = 'force-cache'): RequestInit {
     return {
       method,
       cache,
       next: {
         revalidate: 3600,
       },
+      body: body ? JSON.stringify(body) : undefined,
     };
   }
 
@@ -65,6 +69,29 @@ class AnimeService {
 
     const finalResponse = chartDataExtractor(finalRequest.titles);
     return finalResponse;
+  }
+
+  async fetchProfile() {
+    const res = await fetch(`${this.domain}/user`, this.getFetchOptions());
+    if (!res.ok) throw new Error(i18n.t('toast.fetchUserProfileError'));
+    return res.json();
+  }
+
+  async fetchLogin(data: LoginRequest): Promise<{ success: boolean }> {
+    const res = await fetch('/api/login', this.getFetchOptions('POST', data));
+
+    if (!res.ok) toast.error(i18n.t('toast.fetchLoginError'));
+
+    const resJson = await res.json();
+
+    if (resJson.success) {
+      return resJson;
+    } else {
+      toast.error(i18n.t('toast.LoginFailedUser'));
+      console.error(i18n.t('toast.LoginFailedUser'));
+    }
+
+    return { success: false };
   }
 }
 
