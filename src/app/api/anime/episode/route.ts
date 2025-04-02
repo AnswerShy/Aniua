@@ -16,10 +16,7 @@ export async function GET(req: NextRequest) {
     });
 
     if (!response.ok) {
-      return NextResponse.json(
-        { message: `Failed to fetch anime list ${title.toString()}` },
-        { status: response.status },
-      );
+      return NextResponse.json({ message: `Failed to fetch anime list ${title.toString()}` }, { status: response.status });
     }
 
     const responseBody = NextResponse.json(await response.json());

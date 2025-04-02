@@ -21,10 +21,8 @@ export async function GET(req: NextRequest, { params }: { params: { query: strin
     const { titles }: { titles: AnimeDataInterface[] } = await response.json();
 
     const filteredResults = titles.filter((item) => {
-      const titleEnMatch =
-        typeof item.title_en === 'string' && item.title_en.toLowerCase().includes(query.toLowerCase());
-      const titleUaMatch =
-        typeof item.title === 'string' && item.title.toLowerCase().includes(query.toLowerCase());
+      const titleEnMatch = typeof item.title_en === 'string' && item.title_en.toLowerCase().includes(query.toLowerCase());
+      const titleUaMatch = typeof item.title === 'string' && item.title.toLowerCase().includes(query.toLowerCase());
 
       return titleEnMatch || titleUaMatch;
     });
