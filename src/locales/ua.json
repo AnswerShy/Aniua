@@ -17,8 +17,12 @@
     "Type": "Тип",
     "Status": "Статус",
     "Episodes": "Серій",
+    "Genres": "Жанри",
+    "Year": "Рік",
     "more": "більше",
-    "less": "менше"
+    "less": "менше",
+    "addToList": "Додати до списку",
+    "EpisodesNotFound": "Упс... Епізодів не знайдено"
   },
   "login": {
     "Required field": "Обов'язкове поле",
@@ -42,12 +46,19 @@
     "home": "Головна",
     "list": "Список",
     "profile": "Профіль",
-    "settings": "Налаштування"
+    "settings": "Налаштування",
+    "add": "Додати"
   },
   "toast": {
     "LoginFailedUser": "Логін або пароль невірний",
     "ServerError": "Помилка сервера",
     "RegistrationFailed": "Помилка реєстрації",
-    "RegistrationSuccess": "Реєстрація пройшла успішно"
+    "RegistrationSuccess": "Реєстрація пройшла успішно",
+    "fetchUserProfileError": "Помилка заванаження профілю",
+    "fetchLoginError": ""
+  },
+  "chat": {
+    "send": "Відправити",
+    "enterMessage": "Повідомлення:"
   }
 }
