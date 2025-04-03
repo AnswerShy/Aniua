@@ -17,20 +17,24 @@ const useUserProfile = () => {
     const fetchUserProfile = async () => {
       try {
         const data = await AnimeServiceInstance.fetchProfile();
-        if (data.success !== 'true') {
+        if (data.success !== true) {
           removeUserFromStore();
+          console.log('success', data.success);
+          return;
         }
+        console.log('success', data.success);
         setUserToStore(data);
       } catch (error) {
         if (isLoggedIn) {
           toast.error(i18n.t('toast.fetchUserProfileError'));
           console.error('Error fetching user data:', error);
         }
+        removeUserFromStore();
       }
     };
 
     fetchUserProfile();
-  }, [removeUserFromStore, setUserToStore, userStoredData.username, isLoggedIn, hydrated]);
+  }, [hydrated]);
 
   return userStoredData;
 };

@@ -3,8 +3,7 @@
 import descriptionCutter from '@/utils/custom/descriptionCutter';
 import styles from './FullScreenBanner.module.css';
 import Image from 'next/image';
-import { Section, Typography, TypographyType, CreepingText } from '../Shared/SharedComponents';
-import { TransitionLink } from '@/utils/customUtils';
+import { Section, Typography, TypographyType, CreepingText, CustomButton } from '../Shared/SharedComponents';
 import clsx from 'clsx';
 
 interface Banner_props {
@@ -34,9 +33,9 @@ const genresDisplay = (genres: animeBannerInterface['genres']): JSX.Element | nu
   return genres ? (
     <>
       {genres.map((el, index) => (
-        <TransitionLink className={TypographyType['h2'].className} key={index} url={`/genres/${el.slug}`}>
+        <CustomButton className={TypographyType['h2'].className} key={index} url={`/genres/${el.slug}`}>
           {el.title}
-        </TransitionLink>
+        </CustomButton>
       ))}
     </>
   ) : null;
