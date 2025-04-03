@@ -8,6 +8,8 @@ export async function POST(req: NextRequest) {
     formData.append('username', username);
     formData.append('password', password);
 
+    console.log(formData.toString());
+
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}login/`, {
       method: 'POST',
       headers: {
