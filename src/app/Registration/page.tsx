@@ -54,7 +54,7 @@ export default function Registration() {
               required: i18n.t('login.Required field'),
               minLength: { value: 2, message: 'More than 2 symbols' },
             }}
-            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.username?.message} ref={ref} type={'username'} />}
+            render={({ field: { ref, value, ...field } }) => <TextField {...field} value={value} label={i18n.t('login.username')} errorString={errors.username?.message} ref={ref} type={'username'} />}
           />
           <Controller
             control={control}
@@ -66,7 +66,7 @@ export default function Registration() {
               },
               required: i18n.t('login.Required field'),
             }}
-            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.email?.message} ref={ref} type={'email'} />}
+            render={({ field: { ref, value, ...field } }) => <TextField {...field} value={value} label={i18n.t('login.email')} errorString={errors.email?.message} ref={ref} type={'email'} />}
           />
           <Controller
             control={control}
@@ -75,7 +75,7 @@ export default function Registration() {
               required: i18n.t('login.Required field'),
               minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
             }}
-            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.password1?.message} ref={ref} type={'password'} />}
+            render={({ field: { ref, value, ...field } }) => <TextField {...field} value={value} label={i18n.t('login.password')} errorString={errors.password1?.message} ref={ref} type={'password'} />}
           />
           <Controller
             control={control}
@@ -89,7 +89,7 @@ export default function Registration() {
               required: i18n.t('login.Required field'),
               minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
             }}
-            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.password2?.message} ref={ref} type={'password'} label={'passwordRepeat'} />}
+            render={({ field: { ref, value, ...field } }) => <TextField {...field} value={value} label={i18n.t('login.passwordRepeat')} errorString={errors.password2?.message} ref={ref} type={'password'} />}
           />
 
           <input type="submit" className={CustomButtonStyles.button} disabled={!isValid} value={i18n.t('login.SubmitRegistration')} />

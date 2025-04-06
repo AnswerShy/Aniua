@@ -20,6 +20,10 @@ export default function Login() {
     formState: { errors, isValid },
   } = useForm<LoginForms>({
     mode: 'onChange',
+    defaultValues: {
+      username: '',
+      password: '',
+    },
   });
 
   const handleLogin: SubmitHandler<LoginForms> = async (data) => {
@@ -50,7 +54,7 @@ export default function Login() {
               required: i18n.t('login.Required field'),
               minLength: { value: 2, message: i18n.t('login.More than', { count: 2 }) },
             }}
-            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.username?.message} ref={ref} type={'login'} />}
+            render={({ field: { ref, value, ...field } }) => <TextField {...field} value={value} errorString={errors.username?.message} label={i18n.t('login.username')} ref={ref} type={'login'} />}
           />
           <Controller
             control={control}
@@ -59,10 +63,9 @@ export default function Login() {
               required: i18n.t('login.Required field'),
               minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
             }}
-            render={({ field: { ref, ...field } }) => <TextField {...field} errorString={errors.password?.message} ref={ref} type={'password'} />}
+            render={({ field: { ref, value, ...field } }) => <TextField {...field} value={value} errorString={errors.password?.message} label={i18n.t('login.password')} ref={ref} type={'password'} />}
           />
-
-          <input type="submit" className={CustomButtonStyles.buttonBG} disabled={!isValid} value={i18n.t('login.SubmitLogin')} />
+          <input type="submit" className={CustomButtonStyles.button} disabled={!isValid} value={i18n.t('login.SubmitLogin') || 'Submit'} />
         </form>
       </Section>
     </>

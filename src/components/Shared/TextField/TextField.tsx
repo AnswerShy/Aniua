@@ -13,12 +13,12 @@ type TextFieldProps = {
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ type = 'text', placeholder, onKeyDown, label, onChange, errorString, ...rest }, ref) => {
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ value, type = 'text', placeholder, onKeyDown, label, onChange, errorString, ...rest }, ref) => {
   return (
     <>
       <div className={styles.fieldWrap}>
-        <input ref={ref} type={type} onChange={onChange} placeholder={placeholder ?? ' '} onKeyDown={onKeyDown} className={styles.fieldText} {...rest} />
-        <label className={styles.fieldLabel}>{label}</label>
+        <input value={value} ref={ref} type={type} onChange={onChange} placeholder={placeholder ?? ' '} onKeyDown={onKeyDown} className={styles.fieldText} {...rest} />
+        <label className={styles.fieldLabel}>{label || type}</label>
       </div>
 
       <div className={`${!errorString ? 'hidden' : styles.fieldError}`}>

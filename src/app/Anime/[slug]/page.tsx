@@ -24,7 +24,7 @@ export default async function AnimePage({ params }: { params: { slug: string } }
 
   return (
     <>
-      <Banner bannerImage={data.poster} bannerTitle={data.title} bannerDesc={data.description} bannerGenres={data.genres} bannerYear={data.year} />
+      <Banner bannerImage={data.poster} bannerChar={data.background_image_url} bannerTitle={data.title} bannerDesc={data.description} bannerGenres={data.genres} bannerYear={data.year} />
       <InfoBlock infoData={data} />
       <PlayerProvider slug={slug} />
     </>
