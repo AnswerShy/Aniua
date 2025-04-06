@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import { useUserStore } from '@/stores/store';
 import AnimeServiceInstance from '@/app/api';
@@ -11,32 +13,31 @@ const useUserProfile = () => {
   const hydrated = useUserStore((state) => state.hydrated);
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
+  const fetchUserProfile = async () => {
+    try {
+      const data = await AnimeServiceInstance.fetchProfile();
+      if (data.success !== true) {
+        removeUserFromStore();
+        console.log('success', data.success);
+        return;
+      }
+      console.log('success', data.success, data.username);
+      setUserToStore(data);
+    } catch (error) {
+      if (isLoggedIn) {
+        toast.error(i18n.t('toast.fetchUserProfileError'));
+        console.error('Error fetching user data:', error);
+      }
+      removeUserFromStore();
+    }
+  };
+
   useEffect(() => {
     if (!hydrated) return;
-
-    const fetchUserProfile = async () => {
-      try {
-        const data = await AnimeServiceInstance.fetchProfile();
-        if (data.success !== true) {
-          removeUserFromStore();
-          console.log('success', data.success);
-          return;
-        }
-        console.log('success', data.success);
-        setUserToStore(data);
-      } catch (error) {
-        if (isLoggedIn) {
-          toast.error(i18n.t('toast.fetchUserProfileError'));
-          console.error('Error fetching user data:', error);
-        }
-        removeUserFromStore();
-      }
-    };
-
     fetchUserProfile();
   }, [hydrated]);
 
-  return userStoredData;
+  return { userStoredData, fetchUserProfile };
 };
 
 export default useUserProfile;
