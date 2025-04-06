@@ -21,7 +21,7 @@ const Banner: React.FC<Banner_props> = ({ bannerImage, bannerTitle, bannerChar, 
   return (
     <Section typeOfSection={'Banner'}>
       <InfoBlockBanner bannerTitle={bannerTitle} bannerYear={bannerYear} bannerGenres={bannerGenres} bannerDesc={bannerDesc} />
-      <Image src={bannerImage || bannerChar || ''} className={clsx(usePicAsBg ? styles.bannerBackgroundImage : styles.bannerChar)} alt="animeImage" width={250} height={350} />
+      <Image src={bannerImage || bannerChar || 'pfp.png'} className={clsx(usePicAsBg ? styles.bannerBackgroundImage : styles.bannerChar)} alt="animeImage" width={250} height={350} />
       <CreepingText text={bannerTitle} speed={20} />
     </Section>
   );

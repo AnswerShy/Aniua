@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 
 export default function ProfileComponent() {
-  const userData = useUserProfile();
+  const { userStoredData } = useUserProfile();
   const [chart, setChart] = useState<chartData[]>([]);
 
   useEffect(() => {
@@ -19,15 +19,15 @@ export default function ProfileComponent() {
 
   return (
     <Section typeOfSection={'Profile'}>
-      {userData ? (
+      {userStoredData ? (
         <>
           <div className={styles.profileRowUp}>
             <div>
-              {userData.username && <Typography variant="h1"> {userData.username} </Typography>}
-              <h2 className="text">{userData.first_name ? userData.first_name : '...'}</h2>
-              <h2 className="subText">{userData.description ? userData.description : '...'}</h2>
+              {userStoredData.username && <Typography variant="h1"> {userStoredData.username} </Typography>}
+              <h2 className="text">{userStoredData.first_name ? userStoredData.first_name : '...'}</h2>
+              <h2 className="subText">{userStoredData.description ? userStoredData.description : '...'}</h2>
             </div>
-            {userData.avatar ? <Image className="rounded-xl size-32 md:size-64 object-cover" alt="pfp" src={userData.avatar} width={256} height={256} /> : <div className="size-32 md:size-64 bg-black rounded-xl"></div>}
+            {userStoredData.avatar ? <Image className="rounded-xl size-32 md:size-64 object-cover" alt="pfp" src={userStoredData.avatar} width={256} height={256} /> : <div className="size-32 md:size-64 bg-black rounded-xl"></div>}
           </div>
 
           <div className={styles.profileRowDown}>
