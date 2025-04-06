@@ -15,11 +15,12 @@ interface Props {
 }
 
 const genres = (year: number, genres: AnimeGenres[]) => {
+  if (!genres) return null;
   return (
     <div className={styles.genresRow}>
       <p>{year}</p>
       <p>•</p>
-      {genres.length > 0 ? (
+      {Object.entries(genres).length > 0 ? (
         genres.map((el) => (
           <Link key={el.id} href={`${paths.list}/${el.slug}`}>
             {el.title}
@@ -82,7 +83,7 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
       <div className={styles.detailColumn}>
         <Typography variant="h2">{i18n.t('info.Details')}</Typography>
         <div className={styles.subBlock}>
-          <DetailRow title={i18n.t('info.Type')} data={infoData.type.title} url={infoData.type.title} />
+          <DetailRow title={i18n.t('info.Type')} data={infoData.type.title} url={infoData.type.slug} />
           <DetailRow title={i18n.t('info.Status')} data={infoData.status} url={infoData.status} />
           <DetailRow title={i18n.t('info.Episodes')} data={episodesInfo(infoData.episode.present, infoData.episode.last)} />
           <DetailRow title={i18n.t('info.Rate')} data={infoData.mal_score} />
