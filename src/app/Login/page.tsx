@@ -8,9 +8,11 @@ import { useRouter } from 'next/navigation';
 import { i18n } from '@/utils/customUtils';
 import toast from 'react-hot-toast';
 import AnimeServiceInstance from '../api';
+import useUserProfile from '@/hooks/useUserProfile';
 
 export default function Login() {
   const router = useRouter();
+  const { fetchUserProfile } = useUserProfile();
 
   const {
     handleSubmit,
@@ -25,6 +27,7 @@ export default function Login() {
       const res = await AnimeServiceInstance.fetchLogin(data);
 
       if (res.success) {
+        await fetchUserProfile();
         router.push('/');
       } else {
         toast.error(i18n.t('toast.LoginFailedUser'));

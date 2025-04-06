@@ -17,7 +17,7 @@ export default function Header() {
   const pathname = usePathname();
   const [currentPath, setCurrentPath] = useState('');
   const [isMenuOpened, setMenuOpened] = useState(false);
-  const userData = useUserProfile();
+  const { userStoredData } = useUserProfile();
 
   const menuHandler = () => {
     setMenuOpened((prev) => !prev);
@@ -62,13 +62,13 @@ export default function Header() {
           ))}
         </div>
         <div className={`${styles.botMenu}`}>
-          {userData.username ? (
+          {userStoredData.username ? (
             <>
-              <div>{userData?.money}/|\</div>
+              <div>{userStoredData?.money}/|\</div>
               <CustomButton url={'/Profile'} className="size-16 relative p-2 flex rounded-xl" hideMenu={menuHandler}>
-                {userData?.avatar ? (
+                {userStoredData?.avatar ? (
                   <div className="size-full relative">
-                    <Image src={userData.avatar} className="w-full h-full rounded-xl" fill objectFit="cover" alt="profile picture"></Image>
+                    <Image src={userStoredData.avatar} className="w-full h-full rounded-xl" fill objectFit="cover" alt="profile picture"></Image>
                   </div>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-transparent01dp rounded-xl">
@@ -102,14 +102,14 @@ export default function Header() {
         </div>
         <div className={styles.rightHeader}>
           <SearchBar />
-          {userData.username ? (
+          {userStoredData.username ? (
             <>
-              <Dropdown currentState={userData?.money?.toString()} isLeft={false}>
+              <Dropdown currentState={userStoredData?.money?.toString()} isLeft={false}>
                 {Object.entries(pathsMoney).map((path, index) => {
                   return <Dropdown.optionUrl key={index} href={path[1]} state={getTranslatedText('paths', path[0])} />;
                 })}
               </Dropdown>
-              <Dropdown customElement={<Avatar avatar={userData?.avatar} />} isLeft={false}>
+              <Dropdown customElement={<Avatar avatar={userStoredData?.avatar} />} isLeft={false}>
                 {Object.entries(pathsProfile).map((path, index) => {
                   return <Dropdown.optionUrl key={index} href={path[1]} state={getTranslatedText('paths', path[0])} />;
                 })}
