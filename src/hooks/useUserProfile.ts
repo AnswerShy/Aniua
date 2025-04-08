@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useUserStore } from '@/stores/store';
-import AnimeServiceInstance from '@/app/api';
+import FetchServiceInstance from '@/app/api';
 import toast from 'react-hot-toast';
 import { i18n } from '@/utils/customUtils';
 
@@ -15,7 +15,7 @@ const useUserProfile = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const data = await AnimeServiceInstance.fetchProfile();
+      const data = await FetchServiceInstance.fetchProfile();
       if (data.success !== true) {
         removeUserFromStore();
         console.log('success', data.success);

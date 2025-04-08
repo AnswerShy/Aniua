@@ -5,7 +5,7 @@ import styles from './Profile.module.css';
 import Image from 'next/image';
 import { Telegram } from '@mui/icons-material';
 import useUserProfile from '@/hooks/useUserProfile';
-import AnimeServiceInstance from '@/app/api';
+import FetchServiceInstance from '@/app/api';
 import { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 
@@ -14,7 +14,7 @@ export default function ProfileComponent() {
   const [chart, setChart] = useState<chartData[]>([]);
 
   useEffect(() => {
-    AnimeServiceInstance.fetchUserListContent().then((data) => setChart(data));
+    FetchServiceInstance.fetchUserListContent().then((data) => setChart(data));
   }, []);
 
   return (

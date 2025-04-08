@@ -3,7 +3,7 @@
 import { Card, CustomButton, Dropdown } from '@/components/Shared/SharedComponents';
 import { paths } from '@/constants/headersconst';
 import { useState } from 'react';
-import AnimeServiceInstance from '../api';
+import FetchServiceInstance from '../api';
 import style from '@/components/Chat/Chat.module.css';
 import { Message } from '@/components/IndexComponent';
 export default function Vse() {
@@ -49,7 +49,7 @@ export default function Vse() {
 }
 
 const ListPage = async () => {
-  const anime = await AnimeServiceInstance.fetchAnimeList();
+  const anime = await FetchServiceInstance.fetchAnimeList();
   return (
     <>
       {anime.map((el: AnimeDataInterface, index: number) => (

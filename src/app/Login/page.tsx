@@ -7,7 +7,7 @@ import { TextField } from '@/components/Shared/SharedComponents';
 import { useRouter } from 'next/navigation';
 import { i18n } from '@/utils/customUtils';
 import toast from 'react-hot-toast';
-import AnimeServiceInstance from '../api';
+import FetchServiceInstance from '../api';
 import useUserProfile from '@/hooks/useUserProfile';
 
 export default function Login() {
@@ -28,7 +28,7 @@ export default function Login() {
 
   const handleLogin: SubmitHandler<LoginForms> = async (data) => {
     try {
-      const res = await AnimeServiceInstance.fetchLogin(data);
+      const res = await FetchServiceInstance.fetchLogin(data);
 
       if (res.success) {
         await fetchUserProfile();
