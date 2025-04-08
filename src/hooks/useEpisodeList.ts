@@ -1,4 +1,4 @@
-import AnimeServiceInstance from '@/app/api';
+import FetchServiceInstance from '@/app/api';
 import { useEffect, useState } from 'react';
 
 export const useEpisodeList = (slug: string) => {
@@ -7,7 +7,7 @@ export const useEpisodeList = (slug: string) => {
 
   useEffect(() => {
     const fetchEpisodes = async () => {
-      const list = await AnimeServiceInstance.fetchEpisodeList(slug);
+      const list = await FetchServiceInstance.fetchEpisodeList(slug);
       setEpisodesList(list);
       setLoading(false);
     };

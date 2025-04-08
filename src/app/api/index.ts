@@ -28,6 +28,10 @@ class AnimeService {
       },
     };
 
+    if (cache == 'no-store') {
+      options.next = {};
+    }
+
     if (method === 'POST' && body) {
       options.headers = {
         'Content-Type': 'application/json',
@@ -38,19 +42,19 @@ class AnimeService {
     return options;
   }
 
-  private async fetchHelper(endpoint: string, req?: NextRequest, params?: Record<string, string>, method: 'GET' | 'POST' = 'GET', body: Record<string, string | number> | null = null, chache?: RequestCache) {
+  async fetchHelper(endpoint: string, req?: NextRequest, params?: Record<string, string>, method: 'GET' | 'POST' = 'GET', body: Record<string, string | number> | null = null, chache?: RequestCache) {
     try {
       const url = this.constructUrl(endpoint, params);
       const options = this.getFetchOptions(method, body, chache);
 
       if (req) {
         const cookieHeader = await this.getCookieHeader(req);
-        if (cookieHeader instanceof NextResponse) return cookieHeader;
-
-        options.headers = {
-          ...(options.headers || {}),
-          Cookie: cookieHeader,
-        };
+        if (cookieHeader) {
+          options.headers = {
+            ...(options.headers || {}),
+            Cookie: cookieHeader as string,
+          };
+        }
       }
 
       const request = await fetch(url, options);
@@ -62,6 +66,8 @@ class AnimeService {
       return null;
     }
   }
+
+  // Ready fetches
 
   async fetchAnimeInfo(slug: string): Promise<AnimeDataInterface> {
     return this.fetchHelper(`${this.domain}api/anime/${slug}`);
@@ -148,5 +154,5 @@ export const chartDataExtractor = (titles: Title[]): chartData[] => {
   return chartData;
 };
 
-const AnimeServiceInstance = new AnimeService();
-export default AnimeServiceInstance;
+const FetchServiceInstance = new AnimeService();
+export default FetchServiceInstance;

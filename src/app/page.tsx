@@ -1,9 +1,9 @@
 import { Card, Row, SubRow, Section, Typography } from '@/components/Shared/SharedComponents';
-import AnimeServiceInstance from '@/app/api';
+import FetchServiceInstance from '@/app/api';
 import { i18n } from '@/utils/customUtils';
 
 export default async function Home() {
-  const communityChoice = await AnimeServiceInstance.fetchCommunityChoice();
+  const communityChoice = await FetchServiceInstance.fetchCommunityChoice();
 
   return (
     <>

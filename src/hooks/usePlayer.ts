@@ -1,5 +1,5 @@
 import { handleEpisode, i18n } from '@/utils/customUtils';
-import AnimeServiceInstance from '@/app/api';
+import FetchServiceInstance from '@/app/api';
 import { useCallback, useEffect, useState } from 'react';
 
 export const usePlayer = (slug: string | null) => {
@@ -8,7 +8,7 @@ export const usePlayer = (slug: string | null) => {
   useEffect(() => {
     const fetchEpisodes = async () => {
       if (!slug) return;
-      const list = await AnimeServiceInstance.fetchEpisodeList(slug);
+      const list = await FetchServiceInstance.fetchEpisodeList(slug);
       setEpisodesList(list);
     };
     fetchEpisodes();
