@@ -15,7 +15,7 @@ interface SearchModalProps {
 async function fetchDBSearch(query: string) {
   if (!query.trim()) return 'Type something to search';
 
-  const response = await fetch(`/api/search/${query}`);
+  const response = await fetch(`/api/search/?q=${query}`);
 
   if (!response.ok) {
     console.error('Failed to fetch search results');
@@ -25,21 +25,6 @@ async function fetchDBSearch(query: string) {
   if (response.status === 404) return 'No results found';
   const data = await response.json();
   console.log(data);
-  return data;
-}
-
-async function fetchGPTSearch(query: string) {
-  query = query.replace(/^\/s\s*/, '');
-
-  const response = await fetch(`/api/search/ai/${query}`);
-
-  if (!response.ok) {
-    console.error('Failed to fetch search results');
-    return;
-  }
-
-  const data = await response.json();
-
   return data;
 }
 
@@ -56,16 +41,15 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
       try {
         if (query.startsWith('/')) return;
-        console.log(query.trim());
         if (!query.trim()) return;
-
+        console.log(query);
         setResults(await fetchDBSearch(query));
       } catch (error) {
         console.error('Error fetching search results:', error);
       }
 
       setIsLoading(false);
-    }, 300),
+    }, 500),
     [],
   );
 
@@ -109,11 +93,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         onClose();
         break;
       case 'Enter':
-        if (query.startsWith('/s')) {
-          setResults(await fetchGPTSearch(query));
-        } else {
-          setResults(await fetchDBSearch(query));
-        }
+        setResults(await fetchDBSearch(query));
         break;
     }
   };
