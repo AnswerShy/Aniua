@@ -42,7 +42,22 @@ class AnimeService {
     return options;
   }
 
-  async fetchHelper(endpoint: string, req?: NextRequest, params?: Record<string, string>, method: 'GET' | 'POST' = 'GET', body: Record<string, string | number> | null = null, chache?: RequestCache) {
+  async fetchHelper(
+    endpoint: string,
+    {
+      req,
+      params,
+      method = 'GET',
+      body = null,
+      chache,
+    }: {
+      req?: NextRequest;
+      params?: Record<string, string>;
+      method?: 'GET' | 'POST';
+      body?: Record<string, string | number> | null;
+      chache?: RequestCache;
+    } = {},
+  ) {
     try {
       const url = this.constructUrl(endpoint, params);
       const options = this.getFetchOptions(method, body, chache);
@@ -70,7 +85,7 @@ class AnimeService {
   // Ready fetches
 
   async fetchAnimeInfo(slug: string): Promise<AnimeDataInterface> {
-    return this.fetchHelper(`${this.domain}api/anime/${slug}`);
+    return this.fetchHelper(`${this.domain}api/anime/${slug}`, {});
   }
 
   async fetchEpisodeList(slug: string) {
@@ -82,7 +97,7 @@ class AnimeService {
   }
 
   async fetchAnimeList(page: number = 1): Promise<Array<AnimeDataInterface>> {
-    return this.fetchHelper(`${this.api}filter/?page=${page}&limit=18`).then((res) => res.titles as AnimeDataInterface[]);
+    return this.fetchHelper(`${this.api}filter/?page=${page}&limit=18`, { chache: 'no-store' }).then((res) => res.titles as AnimeDataInterface[]);
   }
 
   async fetchCommunityChoice(): Promise<Array<AnimeDataInterface>> {
@@ -90,18 +105,21 @@ class AnimeService {
   }
 
   async fetchUserListContent() {
-    return this.fetchHelper(`${this.domain}api/chart`, undefined, undefined, 'GET', null, 'no-store').then((res) => chartDataExtractor(res));
+    return this.fetchHelper(`${this.domain}api/chart`, { method: 'GET', chache: 'no-store' }).then((res) => chartDataExtractor(res));
   }
 
   async fetchProfile() {
-    return this.fetchHelper(`${this.domain}api/profile`, undefined, undefined, 'GET', null, 'no-store').then((res) => res);
+    return this.fetchHelper(`${this.domain}api/profile`, { method: 'GET', chache: 'no-store' }).then((res) => res);
   }
 
   async fetchLogin(data: LoginRequest): Promise<{ success: boolean }> {
     try {
-      const res = await this.fetchHelper(`/api/login`, undefined, undefined, 'POST', {
-        username: data.username,
-        password: data.password,
+      const res = await this.fetchHelper(`/api/login`, {
+        method: 'POST',
+        body: {
+          username: data.username,
+          password: data.password,
+        },
       });
 
       if (res?.success == true) {
