@@ -24,7 +24,7 @@ class AnimeService {
       method,
       cache,
       next: {
-        revalidate: 3600,
+        revalidate: 1000 * 60 * 5,
       },
     };
 
