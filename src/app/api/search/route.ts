@@ -18,11 +18,18 @@ export async function GET(req: NextRequest) {
 
     const { titles }: { titles: AnimeDataInterface[] } = await response.json();
 
+    const filteredResults = titles.filter((item) => {
+      const titleEnMatch = typeof item.title_en === 'string' && item.title_en.toLowerCase().includes(query.toLowerCase());
+      const titleUaMatch = typeof item.title === 'string' && item.title.toLowerCase().includes(query.toLowerCase());
+
+      return titleEnMatch || titleUaMatch;
+    });
+
     if (titles.length < 1) {
       return NextResponse.json({ message: 'No results found' }, { status: 404 });
     }
 
-    return NextResponse.json(titles);
+    return NextResponse.json(filteredResults);
   } catch (e) {
     return NextResponse.json({ message: 'Internal server error', error: e }, { status: 500 });
   }

@@ -5,7 +5,7 @@ interface AnimeEpisodes {
 
 interface AnimeGenres {
   title: string;
-  id: number;
+  id?: number;
   slug: string;
   title_en?: string;
   description?: string;

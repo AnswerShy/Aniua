@@ -51,3 +51,36 @@
     background-position: -100%;
   }
 }
+
+/* HORIZONTAL */
+
+.cardHorizontal {
+  transition: 0.7s;
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--borderRad);
+  height: fit-content;
+  display: flex;
+}
+
+.cardHorizontal > div {
+  display: flex;
+  gap: 15px;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.cardImageHorizontal {
+  height: 75px;
+  width: 54px;
+  background-size: cover;
+  border-radius: calc(var(--borderRad) - 10px);
+}
+
+.cardHorizontal:hover,
+.cardHorizontal:focus {
+  background-color: var(--03dp);
+  box-shadow: var(--shadow03dp);
+  transform: scale(1.02);
+  z-index: 2;
+}
