@@ -1,4 +1,4 @@
-import { Section } from '../Shared/SharedComponents';
+import { Section } from '../UI/UIComponents';
 import styles from './FullScreenBanner.module.css';
 
 const BannerSkeleton = () => {

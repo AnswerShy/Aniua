@@ -1,7 +1,7 @@
 'use client';
 
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { CustomButtonStyles, TextField, Section } from '@/components/Shared/SharedComponents';
+import { CustomButtonStyles, TextField, Section } from '@/components/UI/UIComponents';
 import { useRouter } from 'next/navigation';
 import { i18n } from '@/utils/customUtils';
 

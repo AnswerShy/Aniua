@@ -1,5 +1,5 @@
-import CardSkeleton from '@/components/Shared/Card/CardSkeleton';
-import { Section } from '@/components/Shared/SharedComponents';
+import CardSkeleton from '@/components/UI/Card/CardSkeleton';
+import { Section } from '@/components/UI/UIComponents';
 
 export default function Loading() {
   return (

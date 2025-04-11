@@ -1,7 +1,7 @@
 'use client';
 
 import { animeCardInterface } from '@/interfaces/animeCardInterface';
-import { Section, Card } from '@/components/Shared/SharedComponents';
+import { Section, Card } from '@/components/UI/UIComponents';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
 

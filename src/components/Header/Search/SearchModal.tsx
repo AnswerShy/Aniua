@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import style from './SearchModal.module.css';
 import { i18n } from '@/utils/customUtils';
-import { Card } from '../Shared/SharedComponents';
+import { Card } from '@/components/UI/UIComponents';
 import clsx from 'clsx';
 import useSearchHook from '@/hooks/useSearch';
 

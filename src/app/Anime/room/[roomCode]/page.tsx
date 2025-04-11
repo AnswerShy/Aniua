@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import PlayerProvider from '../../Components/PlayerProvider';
+import PlayerProvider from '../../Components/PlayerSection/PlayerProvider';
 import { i18n } from '@/utils/customUtils';
 
 export async function generateMetadata(): Promise<Metadata> {

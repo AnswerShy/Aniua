@@ -1,4 +1,4 @@
-import { Typography } from '../Shared/SharedComponents';
+import { Typography } from '../../UI/UIComponents';
 import style from './Message.module.css';
 import Image from 'next/image';
 

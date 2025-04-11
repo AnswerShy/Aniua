@@ -2,7 +2,7 @@
 
 import { ReactElement, useState } from 'react';
 import styles from './DropDown.module.css';
-import { CustomButton, TypographyType } from '../SharedComponents';
+import { CustomButton, TypographyType } from '../UIComponents';
 
 import { KeyboardArrowUp } from '@mui/icons-material';
 import clsx from 'clsx';

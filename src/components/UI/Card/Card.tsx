@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { CustomButton, TypographyType } from '../SharedComponents';
+import { CustomButton, TypographyType } from '../UIComponents';
 import styles from './Card.module.css';
 
 interface cardProps {

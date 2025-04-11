@@ -1,9 +1,9 @@
 'use client';
 
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { Section } from '@/components/Shared/SharedComponents';
-import { CustomButtonStyles } from '@/components/Shared/SharedComponents';
-import { TextField } from '@/components/Shared/SharedComponents';
+import { Section } from '@/components/UI/UIComponents';
+import { CustomButtonStyles } from '@/components/UI/UIComponents';
+import { TextField } from '@/components/UI/UIComponents';
 import { useRouter } from 'next/navigation';
 import { i18n } from '@/utils/customUtils';
 import toast from 'react-hot-toast';

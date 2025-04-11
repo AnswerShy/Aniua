@@ -1,6 +1,6 @@
 'use client';
 
-import { Section, Typography } from '../../../components/Shared/SharedComponents';
+import { Section, Typography } from '../../../components/UI/UIComponents';
 import styles from './Profile.module.css';
 import Image from 'next/image';
 import { Telegram } from '@mui/icons-material';

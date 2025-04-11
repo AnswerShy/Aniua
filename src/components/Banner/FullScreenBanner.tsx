@@ -3,7 +3,7 @@
 import descriptionCutter from '@/utils/custom/descriptionCutter';
 import styles from './FullScreenBanner.module.css';
 import Image from 'next/image';
-import { Section, Typography, TypographyType, CreepingText, CustomButton } from '../Shared/SharedComponents';
+import { Section, Typography, TypographyType, CreepingText, CustomButton } from '../UI/UIComponents';
 import clsx from 'clsx';
 
 interface Banner_props {

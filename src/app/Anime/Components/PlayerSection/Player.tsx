@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './Player.module.css';
-import { CustomButton, CustomButtonStyles, Dropdown, Typography } from '@/components/Shared/SharedComponents';
+import { CustomButton, CustomButtonStyles, Dropdown, Typography } from '@/components/UI/UIComponents';
 import { usePlayerSocket } from '@/hooks/usePlayerSocket';
 
 import { handleEpisode } from '@/utils/customUtils';
