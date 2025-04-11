@@ -1,43 +1,38 @@
 'use client';
 
-import { animeCardInterface } from '@/interfaces/animeCardInterface';
 import { Section, Card } from '@/components/UI/UIComponents';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
+import FetchServiceInstance from '@/app/api';
 
-let page = 2;
+let page = 1;
 
 const ListSectionLoader = () => {
   const { ref, inView } = useInView();
-  const [anime, setAnime] = useState<animeCardInterface[]>([]);
-  const [isEnd, setSsEnd] = useState(false);
+  const [anime, setAnime] = useState<AnimeDataInterface[]>([]);
+  const [isEnd, setIsEnd] = useState(false);
 
   useEffect(() => {
     if (inView && !isEnd) {
-      fetch(`/api/list?page=${page}`)
-        .then((res) => res.json())
-        .then((data: AnimeDataInterface[]) => {
-          const transformedData = data.map((item) => ({
-            ...item,
-            episode: {
-              ...item.episode,
-              present: item.episode.present ?? 0,
-            },
-          }));
-          setAnime((prev) => [...prev, ...(transformedData as animeCardInterface[])]);
-          if (data.length < 18) setSsEnd(true);
+      const fetchMore = async () => {
+        try {
+          const moreAnime = await FetchServiceInstance.fetchAnimeList(page);
+          setAnime((prev) => [...prev, ...moreAnime]);
+          if (moreAnime.length < 18) setIsEnd(true);
           page++;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+      fetchMore();
     }
   }, [inView, anime, isEnd]);
 
   return (
     <>
       <Section typeOfSection={'grid'}>
-        {anime.map((el: animeCardInterface, index: number) => (
+        {anime.map((el: AnimeDataInterface, index: number) => (
           <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
         ))}
       </Section>
