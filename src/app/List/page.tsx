@@ -1,8 +1,5 @@
 import { Metadata } from 'next';
-import { animeCardInterface } from '@/interfaces/animeCardInterface';
-import { Section, Card } from '@/components/UI/UIComponents';
 import ListSectionLoader from './Components/ListSectionLoader';
-import FetchServiceInstance from '@/app/api';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -11,18 +8,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const listPage: React.FC<animeCardInterface> = async () => {
-  const anime = await FetchServiceInstance.fetchAnimeList();
-  return (
-    <>
-      <Section typeOfSection={'grid'}>
-        {anime.map((el: AnimeDataInterface, index: number) => (
-          <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
-        ))}
-      </Section>
-      <ListSectionLoader />
-    </>
-  );
+const listPage = async () => {
+  return <ListSectionLoader></ListSectionLoader>;
 };
 
 export default listPage;
