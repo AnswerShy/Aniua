@@ -33,13 +33,13 @@ const PlayerProvider = ({ slug }: { slug?: string }) => {
     <>
       {codeOfRoom ? (
         <SocketProvider>
-          <Section typeOfSection="flexThreeCols" id="player-section">
+          <Section typeOfSection="OneColSection" id="player-section">
             <Player playerState={playerState} setPlayerState={setPlayerState} handleStudio={handleStudio} episodesList={episodesList} room={codeOfRoom} classname={codeOfRoom && 'layer1'} />
             <Chat />
           </Section>
         </SocketProvider>
       ) : (
-        <Section typeOfSection="flexThreeCols" id="player-section">
+        <Section typeOfSection="OneColSection" id="player-section">
           <Player startW2G={reloadWithRoom} playerState={playerState} setPlayerState={setPlayerState} handleStudio={handleStudio} episodesList={episodesList} room={codeOfRoom} />
         </Section>
       )}
