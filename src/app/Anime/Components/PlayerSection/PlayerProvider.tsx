@@ -3,7 +3,7 @@
 import Player from './Player';
 import { usePlayer } from '@/hooks/usePlayer';
 import { Chat } from '@/components/IndexComponent';
-import { Section } from '@/components/Shared/SharedComponents';
+import { Section } from '@/components/UI/UIComponents';
 import { SocketProvider } from '@/context/SocketContext';
 import { useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';

@@ -1,8 +1,8 @@
 import Banner from '@/components/Banner/FullScreenBanner';
-import InfoBlock from '@/components/InfoBlock/InfoBlock';
+import InfoBlock from '../Components/AnimeDataSection/InfoBlock';
 import { Metadata } from 'next';
 import FetchServiceInstance from '@/app/api';
-import PlayerProvider from '../Components/PlayerProvider';
+import PlayerProvider from '../Components/PlayerSection/PlayerProvider';
 import { i18n } from '@/utils/customUtils';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {

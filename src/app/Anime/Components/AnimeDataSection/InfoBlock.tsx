@@ -6,7 +6,7 @@ import descriptionCutter from '@/utils/custom/descriptionCutter';
 import Link from 'next/link';
 
 import styles from './InfoBlock.module.css';
-import { CustomButton, Dropdown, Section, Typography } from '../Shared/SharedComponents';
+import { CustomButton, Dropdown, Section, Typography } from '../../../../components/UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
 import { paths } from '@/constants/headersconst';
 

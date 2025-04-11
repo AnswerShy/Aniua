@@ -4,7 +4,7 @@ import style from './SearchBar.module.css';
 import { i18n } from '@/utils/customUtils';
 import { useSearch } from '@/context/SearchContext';
 import clsx from 'clsx';
-import { TypographyType } from '../Shared/SharedComponents';
+import { TypographyType } from '@/components/UI/UIComponents';
 
 function SearchBar() {
   const { openSearchModal } = useSearch();

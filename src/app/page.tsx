@@ -1,4 +1,4 @@
-import { Card, Row, SubRow, Section, Typography } from '@/components/Shared/SharedComponents';
+import { Card, Row, SubRow, Section, Typography } from '@/components/UI/UIComponents';
 import FetchServiceInstance from '@/app/api';
 import { i18n } from '@/utils/customUtils';
 

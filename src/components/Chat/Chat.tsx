@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useSocket } from '@/context/SocketContext';
 import { useUserStore } from '@/stores/store';
 
-import Message from '../Message/Message';
+import Message from './ChatMessage/Message';
 import style from './Chat.module.css';
-import { TextField } from '../Shared/SharedComponents';
+import { TextField } from '../UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
 
 function Chat() {

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
 import styles from './Button.module.css';
-import { TypographyType } from '../SharedComponents';
+import { TypographyType } from '@/components/UI/UIComponents';
 import { sleep } from '@/utils/customUtils';
 import React from 'react';
 

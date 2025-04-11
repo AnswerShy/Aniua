@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { animeCardInterface } from '@/interfaces/animeCardInterface';
-import { Section, Card } from '@/components/Shared/SharedComponents';
+import { Section, Card } from '@/components/UI/UIComponents';
 import ListSectionLoader from './Components/ListSectionLoader';
 import FetchServiceInstance from '@/app/api';
 

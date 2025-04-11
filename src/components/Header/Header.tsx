@@ -3,7 +3,7 @@ import styles from './Header.module.css';
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { CustomButton, Dropdown } from '../Shared/SharedComponents';
+import { CustomButton, Dropdown } from '../UI/UIComponents';
 import clsx from 'clsx';
 
 import { getTranslatedText } from '@/utils/customUtils';

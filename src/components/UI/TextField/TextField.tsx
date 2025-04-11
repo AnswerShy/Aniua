@@ -1,7 +1,7 @@
 import styles from './TextField.module.css';
 import { ErrorIcon } from '@/utils/icons';
 import { ChangeEvent, forwardRef, HTMLInputTypeAttribute } from 'react';
-import { TypographyType } from '../SharedComponents';
+import { TypographyType } from '@/components/UI/UIComponents';
 
 type TextFieldProps = {
   value: string | number;
