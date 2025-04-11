@@ -8,10 +8,7 @@ export { default as TextField } from '@/components/UI/TextField/TextField';
 export { default as Card } from '@/components/UI/Card/Card';
 export { default as CardSkeletonBlock } from '@/components/UI/Card/CardSkeleton';
 
-export { default as Row } from '@/components/UI/containers/Row';
-export { default as SubRow } from '@/components/UI/containers/Subrow';
-
-export { default as Section } from '@/components/UI/containers/Section';
+export { default as Section } from '@/components/UI/Section/Section';
 
 export { default as Typography } from '@/components/UI/Typography/Typography';
 export { variantMap as TypographyType } from '@/components/UI/Typography/Typography';

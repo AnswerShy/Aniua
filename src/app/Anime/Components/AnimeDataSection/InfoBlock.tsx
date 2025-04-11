@@ -54,7 +54,7 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
     }
   };
   return (
-    <Section typeOfSection={'flexThreeCols'}>
+    <Section typeOfSection={'ThreeColsSection'}>
       {/* First column */}
       <div className={styles.posterColumn}>
         <Image src={infoData.poster} alt={infoData.title} className="rounded-xl self-center" height={350} width={250} />
