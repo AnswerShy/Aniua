@@ -1,14 +1,33 @@
 .button {
-  /* Button */
   padding: 10px 15px;
+  display: block;
   border-radius: var(--borderRad);
 }
 
-.buttonBG {
-  /* Button */
-  padding: 10px 15px;
-  border-radius: var(--borderRad);
-  background-color: var(--01dp);
+.link {
+  background-color: transparent;
+  width: fit-content;
+  position: relative;
+}
+
+.link::after {
+  content: ' ';
+  display: block;
+  height: 5px;
+  width: 100%;
+  position: absolute;
+  transform: scaleX(0);
+  transition:
+    0.3s ease 0s,
+    left 0.3s ease 0s;
+  transform-origin: bottom right;
+  background-color: var(--primaryColor);
+}
+
+.link:hover::after,
+.link:focus::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .button:not(:disabled):hover {
