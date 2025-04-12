@@ -12,9 +12,15 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   url?: string;
   classString?: string;
   hideMenu?: () => void;
+  variant?: 'button' | 'link';
 }
 
-const CustomButton: React.FC<ButtonProps> = React.memo(({ url, hideMenu = null, children, classString, ...props }) => {
+const variants = {
+  button: styles.button,
+  link: styles.link,
+};
+
+const CustomButton: React.FC<ButtonProps> = React.memo(({ url, hideMenu = null, children, classString, variant = 'button', ...props }) => {
   const router = useRouter();
 
   const doLink = async (url: string, event: React.MouseEvent) => {
@@ -34,7 +40,7 @@ const CustomButton: React.FC<ButtonProps> = React.memo(({ url, hideMenu = null, 
       {children}
     </button>
   ) : (
-    <Link href={url} className={clsx(classString ?? `${styles.button}`, `${TypographyType['button'].className}`)}>
+    <Link href={url} className={clsx(classString ?? variants[variant], `${TypographyType['button'].className}`)}>
       <div onClick={(event) => doLink(url, event)}>{children}</div>
     </Link>
   );
