@@ -1,25 +1,36 @@
 'use client';
 
-import style from './SearchBar.module.css';
 import { i18n } from '@/utils/customUtils';
 import { useSearch } from '@/context/SearchContext';
-import clsx from 'clsx';
-import { TypographyType } from '@/components/UI/UIComponents';
+import { TextField } from '@/components/UI/UIComponents';
+import { SearchIcon } from '@/utils/icons';
 
-function SearchBar() {
+interface SearchBarProps {
+  variant?: 'input' | 'icon';
+  handle?: () => void;
+}
+
+function SearchBar({ variant = 'input', handle }: SearchBarProps) {
   const { openSearchModal } = useSearch();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      // Open modal on Enter or Spacebar press
       openSearchModal();
     }
   };
 
-  return (
+  return variant == 'input' ? (
     <>
-      <input type="button" className={clsx(`${TypographyType['button'].className}`, style.searchbar)} aria-label={i18n.t('header.search')} onClick={openSearchModal} onKeyDown={handleKeyDown} value={i18n.t('header.search')} />
+      <TextField type="text" readonly aria-label={i18n.t('header.search')} onClick={openSearchModal} onKeyDown={handleKeyDown} value={i18n.t('header.search')} />
     </>
+  ) : (
+    <SearchIcon
+      sx={{ fontSize: '30px' }}
+      onClick={() => {
+        openSearchModal();
+        handle?.();
+      }}
+    />
   );
 }
 

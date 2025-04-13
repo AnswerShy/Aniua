@@ -1,34 +1,60 @@
-.headerMobile {
-  @apply flex w-full flex-row fixed items-center p-4 z-50 top-0 xl:hidden backdrop-blur-sm;
-  transition: all 0.2s linear;
-  @apply cursor-pointer;
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  transition: 0.5s;
 }
 
-.headerDesktop {
-  @apply hidden fixed z-50 transition-colors duration-500;
-  @apply xl:py-[5px] xl:top-0 xl:flex xl:w-full xl:flex-row xl:items-center xl:justify-between xl:px-[25%];
+.header nav:first-child {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 2px var(--01dp) solid;
+  background-color: var(--t00dp);
   backdrop-filter: var(--blurredFilter);
-  background-color: var(--t01dp);
-  border-bottom: 1px solid var(--02dp);
+}
+
+.header nav svg {
+  cursor: pointer;
+}
+
+@media (max-width: 450px) {
+  .header nav > *:last-child {
+    display: none;
+  }
+}
+
+.hidden {
+  pointer-events: none;
+  display: none !important;
+}
+
+.pathway {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 5px;
+}
+
+.pathway span {
+  color: var(--textSemiColor);
+  font-weight: bolder;
 }
 
 .sideMenu {
-  @apply flex xl:hidden flex-col fixed top-16 items-start p-4 w-3/4 justify-between h-calc-screen-minus-4rem bg-c01dp z-50;
-  transition: all 0.2s linear;
-}
-
-.leftHeader {
-  @apply text-2xl hidden xl:flex flex-col items-center xl:flex-row xl:gap-4;
-}
-
-.rightHeader {
-  @apply flex flex-row items-center gap-4;
-}
-
-.topMenu {
-  @apply flex xl:hidden flex-col items-start gap-4;
-}
-
-.botMenu {
-  @apply flex flex-row-reverse justify-center items-center gap-4;
+  width: 250px;
+  height: 100svh;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: flex-start !important;
+  background-color: var(--01dp);
+  box-shadow: inset -4px 0px 6px -2px rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  position: absolute;
+  transform: translate(-250px, 0px);
+  top: 0;
+  z-index: 99;
+  border-right: 1px var(--01dp) solid;
 }

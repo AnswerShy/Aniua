@@ -4,3 +4,4 @@ export { default as ArrowForwardIcon } from '@mui/icons-material/ArrowForward';
 export { default as MenuIcon } from '@mui/icons-material/Menu';
 export { default as Person } from '@mui/icons-material/Person';
 export { default as ErrorIcon } from '@mui/icons-material/ErrorOutline';
+export { default as SearchIcon } from '@mui/icons-material/SearchOutlined';
