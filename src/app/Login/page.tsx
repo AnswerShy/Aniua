@@ -45,8 +45,9 @@ export default function Login() {
 
   return (
     <>
-      <Section typeOfSection={'center'}>
+      <Section typeOfSection={'OneColSection'}>
         <form onSubmit={handleSubmit(handleLogin)} className="w-full lg:w-1/4 rounded-xl py-16 px-16 flex flex-col gap-4">
+          <label>{i18n.t('login.username')}</label>
           <Controller
             control={control}
             name="username"
@@ -56,6 +57,7 @@ export default function Login() {
             }}
             render={({ field: { ref, value, ...field } }) => <TextField {...field} value={value} errorString={errors.username?.message} label={i18n.t('login.username')} ref={ref} type={'login'} />}
           />
+          <label>{i18n.t('login.password')}</label>
           <Controller
             control={control}
             name="password"

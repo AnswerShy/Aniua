@@ -10,7 +10,7 @@
   --primaryColor: white;
 
   --00dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 0%);
-  --t00dp: color-mix(in oklab, var(--00dp) 75%, transparent);
+  --t00dp: color-mix(in oklab, var(--black) 95%, transparent);
   --01dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 7%);
   --t01dp: color-mix(in oklab, var(--01dp) 75%, transparent);
   --02dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 12%);
@@ -63,49 +63,22 @@
   --loadingAnim: shimmer 1s infinite linear !important;
 
   --mdMaxWidth: 768px;
+
+  --sideMenuWidth: 250px;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #121212;
-    --foreground: #ededed;
+.body-shifted {
+  transform: translate(var(--sideMenuWidth), 0px);
+}
 
-    --button: color-mix(in oklab, var(--background) 10%, white)
-    --buttonHover: #171717;
-  }
-} */
+svg:hover {
+  fill: var(--primaryColor);
+}
 
 body {
   color: var(--foreground);
   background: var(--background);
-}
-
-h1 {
-  width: fit-content;
-  text-align: left;
-  color: var(--foreground);
-
-  color: var(--titleColor);
-  font-size: var(--titleSize);
-}
-
-h2 {
-  height: fit-content;
-  font-size: var(--textSize);
-}
-
-p,
-span,
-a {
-  font-size: var(--textSize);
-  width: fit-content;
-  text-align: left;
-  color: var(--textSemiColor);
-}
-
-a:hover {
-  cursor: pointer;
-  color: white;
+  transition: 0.2s;
 }
 
 span > :nth-child(1) {
@@ -150,8 +123,7 @@ form {
 }
 
 *:focus {
-  z-index: 10;
-  outline: solid 1px var(--primaryColor);
+  outline: none;
 }
 
 .layer1 {
@@ -159,13 +131,6 @@ form {
   border-radius: var(--borderRad);
   box-shadow: var(--shadowHover);
   padding: 15px;
-}
-
-.text-style-default {
-  font-size: 2rem;
-  color: var(--textColor);
-  font-weight: light;
-  line-height: 0;
 }
 
 @keyframes shimmer {
@@ -179,26 +144,11 @@ form {
 
 /* Buttons and Inputs */
 
-input,
-button {
-  /* backdrop-filter: var(--blurredFilter); */
-  padding: 15px;
-  border-radius: 12px;
-}
-
-input:hover,
-button:hover {
-  background-color: var(--02dp);
-  cursor: pointer;
-  box-shadow: var(--shadowHover);
-}
-
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
-  border: 1px solid var(--textColor);
+  border: none;
   -webkit-text-fill-color: var(--textColor);
-  background-color: var(--01dp);
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -208,4 +158,27 @@ select:-webkit-autofill:hover {
   background-color: var(--02dp);
   cursor: pointer;
   box-shadow: var(--shadowHover);
+}
+
+/* BORDER ANIMATION */
+
+@layer utilities {
+  .border-animate {
+    @apply relative transition-colors duration-300;
+
+    background-size: 0% 1px;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to left, var(--primaryColor), var(--primaryColor));
+  }
+
+  .border-animate:hover,
+  .border-animate:focus {
+    background-size: 100% 1px;
+    background-position: bottom left;
+  }
+
+  .border-animate:has(input:-webkit-autofill) {
+    border-color: var(--your-autofilled-border-color);
+  }
 }
