@@ -5,10 +5,12 @@
   border: 1px var(--02dp) solid;
   @apply rounded-sm;
   transition: 0.2s;
+  position: relative;
 }
 
 .inputText input {
-  background-color: transparent;
+  background-color: transparent !important;
+  width: 100%;
 }
 
 .inputText:hover {

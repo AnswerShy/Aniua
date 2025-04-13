@@ -44,15 +44,6 @@
 
   --loadGradient: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%);
 
-  --titleSize: 2.5rem;
-  --textSize: 1.5rem;
-
-  --subtext: 1.275rem;
-  --subtitle: 1.5rem;
-
-  --bannerTitle: 6rem;
-  --bannerText: 1.5rem;
-
   --minButtonHeight: 40px;
   --minButtonWidth: 40px;
 
@@ -67,6 +58,8 @@
   --mdMaxWidth: 768px;
 
   --sideMenuWidth: 250px;
+
+  --borderAnimSize: 5px;
 }
 
 .body-shifted {
@@ -165,22 +158,24 @@ select:-webkit-autofill:hover {
 /* BORDER ANIMATION */
 
 @layer utilities {
-  .border-animate {
-    @apply relative transition-colors duration-300;
-
-    background-size: 0% 1px;
-    background-position: bottom right;
-    background-repeat: no-repeat;
-    background-image: linear-gradient(to left, var(--primaryColor), var(--primaryColor));
+  .border-animate::after {
+    content: ' ';
+    display: block;
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    transform: scaleX(0);
+    transition:
+      0.3s ease 0s,
+      left 0.3s ease 0s;
+    transform-origin: bottom right;
+    background-color: var(--primaryColor);
   }
 
-  .border-animate:hover,
-  .border-animate:focus {
-    background-size: 100% 1px;
-    background-position: bottom left;
-  }
-
-  .border-animate:has(input:-webkit-autofill) {
-    border-color: var(--your-autofilled-border-color);
+  .border-animate:hover::after,
+  .border-animate:focus::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
