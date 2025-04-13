@@ -7,18 +7,23 @@ import { TypographyType } from '@/components/UI/UIComponents';
 import { sleep } from '@/utils/customUtils';
 import React from 'react';
 
+const variants = {
+  button: styles.button,
+  outline: styles.outline,
+  secondary: styles.secondary,
+  link: styles.link,
+  primary: styles.primary,
+} as const;
+
+type VariantType = keyof typeof variants;
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   url?: string;
   classString?: string;
   hideMenu?: () => void;
-  variant?: 'button' | 'link';
+  variant?: VariantType;
 }
-
-const variants = {
-  button: styles.button,
-  link: styles.link,
-};
 
 const CustomButton: React.FC<ButtonProps> = React.memo(({ url, hideMenu = null, children, classString, variant = 'button', ...props }) => {
   const router = useRouter();

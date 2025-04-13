@@ -104,7 +104,7 @@ const GetAccBlock = React.memo(() => (
     <CustomButton variant="link" url="/Registration">
       {getTranslatedText('header', 'Registration')}
     </CustomButton>
-    <CustomButton variant="link" url="/Login">
+    <CustomButton variant="primary" url="/Login">
       {getTranslatedText('header', 'Login')}
     </CustomButton>
   </>

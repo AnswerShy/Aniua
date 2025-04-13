@@ -15,6 +15,8 @@
   --t01dp: color-mix(in oklab, var(--01dp) 75%, transparent);
   --02dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 12%);
   --03dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 17%);
+  --04dp: color-mix(in oklab, var(--black) 100%, var(--primaryColor) 25%);
+  --05dp: color-mix(in oklab, var(--black) 25%, var(--primaryColor) 100%);
 
   --background: var(--00dp);
   --foreground: #ffffffab;
