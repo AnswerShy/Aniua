@@ -8,6 +8,11 @@
   background-color: transparent;
   width: fit-content;
   position: relative;
+  color: var(--foreground);
+}
+
+.link:hover {
+  color: var(--primaryColor);
 }
 
 .link::after {

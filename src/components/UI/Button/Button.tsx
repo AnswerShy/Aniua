@@ -36,7 +36,7 @@ const CustomButton: React.FC<ButtonProps> = React.memo(({ url, hideMenu = null, 
   };
 
   return !url ? (
-    <button className={clsx(`${styles.button}`, `${TypographyType['button'].className}`, classString)} {...props}>
+    <button className={clsx(classString ?? variants[variant], `${TypographyType['button'].className}`)} {...props}>
       {children}
     </button>
   ) : (
