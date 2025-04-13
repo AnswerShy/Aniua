@@ -3,12 +3,12 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import descriptionCutter from '@/utils/custom/descriptionCutter';
-import Link from 'next/link';
 
 import styles from './InfoBlock.module.css';
-import { CustomButton, Dropdown, Section, Typography } from '../../../../components/UI/UIComponents';
+import { CustomButton, Dropdown, Section, Typography, TypographyType } from '../../../../components/UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
 import { paths } from '@/constants/headersconst';
+import clsx from 'clsx';
 
 interface Props {
   infoData: AnimeDataInterface;
@@ -18,13 +18,15 @@ const genres = (year: number, genres: AnimeGenres[]) => {
   if (!genres) return null;
   return (
     <div className={styles.genresRow}>
-      <p>{year}</p>
+      <CustomButton variant="link" key={year} url={`${paths.list}/?year=${year}`}>
+        {year}
+      </CustomButton>
       <p>•</p>
       {Object.entries(genres).length > 0 ? (
         genres.map((el) => (
-          <Link key={el.id} href={`${paths.list}/${el.slug}`}>
+          <CustomButton variant="link" key={el.id} url={`${paths.list}/?genre=${el.slug}`}>
             {el.title}
-          </Link>
+          </CustomButton>
         ))
       ) : (
         <p>unknown genres (?)</p>
@@ -82,7 +84,7 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
       {/* Third column */}
       <div className={styles.detailColumn}>
         <Typography variant="h2">{i18n.t('info.Details')}</Typography>
-        <div className={styles.subBlock}>
+        <div className={clsx(styles.subBlock, TypographyType['body1'].className)}>
           <DetailRow title={i18n.t('info.Type')} data={infoData.type.title} url={infoData.type.slug} />
           <DetailRow title={i18n.t('info.Status')} data={infoData.status} url={infoData.status} />
           <DetailRow title={i18n.t('info.Episodes')} data={episodesInfo(infoData.episode.present, infoData.episode.last)} />

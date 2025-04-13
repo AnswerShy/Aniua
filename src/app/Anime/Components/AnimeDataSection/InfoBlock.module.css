@@ -3,7 +3,7 @@
 }
 
 .titleDescColumn {
-  @apply flex flex-col w-full lg:w-min xl:w-[670px] gap-4;
+  @apply flex flex-col w-full lg:w-[500px] xl:w-[670px] gap-4;
 }
 
 .detailColumn {
