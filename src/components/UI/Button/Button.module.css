@@ -4,41 +4,9 @@
   border-radius: var(--borderRad);
 }
 
-.link {
-  background-color: transparent;
-  width: fit-content;
-  position: relative;
-  color: var(--foreground);
-}
-
-.link:hover {
-  color: var(--primaryColor);
-}
-
-.link::after {
-  content: ' ';
-  display: block;
-  height: 5px;
-  width: 100%;
-  position: absolute;
-  transform: scaleX(0);
-  transition:
-    0.3s ease 0s,
-    left 0.3s ease 0s;
-  transform-origin: bottom right;
-  background-color: var(--primaryColor);
-}
-
-.link:hover::after,
-.link:focus::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
 .button:not(:disabled):hover {
-  /* On button hover */
   cursor: pointer;
-  background-color: var(--02dp);
+  background-color: var(--01dp);
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.25),
     0 10px 10px rgba(0, 0, 0, 0.22);
@@ -68,4 +36,83 @@
 .btnErrorline {
   display: flex;
   align-items: center;
+}
+
+/* Primary button */
+
+.primary {
+  padding: 10px 15px;
+  border-radius: var(--borderRad);
+  background-color: var(--05dp);
+  color: var(--background);
+}
+
+.primary:not(:disabled):hover {
+  cursor: pointer;
+  background-color: var(--primaryColor);
+}
+
+/* Secondary button */
+
+.secondary {
+  padding: 10px 15px;
+  background-color: var(--01dp);
+  border-radius: var(--borderRad);
+}
+
+.secondary:not(:disabled):hover {
+  cursor: pointer;
+  background-color: var(--02dp);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/* Outline button */
+
+.outline {
+  padding: 10px 15px;
+  display: block;
+  border-radius: var(--borderRad);
+  border: 1px var(--01dp) solid;
+}
+
+.outline:not(:disabled):hover {
+  background-color: var(--01dp);
+}
+
+.outline:focus {
+  background-color: var(--02dp);
+}
+
+/* Link button variant */
+.link {
+  background-color: transparent;
+  width: fit-content;
+  position: relative;
+  color: var(--foreground);
+}
+
+.link:not(:disabled):hover {
+  color: var(--primaryColor);
+}
+
+.link::after {
+  content: ' ';
+  display: block;
+  height: 5px;
+  width: 100%;
+  position: absolute;
+  transform: scaleX(0);
+  transition:
+    0.3s ease 0s,
+    left 0.3s ease 0s;
+  transform-origin: bottom right;
+  background-color: var(--primaryColor);
+}
+
+.link:hover::after,
+.link:focus::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
