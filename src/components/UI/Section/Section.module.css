@@ -17,7 +17,7 @@
   min-height: 50svh;
   align-items: center;
   flex-direction: column;
-  padding: 0 10%;
+  padding: 50px 10%;
   gap: 25px;
 }
 
@@ -30,6 +30,7 @@
 .row {
   display: flex;
   width: 100%;
+  gap: 20px;
 }
 
 .col {

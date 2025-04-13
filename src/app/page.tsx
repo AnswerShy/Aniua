@@ -15,7 +15,7 @@ export default async function Home() {
         </Section.Row>
         <Section.Row>
           <Section.Col title={i18n.t('home.Community choice')} widthState="3/4">
-            <div style={{ width: '100%', overflow: 'scroll', display: 'flex', flexDirection: 'row' }}>
+            <div style={{ width: '100%', overflow: 'scroll hidden', display: 'flex', flexDirection: 'row' }}>
               {communityChoice.map((el, index) => (
                 <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
               ))}

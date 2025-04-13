@@ -18,7 +18,7 @@ export default function ProfileComponent() {
   }, []);
 
   return (
-    <Section typeOfSection={'Profile'}>
+    <Section typeOfSection={'OneColSection'}>
       {userStoredData ? (
         <>
           <div className={styles.profileRowUp}>
