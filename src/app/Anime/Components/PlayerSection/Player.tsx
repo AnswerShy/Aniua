@@ -110,7 +110,7 @@ const EpisodeList = ({
       {episodesList.map((element, index) => (
         <CustomButton
           key={index}
-          classString={clsx(element.is_filler ? null : CustomButtonStyles.buttonBG, element.id == playerState.episodeID ? styles.activeEpisode : null)}
+          classString={clsx(element.is_filler ? CustomButtonStyles.outline : CustomButtonStyles.secondary, element.id == playerState.episodeID ? styles.activeEpisode : null)}
           onClick={() =>
             handleEpisode({
               playerState: setPlayerState,
