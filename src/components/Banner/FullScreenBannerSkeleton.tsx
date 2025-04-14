@@ -3,7 +3,7 @@ import styles from './FullScreenBanner.module.css';
 
 const BannerSkeleton = () => {
   return (
-    <Section typeOfSection={'Banner'}>
+    <Section typeOfSection={'BannerSection'}>
       <div className={styles.bannerInfoContainer}>
         <h1 className={`${styles.bannerTitle} ${styles.load}`}>TITLE</h1>
         <div className={styles.bannerBaseInfo}>

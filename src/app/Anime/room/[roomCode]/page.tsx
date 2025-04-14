@@ -9,12 +9,10 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function AnimePage({ params }: { params: { roomCode: string } }) {
-  const { roomCode } = await params;
-  console.log(roomCode);
+export default async function AnimePage() {
   return (
     <>
-      <PlayerProvider room={roomCode} />
+      <PlayerProvider />
     </>
   );
 }
