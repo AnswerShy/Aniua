@@ -34,13 +34,27 @@ const PlayerProvider = ({ slug }: { slug?: string }) => {
       {codeOfRoom ? (
         <SocketProvider>
           <Section typeOfSection="OneColSection" id="player-section">
-            <Player playerState={playerState} setPlayerState={setPlayerState} handleStudio={handleStudio} episodesList={episodesList} room={codeOfRoom} classname={codeOfRoom && 'layer1'} />
+            <Player
+              playerState={playerState}
+              setPlayerState={setPlayerState}
+              handleStudio={handleStudio}
+              episodesList={episodesList}
+              room={codeOfRoom}
+              classname={codeOfRoom && 'layer1'}
+            />
             <Chat />
           </Section>
         </SocketProvider>
       ) : (
         <Section typeOfSection="OneColSection" id="player-section">
-          <Player startW2G={reloadWithRoom} playerState={playerState} setPlayerState={setPlayerState} handleStudio={handleStudio} episodesList={episodesList} room={codeOfRoom} />
+          <Player
+            startW2G={reloadWithRoom}
+            playerState={playerState}
+            setPlayerState={setPlayerState}
+            handleStudio={handleStudio}
+            episodesList={episodesList}
+            room={codeOfRoom}
+          />
         </Section>
       )}
     </>

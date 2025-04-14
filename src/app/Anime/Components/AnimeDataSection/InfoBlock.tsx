@@ -5,7 +5,13 @@ import { useState } from 'react';
 import descriptionCutter from '@/utils/custom/descriptionCutter';
 
 import styles from './InfoBlock.module.css';
-import { CustomButton, Dropdown, Section, Typography, TypographyType } from '../../../../components/UI/UIComponents';
+import {
+  CustomButton,
+  Dropdown,
+  Section,
+  Typography,
+  TypographyType,
+} from '../../../../components/UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
 import { paths } from '@/constants/headersconst';
 import clsx from 'clsx';
@@ -59,7 +65,13 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
     <Section typeOfSection={'ThreeColsSection'}>
       {/* First column */}
       <div className={styles.posterColumn}>
-        <Image src={infoData.poster} alt={infoData.title} className="rounded-xl self-center" height={350} width={250} />
+        <Image
+          src={infoData.poster}
+          alt={infoData.title}
+          className="rounded-xl self-center"
+          height={350}
+          width={250}
+        />
         <Dropdown currentState={i18n.t('info.addToList')}></Dropdown>
       </div>
 
@@ -85,9 +97,16 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
       <div className={styles.detailColumn}>
         <Typography variant="h2">{i18n.t('info.Details')}</Typography>
         <div className={clsx(styles.subBlock, TypographyType['body1'].className)}>
-          <DetailRow title={i18n.t('info.Type')} data={infoData.type.title} url={infoData.type.slug} />
+          <DetailRow
+            title={i18n.t('info.Type')}
+            data={infoData.type.title}
+            url={infoData.type.slug}
+          />
           <DetailRow title={i18n.t('info.Status')} data={infoData.status} url={infoData.status} />
-          <DetailRow title={i18n.t('info.Episodes')} data={episodesInfo(infoData.episode.present, infoData.episode.last)} />
+          <DetailRow
+            title={i18n.t('info.Episodes')}
+            data={episodesInfo(infoData.episode.present, infoData.episode.last)}
+          />
           <DetailRow title={i18n.t('info.Rate')} data={infoData.mal_score} />
           <DetailRow title={i18n.t('info.Year')} data={infoData.year} />
           <DetailRowMultiplie title={i18n.t('info.Genres')} data={infoData.genres} />
@@ -99,7 +118,15 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
 
 export default InfoBlock;
 
-const DetailRow = ({ title, data, url }: { title: string; data: string | number; url?: string }) => {
+const DetailRow = ({
+  title,
+  data,
+  url,
+}: {
+  title: string;
+  data: string | number;
+  url?: string;
+}) => {
   return (
     <span className={styles.subRow}>
       <p>{title}: </p>
@@ -121,7 +148,11 @@ const DetailRowMultiplie = ({ title, data }: { title: string; data: AnimeGenres[
       <div className={styles.detailsArray}>
         {Object.entries(data).map((element, key) => {
           return (
-            <CustomButton key={key} url={`${paths.list}/${element[1].slug}`} classString={styles.subText}>
+            <CustomButton
+              key={key}
+              url={`${paths.list}/${element[1].slug}`}
+              classString={styles.subText}
+            >
               {element[1].title}
             </CustomButton>
           );

@@ -5,7 +5,11 @@ import FetchServiceInstance from '@/app/api';
 import PlayerProvider from '../Components/PlayerSection/PlayerProvider';
 import { i18n } from '@/utils/customUtils';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const { slug } = await params;
   const data = await FetchServiceInstance.fetchAnimeInfo(slug);
 
@@ -24,7 +28,14 @@ export default async function AnimePage({ params }: { params: { slug: string } }
 
   return (
     <>
-      <Banner bannerImage={data.poster} bannerChar={data.background_image_url} bannerTitle={data.title} bannerDesc={data.description} bannerGenres={data.genres} bannerYear={data.year} />
+      <Banner
+        bannerImage={data.poster}
+        bannerChar={data.background_image_url}
+        bannerTitle={data.title}
+        bannerDesc={data.description}
+        bannerGenres={data.genres}
+        bannerYear={data.year}
+      />
       <InfoBlock infoData={data} />
       <PlayerProvider slug={slug} />
     </>

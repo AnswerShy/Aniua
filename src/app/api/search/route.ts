@@ -13,14 +13,20 @@ export async function GET(req: NextRequest) {
     });
 
     if (!response.ok) {
-      return NextResponse.json({ message: `Failed to fetch anime ${query}` }, { status: response.status });
+      return NextResponse.json(
+        { message: `Failed to fetch anime ${query}` },
+        { status: response.status },
+      );
     }
 
     const { titles }: { titles: AnimeDataInterface[] } = await response.json();
 
     const filteredResults = titles.filter((item) => {
-      const titleEnMatch = typeof item.title_en === 'string' && item.title_en.toLowerCase().includes(query.toLowerCase());
-      const titleUaMatch = typeof item.title === 'string' && item.title.toLowerCase().includes(query.toLowerCase());
+      const titleEnMatch =
+        typeof item.title_en === 'string' &&
+        item.title_en.toLowerCase().includes(query.toLowerCase());
+      const titleUaMatch =
+        typeof item.title === 'string' && item.title.toLowerCase().includes(query.toLowerCase());
 
       return titleEnMatch || titleUaMatch;
     });

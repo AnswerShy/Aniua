@@ -36,21 +36,56 @@ const Dropdown = ({ currentState, customElement, children, isLeft = true }: Drop
       )}
 
       {/*Options for the dropdown*/}
-      <div className={`${styles.optionsWrap} ${!visible ? styles.hideOptions : null}`} style={{ left: isLeft ? '0' : 'auto', right: isLeft ? 'auto' : '0' }}>
-        {React.Children.map(children, (child) => (React.isValidElement(child) ? React.cloneElement(child as ReactElement<{ hideDropdown?: () => void }>, { hideDropdown }) : child))}
+      <div
+        className={`${styles.optionsWrap} ${!visible ? styles.hideOptions : null}`}
+        style={{ left: isLeft ? '0' : 'auto', right: isLeft ? 'auto' : '0' }}
+      >
+        {React.Children.map(children, (child) =>
+          React.isValidElement(child)
+            ? React.cloneElement(child as ReactElement<{ hideDropdown?: () => void }>, {
+                hideDropdown,
+              })
+            : child,
+        )}
       </div>
     </DropdownButton>
   );
 };
 export default Dropdown;
 
-const DropdownButton = ({ children, onClick, visible }: { children: React.ReactNode; onClick: () => void; visible: boolean }) => (
-  <button className={clsx(`${styles.dropdownButton}`, `${TypographyType['button'].className}`, `${children ? styles.dropdownChildren : null}`)} onClick={onClick} aria-haspopup="listbox" aria-expanded={visible} aria-controls="dropdown-options">
+const DropdownButton = ({
+  children,
+  onClick,
+  visible,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  visible: boolean;
+}) => (
+  <button
+    className={clsx(
+      `${styles.dropdownButton}`,
+      `${TypographyType['button'].className}`,
+      `${children ? styles.dropdownChildren : null}`,
+    )}
+    onClick={onClick}
+    aria-haspopup="listbox"
+    aria-expanded={visible}
+    aria-controls="dropdown-options"
+  >
     {children}
   </button>
 );
 
-const optionUrl = ({ href, state, hideDropdown }: { href: string; state: string; hideDropdown?: () => void }) => {
+const optionUrl = ({
+  href,
+  state,
+  hideDropdown,
+}: {
+  href: string;
+  state: string;
+  hideDropdown?: () => void;
+}) => {
   return (
     <>
       <CustomButton hideMenu={hideDropdown} url={href} classString={styles.option}>
@@ -60,22 +95,32 @@ const optionUrl = ({ href, state, hideDropdown }: { href: string; state: string;
   );
 };
 
-const optionAction = React.memo(({ handleOptionSelectAction, state, hideDropdown }: { handleOptionSelectAction: () => void; state?: string; hideDropdown?: () => void }) => {
-  return (
-    <>
-      <div
-        role="option"
-        className={styles.option}
-        onClick={() => {
-          handleOptionSelectAction();
-          if (hideDropdown) hideDropdown();
-        }}
-      >
-        {state && state.charAt(0).toUpperCase() + state.slice(1)}
-      </div>
-    </>
-  );
-});
+const optionAction = React.memo(
+  ({
+    handleOptionSelectAction,
+    state,
+    hideDropdown,
+  }: {
+    handleOptionSelectAction: () => void;
+    state?: string;
+    hideDropdown?: () => void;
+  }) => {
+    return (
+      <>
+        <div
+          role="option"
+          className={styles.option}
+          onClick={() => {
+            handleOptionSelectAction();
+            if (hideDropdown) hideDropdown();
+          }}
+        >
+          {state && state.charAt(0).toUpperCase() + state.slice(1)}
+        </div>
+      </>
+    );
+  },
+);
 optionAction.displayName = 'OptionAction';
 
 Dropdown.optionUrl = optionUrl;

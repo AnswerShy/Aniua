@@ -38,7 +38,9 @@ export const usePlayerSocket = (roomCode: string | null, iframe: HTMLIFrameEleme
       }
 
       console.log('Sending message to iframe:', { command: messageToFrame, additional });
-      const message = additional ? { command: messageToFrame, seek: Number(additional) } : { command: messageToFrame };
+      const message = additional
+        ? { command: messageToFrame, seek: Number(additional) }
+        : { command: messageToFrame };
       iframe?.contentWindow?.postMessage(message, '*');
     },
     [iframe],

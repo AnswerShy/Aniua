@@ -13,7 +13,10 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
     });
 
     if (!response.ok) {
-      return NextResponse.json({ message: `Failed to fetch anime ${slug}` }, { status: response.status });
+      return NextResponse.json(
+        { message: `Failed to fetch anime ${slug}` },
+        { status: response.status },
+      );
     }
 
     const responseBody = await response.json();

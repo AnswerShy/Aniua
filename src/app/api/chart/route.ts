@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(req: NextRequest) {
   try {
     const sessionid = req.cookies.get('sessionid')?.value;
-    if (!sessionid) return NextResponse.json({ message: 'Missing sessionid cookie' }, { status: 400 });
+    if (!sessionid)
+      return NextResponse.json({ message: 'Missing sessionid cookie' }, { status: 400 });
 
     const url = `${process.env.NEXT_PUBLIC_API_URL}mylists/pereglyanuto`;
 
