@@ -27,7 +27,6 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${roboto.className} antialiased`}>
-        {/* <SearchProvider> */}
         <Loading />
         <Toaster
           toastOptions={{
@@ -40,7 +39,6 @@ export default function RootLayout({
         <Header />
         {modal}
         <main>{children}</main>
-        {/* </SearchProvider> */}
       </body>
     </html>
   );

@@ -23,13 +23,11 @@ export default function Header() {
   const { userStoredData } = useUserProfile();
 
   useEffect(() => {
-    if (pathname === '/') {
-      setCurrentPath(['List']);
-    } else if (pathname.startsWith('/Anime/')) {
+    if (pathname.startsWith('/Anime/')) {
       const anime = pathname.slice(7).replaceAll('-', ' ');
       setCurrentPath(['List', anime]);
     } else {
-      setCurrentPath([pathname.slice(1)]);
+      setCurrentPath(['List']);
     }
   }, [pathname]);
 
