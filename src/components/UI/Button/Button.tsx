@@ -25,31 +25,39 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: VariantType;
 }
 
-const CustomButton: React.FC<ButtonProps> = React.memo(({ url, hideMenu = null, children, classString, variant = 'button', ...props }) => {
-  const router = useRouter();
+const CustomButton: React.FC<ButtonProps> = React.memo(
+  ({ url, hideMenu = null, children, classString, variant = 'button', ...props }) => {
+    const router = useRouter();
 
-  const doLink = async (url: string, event: React.MouseEvent) => {
-    event.preventDefault();
-    if (hideMenu) {
-      hideMenu();
-    }
-    document.getElementById('transition')?.classList.remove('hidden');
-    await sleep(1000);
-    router.push(url);
-    await sleep(1000);
-    document.getElementById('transition')?.classList.add('hidden');
-  };
+    const doLink = async (url: string, event: React.MouseEvent) => {
+      event.preventDefault();
+      if (hideMenu) {
+        hideMenu();
+      }
+      document.getElementById('transition')?.classList.remove('hidden');
+      await sleep(1000);
+      router.push(url);
+      await sleep(1000);
+      document.getElementById('transition')?.classList.add('hidden');
+    };
 
-  return !url ? (
-    <button className={clsx(classString ?? variants[variant], `${TypographyType['button'].className}`)} {...props}>
-      {children}
-    </button>
-  ) : (
-    <Link href={url} className={clsx(classString ?? variants[variant], `${TypographyType['button'].className}`)}>
-      <div onClick={(event) => doLink(url, event)}>{children}</div>
-    </Link>
-  );
-});
+    return !url ? (
+      <button
+        className={clsx(variants[variant], classString, `${TypographyType['button'].className}`)}
+        {...props}
+      >
+        {children}
+      </button>
+    ) : (
+      <Link
+        href={url}
+        className={clsx(classString ?? variants[variant], `${TypographyType['button'].className}`)}
+      >
+        <div onClick={(event) => doLink(url, event)}>{children}</div>
+      </Link>
+    );
+  },
+);
 CustomButton.displayName = 'CustomButton';
 
 export default CustomButton;
