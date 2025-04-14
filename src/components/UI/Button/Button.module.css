@@ -1,6 +1,5 @@
 .button {
   padding: 10px 15px;
-  display: block;
   border-radius: var(--borderRad);
 }
 
@@ -72,7 +71,6 @@
 
 .outline {
   padding: 10px 15px;
-  display: block;
   border-radius: var(--borderRad);
   border: 1px var(--01dp) solid;
 }
