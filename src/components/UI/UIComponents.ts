@@ -14,3 +14,5 @@ export { default as Typography } from '@/components/UI/Typography/Typography';
 export { variantMap as TypographyType } from '@/components/UI/Typography/Typography';
 
 export { default as CreepingText } from '@/components/UI/LineTextAnimation/CreepingText';
+
+export { default as Modal } from '@/components/UI/Modal/Modal';

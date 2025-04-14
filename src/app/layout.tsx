@@ -5,7 +5,6 @@ import './globals.css';
 import Header from '@/components/Header/Header';
 import Loading from '@/components/Loading/LoadingComponent';
 import { i18n } from '@/utils/customUtils';
-import { SearchProvider } from '@/context/SearchContext';
 import { Toaster } from 'react-hot-toast';
 
 const roboto = Roboto_Condensed({
@@ -20,25 +19,28 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
+  modal: React.ReactNode;
   children: React.ReactNode;
 }>) {
   return (
     <html>
       <body className={`${roboto.className} antialiased`}>
-        <SearchProvider>
-          <Loading />
-          <Toaster
-            toastOptions={{
-              style: {
-                background: 'var(--03dp)',
-                color: '#fff',
-              },
-            }}
-          />
-          <Header />
-          <main>{children}</main>
-        </SearchProvider>
+        {/* <SearchProvider> */}
+        <Loading />
+        <Toaster
+          toastOptions={{
+            style: {
+              background: 'var(--03dp)',
+              color: '#fff',
+            },
+          }}
+        />
+        <Header />
+        {modal}
+        <main>{children}</main>
+        {/* </SearchProvider> */}
       </body>
     </html>
   );

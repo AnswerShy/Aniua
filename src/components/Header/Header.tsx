@@ -52,7 +52,13 @@ export default function Header() {
         </CustomButton>
         <Pathway ways={currentPaths} />
         <SearchBar />
-        <div className="hidden md:flex ml-auto flex gap-[20px] items-center flex-row justify-center">{userStoredData?.username ? <ProfileBlock userStoredData={userStoredData} /> : <GetAccBlock />}</div>
+        <div className="hidden md:flex ml-auto flex gap-[20px] items-center flex-row justify-center">
+          {userStoredData?.username ? (
+            <ProfileBlock userStoredData={userStoredData} />
+          ) : (
+            <GetAccBlock />
+          )}
+        </div>
       </nav>
       <nav className={clsx(!isMenuOpened ? styles.hidden : styles.sideMenu)}>
         <div className="w-full justify-between flex">
@@ -101,10 +107,10 @@ Pathway.displayName = 'Pathway';
 
 const GetAccBlock = React.memo(() => (
   <>
-    <CustomButton variant="link" url="/Registration">
+    <CustomButton variant="link" url="/registration">
       {getTranslatedText('header', 'Registration')}
     </CustomButton>
-    <CustomButton variant="primary" url="/Login">
+    <CustomButton variant="primary" url="/login">
       {getTranslatedText('header', 'Login')}
     </CustomButton>
   </>
@@ -115,12 +121,20 @@ const ProfileBlock = React.memo(({ userStoredData }: { userStoredData: UserProfi
   <>
     <Dropdown currentState={userStoredData?.money?.toString()} isLeft={false}>
       {Object.entries(pathsMoney).map((path, index) => (
-        <Dropdown.optionUrl key={index} href={path[1]} state={getTranslatedText('paths', path[0])} />
+        <Dropdown.optionUrl
+          key={index}
+          href={path[1]}
+          state={getTranslatedText('paths', path[0])}
+        />
       ))}
     </Dropdown>
     <Dropdown customElement={<Avatar avatar={userStoredData?.avatar} />} isLeft={false}>
       {Object.entries(pathsProfile).map((path, index) => (
-        <Dropdown.optionUrl key={index} href={path[1]} state={getTranslatedText('paths', path[0])} />
+        <Dropdown.optionUrl
+          key={index}
+          href={path[1]}
+          state={getTranslatedText('paths', path[0])}
+        />
       ))}
     </Dropdown>
   </>
@@ -132,7 +146,13 @@ const Avatar = ({ avatar }: { avatar?: string }) => {
     <div className="size-10 relative flex rounded-xl">
       {avatar ? (
         <div className="size-full relative">
-          <Image src={avatar} className="w-full h-full rounded-xl" fill objectFit="cover" alt="profile picture"></Image>
+          <Image
+            src={avatar}
+            className="w-full h-full rounded-xl"
+            fill
+            objectFit="cover"
+            alt="profile picture"
+          ></Image>
         </div>
       ) : (
         <div className="w-full h-full flex items-center justify-center bg-transparent01dp rounded-xl">

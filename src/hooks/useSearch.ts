@@ -56,7 +56,7 @@ function useSearchHook() {
     search(query);
   };
 
-  return { onSearchSubmit, onQueryChange, search, setQuery, results, isLoading };
+  return { onSearchSubmit, onQueryChange, search, setQuery, query, results, isLoading };
 }
 
 export default useSearchHook;
