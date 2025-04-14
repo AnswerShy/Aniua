@@ -17,21 +17,53 @@ type TextFieldProps = {
   kbd?: string;
 };
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ value, kbd, readonly, onClick, type = 'text', placeholder, onKeyDown, label, onChange, errorString, ...rest }, ref) => {
-  return (
-    <>
-      <div className={clsx(styles.inputText, 'border-animate')}>
-        <input value={onChange && value} readOnly={readonly} ref={ref} type={type} onChange={onChange} onClick={onClick} placeholder={(placeholder ?? label ?? value ?? type).toString()} onKeyDown={onKeyDown} {...rest} />
-        {kbd ? <kbd className="pointer-events-none select-none items-center gap-1 rounded bg-muted px-1.5 opacity-100">{kbd}</kbd> : null}
-      </div>
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+  (
+    {
+      value,
+      kbd,
+      readonly,
+      onClick,
+      type = 'text',
+      placeholder,
+      onKeyDown,
+      label,
+      onChange,
+      errorString,
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <div className="flex flex-col">
+        <label className={TypographyType['h4'].className}>{label}</label>
+        <div className={clsx(styles.inputText, 'border-animate')}>
+          <input
+            value={onChange && value}
+            readOnly={readonly}
+            ref={ref}
+            type={type}
+            onChange={onChange}
+            onClick={onClick}
+            placeholder={(placeholder ?? label ?? value ?? type).toString()}
+            onKeyDown={onKeyDown}
+            {...rest}
+          />
+          {kbd ? (
+            <kbd className="pointer-events-none select-none items-center gap-1 rounded bg-muted px-1.5 opacity-100">
+              {kbd}
+            </kbd>
+          ) : null}
+        </div>
 
-      <div className={`${!errorString ? 'hidden' : styles.fieldError}`}>
-        <ErrorIcon fontSize="medium" />
-        <span className={TypographyType['body1'].className}>{errorString}</span>
+        <div className={`${!errorString ? 'hidden' : 'flex gap-1 items-center'}`}>
+          <ErrorIcon fontSize="medium" />
+          <span className={TypographyType['h4'].className}>{errorString}</span>
+        </div>
       </div>
-    </>
-  );
-});
+    );
+  },
+);
 
 TextField.displayName = 'TextField';
 
