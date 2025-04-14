@@ -5,6 +5,5 @@ export { default as Header } from '@/components/Header/Header';
 export { default as Chat } from '@/components/Chat/Chat';
 
 export { default as SearchBar } from '@/components/Header/Search/SearchBar';
-export { default as SearchModal } from '@/components/Header/Search/SearchModal';
 
 export { default as Message } from '@/components/Chat/ChatMessage/Message';

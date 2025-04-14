@@ -1,9 +1,9 @@
 'use client';
 
 import { i18n } from '@/utils/customUtils';
-import { useSearch } from '@/context/SearchContext';
 import { TextField } from '@/components/UI/UIComponents';
 import { SearchIcon } from '@/utils/icons';
+import { useRouter } from 'next/navigation';
 
 interface SearchBarProps {
   variant?: 'input' | 'icon';
@@ -11,23 +11,32 @@ interface SearchBarProps {
 }
 
 function SearchBar({ variant = 'input', handle }: SearchBarProps) {
-  const { openSearchModal } = useSearch();
+  const router = useRouter();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      openSearchModal();
+      router.push('/search');
     }
   };
 
   return variant == 'input' ? (
     <>
-      <TextField type="text" readonly aria-label={i18n.t('header.search')} onClick={openSearchModal} onKeyDown={handleKeyDown} value={i18n.t('header.search')} />
+      <TextField
+        type="text"
+        readonly
+        aria-label={i18n.t('header.search')}
+        onClick={() => {
+          router.push('/search');
+        }}
+        onKeyDown={handleKeyDown}
+        value={i18n.t('header.search')}
+      />
     </>
   ) : (
     <SearchIcon
       sx={{ fontSize: '30px' }}
       onClick={() => {
-        openSearchModal();
+        router.push('/search');
         handle?.();
       }}
     />
