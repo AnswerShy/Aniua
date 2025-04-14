@@ -1,4 +1,4 @@
-import { LoginRequest } from '@/interfaces/UserAccServices';
+import { LoginRequest, RegistrationRequest } from '@/interfaces/UserAccServices';
 import { i18n } from '@/utils/customUtils';
 import { NextRequest, NextResponse } from 'next/server';
 import toast from 'react-hot-toast';
@@ -9,17 +9,23 @@ class AnimeService {
 
   private constructUrl(endpoint: string, params?: Record<string, string>) {
     const url = new URL(endpoint, this.domain);
-    if (params) Object.entries(params).forEach(([key, value]) => url.searchParams.append(key, value));
+    if (params)
+      Object.entries(params).forEach(([key, value]) => url.searchParams.append(key, value));
     return url.toString();
   }
 
   private async getCookieHeader(req: NextRequest): Promise<string | NextResponse> {
     const sessionid = req.cookies.get('sessionid')?.value;
-    if (!sessionid) return NextResponse.json({ message: 'Missing required cookies' }, { status: 400 });
+    if (!sessionid)
+      return NextResponse.json({ message: 'Missing required cookies' }, { status: 400 });
     return `sessionid=${sessionid}`;
   }
 
-  private getFetchOptions<T>(method: 'GET' | 'POST' = 'GET', body: T | null = null, cache: RequestCache = 'force-cache'): RequestInit {
+  private getFetchOptions<T>(
+    method: 'GET' | 'POST' = 'GET',
+    body: T | null = null,
+    cache: RequestCache = 'force-cache',
+  ): RequestInit {
     const options: RequestInit = {
       method,
       cache,
@@ -89,7 +95,9 @@ class AnimeService {
   }
 
   async fetchEpisodeList(slug: string) {
-    return await this.fetchHelper(`${this.domain}api/anime/episodeList?title=${slug}`).then((res) => res.episodes);
+    return await this.fetchHelper(`${this.domain}api/anime/episodeList?title=${slug}`).then(
+      (res) => res.episodes,
+    );
   }
 
   async fetchEpisode(id: number) {
@@ -97,19 +105,28 @@ class AnimeService {
   }
 
   async fetchAnimeList(page: number = 1): Promise<Array<AnimeDataInterface>> {
-    return this.fetchHelper(`${this.api}filter/?page=${page}&limit=18`, { chache: 'no-store' }).then((res) => res.titles as AnimeDataInterface[]);
+    return this.fetchHelper(`${this.api}filter/?page=${page}&limit=18`, {
+      chache: 'no-store',
+    }).then((res) => res.titles as AnimeDataInterface[]);
   }
 
   async fetchCommunityChoice(): Promise<Array<AnimeDataInterface>> {
-    return this.fetchHelper(`${this.api}filter/?limit=5&order=rating`).then((res) => res.titles as AnimeDataInterface[]);
+    return this.fetchHelper(`${this.api}filter/?limit=5&order=rating`).then(
+      (res) => res.titles as AnimeDataInterface[],
+    );
   }
 
   async fetchUserListContent() {
-    return this.fetchHelper(`${this.domain}api/chart`, { method: 'GET', chache: 'no-store' }).then((res) => chartDataExtractor(res));
+    return this.fetchHelper(`${this.domain}api/chart`, { method: 'GET', chache: 'no-store' }).then(
+      (res) => chartDataExtractor(res),
+    );
   }
 
   async fetchProfile() {
-    return this.fetchHelper(`${this.domain}api/profile`, { method: 'GET', chache: 'no-store' }).then((res) => res);
+    return this.fetchHelper(`${this.domain}api/profile`, {
+      method: 'GET',
+      chache: 'no-store',
+    }).then((res) => res);
   }
 
   async fetchLogin(data: LoginRequest): Promise<{ success: boolean }> {
@@ -132,6 +149,32 @@ class AnimeService {
     } catch (error) {
       toast.error(i18n.t('toast.fetchLoginError'));
       console.error(i18n.t('toast.fetchLoginError'), error);
+      return { success: false };
+    }
+  }
+
+  async fetchRegistration(data: RegistrationRequest): Promise<{ success: boolean }> {
+    try {
+      const res = await this.fetchHelper(`/api/registration`, {
+        method: 'POST',
+        body: {
+          username: data.username,
+          email: data.email,
+          password1: data.password1,
+          password2: data.password2,
+        },
+      });
+
+      if (res?.success == true) {
+        return res;
+      } else {
+        toast.error(i18n.t('toast.RegistrationFailedUser'));
+        console.error(i18n.t('toast.RegistrationFailedUser'));
+        return { success: false };
+      }
+    } catch (error) {
+      toast.error(i18n.t('toast.fetchRegistrationError'));
+      console.error(i18n.t('toast.fetchRegistrationError'), error);
       return { success: false };
     }
   }
