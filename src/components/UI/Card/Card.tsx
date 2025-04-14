@@ -22,7 +22,11 @@ const genres = (year: number, genres: AnimeGenres[] | []) => {
     <>
       <span>{year}</span>
       <span>•</span>
-      {Object.entries(genres).length > 0 ? genres.map((el) => <span key={el.id}>{el.title}</span>) : <p>unknown genres (?)</p>}
+      {Object.entries(genres).length > 0 ? (
+        genres.map((el) => <span key={el.id}>{el.title}</span>)
+      ) : (
+        <p>unknown genres (?)</p>
+      )}
     </>
   );
 };
@@ -36,11 +40,18 @@ const Card: React.FC<cardProps> = ({ image, title, slug, variant = 'default', ad
       </p>
     </CustomButton>
   ) : (
-    <CustomButton onClick={additional?.onClick} url={`/Anime/${slug}`} classString={styles.cardHorizontal}>
+    <CustomButton
+      onClick={additional?.onClick}
+      url={`/Anime/${slug}`}
+      classString={styles.cardHorizontal}
+    >
       <div className={styles.cardImageHorizontal} style={{ backgroundImage: `url(${image})` }} />
       <div>
         <p className={TypographyType['h2'].className}>{title}</p>
-        <div className={TypographyType['h4'].className} style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+        <div
+          className={TypographyType['h4'].className}
+          style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}
+        >
           {genres(additional?.year || 0, additional?.genres || [])}
         </div>
       </div>

@@ -17,7 +17,9 @@ async function handleEpisode({ playerState, id, studio = 0 }: handleEpisodeInter
 
     const isNewEpisodeHasArrayOfPlayers = Array.isArray(newEpisode.players);
 
-    const studios: string[] = isNewEpisodeHasArrayOfPlayers ? newEpisode.players.map((player: PlayersInEpisode) => player.studio) : [];
+    const studios: string[] = isNewEpisodeHasArrayOfPlayers
+      ? newEpisode.players.map((player: PlayersInEpisode) => player.studio)
+      : [];
 
     let episodeUrl: string | null = null;
 

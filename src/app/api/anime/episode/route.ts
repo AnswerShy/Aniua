@@ -7,7 +7,10 @@ export async function GET(req: NextRequest) {
 
     const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}episode/get/${title}`);
 
-    const response = await FetchServiceInstance.fetchHelper(url.toString(), { method: 'GET', chache: 'no-store' });
+    const response = await FetchServiceInstance.fetchHelper(url.toString(), {
+      method: 'GET',
+      chache: 'no-store',
+    });
 
     const responseBody = NextResponse.json(response);
 

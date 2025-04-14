@@ -38,12 +38,24 @@ export default function Vse() {
             <Message photo={'ss'} username={'frnj'} msgContent="Hello" />
           </div>
           <div className={style.messageInputContainer}>
-            <input placeholder="Enter message" type="text" value={'hello'} className={style.messageInput} onChange={(e) => console.log(e.target.value)} />
+            <input
+              placeholder="Enter message"
+              type="text"
+              value={'hello'}
+              className={style.messageInput}
+              onChange={(e) => console.log(e.target.value)}
+            />
             <button>Send</button>
           </div>
         </div>
         <br />
-        <Card variant="horizontal" image="https://cdn.aniua.vip/images/naruto/posters/naruto_fVfvpBoxbAWrSE_3347.webp" title="title" slug="naruto" additional={{ year: 1990, genres: [{ title: 'Івопа', slug: 'asdw' }] }} />
+        <Card
+          variant="horizontal"
+          image="https://cdn.aniua.vip/images/naruto/posters/naruto_fVfvpBoxbAWrSE_3347.webp"
+          title="title"
+          slug="naruto"
+          additional={{ year: 1990, genres: [{ title: 'Івопа', slug: 'asdw' }] }}
+        />
       </div>
     </>
   );

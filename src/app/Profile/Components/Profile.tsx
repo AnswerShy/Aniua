@@ -23,11 +23,27 @@ export default function ProfileComponent() {
         <>
           <div className={styles.profileRowUp}>
             <div>
-              {userStoredData.username && <Typography variant="h1"> {userStoredData.username} </Typography>}
-              <h2 className="text">{userStoredData.first_name ? userStoredData.first_name : '...'}</h2>
-              <h2 className="subText">{userStoredData.description ? userStoredData.description : '...'}</h2>
+              {userStoredData.username && (
+                <Typography variant="h1"> {userStoredData.username} </Typography>
+              )}
+              <h2 className="text">
+                {userStoredData.first_name ? userStoredData.first_name : '...'}
+              </h2>
+              <h2 className="subText">
+                {userStoredData.description ? userStoredData.description : '...'}
+              </h2>
             </div>
-            {userStoredData.avatar ? <Image className="rounded-xl size-32 md:size-64 object-cover" alt="pfp" src={userStoredData.avatar} width={256} height={256} /> : <div className="size-32 md:size-64 bg-black rounded-xl"></div>}
+            {userStoredData.avatar ? (
+              <Image
+                className="rounded-xl size-32 md:size-64 object-cover"
+                alt="pfp"
+                src={userStoredData.avatar}
+                width={256}
+                height={256}
+              />
+            ) : (
+              <div className="size-32 md:size-64 bg-black rounded-xl"></div>
+            )}
           </div>
 
           <div className={styles.profileRowDown}>

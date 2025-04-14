@@ -12,7 +12,14 @@ interface AnimatedTextProps {
   lineSpacing?: number;
 }
 
-const CreepingText: React.FC<AnimatedTextProps> = ({ text, speed = 10, fontSize = 64, color = 'rgba(255, 255, 255, 0.01)', fontFamily = 'Roboto Condensed', lineSpacing = 100 }) => {
+const CreepingText: React.FC<AnimatedTextProps> = ({
+  text,
+  speed = 10,
+  fontSize = 64,
+  color = 'rgba(255, 255, 255, 0.01)',
+  fontFamily = 'Roboto Condensed',
+  lineSpacing = 100,
+}) => {
   if (!text) return;
   const [textWidth, setTextWidth] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
@@ -41,7 +48,18 @@ const CreepingText: React.FC<AnimatedTextProps> = ({ text, speed = 10, fontSize 
   return (
     <div className={styles.tickerContainer}>
       {/* Hidden text for measurement */}
-      <div ref={textRef} className="hidden-text" style={{ fontSize, fontFamily, color, whiteSpace: 'nowrap', position: 'absolute', visibility: 'hidden' }}>
+      <div
+        ref={textRef}
+        className="hidden-text"
+        style={{
+          fontSize,
+          fontFamily,
+          color,
+          whiteSpace: 'nowrap',
+          position: 'absolute',
+          visibility: 'hidden',
+        }}
+      >
         {text}
       </div>
       {[0, 1].map((index) => (

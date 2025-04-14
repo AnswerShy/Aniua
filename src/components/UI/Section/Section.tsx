@@ -44,7 +44,10 @@ const Col: React.FC<ColProps> = ({ children, title, widthState = '1' }) => {
   };
   return (
     <>
-      <div style={{ width: widthClasses[widthState] } as React.CSSProperties} className={styles.col}>
+      <div
+        style={{ width: widthClasses[widthState] } as React.CSSProperties}
+        className={styles.col}
+      >
         <Typography variant="h2">{title}</Typography>
         {children}
       </div>
