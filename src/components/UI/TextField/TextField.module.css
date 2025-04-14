@@ -1,7 +1,7 @@
 .inputText {
   background-color: var(--t00dp);
   border-radius: var(--borderRad);
-  padding: 0 5px;
+  padding: 5px;
   border: 1px var(--02dp) solid;
   @apply rounded-sm;
   transition: 0.2s;
@@ -9,7 +9,7 @@
 }
 
 .inputText input {
-  background-color: transparent !important;
+  background-color: transparent;
   width: 100%;
 }
 
