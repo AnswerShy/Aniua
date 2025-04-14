@@ -52,7 +52,13 @@
 
   --gapVar: 15px;
 
-  --loadingGradient: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%, var(--00dp) 100%);
+  --loadingGradient: linear-gradient(
+    90deg,
+    var(--00dp) 25%,
+    var(--02dp) 50%,
+    var(--01dp) 75%,
+    var(--00dp) 100%
+  );
   --loadingAnim: shimmer 1s infinite linear !important;
 
   --mdMaxWidth: 768px;
@@ -139,20 +145,21 @@ form {
 
 /* Buttons and Inputs */
 
-input:-webkit-autofill,
-textarea:-webkit-autofill,
-select:-webkit-autofill {
-  border: none;
+input:is(:-webkit-autofill, :autofill) {
+  -webkit-box-shadow: 0 0 0px 1000px var(--black) inset;
+  color: var(--foreground);
   -webkit-text-fill-color: var(--textColor);
-  transition: background-color 5000s ease-in-out 0s;
 }
 
-input:-webkit-autofill:hover,
-textarea:-webkit-autofill:hover,
-select:-webkit-autofill:hover {
-  background-color: var(--02dp);
-  cursor: pointer;
-  box-shadow: var(--shadowHover);
+input,
+button {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+kbd {
+  @apply pointer-events-none right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-c01dp px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex;
 }
 
 /* BORDER ANIMATION */
