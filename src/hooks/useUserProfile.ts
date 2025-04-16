@@ -12,6 +12,7 @@ const useUserProfile = () => {
   const removeUserFromStore = useUserStore((state) => state.removeUser);
   const hydrated = useUserStore((state) => state.hydrated);
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const setLoginState = useUserStore((state) => state.setLoginState);
 
   const fetchUserProfile = async () => {
     try {
@@ -34,10 +35,10 @@ const useUserProfile = () => {
 
   useEffect(() => {
     if (!hydrated) return;
-    fetchUserProfile();
+    if (isLoggedIn) fetchUserProfile();
   }, [hydrated]);
 
-  return { userStoredData, fetchUserProfile };
+  return { userStoredData, setLoginState, fetchUserProfile };
 };
 
 export default useUserProfile;

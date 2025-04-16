@@ -11,7 +11,7 @@ import useUserProfile from '@/hooks/useUserProfile';
 
 function Login() {
   const router = useRouter();
-  const { fetchUserProfile } = useUserProfile();
+  const { fetchUserProfile, setLoginState } = useUserProfile();
 
   const {
     handleSubmit,
@@ -32,6 +32,7 @@ function Login() {
       if (res.success) {
         await fetchUserProfile();
         router.push('/');
+        setLoginState(true);
       }
     } catch (e) {
       toast.error(i18n.t('toast.ServerError'));
