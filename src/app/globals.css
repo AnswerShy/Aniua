@@ -45,8 +45,10 @@
   --shadow04dp: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   --shadow05dp: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 
-  --posterWidth: 192px;
-  --posterHeight: 313px;
+  --cardMinWidth: 130px;
+  --cardMaxWidth: 150px;
+  --cardMinHeight: 200px;
+  --cardMaxHeight: 220px;
 
   --blurredFilter: blur(5px);
   --borderRad: 12px;
