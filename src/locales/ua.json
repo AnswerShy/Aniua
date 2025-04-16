@@ -22,7 +22,8 @@
     "more": "більше",
     "less": "менше",
     "addToList": "Додати до списку",
-    "EpisodesNotFound": "Упс... Епізодів не знайдено"
+    "EpisodesNotFound": "Упс... Епізодів не знайдено",
+    "Watch": "Дивитись"
   },
   "login": {
     "Required field": "Обов'язкове поле",

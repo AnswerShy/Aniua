@@ -7,11 +7,11 @@ import React from 'react';
 import { useTransitionRouter } from 'next-view-transitions';
 
 const variants = {
-  button: styles.button,
-  outline: styles.outline,
-  secondary: styles.secondary,
-  link: `${styles.link} border-animate`,
-  primary: styles.primary,
+  button: clsx(styles.ghost, styles.button),
+  outline: clsx(styles.outline, styles.button),
+  secondary: clsx(styles.secondary, styles.button),
+  link: clsx(styles.link, `border-animate`),
+  primary: clsx(styles.primary, styles.button),
 } as const;
 
 type VariantType = keyof typeof variants;

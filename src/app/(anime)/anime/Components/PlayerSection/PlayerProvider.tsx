@@ -8,7 +8,7 @@ import { SocketProvider } from '@/context/SocketContext';
 import { useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-const PlayerProvider = ({ slug }: { slug?: string }) => {
+const PlayerProvider = ({ slug, playerID }: { slug?: string; playerID?: string }) => {
   const { playerState, setPlayerState, handleStudio, episodesList } = usePlayer(slug ?? null);
 
   const searchParams = useSearchParams();
@@ -33,7 +33,7 @@ const PlayerProvider = ({ slug }: { slug?: string }) => {
     <>
       {codeOfRoom ? (
         <SocketProvider>
-          <Section typeOfSection="OneColSection" id="player-section">
+          <Section typeOfSection="OneColSection" id={playerID}>
             <Player
               playerState={playerState}
               setPlayerState={setPlayerState}
@@ -46,7 +46,7 @@ const PlayerProvider = ({ slug }: { slug?: string }) => {
           </Section>
         </SocketProvider>
       ) : (
-        <Section typeOfSection="OneColSection" id="player-section">
+        <Section typeOfSection="OneColSection" id={playerID}>
           <Player
             startW2G={reloadWithRoom}
             playerState={playerState}

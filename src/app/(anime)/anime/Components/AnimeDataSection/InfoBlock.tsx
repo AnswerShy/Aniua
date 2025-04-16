@@ -5,19 +5,13 @@ import { useState } from 'react';
 import descriptionCutter from '@/utils/custom/descriptionCutter';
 
 import styles from './InfoBlock.module.css';
-import {
-  CustomButton,
-  Dropdown,
-  Section,
-  Typography,
-  TypographyType,
-} from '@/components/UI/UIComponents';
+import { CustomButton, Dropdown, Section, Table, Typography } from '@/components/UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
 import { paths } from '@/constants/headersconst';
-import clsx from 'clsx';
 
 interface Props {
   infoData: AnimeDataInterface;
+  playerID?: string;
 }
 
 const genres = (year: number, genres: AnimeGenres[]) => {
@@ -41,7 +35,7 @@ const genres = (year: number, genres: AnimeGenres[]) => {
   );
 };
 
-const InfoBlock: React.FC<Props> = ({ infoData }) => {
+const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
   const slicedText = descriptionCutter(infoData.description, 50);
 
   const [displayedText, setFullDescription] = useState(slicedText);
@@ -60,8 +54,7 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
   };
   return (
     <Section typeOfSection={'ThreeColsSection'}>
-      {/* First column */}
-      <div className={styles.posterColumn}>
+      <Section.Col widthState="13">
         <Image
           src={infoData.poster}
           alt={infoData.title}
@@ -69,96 +62,62 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
           height={350}
           width={250}
         />
+        <CustomButton variant="primary" isAnimate={false} url={`#${playerID}`}>
+          {i18n.t('info.Watch')}
+        </CustomButton>
         <Dropdown currentState={i18n.t('info.addToList')}></Dropdown>
-      </div>
+      </Section.Col>
 
-      {/* Second column */}
-      <div className={styles.titleDescColumn}>
-        <div className={styles.infoRow}>
+      <Section.Col widthState="2/4">
+        <Section.Row>
           <Typography variant="h2">{infoData.title}</Typography>
           {genres(infoData.year, infoData.genres)}
-        </div>
-
-        <div>
+        </Section.Row>
+        <Section.Row>
           <Typography variant="h2">{i18n.t('info.Description')}</Typography>
-          <Typography variant="body1" id="desc">
+          <Typography variant="p" id="desc">
             {displayedText}
             <CustomButton variant="link" onClick={descHandler} id="descriptionButton">
               {!isFullTextDisplayed ? ` ...${i18n.t('info.more')}` : ` ...${i18n.t('info.less')}`}
             </CustomButton>
           </Typography>
-        </div>
-      </div>
+        </Section.Row>
+      </Section.Col>
 
-      {/* Third column */}
-      <div className={styles.detailColumn}>
-        <Typography variant="h2">{i18n.t('info.Details')}</Typography>
-        <div className={clsx(styles.subBlock, TypographyType['body1'].className)}>
-          <DetailRow
+      <Section.Col>
+        <Table title={i18n.t('info.Details')}>
+          <Table.row
             title={i18n.t('info.Type')}
             data={infoData.type.title}
-            url={infoData.type.slug}
+            url={`${paths.list}/?type=${infoData.type.slug}`}
           />
-          <DetailRow title={i18n.t('info.Status')} data={infoData.status} url={infoData.status} />
-          <DetailRow
+          <Table.row
+            title={i18n.t('info.Status')}
+            data={infoData.status}
+            url={`${paths.list}/?status=${infoData.status}`}
+          />
+          <Table.row
             title={i18n.t('info.Episodes')}
             data={episodesInfo(infoData.episode.present, infoData.episode.last)}
           />
-          <DetailRow title={i18n.t('info.Rate')} data={infoData.mal_score} />
-          <DetailRow title={i18n.t('info.Year')} data={infoData.year} />
-          <DetailRowMultiplie title={i18n.t('info.Genres')} data={infoData.genres} />
-        </div>
-      </div>
+          <Table.row
+            title={i18n.t('info.Rate')}
+            data={infoData.mal_score.toString()}
+            url={`${paths.list}/?mal_score=${infoData.mal_score}`}
+          />
+          <Table.row
+            title={i18n.t('info.Year')}
+            data={infoData.year.toString()}
+            url={`${paths.list}/?year=${infoData.mal_score}`}
+          />
+          <Table.row title={i18n.t('info.Genres')} data={infoData.genres} />
+        </Table>
+      </Section.Col>
     </Section>
   );
 };
 
 export default InfoBlock;
-
-const DetailRow = ({
-  title,
-  data,
-  url,
-}: {
-  title: string;
-  data: string | number;
-  url?: string;
-}) => {
-  return (
-    <span className={styles.subRow}>
-      <p>{title}: </p>
-      {url ? (
-        <CustomButton variant="link" url={`${paths.list}/${url}`}>
-          {data}
-        </CustomButton>
-      ) : (
-        <div className={styles.subText}>{data}</div>
-      )}
-    </span>
-  );
-};
-
-const DetailRowMultiplie = ({ title, data }: { title: string; data: AnimeGenres[] }) => {
-  return (
-    <span className={styles.subRow}>
-      <p>{title}: </p>
-      <div className={styles.detailsArray}>
-        {Object.entries(data).map((element, key) => {
-          return (
-            <CustomButton
-              variant="link"
-              key={key}
-              url={`${paths.list}/${element[1].slug}`}
-              classString={styles.subText}
-            >
-              {element[1].title}
-            </CustomButton>
-          );
-        })}
-      </div>
-    </span>
-  );
-};
 
 const episodesInfo = (present: string | null, last: number | null): string => {
   return `${present ? present : '? / '} ${last ? last : '?'}`;

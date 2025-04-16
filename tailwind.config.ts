@@ -9,10 +9,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
         textCol: 'var(--textColor)',
-        textSemiColor: 'var(--textSemiColor)',
+        textSemiCol: 'var(--textSemiColor)',
+        background: 'var(--background)',
         c01dp: 'var(--01dp)',
+        c02dp: 'var(--02dp)',
         transparent01dp: 'var(--t01dp)',
         transparent00dp: 'var(--t00dp)',
       },

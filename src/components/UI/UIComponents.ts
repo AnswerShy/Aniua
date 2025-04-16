@@ -16,3 +16,5 @@ export { variantMap as TypographyType } from '@/components/UI/Typography/Typogra
 export { default as CreepingText } from '@/components/UI/LineTextAnimation/CreepingText';
 
 export { default as Modal } from '@/components/UI/Modal/Modal';
+
+export { default as Table } from '@/components/UI/Table/Table';
