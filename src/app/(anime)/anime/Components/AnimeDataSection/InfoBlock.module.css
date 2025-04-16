@@ -39,6 +39,7 @@
   flex-direction: row;
   gap: var(--gapVar);
   width: 100%;
+  border-bottom: 2px dashed var(--06dp);
 }
 
 .detailsArray {

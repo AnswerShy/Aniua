@@ -11,7 +11,7 @@ import {
   Section,
   Typography,
   TypographyType,
-} from '../../../../components/UI/UIComponents';
+} from '@/components/UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
 import { paths } from '@/constants/headersconst';
 import clsx from 'clsx';
@@ -48,15 +48,12 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
   const [isFullTextDisplayed, setIsFullTextDisplayed] = useState(false);
 
   const descHandler = () => {
-    const moreLessButton = document.getElementById('descriptionButton');
     if (isFullTextDisplayed) {
       setFullDescription(slicedText);
-      if (moreLessButton) moreLessButton.innerHTML = ` ...${i18n.t('info.more')}`;
       document.getElementById('desc')?.classList.add('text-justify');
       setIsFullTextDisplayed(false);
     } else {
       setFullDescription(infoData.description);
-      if (moreLessButton) moreLessButton.innerHTML = ` ...${i18n.t('info.less')}`;
       document.getElementById('desc')?.classList.remove('text-justify');
       setIsFullTextDisplayed(true);
     }
@@ -86,9 +83,9 @@ const InfoBlock: React.FC<Props> = ({ infoData }) => {
           <Typography variant="h2">{i18n.t('info.Description')}</Typography>
           <Typography variant="body1" id="desc">
             {displayedText}
-            <a onClick={descHandler} id="descriptionButton">
-              {` ...${i18n.t('info.more')}`}
-            </a>
+            <CustomButton variant="link" onClick={descHandler} id="descriptionButton">
+              {!isFullTextDisplayed ? ` ...${i18n.t('info.more')}` : ` ...${i18n.t('info.less')}`}
+            </CustomButton>
           </Typography>
         </div>
       </div>
@@ -131,7 +128,7 @@ const DetailRow = ({
     <span className={styles.subRow}>
       <p>{title}: </p>
       {url ? (
-        <CustomButton url={`${paths.list}/${url}`} classString={styles.subText}>
+        <CustomButton variant="link" url={`${paths.list}/${url}`}>
           {data}
         </CustomButton>
       ) : (
@@ -149,6 +146,7 @@ const DetailRowMultiplie = ({ title, data }: { title: string; data: AnimeGenres[
         {Object.entries(data).map((element, key) => {
           return (
             <CustomButton
+              variant="link"
               key={key}
               url={`${paths.list}/${element[1].slug}`}
               classString={styles.subText}
