@@ -9,7 +9,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const listPage = async () => {
-  return <ListSectionLoader></ListSectionLoader>;
+  return (
+    <>
+      <ListSectionLoader></ListSectionLoader>
+    </>
+  );
 };
 
 export default listPage;
