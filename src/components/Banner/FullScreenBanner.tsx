@@ -58,7 +58,8 @@ const genresDisplay = (genres: animeBannerInterface['genres']): JSX.Element | nu
     <>
       {genres.map((el, index) => (
         <CustomButton
-          className={TypographyType['h2'].className}
+          variant="link"
+          className={TypographyType['h1'].className}
           key={index}
           url={`/genres/${el.slug}`}
         >
@@ -72,11 +73,11 @@ const genresDisplay = (genres: animeBannerInterface['genres']): JSX.Element | nu
 const InfoBlockBanner = ({ bannerTitle, bannerYear, bannerGenres, bannerDesc }: Banner_props) => {
   return (
     <div className={styles.bannerInfoContainer}>
-      <Typography variant="h1" classname={styles.bannerTitle}>
-        {bannerTitle}
-      </Typography>
-      <div className={`${styles.bannerBaseInfo} ${styles.bannerText}`}>
-        <Typography variant="body1">{bannerYear ? bannerYear : null}</Typography>
+      <Typography variant="h1">{bannerTitle}</Typography>
+      <div className={`${styles.bannerBaseInfo}`}>
+        <CustomButton variant="link" url={`/filter?year=${bannerYear}`}>
+          {bannerYear ? bannerYear : null}
+        </CustomButton>
         <span>•</span>
         {bannerGenres && bannerGenres.length > 0 ? (
           genresDisplay(bannerGenres)
@@ -84,9 +85,7 @@ const InfoBlockBanner = ({ bannerTitle, bannerYear, bannerGenres, bannerDesc }: 
           <Typography variant="body1">unknow genres</Typography>
         )}
       </div>
-      <p className={`${styles.bannerDescription} ${styles.bannerText}`}>
-        {descriptionCutter(bannerDesc, 25)}...
-      </p>
+      <p className={`${styles.bannerDescription}`}>{descriptionCutter(bannerDesc, 25)}...</p>
     </div>
   );
 };

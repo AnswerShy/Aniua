@@ -105,10 +105,10 @@ Pathway.displayName = 'Pathway';
 
 const GetAccBlock = React.memo(() => (
   <>
-    <CustomButton variant="link" url="/registration">
+    <CustomButton variant="link" isAnimate={false} url="/registration">
       {getTranslatedText('header', 'Registration')}
     </CustomButton>
-    <CustomButton variant="primary" url="/login">
+    <CustomButton variant="primary" isAnimate={false} url="/login">
       {getTranslatedText('header', 'Login')}
     </CustomButton>
   </>
