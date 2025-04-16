@@ -29,19 +29,22 @@ const Row: React.FC<RowProps> = ({ children }) => {
   return <div className={styles.row}>{children}</div>;
 };
 
+const widthClasses: { [key: string]: string } = {
+  '10': '10%',
+  '13': '13%',
+  '1/4': '25%',
+  '2/4': '50%',
+  '3/4': '75%',
+  '4/4': '100%',
+};
+
 type ColProps = {
   children: React.ReactNode;
   title?: string;
-  widthState?: '1/4' | '2/4' | '3/4' | '1';
+  widthState?: keyof typeof widthClasses;
 };
 
 const Col: React.FC<ColProps> = ({ children, title, widthState = '1' }) => {
-  const widthClasses: { [key: string]: string } = {
-    '1/4': '25%',
-    '2/4': '50%',
-    '3/4': '75%',
-    '4/4': '100%',
-  };
   return (
     <>
       <div

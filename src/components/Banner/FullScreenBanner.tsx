@@ -11,6 +11,7 @@ import {
   CustomButton,
 } from '../UI/UIComponents';
 import clsx from 'clsx';
+import { i18n } from '@/utils/customUtils';
 
 interface Banner_props {
   bannerImage?: string | null;
@@ -20,6 +21,7 @@ interface Banner_props {
   bannerDesc: string;
   bannerChar?: string | null;
   bannerTypeNews?: boolean;
+  playerID?: string;
 }
 
 const Banner: React.FC<Banner_props> = ({
@@ -29,6 +31,7 @@ const Banner: React.FC<Banner_props> = ({
   bannerYear,
   bannerGenres,
   bannerDesc,
+  playerID,
 }) => {
   const usePicAsBg = false;
   return (
@@ -38,6 +41,7 @@ const Banner: React.FC<Banner_props> = ({
         bannerYear={bannerYear}
         bannerGenres={bannerGenres}
         bannerDesc={bannerDesc}
+        playerID={playerID}
       />
       <Image
         src={bannerImage || bannerChar || 'pfp.png'}
@@ -70,10 +74,22 @@ const genresDisplay = (genres: animeBannerInterface['genres']): JSX.Element | nu
   ) : null;
 };
 
-const InfoBlockBanner = ({ bannerTitle, bannerYear, bannerGenres, bannerDesc }: Banner_props) => {
+const InfoBlockBanner = ({
+  bannerTitle,
+  bannerYear,
+  bannerGenres,
+  bannerDesc,
+  playerID,
+}: Banner_props) => {
   return (
     <div className={styles.bannerInfoContainer}>
-      <Typography variant="h1">{bannerTitle}</Typography>
+      <div className="flex flex-row items-center gap-2">
+        <Typography variant="h1">{bannerTitle}</Typography>
+        <CustomButton variant="primary" isAnimate={false} url={`#${playerID}`}>
+          {i18n.t('info.Watch')}
+        </CustomButton>
+      </div>
+
       <div className={`${styles.bannerBaseInfo}`}>
         <CustomButton variant="link" url={`/filter?year=${bannerYear}`}>
           {bannerYear ? bannerYear : null}
@@ -82,7 +98,7 @@ const InfoBlockBanner = ({ bannerTitle, bannerYear, bannerGenres, bannerDesc }: 
         {bannerGenres && bannerGenres.length > 0 ? (
           genresDisplay(bannerGenres)
         ) : (
-          <Typography variant="body1">unknow genres</Typography>
+          <Typography variant="p">unknow genres</Typography>
         )}
       </div>
       <p className={`${styles.bannerDescription}`}>{descriptionCutter(bannerDesc, 25)}...</p>

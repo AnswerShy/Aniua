@@ -25,6 +25,7 @@ export async function generateMetadata({
 export default async function AnimePage({ params }: { params: { slug: string } }) {
   const { slug } = await params;
   const data = await FetchServiceInstance.fetchAnimeInfo(slug);
+  const playerID = 'player-section';
 
   return (
     <>
@@ -35,9 +36,10 @@ export default async function AnimePage({ params }: { params: { slug: string } }
         bannerDesc={data.description}
         bannerGenres={data.genres}
         bannerYear={data.year}
+        playerID={playerID}
       />
-      <InfoBlock infoData={data} />
-      <PlayerProvider slug={slug} />
+      <InfoBlock infoData={data} playerID={playerID} />
+      <PlayerProvider slug={slug} playerID={playerID} />
     </>
   );
 }
