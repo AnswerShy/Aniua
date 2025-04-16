@@ -126,7 +126,12 @@ class AnimeService {
     return this.fetchHelper(`${this.domain}api/profile`, {
       method: 'GET',
       chache: 'no-store',
-    }).then((res) => res);
+    }).then((res) => {
+      if (res == null) {
+        localStorage.setItem('isLoggedIn', 'false');
+      }
+      return res;
+    });
   }
 
   async fetchLogin(data: LoginRequest): Promise<{ success: boolean }> {
