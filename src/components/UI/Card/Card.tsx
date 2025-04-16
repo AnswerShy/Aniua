@@ -49,7 +49,7 @@ const Card: React.FC<cardProps> = ({ image, title, slug, variant = 'default', ad
       <div>
         <p className={TypographyType['h2'].className}>{title}</p>
         <div
-          className={TypographyType['h4'].className}
+          className={TypographyType['muted'].className}
           style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}
         >
           {genres(additional?.year || 0, additional?.genres || [])}

@@ -64,13 +64,15 @@
   border-radius: var(--borderRad);
   height: fit-content;
   display: flex;
+  gap: 5px;
+  justify-content: flex-start;
 }
 
 .cardHorizontal > div {
   display: flex;
   gap: 15px;
   flex-wrap: nowrap;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .cardImageHorizontal {
