@@ -42,15 +42,18 @@
 .primary {
   padding: 10px 15px;
   border-radius: var(--borderRad);
-  background-color: var(--05dp);
-  color: var(--background);
+  background-color: var(--frontColor);
+  color: var(--backColor);
 }
 
 .primary:not(:disabled):hover {
   cursor: pointer;
-  background-color: var(--primaryColor);
+  background-color: var(--primary24dp);
 }
 
+.primary:not(:disabled):focus {
+  background-color: var(--primary16dp);
+}
 /* Secondary button */
 
 .secondary {
@@ -67,6 +70,9 @@
     0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
+.secondary:not(:disabled):focus {
+  background-color: var(--06dp);
+}
 /* Outline button */
 
 .outline {
@@ -88,29 +94,10 @@
   background-color: transparent;
   width: fit-content;
   position: relative;
-  color: var(--foreground);
+  color: var(--textSemiColor);
 }
 
-.link:not(:disabled):hover {
-  color: var(--primaryColor);
-}
-
-.link::after {
-  content: ' ';
-  display: block;
-  height: 5px;
-  width: 100%;
-  position: absolute;
-  transform: scaleX(0);
-  transition:
-    0.3s ease 0s,
-    left 0.3s ease 0s;
-  transform-origin: bottom right;
-  background-color: var(--primaryColor);
-}
-
-.link:hover::after,
-.link:focus::after {
-  transform: scaleX(1);
-  transform-origin: left;
+.link:not(:disabled):hover,
+.link:not(:disabled):focus {
+  color: var(--textColor);
 }
