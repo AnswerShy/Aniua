@@ -3,9 +3,9 @@ import { Roboto_Condensed } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header/Header';
-import Loading from '@/components/Loading/LoadingComponent';
 import { i18n } from '@/utils/customUtils';
 import { Toaster } from 'react-hot-toast';
+import { ViewTransitions } from 'next-view-transitions';
 
 const roboto = Roboto_Condensed({
   weight: '400',
@@ -26,20 +26,21 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body className={`${roboto.className} antialiased`}>
-        <Loading />
-        <Toaster
-          toastOptions={{
-            style: {
-              background: 'var(--03dp)',
-              color: '#fff',
-            },
-          }}
-        />
-        <Header />
-        {modal}
-        <main>{children}</main>
-      </body>
+      <ViewTransitions>
+        <body className={`${roboto.className} antialiased`}>
+          <Toaster
+            toastOptions={{
+              style: {
+                background: 'var(--03dp)',
+                color: '#fff',
+              },
+            }}
+          />
+          <Header />
+          {modal}
+          <main>{children}</main>
+        </body>
+      </ViewTransitions>
     </html>
   );
 }
