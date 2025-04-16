@@ -28,6 +28,8 @@
   flex-direction: column;
 
   padding-top: 5px;
+
+  box-shadow: var(--shadow02dp);
 }
 
 .hideOptions {
@@ -35,7 +37,7 @@
 }
 
 .option {
-  background-color: var(--02dp);
+  background-color: var(--01dp);
   color: var(--textSemiColor);
   padding: 6px 6px;
   margin: 0;
@@ -67,14 +69,14 @@
 
 /* border radius */
 
-/* Apply rounded corners to the first dropdown option */
-.optionsWrap .option:first-child {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+.optionsWrap .option:only-child {
+  border-radius: var(--borderRad);
 }
 
-/* Apply rounded corners to the last dropdown option */
-.optionsWrap .option:last-child {
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+.optionsWrap .option:first-child:not(:only-child) {
+  border-radius: var(--borderRad) var(--borderRad) 0 0;
+}
+
+.optionsWrap .option:last-child:not(:only-child) {
+  border-radius: 0 0 var(--borderRad) var(--borderRad);
 }

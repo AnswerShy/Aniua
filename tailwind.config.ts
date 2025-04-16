@@ -11,6 +11,7 @@ export default {
       colors: {
         background: 'var(--background)',
         textCol: 'var(--textColor)',
+        textSemiColor: 'var(--textSemiColor)',
         c01dp: 'var(--01dp)',
         transparent01dp: 'var(--t01dp)',
         transparent00dp: 'var(--t00dp)',

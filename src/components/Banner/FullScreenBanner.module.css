@@ -41,7 +41,6 @@
 
 .bannerTitle {
   color: var(--titleColor);
-  font-size: var(--bannerTitle);
   text-transform: uppercase;
 }
 
@@ -56,11 +55,6 @@
 
 .bannerDescription {
   @apply hidden lg:block lg:w-1/2;
-}
-
-.bannerText,
-.bannerText * {
-  font-size: var(--bannerText);
 }
 
 .load {
