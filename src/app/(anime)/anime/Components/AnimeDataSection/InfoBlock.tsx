@@ -54,7 +54,7 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
   };
   return (
     <Section typeOfSection={'ThreeColsSection'}>
-      <Section.Col widthState="13">
+      <Section.Col className="lg:w-[13%]">
         <Image
           src={infoData.poster}
           alt={infoData.title}
@@ -84,7 +84,7 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
         </Section.Row>
       </Section.Col>
 
-      <Section.Col>
+      <Section.Col widthState="1/4">
         <Table title={i18n.t('info.Details')}>
           <Table.row
             title={i18n.t('info.Type')}
