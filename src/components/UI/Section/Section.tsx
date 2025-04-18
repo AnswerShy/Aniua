@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { Typography } from '../UIComponents';
 import styles from './Section.module.css';
 
@@ -31,28 +32,24 @@ const Row: React.FC<RowProps> = ({ children }) => {
   return <div className={styles.row}>{children}</div>;
 };
 
-const widthClasses: { [key: string]: string } = {
-  '10': '10%',
-  '13': '13%',
-  '1/4': '25%',
-  '2/4': '50%',
-  '3/4': '75%',
-  '4/4': '100%',
+const widthClasses: Record<string, string> = {
+  '1/4': 'lg:w-1/4',
+  '2/4': 'lg:w-2/4',
+  '3/4': 'lg:w-3/4',
+  '1': 'lg:w-full',
 };
 
 type ColProps = {
   children: React.ReactNode;
   title?: string;
   widthState?: keyof typeof widthClasses;
+  className?: string;
 };
 
-const Col: React.FC<ColProps> = ({ children, title, widthState = '1' }) => {
+const Col: React.FC<ColProps> = ({ children, title, widthState = '1', className }) => {
   return (
     <>
-      <div
-        style={{ width: widthClasses[widthState] } as React.CSSProperties}
-        className={styles.col}
-      >
+      <div className={clsx(widthClasses[widthState], styles.col, className)}>
         <Typography variant="h2">{title}</Typography>
         {children}
       </div>

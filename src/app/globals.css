@@ -92,8 +92,8 @@ svg:hover {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--textColor);
+  background: var(--backColor);
   transition: 0.2s;
   overflow: overlay;
 }
