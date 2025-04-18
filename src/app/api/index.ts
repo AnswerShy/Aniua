@@ -51,12 +51,14 @@ class AnimeService {
   async fetchHelper(
     endpoint: string,
     {
+      to,
       req,
       params,
       method = 'GET',
       body = null,
       chache,
     }: {
+      to?: 'self' | 'out';
       req?: NextRequest;
       params?: Record<string, string>;
       method?: 'GET' | 'POST';
@@ -65,7 +67,11 @@ class AnimeService {
     } = {},
   ) {
     try {
-      const url = this.constructUrl(endpoint, params);
+      const url = this.constructUrl(
+        `${to ? (to === 'self' ? this.domain : this.api) : ''}${endpoint}`,
+        params,
+      );
+
       const options = this.getFetchOptions(method, body, chache);
 
       if (req) {
@@ -91,39 +97,44 @@ class AnimeService {
   // Ready fetches
 
   async fetchAnimeInfo(slug: string): Promise<AnimeDataInterface> {
-    return this.fetchHelper(`${this.domain}api/anime/${slug}`, {});
+    return this.fetchHelper(`api/anime/${slug}`, { to: 'self' });
   }
 
   async fetchEpisodeList(slug: string) {
-    return await this.fetchHelper(`${this.domain}api/anime/episodeList?title=${slug}`).then(
+    return await this.fetchHelper(`api/anime/episodeList?title=${slug}`, { to: 'self' }).then(
       (res) => res.episodes,
     );
   }
 
   async fetchEpisode(id: number) {
-    return this.fetchHelper(`${this.domain}api/anime/episode?title=${id}`);
+    return this.fetchHelper(`api/anime/episode?title=${id}`, { to: 'self' });
   }
 
-  async fetchAnimeList(page: number = 1): Promise<Array<AnimeDataInterface>> {
-    return this.fetchHelper(`${this.api}filter/?page=${page}&limit=18`, {
+  async fetchAnimeList(
+    page: number = 1,
+    filter?: string,
+  ): Promise<{ page_count: number; titles: AnimeDataInterface[] }> {
+    return this.fetchHelper(`filter/?page=${page}&limit=21&${filter}`, {
+      to: 'out',
       chache: 'no-store',
-    }).then((res) => res.titles as AnimeDataInterface[]);
+    }).then((res) => res as { page_count: number; titles: AnimeDataInterface[] });
   }
 
   async fetchCommunityChoice(): Promise<Array<AnimeDataInterface>> {
-    return this.fetchHelper(`${this.api}filter/?limit=5&order=rating`).then(
+    return this.fetchHelper(`filter/?limit=5&order=rating`, { to: 'out' }).then(
       (res) => res.titles as AnimeDataInterface[],
     );
   }
 
   async fetchUserListContent() {
-    return this.fetchHelper(`${this.domain}api/chart`, { method: 'GET', chache: 'no-store' }).then(
+    return this.fetchHelper(`api/chart`, { to: 'self', method: 'GET', chache: 'no-store' }).then(
       (res) => chartDataExtractor(res),
     );
   }
 
   async fetchProfile() {
-    return this.fetchHelper(`${this.domain}api/profile`, {
+    return this.fetchHelper(`api/profile`, {
+      to: 'self',
       method: 'GET',
       chache: 'no-store',
     }).then((res) => {
@@ -136,7 +147,8 @@ class AnimeService {
 
   async fetchLogin(data: LoginRequest): Promise<{ success: boolean }> {
     try {
-      const res = await this.fetchHelper(`/api/login`, {
+      const res = await this.fetchHelper(`api/login`, {
+        to: 'self',
         method: 'POST',
         body: {
           username: data.username,
@@ -160,7 +172,8 @@ class AnimeService {
 
   async fetchRegistration(data: RegistrationRequest): Promise<{ success: boolean }> {
     try {
-      const res = await this.fetchHelper(`/api/registration`, {
+      const res = await this.fetchHelper(`api/registration`, {
+        to: 'self',
         method: 'POST',
         body: {
           username: data.username,
