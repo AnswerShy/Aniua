@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
-import ListSectionLoader from './Components/ListSectionLoader';
+import Filters from './Components/Filters';
+import { Section } from '@/components/UI/UIComponents';
+import AnimeList from './Components/AnimeList';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -10,9 +12,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const listPage = async () => {
   return (
-    <>
-      <ListSectionLoader></ListSectionLoader>
-    </>
+    <Section typeOfSection="TwoColSection">
+      <AnimeList />
+      <Filters />
+    </Section>
   );
 };
 
