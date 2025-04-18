@@ -12,6 +12,7 @@ import {
 } from '../UI/UIComponents';
 import clsx from 'clsx';
 import { i18n } from '@/utils/customUtils';
+import { paths } from '@/constants/headersconst';
 
 interface Banner_props {
   bannerImage?: string | null;
@@ -65,7 +66,7 @@ const genresDisplay = (genres: animeBannerInterface['genres']): JSX.Element | nu
           variant="link"
           className={TypographyType['h1'].className}
           key={index}
-          url={`/genres/${el.slug}`}
+          url={`${paths.list}/?genres=${el.slug}`}
         >
           {el.title}
         </CustomButton>
@@ -91,7 +92,7 @@ const InfoBlockBanner = ({
       </div>
 
       <div className={`${styles.bannerBaseInfo}`}>
-        <CustomButton variant="link" url={`/filter?year=${bannerYear}`}>
+        <CustomButton variant="link" url={`${paths.list}/?year=${bannerYear}`}>
           {bannerYear ? bannerYear : null}
         </CustomButton>
         <span>•</span>
