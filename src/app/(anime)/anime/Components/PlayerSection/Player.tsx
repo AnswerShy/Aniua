@@ -1,5 +1,6 @@
 'use client';
 
+import Pagination from '@/components/Pagination/Pagination';
 import styles from './Player.module.css';
 import {
   CustomButton,
@@ -170,7 +171,7 @@ const EpisodeList = ({
 }) => {
   if (!episodesList || episodesList.length < 2) return null;
   return (
-    <div className={styles.episodeWrapper}>
+    <Pagination>
       {episodesList.map((element, index) => (
         <CustomButton
           key={index}
@@ -190,6 +191,6 @@ const EpisodeList = ({
           {element.episode_number}
         </CustomButton>
       ))}
-    </div>
+    </Pagination>
   );
 };
