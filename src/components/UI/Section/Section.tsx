@@ -1,21 +1,23 @@
 import { Typography } from '../UIComponents';
 import styles from './Section.module.css';
 
+const SectionType = {
+  OneColSection: styles.OneColSection,
+  TwoColSection: styles.TwoColSection,
+  ThreeColsSection: styles.ThreeColsSection,
+  BannerSection: styles.BannerSection,
+  grid: styles.grid,
+};
+
 type SectionProps = {
   children: React.ReactNode;
-  typeOfSection?: 'OneColSection' | 'ThreeColsSection' | 'BannerSection' | 'grid';
+  typeOfSection?: keyof typeof SectionType;
   id?: string;
 };
 
 const SectionBase: React.FC<SectionProps> = ({ children, typeOfSection = 'OneColSection', id }) => {
-  const widthClasses: { [key: string]: string } = {
-    OneColSection: styles.OneColSection,
-    ThreeColsSection: styles.ThreeColsSection,
-    BannerSection: styles.BannerSection,
-    grid: styles.grid,
-  };
   return (
-    <section className={widthClasses[typeOfSection]} id={id}>
+    <section className={SectionType[typeOfSection]} id={id}>
       {children}
     </section>
   );
