@@ -108,7 +108,7 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
           <Table.row
             title={i18n.t('info.Year')}
             data={infoData.year.toString()}
-            url={`${paths.list}/?year=${infoData.mal_score}`}
+            url={`${paths.list}/?year=${infoData.year}`}
           />
           <Table.row title={i18n.t('info.Genres')} data={infoData.genres} />
         </Table>

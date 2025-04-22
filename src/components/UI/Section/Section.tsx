@@ -36,7 +36,7 @@ const widthClasses: Record<string, string> = {
   '1/4': 'lg:w-1/4',
   '2/4': 'lg:w-2/4',
   '3/4': 'lg:w-3/4',
-  '1': 'lg:w-full',
+  '1': 'w-full',
 };
 
 type ColProps = {
