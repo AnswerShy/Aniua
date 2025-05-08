@@ -1,0 +1,24 @@
+.checkbox {
+  padding: 8px 16px;
+  border-radius: var(--borderRad);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px var(--02dp) solid;
+  width: fit-content;
+}
+
+.checkbox:hover,
+.checkbox:has(.checkinput:focus-visible) {
+  background-color: var(--04dp);
+  cursor: pointer;
+}
+
+.checkinput {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkbox:has(.checkinput:checked) {
+  background-color: var(--04dp);
+}
