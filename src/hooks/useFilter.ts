@@ -17,7 +17,7 @@ export const useAnimeFilters = () => {
         }));
 
         const defaultFilters: AnimeFiltersInterface = {
-          year: { min: 1980, max: 2025 },
+          year: ['1980', '2025'],
           genre,
           type: ['tv', 'movie'],
           status: ['ongoing', 'finished'],

@@ -1,0 +1,28 @@
+.filterBlock {
+  max-width: 300px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.filterBlock > div {
+  background-color: var(--01dp);
+  width: 100%;
+  height: fit-content;
+  padding: 5%;
+  margin: 5%;
+  border-radius: var(--borderRad);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.range {
+  padding: 8px 16px;
+  border-radius: var(--borderRad);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px var(--02dp) solid;
+  background-color: var(--01dp);
+  width: fit-content;
+}
