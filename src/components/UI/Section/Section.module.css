@@ -28,10 +28,9 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 1rem;
-  padding: 0 1%;
-  width: 100%;
+  grid-template-columns: repeat(7, minmax(130px, 1fr));
+
+  margin: 0 auto;
 }
 
 .row {
@@ -53,5 +52,14 @@
     flex-direction: column;
     gap: 15px;
     padding: 0 10px;
+  }
+  .grid {
+    grid-template-columns: repeat(5, minmax(130px, 1fr));
+  }
+}
+
+@media (max-width: 786px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(130px, 1fr));
   }
 }
