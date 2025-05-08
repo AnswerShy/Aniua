@@ -18,7 +18,6 @@ function AnimeList() {
   const fetchMore = async () => {
     try {
       setLoad(true);
-      console.log(page);
       const queryString = searchParams.toString();
       const moreAnime = await FetchServiceInstance.fetchAnimeList(page, queryString);
       setLength(moreAnime.page_count);
@@ -49,10 +48,10 @@ function AnimeList() {
   };
 
   return (
-    <div className="w-full">
+    <div>
       {isLoad ? (
         <Section typeOfSection={'grid'}>
-          <CardSkeleton countOfCards={21} />
+          <CardSkeleton countOfCards={28} />
         </Section>
       ) : (
         <Section typeOfSection={'grid'}>

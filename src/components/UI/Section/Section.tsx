@@ -14,11 +14,17 @@ type SectionProps = {
   children: React.ReactNode;
   typeOfSection?: keyof typeof SectionType;
   id?: string;
+  classname?: string;
 };
 
-const SectionBase: React.FC<SectionProps> = ({ children, typeOfSection = 'OneColSection', id }) => {
+const SectionBase: React.FC<SectionProps> = ({
+  children,
+  typeOfSection = 'OneColSection',
+  id,
+  classname,
+}) => {
   return (
-    <section className={SectionType[typeOfSection]} id={id}>
+    <section className={clsx(SectionType[typeOfSection], classname)} id={id}>
       {children}
     </section>
   );
