@@ -114,8 +114,9 @@ class AnimeService {
     page: number = 1,
     filter?: string,
   ): Promise<{ page_count: number; titles: AnimeDataInterface[] }> {
-    return this.fetchHelper(`filter/?page=${page}&limit=21&${filter}`, {
-      to: 'out',
+    const filterData = filter?.toString();
+    return this.fetchHelper(`api/list/?page=${page}&limit=28&${filterData}`, {
+      to: 'self',
       chache: 'no-store',
     }).then((res) => res as { page_count: number; titles: AnimeDataInterface[] });
   }
