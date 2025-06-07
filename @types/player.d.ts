@@ -3,6 +3,7 @@ interface PlayerProps {
 }
 
 interface playerStateInterface {
+  animeSlug: string;
   episodeID: number;
   chooseStudio: number;
   studiosList: string[];

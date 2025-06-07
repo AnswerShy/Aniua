@@ -185,6 +185,7 @@ const EpisodeList = ({
               id: episodesList[index].id,
               studio: chooseStudio,
               episodesList: episodesList[index],
+              animeSlug: playerState.animeSlug,
             })
           }
         >
