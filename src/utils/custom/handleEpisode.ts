@@ -1,5 +1,6 @@
 // Desc: Helper function to handle the episode change in the player component
 import FetchServiceInstance from '@/app/api';
+import { usePlayerStore } from '@/stores/playerHistory';
 import { Dispatch, SetStateAction } from 'react';
 
 interface handleEpisodeInterface {
@@ -7,9 +8,17 @@ interface handleEpisodeInterface {
   id: number;
   studio?: number;
   episodesList: EpisodeListInterface;
+  animeSlug: string;
 }
 
-async function handleEpisode({ playerState, id, studio = 0 }: handleEpisodeInterface) {
+async function handleEpisode({ playerState, id, studio = 0, animeSlug }: handleEpisodeInterface) {
+  const { setEpisode } = usePlayerStore.getState();
+
+  setEpisode(animeSlug, {
+    episodeID: id,
+    studio: String(studio),
+  });
+
   playerState((prevState) => ({ ...prevState, isPlayerLoading: true, episodeID: id }));
 
   try {

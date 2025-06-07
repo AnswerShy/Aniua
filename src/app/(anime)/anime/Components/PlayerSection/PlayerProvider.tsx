@@ -33,7 +33,7 @@ const PlayerProvider = ({ slug, playerID }: { slug?: string; playerID?: string }
     <>
       {codeOfRoom ? (
         <SocketProvider>
-          <Section typeOfSection="OneColSection" id={playerID}>
+          <Section typeOfSection="TwoColSection" id={playerID}>
             <Player
               playerState={playerState}
               setPlayerState={setPlayerState}
