@@ -10,7 +10,7 @@ import { getTranslatedText } from '@/utils/customUtils';
 import { MenuIcon, Person } from '@/utils/icons';
 import Image from 'next/image';
 import useUserProfile from '@/hooks/useUserProfile';
-import { paths, pathsProfile, pathsMoney } from '@/constants/headersconst';
+import { paths, pathsProfile } from '@/constants/headersconst';
 import { SearchBar } from '../IndexComponent';
 import React from 'react';
 import { useScrollDirection } from '@/hooks/useScrollDirection';
@@ -117,7 +117,7 @@ GetAccBlock.displayName = 'GetAccBlock';
 
 const ProfileBlock = React.memo(({ userStoredData }: { userStoredData: UserProfileInterface }) => (
   <>
-    <Dropdown currentState={userStoredData?.money?.toString()} isLeft={false}>
+    {/* <Dropdown currentState={userStoredData?.money?.toString()} isLeft={false}>
       {Object.entries(pathsMoney).map((path, index) => (
         <Dropdown.optionUrl
           key={index}
@@ -125,8 +125,8 @@ const ProfileBlock = React.memo(({ userStoredData }: { userStoredData: UserProfi
           state={getTranslatedText('paths', path[0])}
         />
       ))}
-    </Dropdown>
-    <Dropdown customElement={<Avatar avatar={userStoredData?.avatar} />} isLeft={false}>
+    </Dropdown> */}
+    <Dropdown customElement={<Avatar avatar={userStoredData?.avatar} />} position="right">
       {Object.entries(pathsProfile).map((path, index) => (
         <Dropdown.optionUrl
           key={index}

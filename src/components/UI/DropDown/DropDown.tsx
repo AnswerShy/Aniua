@@ -14,10 +14,15 @@ interface DropdownProps {
 
   customElement?: React.ReactNode; //For show custom element
 
-  isLeft?: boolean; //For change position of dropdown options menu
+  position?: 'left' | 'right' | 'center'; //For change position of dropdown options menu
 }
 
-const Dropdown = ({ currentState, customElement, children, isLeft = true }: DropdownProps) => {
+const Dropdown = ({
+  currentState,
+  customElement,
+  children,
+  position = 'center',
+}: DropdownProps) => {
   const [visible, setVision] = useState(false);
   const handleVisible = () => {
     setVision((prev) => !prev);
@@ -38,7 +43,10 @@ const Dropdown = ({ currentState, customElement, children, isLeft = true }: Drop
       {/*Options for the dropdown*/}
       <div
         className={`${styles.optionsWrap} ${!visible ? styles.hideOptions : null}`}
-        style={{ left: isLeft ? '0' : 'auto', right: isLeft ? 'auto' : '0' }}
+        style={{
+          left: position === 'left' ? '0' : position === 'center' ? 'auto' : 'auto',
+          right: position === 'right' ? '0' : 'auto',
+        }}
       >
         {React.Children.map(children, (child) =>
           React.isValidElement(child)
