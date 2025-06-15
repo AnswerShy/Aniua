@@ -24,6 +24,9 @@
   .messageInputContainer {
     flex-direction: column;
   }
+  .chat {
+    max-width: 100%;
+  }
 }
 
 .messageInput {
