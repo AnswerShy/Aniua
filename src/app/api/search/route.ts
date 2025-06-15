@@ -21,12 +21,17 @@ export async function GET(req: NextRequest) {
 
     const { titles }: { titles: AnimeDataInterface[] } = await response.json();
 
+    const parts = query.toString().trim().split(' ');
+    const command = parts[0].startsWith('/') ? parts[0] : null;
+    const queryString = command ? parts.slice(1).join(' ') : query.toString();
+
     const filteredResults = titles.filter((item) => {
       const titleEnMatch =
         typeof item.title_en === 'string' &&
-        item.title_en.toLowerCase().includes(query.toLowerCase());
+        item.title_en.toLowerCase().includes(queryString.toLowerCase());
       const titleUaMatch =
-        typeof item.title === 'string' && item.title.toLowerCase().includes(query.toLowerCase());
+        typeof item.title === 'string' &&
+        item.title.toLowerCase().includes(queryString.toLowerCase());
 
       return titleEnMatch || titleUaMatch;
     });
