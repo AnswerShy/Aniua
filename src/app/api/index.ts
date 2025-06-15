@@ -40,9 +40,19 @@ class AnimeService {
 
     if (method === 'POST' && body) {
       options.headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
       };
-      options.body = JSON.stringify(body);
+
+      const formData = new URLSearchParams();
+      Object.entries(body).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          formData.append(key, String(value));
+        }
+      });
+      formData.toString();
+      options.body = formData;
+
+      console.log(options.body);
     }
 
     return options;
@@ -83,7 +93,7 @@ class AnimeService {
           };
         }
       }
-
+      console.log(url);
       const request = await fetch(url, options);
       const response = await request.json();
       if (!request.ok) throw new Error(`${request.status} ${response.message}`);
@@ -205,7 +215,6 @@ type Title = {
 
 export const chartDataExtractor = (titles: Title[]): chartData[] => {
   if (!Array.isArray(titles)) {
-    console.error('Invalid input: titles is not an array', titles);
     return [];
   }
 

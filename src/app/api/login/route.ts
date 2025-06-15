@@ -2,20 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   try {
-    const { username, password } = await req.json();
+    const formData = await req.formData();
 
-    const formData = new URLSearchParams();
-    formData.append('username', username);
-    formData.append('password', password);
-
-    console.log(formData.toString());
+    const urlEncoded = new URLSearchParams();
+    for (const [key, value] of formData.entries()) {
+      urlEncoded.append(key, value.toString());
+    }
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}login/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: formData.toString(),
+      body: urlEncoded.toString(),
     });
 
     if (!response.ok) {
