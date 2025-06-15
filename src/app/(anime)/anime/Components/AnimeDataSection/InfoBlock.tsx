@@ -8,6 +8,9 @@ import styles from './InfoBlock.module.css';
 import { CustomButton, Dropdown, Section, Table, Typography } from '@/components/UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
 import { paths } from '@/constants/headersconst';
+import { useUserStore } from '@/stores/store';
+import FetchServiceInstance from '@/app/api';
+import toast from 'react-hot-toast';
 
 interface Props {
   infoData: AnimeDataInterface;
@@ -37,9 +40,25 @@ const genres = (year: number, genres: AnimeGenres[]) => {
 
 const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
   const slicedText = descriptionCutter(infoData.description, 50);
+  const userStoredData = useUserStore((state) => state.user);
 
   const [displayedText, setFullDescription] = useState(slicedText);
   const [isFullTextDisplayed, setIsFullTextDisplayed] = useState(false);
+
+  const addToList = async ({ list }: { list: string }) => {
+    const data = await FetchServiceInstance.fetchHelper('lists/add/anime', {
+      to: 'out',
+      body: {
+        anime_slug: infoData.slug,
+        list_id: list,
+      },
+      method: 'POST',
+    });
+
+    if (data && data.message) {
+      toast.success(data.message);
+    }
+  };
 
   const descHandler = () => {
     if (isFullTextDisplayed) {
@@ -65,7 +84,19 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
         <CustomButton variant="primary" isAnimate={false} url={`#${playerID}`}>
           {i18n.t('info.Watch')}
         </CustomButton>
-        <Dropdown currentState={i18n.t('info.addToList')}></Dropdown>
+        {userStoredData.anime_lists && (
+          <Dropdown currentState={i18n.t('info.addToList')}>
+            {userStoredData.anime_lists.map((e) => {
+              return (
+                <Dropdown.optionAction
+                  handleOptionSelectAction={() => addToList({ list: e.id || '' })}
+                  key={e.id}
+                  state={e.title}
+                ></Dropdown.optionAction>
+              );
+            })}
+          </Dropdown>
+        )}
       </Section.Col>
 
       <Section.Col widthState="2/4">

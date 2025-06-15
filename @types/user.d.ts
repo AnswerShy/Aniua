@@ -1,3 +1,20 @@
+interface AnimeListInterface {
+  id?: string;
+  slug: string;
+  title: string;
+  reiting: {
+    likes: number;
+    dislikes: number;
+  };
+  is_default: boolean;
+  date?: Date;
+  titles_count?: number;
+  titles?: [];
+  is_pagenated?: boolean;
+  next_url?: any;
+  prev_url?: any;
+}
+
 interface UserProfileInterface {
   id?: number;
   username?: string;
@@ -23,7 +40,7 @@ interface UserProfileInterface {
   comments_count?: number;
   reviews_count?: number;
   achievements?: [string];
-  anime_lists?: [string];
+  anime_lists?: AnimeListInterface[];
   success?: boolean;
   referer?: null;
 }
