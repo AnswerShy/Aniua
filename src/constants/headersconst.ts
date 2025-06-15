@@ -5,8 +5,8 @@ export const paths = {
 }; // Paths for navigation dropdown menu
 
 export const pathsProfile = {
-  profile: '/Profile',
-  settings: '/Profile/Settings',
+  profile: '/profile',
+  settings: '/settings',
 }; // Paths for profile dropdown menu
 
 export const pathsMoney = {

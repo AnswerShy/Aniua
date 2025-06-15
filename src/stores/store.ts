@@ -36,7 +36,7 @@ const defaultUser: UserProfileInterface = {
   comments_count: 0,
   reviews_count: 0,
   achievements: [''],
-  anime_lists: [''],
+  anime_lists: [],
   success: false,
 };
 
