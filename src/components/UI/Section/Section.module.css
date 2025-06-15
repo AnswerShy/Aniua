@@ -8,7 +8,6 @@
 .ThreeColsSection {
   display: flex;
   justify-content: space-evenly;
-  min-height: 100vh;
   padding: 0 2%;
 }
 
@@ -24,6 +23,8 @@
 
 .TwoColSection {
   display: flex;
+  gap: 25px;
+  padding: 5%;
 }
 
 .grid {
@@ -48,10 +49,11 @@
 
 @media (max-width: 1024px) {
   .row,
-  .ThreeColsSection {
+  .ThreeColsSection,
+  .TwoColSection {
     flex-direction: column;
     gap: 15px;
-    padding: 0 10px;
+    padding: 5% 10px;
   }
   .grid {
     grid-template-columns: repeat(5, minmax(130px, 1fr));
