@@ -99,7 +99,8 @@ class AnimeService {
       if (!request.ok) throw new Error(`${request.status} ${response.message}`);
       return response;
     } catch (error) {
-      console.error(`Error fetching ${endpoint}: ${error}`);
+      const totalEndpoint = `${to ? (to === 'self' ? this.domain : this.api) : ''}${endpoint}`;
+      console.error(`Error fetching ${totalEndpoint}: ${error}`);
       return null;
     }
   }
