@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        npm_install_command: install
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    environment:
+      - HOSTNAME=0.0.0.0

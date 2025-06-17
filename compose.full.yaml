@@ -2,6 +2,7 @@ services:
   frontend:
     build:
       context: .
+      dockerfile: Dockerfile.full
       args:
         npm_install_command: install
     env_file:
