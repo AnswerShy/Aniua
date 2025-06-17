@@ -7,9 +7,8 @@
     "dev": "nodemon server.js",
     "dev:next": "next dev --turbopack --hostname 0.0.0.0",
     "build": "next build",
-    "start": "NODE_ENV=production nodemon server.js",
-    "lint": "next lint && prettier --write .",
-    "prepare": "husky"
+    "start": "node server.js",
+    "lint": "next lint && prettier --write ."
   },
   "lint-staged": {
     "*.{js,ts,tsx,css}": [

@@ -2,10 +2,10 @@ import { createServer } from 'node:http';
 import next from 'next';
 import { Server } from 'socket.io';
 
-const dev = process.env.NODE_ENV !== 'production';
-const hostname = 'localhost';
+const dev = false;
 const port = 3000;
-const app = next({ dev, hostname, port });
+const hostname = '0.0.0.0';
+const app = next({ dev, hostname, port, dir: '.' });
 const handler = app.getRequestHandler();
 
 import onLobbyMessage from './server/lobbyCommands.js';
