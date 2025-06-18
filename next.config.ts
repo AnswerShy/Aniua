@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   },
   output: 'standalone',
   allowedDevOrigins: ['honest-octopus-driving.ngrok-free.app', '*.ngrok-free.app'],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

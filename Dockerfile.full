@@ -1,14 +1,23 @@
 ARG NODE_VERSION=23.7.0
 FROM node:${NODE_VERSION}-slim as deps
 WORKDIR /app
-COPY package.json package-lock.json ./
+
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+ARG GITHUB_TOKEN
+RUN git clone https://$GITHUB_TOKEN@github.com/AnswerShy/Aniua.git .
+
 RUN npm ci --only=production
 
 FROM node:${NODE_VERSION}-slim as builder
 WORKDIR /app
-COPY package.json package-lock.json ./
+
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+ARG GITHUB_TOKEN
+RUN git clone https://$GITHUB_TOKEN@github.com/AnswerShy/Aniua.git .
+
 RUN npm ci
-COPY . .
 RUN npm run build
 RUN cp -r public .next/standalone/
 RUN cp -r .next/static .next/standalone/.next/

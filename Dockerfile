@@ -3,14 +3,14 @@ ARG NODE_VERSION=23.7.0
 FROM node:${NODE_VERSION}-slim as builder
 WORKDIR /app
 
-ENV NEXT_PUBLIC_BASE_URL=http://localhost:3000/
-ENV NEXT_PUBLIC_API_URL=https://api.aniua.top/
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-COPY package.json .
-COPY package-lock.json .
+ARG GITHUB_TOKEN
+RUN git clone https://$GITHUB_TOKEN@github.com/AnswerShy/Aniua.git .
+
 RUN npm install
-COPY . .
 RUN npm run build
+
 RUN cp -r public .next/standalone/
 RUN cp -r .next/static .next/standalone/.next/
 
@@ -18,8 +18,6 @@ FROM node:${NODE_VERSION}-slim as runner
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_BASE_URL=http://0.0.0.0:3000/
-ENV NEXT_PUBLIC_API_URL=https://api.aniua.top/
 COPY --from=builder /app/.next/standalone ./
 
 USER node
