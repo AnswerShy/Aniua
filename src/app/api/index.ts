@@ -6,11 +6,20 @@ import toast from 'react-hot-toast';
 class AnimeService {
   private domain = process.env.NEXT_PUBLIC_BASE_URL;
   private api = process.env.NEXT_PUBLIC_API_URL;
+  private search = process.env.NEXT_PUBLIC_SEARCH_API_URL;
+
+  constructor() {
+    if (!this.api || !this.domain) {
+      console.warn('Missing environment variables: NEXT_PUBLIC_API_URL or NEXT_PUBLIC_BASE_URL');
+    }
+  }
 
   private constructUrl(endpoint: string, params?: Record<string, string>) {
-    const url = new URL(endpoint, this.domain);
+    if (!this.domain) throw new Error('Base URL is undefined');
+    const url = new URL(endpoint);
     if (params)
       Object.entries(params).forEach(([key, value]) => url.searchParams.append(key, value));
+    console.log(`\x1b[32m ${url.toString()} \x1b[0m`);
     return url.toString();
   }
 
@@ -68,7 +77,7 @@ class AnimeService {
       body = null,
       chache,
     }: {
-      to?: 'self' | 'out';
+      to?: 'self' | 'out' | 'search';
       req?: NextRequest;
       params?: Record<string, string>;
       method?: 'GET' | 'POST';
@@ -76,12 +85,18 @@ class AnimeService {
       chache?: RequestCache;
     } = {},
   ) {
-    try {
-      const url = this.constructUrl(
-        `${to ? (to === 'self' ? this.domain : this.api) : ''}${endpoint}`,
-        params,
-      );
+    const baseURLMap: Record<'self' | 'out' | 'search', string | undefined> = {
+      self: this.domain,
+      out: this.api,
+      search: this.search,
+    };
 
+    const baseURL = baseURLMap[to ?? 'self'];
+    if (!baseURL) throw new Error(`Base URL for '${to}' is not defined`);
+
+    const url = this.constructUrl(`${baseURL}${endpoint}`, params);
+
+    try {
       const options = this.getFetchOptions(method, body, chache);
 
       if (req) {
@@ -96,11 +111,15 @@ class AnimeService {
       console.log(url);
       const request = await fetch(url, options);
       const response = await request.json();
-      if (!request.ok) throw new Error(`${request.status} ${response.message}`);
+
+      if (!request.ok) {
+        toast.error(i18n.t('toast.ServerError'));
+        return i18n.t('toast.ServerError');
+      }
+
       return response;
     } catch (error) {
-      const totalEndpoint = `${to ? (to === 'self' ? this.domain : this.api) : ''}${endpoint}`;
-      console.error(`Error fetching ${totalEndpoint}: ${error}`);
+      console.error(`Error fetching ${url}: ${error}`);
       return null;
     }
   }

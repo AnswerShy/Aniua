@@ -35,9 +35,8 @@ type SearchResultsProps = {
 };
 
 export function SearchResults({ results, isLoading, click }: SearchResultsProps) {
-  if (typeof results === 'string') return <p>{results}</p>;
-
   if (isLoading) return <p>Loading...</p>;
+  if (typeof results === 'string') return <p>{results}</p>;
   if (!results || results.length === 0) return <p>No results found.</p>;
 
   return (
