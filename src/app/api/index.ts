@@ -1,6 +1,5 @@
 import { LoginRequest, RegistrationRequest } from '@/interfaces/UserAccServices';
 import { i18n } from '@/utils/customUtils';
-import { NextRequest, NextResponse } from 'next/server';
 import toast from 'react-hot-toast';
 
 class AnimeService {
@@ -21,13 +20,6 @@ class AnimeService {
       Object.entries(params).forEach(([key, value]) => url.searchParams.append(key, value));
     console.log(`\x1b[32m ${url.toString()} \x1b[0m`);
     return url.toString();
-  }
-
-  private async getCookieHeader(req: NextRequest): Promise<string | NextResponse> {
-    const sessionid = req.cookies.get('sessionid')?.value;
-    if (!sessionid)
-      return NextResponse.json({ message: 'Missing required cookies' }, { status: 400 });
-    return `sessionid=${sessionid}`;
   }
 
   private getFetchOptions<T>(
@@ -71,14 +63,12 @@ class AnimeService {
     endpoint: string,
     {
       to,
-      req,
       params,
       method = 'GET',
       body = null,
       chache,
     }: {
       to?: 'self' | 'out' | 'search';
-      req?: NextRequest;
       params?: Record<string, string>;
       method?: 'GET' | 'POST';
       body?: Record<string, string | number> | null;
@@ -99,27 +89,16 @@ class AnimeService {
     try {
       const options = this.getFetchOptions(method, body, chache);
 
-      if (req) {
-        const cookieHeader = await this.getCookieHeader(req);
-        if (cookieHeader) {
-          options.headers = {
-            ...(options.headers || {}),
-            Cookie: cookieHeader as string,
-          };
-        }
-      }
-      console.log(url);
       const request = await fetch(url, options);
       const response = await request.json();
 
       if (!request.ok) {
-        toast.error(i18n.t('toast.ServerError'));
-        return i18n.t('toast.ServerError');
+        return { error: true, status: request.status, response };
       }
 
       return response;
     } catch (error) {
-      console.error(`Error fetching ${url}: ${error}`);
+      console.error(`Error fetching ${url}\n<${baseURL}---${endpoint}>: ${error}`);
       return null;
     }
   }
