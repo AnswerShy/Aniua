@@ -4,6 +4,7 @@ import FetchServiceInstance from '@/app/api';
 import Pagination from '@/components/Pagination/Pagination';
 import CardSkeleton from '@/components/UI/Card/CardSkeleton';
 import { Card, CustomButton, Section } from '@/components/UI/UIComponents';
+import { animeAPIConstant } from '@/constants/api-endpoints.constant';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -19,7 +20,13 @@ function AnimeList() {
     try {
       setLoad(true);
       const queryString = searchParams.toString();
-      const moreAnime = await FetchServiceInstance.fetchAnimeList(page, queryString);
+
+      const moreAnime = (await FetchServiceInstance.fetchHelper(animeAPIConstant['list'], {
+        params: { page: page.toString(), limit: '28', filter: queryString ?? '' },
+        to: 'self',
+        chache: 'no-store',
+      })) as { page_count: number; titles: AnimeDataInterface[] };
+
       setLength(moreAnime.page_count);
       setAnime([...moreAnime.titles]);
       if (moreAnime.titles.length < 18) {

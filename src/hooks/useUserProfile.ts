@@ -5,6 +5,7 @@ import { useUserStore } from '@/stores/store';
 import FetchServiceInstance from '@/app/api';
 import toast from 'react-hot-toast';
 import { i18n } from '@/utils/customUtils';
+import { userAPIConstant } from '@/constants/api-endpoints.constant';
 
 const useUserProfile = () => {
   const userStoredData = useUserStore((state) => state.user);
@@ -16,18 +17,21 @@ const useUserProfile = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const data = await FetchServiceInstance.fetchProfile();
+      const data = await FetchServiceInstance.fetchHelper(userAPIConstant['profile'], {
+        to: 'self',
+        method: 'GET',
+        chache: 'no-store',
+      });
+
       if (data.success !== true) {
         removeUserFromStore();
-        console.log('success', data.success);
         return;
       }
-      console.log('success', data.success, data.username);
       setUserToStore(data);
     } catch (error) {
+      console.error(error);
       if (isLoggedIn) {
         toast.error(i18n.t('toast.fetchUserProfileError'));
-        console.error('Error fetching user data:', error);
       }
       removeUserFromStore();
     }

@@ -8,14 +8,26 @@ import useUserProfile from '@/hooks/useUserProfile';
 import FetchServiceInstance from '@/app/api';
 import { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
+import { chartDataExtractor } from '@/utils/customUtils';
+import { userAPIConstant } from '@/constants/api-endpoints.constant';
 
 export default function ProfileComponent() {
   const { userStoredData } = useUserProfile();
   const [chart, setChart] = useState<chartData[]>([]);
 
   useEffect(() => {
-    FetchServiceInstance.fetchUserListContent().then((data) => setChart(data));
-    console.log(chart);
+    const fetchChart = async () => {
+      const request = await FetchServiceInstance.fetchHelper(userAPIConstant['chart'], {
+        to: 'self',
+        method: 'GET',
+        chache: 'no-store',
+      });
+
+      const chart = chartDataExtractor(request);
+      setChart(chart);
+    };
+
+    fetchChart();
   }, []);
 
   return (

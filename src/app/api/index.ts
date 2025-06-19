@@ -1,7 +1,3 @@
-import { LoginRequest, RegistrationRequest } from '@/interfaces/UserAccServices';
-import { i18n } from '@/utils/customUtils';
-import toast from 'react-hot-toast';
-
 class AnimeService {
   private domain = process.env.NEXT_PUBLIC_BASE_URL;
   private api = process.env.NEXT_PUBLIC_API_URL;
@@ -67,12 +63,14 @@ class AnimeService {
       method = 'GET',
       body = null,
       chache,
+      requestReturn = false,
     }: {
       to?: 'self' | 'out' | 'search';
       params?: Record<string, string>;
       method?: 'GET' | 'POST';
       body?: Record<string, string | number> | null;
       chache?: RequestCache;
+      requestReturn?: boolean;
     } = {},
   ) {
     const baseURLMap: Record<'self' | 'out' | 'search', string | undefined> = {
@@ -90,157 +88,18 @@ class AnimeService {
       const options = this.getFetchOptions(method, body, chache);
 
       const request = await fetch(url, options);
-      const response = await request.json();
 
       if (!request.ok) {
-        return { error: true, status: request.status, response };
+        return { error: true, status: request.status, response: await request.json() };
       }
 
-      return response;
+      return requestReturn ? request : await request.json();
     } catch (error) {
       console.error(`Error fetching ${url}\n<${baseURL}---${endpoint}>: ${error}`);
       return null;
     }
   }
-
-  // Ready fetches
-
-  async fetchAnimeInfo(slug: string): Promise<AnimeDataInterface> {
-    return this.fetchHelper(`api/anime/${slug}`, { to: 'self' });
-  }
-
-  async fetchEpisodeList(slug: string) {
-    return await this.fetchHelper(`api/anime/episodeList?title=${slug}`, { to: 'self' }).then(
-      (res) => res.episodes,
-    );
-  }
-
-  async fetchEpisode(id: number) {
-    return this.fetchHelper(`api/anime/episode?title=${id}`, { to: 'self' });
-  }
-
-  async fetchAnimeList(
-    page: number = 1,
-    filter?: string,
-  ): Promise<{ page_count: number; titles: AnimeDataInterface[] }> {
-    const filterData = filter?.toString();
-    return this.fetchHelper(`api/list/?page=${page}&limit=28&${filterData}`, {
-      to: 'self',
-      chache: 'no-store',
-    }).then((res) => res as { page_count: number; titles: AnimeDataInterface[] });
-  }
-
-  async fetchCommunityChoice(): Promise<Array<AnimeDataInterface>> {
-    return this.fetchHelper(`filter/?limit=5&order=rating`, { to: 'out' }).then(
-      (res) => res.titles as AnimeDataInterface[],
-    );
-  }
-
-  async fetchUserListContent() {
-    return this.fetchHelper(`api/chart`, { to: 'self', method: 'GET', chache: 'no-store' }).then(
-      (res) => chartDataExtractor(res),
-    );
-  }
-
-  async fetchProfile() {
-    return this.fetchHelper(`api/profile`, {
-      to: 'self',
-      method: 'GET',
-      chache: 'no-store',
-    }).then((res) => {
-      if (res == null) {
-        localStorage.setItem('isLoggedIn', 'false');
-      }
-      return res;
-    });
-  }
-
-  async fetchLogin(data: LoginRequest): Promise<{ success: boolean }> {
-    try {
-      const res = await this.fetchHelper(`api/login`, {
-        to: 'self',
-        method: 'POST',
-        body: {
-          username: data.username,
-          password: data.password,
-        },
-      });
-
-      if (res?.success == true) {
-        return res;
-      } else {
-        toast.error(i18n.t('toast.LoginFailedUser'));
-        console.error(i18n.t('toast.LoginFailedUser'));
-        return { success: false };
-      }
-    } catch (error) {
-      toast.error(i18n.t('toast.fetchLoginError'));
-      console.error(i18n.t('toast.fetchLoginError'), error);
-      return { success: false };
-    }
-  }
-
-  async fetchRegistration(data: RegistrationRequest): Promise<{ success: boolean }> {
-    try {
-      const res = await this.fetchHelper(`api/registration`, {
-        to: 'self',
-        method: 'POST',
-        body: {
-          username: data.username,
-          email: data.email,
-          password1: data.password1,
-          password2: data.password2,
-        },
-      });
-
-      if (res?.success == true) {
-        return res;
-      } else {
-        toast.error(i18n.t('toast.RegistrationFailedUser'));
-        console.error(i18n.t('toast.RegistrationFailedUser'));
-        return { success: false };
-      }
-    } catch (error) {
-      toast.error(i18n.t('toast.fetchRegistrationError'));
-      console.error(i18n.t('toast.fetchRegistrationError'), error);
-      return { success: false };
-    }
-  }
 }
-
-type Title = {
-  genres: AnimeGenres[];
-};
-
-export const chartDataExtractor = (titles: Title[]): chartData[] => {
-  if (!Array.isArray(titles)) {
-    return [];
-  }
-
-  const genreCount: Record<string, number> = {};
-
-  titles.forEach((title) => {
-    if (Array.isArray(title.genres)) {
-      title.genres.forEach((genre: { title: string }) => {
-        if (genreCount[genre.title]) {
-          genreCount[genre.title]++;
-        } else {
-          genreCount[genre.title] = 1;
-        }
-      });
-    } else {
-      console.warn('Invalid genres structure in title:', title);
-    }
-  });
-
-  const chartData = Object.entries(genreCount).map(([genre, count]) => ({
-    id: genre,
-    value: count,
-    label: genre,
-  }));
-
-  return chartData;
-};
 
 const FetchServiceInstance = new AnimeService();
 export default FetchServiceInstance;

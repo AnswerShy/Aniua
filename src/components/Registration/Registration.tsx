@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import { i18n } from '@/utils/customUtils';
 import FetchServiceInstance from '@/app/api/index';
 import useUserProfile from '@/hooks/useUserProfile';
+import { userAPIConstant } from '@/constants/api-endpoints.constant';
+import toast from 'react-hot-toast';
 
 function Registration() {
   const router = useRouter();
@@ -23,16 +25,29 @@ function Registration() {
 
   const handleRegistration: SubmitHandler<RegistrationForms> = async (data) => {
     try {
-      const res = await FetchServiceInstance.fetchRegistration(data);
+      const res = await FetchServiceInstance.fetchHelper(userAPIConstant['registration'], {
+        to: 'self',
+        method: 'POST',
+        body: {
+          username: data.username,
+          email: data.email,
+          password1: data.password1,
+          password2: data.password2,
+        },
+      });
 
-      if (res.success) {
+      if (res?.success == true) {
         await fetchUserProfile();
         router.push('/');
+      } else {
+        toast.error(i18n.t('toast.RegistrationFailedUser'));
       }
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      toast.error(i18n.t('toast.fetchRegistrationError'));
+      console.error(error);
     }
   };
+
   return (
     <form
       onSubmit={handleSubmit(handleRegistration)}

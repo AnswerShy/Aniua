@@ -6,16 +6,20 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
   try {
     const { slug } = await params;
 
-    const response = await FetchServiceInstance.fetchHelper(animeAPIConstant.animeByTitle(slug), {
+    if (slug === 'none') {
+      NextResponse.json({ message: 'No slug provided' }, { status: 400 });
+    }
+
+    const response = await FetchServiceInstance.fetchHelper(animeAPIConstant.episodeList(slug), {
       to: 'out',
       method: 'GET',
-      chache: 'force-cache',
+      chache: 'no-store',
       requestReturn: true,
     });
 
     if (!response.ok) {
       return NextResponse.json(
-        { message: `Failed to fetch anime ${slug}` },
+        { message: `Failed to fetch anime list ${slug}` },
         { status: response.status },
       );
     }

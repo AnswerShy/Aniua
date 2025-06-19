@@ -1,4 +1,5 @@
 import FetchServiceInstance from '@/app/api';
+import { animeAPIConstant } from '@/constants/api-endpoints.constant';
 import { i18n } from '@/utils/customUtils';
 import debounce from 'lodash.debounce';
 import { useCallback, useState } from 'react';
@@ -11,7 +12,10 @@ function useSearchHook() {
   async function fetchDBSearch(query: string) {
     if (!query.trim()) return i18n.t('search.TypeSmt');
 
-    const response = await FetchServiceInstance.fetchHelper(`search/?q=${query}`, { to: 'search' });
+    const response = await FetchServiceInstance.fetchHelper(animeAPIConstant['search'], {
+      to: 'search',
+      params: { q: query },
+    });
     const titles = response?.titles;
 
     if (!Array.isArray(titles) || titles.length < 1) {

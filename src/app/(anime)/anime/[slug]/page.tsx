@@ -11,7 +11,7 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const { slug } = await params;
-  const data = await FetchServiceInstance.fetchAnimeInfo(slug);
+  const data = await FetchServiceInstance.fetchHelper(`api/anime/${slug}`, { to: 'self' });
 
   const language = i18n.language;
   const title = language === 'uk' ? data.title : data.title_en;
@@ -24,7 +24,7 @@ export async function generateMetadata({
 
 export default async function AnimePage({ params }: { params: { slug: string } }) {
   const { slug } = await params;
-  const data = await FetchServiceInstance.fetchAnimeInfo(slug);
+  const data = await FetchServiceInstance.fetchHelper(`api/anime/${slug}`, { to: 'self' });
   const playerID = 'player-section';
 
   return (

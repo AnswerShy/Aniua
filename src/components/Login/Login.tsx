@@ -8,6 +8,7 @@ import { i18n } from '@/utils/customUtils';
 import toast from 'react-hot-toast';
 import FetchServiceInstance from '@/app/api/index';
 import useUserProfile from '@/hooks/useUserProfile';
+import { userAPIConstant } from '@/constants/api-endpoints.constant';
 
 function Login() {
   const router = useRouter();
@@ -27,12 +28,28 @@ function Login() {
 
   const handleLogin: SubmitHandler<LoginForms> = async (data) => {
     try {
-      const res = await FetchServiceInstance.fetchLogin(data);
+      const res = await FetchServiceInstance.fetchHelper(userAPIConstant['login'], {
+        to: 'self',
+        method: 'POST',
+        body: {
+          username: data.username,
+          password: data.password,
+        },
+      });
 
-      if (res.success) {
+      if (!res) {
+        toast.error(i18n.t('toast.fetchLoginError'));
+        return;
+      }
+
+      if (res?.success == true) {
         await fetchUserProfile();
+        toast.success(i18n.t('toast.LoginSuccess'));
         router.push('/');
         setLoginState(true);
+      } else {
+        toast.error(i18n.t('toast.LoginFailedUser'));
+        return { success: false };
       }
     } catch (e) {
       toast.error(i18n.t('toast.ServerError'));

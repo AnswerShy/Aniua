@@ -2,6 +2,7 @@ import { handleEpisode, i18n } from '@/utils/customUtils';
 import FetchServiceInstance from '@/app/api';
 import { useCallback, useEffect, useState } from 'react';
 import { usePlayerStore } from '@/stores/playerHistory';
+import { animeAPIConstant } from '@/constants/api-endpoints.constant';
 
 export const usePlayer = (slug: string | null) => {
   const [episodesList, setEpisodesList] = useState<EpisodeListInterface[] | null>(null);
@@ -20,9 +21,18 @@ export const usePlayer = (slug: string | null) => {
 
   useEffect(() => {
     const fetchEpisodes = async () => {
-      if (!slug) return;
-      const list = await FetchServiceInstance.fetchEpisodeList(slug);
-      setEpisodesList(list);
+      try {
+        if (!slug) return;
+        const list = await FetchServiceInstance.fetchHelper(
+          `api/${animeAPIConstant.episodeList(slug)}`,
+          {
+            to: 'self',
+          },
+        ).then((res) => res.episodes);
+        setEpisodesList(list);
+      } catch (err) {
+        console.error(err);
+      }
     };
     fetchEpisodes();
 

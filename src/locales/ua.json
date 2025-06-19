@@ -56,7 +56,8 @@
     "RegistrationFailed": "Помилка реєстрації",
     "RegistrationSuccess": "Реєстрація пройшла успішно",
     "fetchUserProfileError": "Помилка заванаження профілю",
-    "fetchLoginError": ""
+    "fetchLoginError": "",
+    "LoginSuccess": "Успішний вхід!"
   },
   "chat": {
     "send": "Відправити",

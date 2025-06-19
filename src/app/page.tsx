@@ -1,9 +1,13 @@
 import { Card, Section } from '@/components/UI/UIComponents';
 import FetchServiceInstance from '@/app/api';
 import { i18n } from '@/utils/customUtils';
+import { animeAPIConstant } from '@/constants/api-endpoints.constant';
 
 export default async function Home() {
-  const communityChoice = await FetchServiceInstance.fetchCommunityChoice();
+  const communityChoice = await FetchServiceInstance.fetchHelper(animeAPIConstant['filter'], {
+    to: 'out',
+    params: { limit: '5', order: 'rating' },
+  }).then((res) => res.titles as AnimeDataInterface[]);
 
   return (
     <>
