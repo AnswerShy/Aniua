@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.multi
-      target: runner-next
+      target: runner-next-local
       args:
         GITHUB_TOKEN: ${GITHUB_TOKEN}
     env_file:
