@@ -20,6 +20,14 @@ RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 ARG GITHUB_TOKEN
 RUN git clone https://$GITHUB_TOKEN@github.com/AnswerShy/Aniua.git .
 
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_BASE_URL
+ARG NEXT_PUBLIC_SEARCH_API_URL
+
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
+ENV NEXT_PUBLIC_SEARCH_API_URL=$NEXT_PUBLIC_SEARCH_API_URL
+
 RUN npm ci
 RUN npm run build
 RUN cp -r public .next/standalone/
@@ -30,6 +38,14 @@ FROM node:${NODE_VERSION}-slim as builder-from-local
 WORKDIR /app
 
 COPY . .
+
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_BASE_URL
+ARG NEXT_PUBLIC_SEARCH_API_URL
+
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
+ENV NEXT_PUBLIC_SEARCH_API_URL=$NEXT_PUBLIC_SEARCH_API_URL
 
 RUN npm ci
 RUN npm run build
@@ -45,10 +61,18 @@ COPY --from=builder-from-public /app/.next/standalone ./
 COPY --from=builder-from-public /app/server.js ./server.js
 COPY --from=builder-from-public /app/server ./server
 
+USER node
+EXPOSE 3000
+CMD ["node", "server.js"]
+
 # ----------- run standalone next build ----------
 FROM node:${NODE_VERSION}-slim as runner-next
 WORKDIR /app
 COPY --from=builder-from-public /app/.next/standalone ./
+
+USER node
+EXPOSE 3000
+CMD ["node", "server.js"]
 
 # ----------- run standalone next build (from local repo) ----------
 FROM node:${NODE_VERSION}-slim as runner-next-local

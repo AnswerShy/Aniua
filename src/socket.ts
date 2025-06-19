@@ -2,14 +2,19 @@
 
 import { io, Socket } from 'socket.io-client';
 
-const URL = process.env.NODE_ENV === 'production' ? undefined : process.env.NEXT_PUBLIC_WS_URL;
+const URL = process.env.NEXT_PUBLIC_WS_URL;
+
+if (!URL) {
+  console.warn(`NEXT_PUBLIC_WS_URL not provided!`);
+}
+
 let socket: Socket | null = null;
 
 export const getSocket = (): Socket => {
   if (!socket) {
     socket = io(URL, {
-      transports: ['websocket'], // Use WebSocket for better performance
-      reconnection: false, // Automatically reconnect
+      transports: ['websocket'],
+      reconnection: false,
     });
 
     socket.on('connect', () => {
