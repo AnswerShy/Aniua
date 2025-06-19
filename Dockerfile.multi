@@ -1,0 +1,60 @@
+ARG NODE_VERSION=23.7.0
+
+# ----------- deps installing ----------
+FROM node:${NODE_VERSION}-slim as deps
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+ARG GITHUB_TOKEN
+RUN git clone https://$GITHUB_TOKEN@github.com/AnswerShy/Aniua.git .
+
+RUN npm ci --only=production
+
+# ----------- builder from git ----------
+FROM node:${NODE_VERSION}-slim as builder-from-public
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+ARG GITHUB_TOKEN
+RUN git clone https://$GITHUB_TOKEN@github.com/AnswerShy/Aniua.git .
+
+RUN npm ci
+RUN npm run build
+RUN cp -r public .next/standalone/
+RUN cp -r .next/static .next/standalone/.next/
+
+# ----------- builder from local ----------
+FROM node:${NODE_VERSION}-slim as builder-from-local
+WORKDIR /app
+
+COPY . .
+
+RUN npm ci
+RUN npm run build
+RUN cp -r public .next/standalone/
+RUN cp -r .next/static .next/standalone/.next/
+
+# ----------- run full app (custom server) ----------
+FROM node:${NODE_VERSION}-slim as runner-full
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=builder-from-public /app/.next/standalone ./
+COPY --from=builder-from-public /app/server.js ./server.js
+COPY --from=builder-from-public /app/server ./server
+
+# ----------- run standalone next build ----------
+FROM node:${NODE_VERSION}-slim as runner-next
+WORKDIR /app
+COPY --from=builder-from-public /app/.next/standalone ./
+
+# ----------- run standalone next build (from local repo) ----------
+FROM node:${NODE_VERSION}-slim as runner-next-local
+WORKDIR /app
+COPY --from=builder-from-local /app/.next/standalone ./
+
+USER node
+EXPOSE 3000
+CMD ["node", "server.js"]

@@ -1,7 +1,7 @@
+import FetchServiceInstance from '@/app/api';
 import { i18n } from '@/utils/customUtils';
 import debounce from 'lodash.debounce';
 import { useCallback, useState } from 'react';
-import toast from 'react-hot-toast';
 
 function useSearchHook() {
   const [query, setQuery] = useState('');
@@ -11,15 +11,14 @@ function useSearchHook() {
   async function fetchDBSearch(query: string) {
     if (!query.trim()) return i18n.t('search.TypeSmt');
 
-    const response = await fetch(`/api/search/?q=${query}`);
-    if (!response.ok) {
-      toast.error(i18n.t('toast.ServerError'));
-      return i18n.t('toast.ServerError');
-    }
-    if (response.status === 404) return i18n.t('search.NoResults');
+    const response = await FetchServiceInstance.fetchHelper(`search/?q=${query}`, { to: 'search' });
+    const titles = response?.titles;
 
-    const data = await response.json();
-    return data;
+    if (!Array.isArray(titles) || titles.length < 1) {
+      return i18n.t('search.NoResults');
+    }
+
+    return titles;
   }
 
   const search = async (q: string) => {
