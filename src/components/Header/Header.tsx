@@ -25,9 +25,9 @@ export default function Header() {
   useEffect(() => {
     if (pathname.startsWith('/Anime/')) {
       const anime = pathname.slice(7).replaceAll('-', ' ');
-      setCurrentPath(['List', anime]);
+      setCurrentPath(['list', anime]);
     } else {
-      setCurrentPath(['List']);
+      setCurrentPath(['list']);
     }
   }, [pathname]);
 
