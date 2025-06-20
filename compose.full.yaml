@@ -9,6 +9,7 @@ services:
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
         NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL}
         NEXT_PUBLIC_SEARCH_API_URL: ${NEXT_PUBLIC_SEARCH_API_URL}
+        NEXT_PUBLIC_WS_URL: ${NEXT_PUBLIC_WS_URL}
     env_file:
       - .env
     ports:
@@ -16,6 +17,7 @@ services:
     environment:
       - HOSTNAME=0.0.0.0
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=http://localhost:3000
-      - NEXT_PUBLIC_BASE_URL=https://api.aniua.top/
-      - NEXT_PUBLIC_SEARCH_API_URL=https://anibackts.fly.dev/api/
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+      - NEXT_PUBLIC_SEARCH_API_URL=${NEXT_PUBLIC_SEARCH_API_URL}
+      - NEXT_PUBLIC_WS_URL=${NEXT_PUBLIC_WS_URL}

@@ -82,3 +82,16 @@ COPY --from=builder-from-local /app/.next/standalone ./
 USER node
 EXPOSE 3000
 CMD ["node", "server.js"]
+
+# ----------- run full app (custom server) (from local repo) ----------
+FROM node:${NODE_VERSION}-slim as runner-full-local
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=builder-from-local /app/.next/standalone ./
+COPY --from=builder-from-local /app/server.js ./server.js
+COPY --from=builder-from-local /app/server ./server
+
+USER node
+EXPOSE 3000
+CMD ["node", "server.js"]
