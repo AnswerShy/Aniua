@@ -45,6 +45,7 @@ const CustomButton: React.FC<ButtonProps> = React.memo(
       router.push(url, {
         onTransitionReady: isAnimate ? pageAnimation : undefined,
       });
+      window.location.href = url;
     };
 
     return !url ? (
