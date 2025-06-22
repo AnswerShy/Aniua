@@ -65,6 +65,7 @@
 
 @media (max-width: 786px) {
   .grid {
-    grid-template-columns: repeat(3, minmax(130px, 1fr));
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    justify-items: center;
   }
 }
