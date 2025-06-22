@@ -7,6 +7,8 @@ import { Section } from '@/components/UI/UIComponents';
 import { SocketProvider } from '@/context/SocketContext';
 import { useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { i18n } from '@/utils/customUtils';
 
 const PlayerProvider = ({ slug, playerID }: { slug?: string; playerID?: string }) => {
   const { playerState, setPlayerState, handleStudio, episodesList } = usePlayer(slug ?? null);
@@ -20,12 +22,30 @@ const PlayerProvider = ({ slug, playerID }: { slug?: string; playerID?: string }
     const newRoom = Math.random().toString(36).substring(2, 8);
     const url = new URL(window.location.href);
     url.searchParams.set('room', newRoom);
-    window.location.href = url.toString();
+    const newUrl = url.toString();
+
+    navigator.clipboard
+      .writeText(newUrl)
+      .then(() => {
+        localStorage.setItem('roomLinkCopied', 'true');
+        window.location.href = newUrl;
+      })
+      .catch(() => {
+        toast.error(i18n.t('toast.copy_error') || 'Failed to copy link');
+        window.location.href = newUrl;
+      });
   }, []);
 
   useEffect(() => {
     if (codeOfRoom) {
-      document.getElementById('player-section')?.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        document.getElementById('player-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    }
+
+    if (localStorage.getItem('roomLinkCopied') === 'true') {
+      toast.success(i18n.t('toast.copied'));
+      localStorage.removeItem('roomLinkCopied');
     }
   }, []);
 
