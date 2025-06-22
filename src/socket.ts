@@ -3,6 +3,7 @@
 import { io, Socket } from 'socket.io-client';
 
 const URL = process.env.NEXT_PUBLIC_WS_URL;
+console.log(URL);
 
 if (!URL) {
   console.warn(`NEXT_PUBLIC_WS_URL not provided!`);
