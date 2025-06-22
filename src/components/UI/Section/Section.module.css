@@ -58,6 +58,9 @@
   .grid {
     grid-template-columns: repeat(5, minmax(130px, 1fr));
   }
+  .BannerSection {
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 786px) {

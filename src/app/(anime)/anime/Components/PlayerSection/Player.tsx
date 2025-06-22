@@ -2,12 +2,7 @@
 
 import Pagination from '@/components/Pagination/Pagination';
 import styles from './Player.module.css';
-import {
-  CustomButton,
-  CustomButtonStyles,
-  Dropdown,
-  Typography,
-} from '@/components/UI/UIComponents';
+import { CustomButton, Dropdown, Typography } from '@/components/UI/UIComponents';
 import { usePlayerSocket } from '@/hooks/usePlayerSocket';
 
 import { handleEpisode } from '@/utils/customUtils';
@@ -172,26 +167,27 @@ const EpisodeList = ({
   if (!episodesList || episodesList.length < 2) return null;
   return (
     <Pagination>
-      {episodesList.map((element, index) => (
-        <CustomButton
-          key={index}
-          classString={clsx(
-            element.is_filler ? CustomButtonStyles.outline : CustomButtonStyles.secondary,
-            element.id == playerState.episodeID ? styles.activeEpisode : null,
-          )}
-          onClick={() =>
-            handleEpisode({
-              playerState: setPlayerState,
-              id: episodesList[index].id,
-              studio: chooseStudio,
-              episodesList: episodesList[index],
-              animeSlug: playerState.animeSlug,
-            })
-          }
-        >
-          {element.episode_number}
-        </CustomButton>
-      ))}
+      {episodesList.map((element, index) => {
+        const isCurrent = element.id === playerState.episodeID;
+        const variant = isCurrent ? 'primary' : element.is_filler ? 'outline' : 'secondary';
+        return (
+          <CustomButton
+            key={index}
+            variant={variant}
+            onClick={() =>
+              handleEpisode({
+                playerState: setPlayerState,
+                id: episodesList[index].id,
+                studio: chooseStudio,
+                episodesList: episodesList[index],
+                animeSlug: playerState.animeSlug,
+              })
+            }
+          >
+            {element.episode_number}
+          </CustomButton>
+        );
+      })}
     </Pagination>
   );
 };
