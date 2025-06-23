@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useUserStore } from '@/stores/store';
+import { useUserStore } from '@/stores/user-profile-store';
 import FetchServiceInstance from '@/app/api';
 import toast from 'react-hot-toast';
 import { i18n } from '@/utils/customUtils';
@@ -24,22 +24,35 @@ const useUserProfile = () => {
       });
 
       if (data.success !== true) {
+        console.log(`\n\n\t\tREMOVED BY STORAGE (while fetch)`);
         removeUserFromStore();
         return;
       }
       setUserToStore(data);
     } catch (error) {
+      console.log(`\n\n\t\tREMOVED BY STORAGE (while trycatch)`);
       console.error(error);
+
       if (isLoggedIn) {
         toast.error(i18n.t('toast.fetchUserProfileError'));
       }
+
       removeUserFromStore();
     }
   };
 
   useEffect(() => {
     if (!hydrated) return;
-    if (isLoggedIn) fetchUserProfile();
+    console.log(userStoredData.last_login);
+
+    const lastLoginDate = new Date(userStoredData.last_login ?? 0).getTime();
+
+    const now = Date.now();
+    const oneDayMs = 24 * 60 * 60 * 1000;
+
+    if (isLoggedIn && now - lastLoginDate > oneDayMs) {
+      fetchUserProfile();
+    }
   }, [hydrated]);
 
   return { userStoredData, setLoginState, fetchUserProfile };

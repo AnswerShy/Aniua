@@ -16,7 +16,7 @@ import {
 } from '@/components/UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
 import { paths } from '@/constants/headersconst';
-import { useUserStore } from '@/stores/store';
+import { useUserStore } from '@/stores/user-profile-store';
 import FetchServiceInstance from '@/app/api';
 import toast from 'react-hot-toast';
 

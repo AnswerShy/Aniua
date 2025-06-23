@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useSocket } from '@/context/SocketContext';
-import { useUserStore } from '@/stores/store';
+import { useUserStore } from '@/stores/user-profile-store';
 
 import Message from './ChatMessage/Message';
 import style from './Chat.module.css';

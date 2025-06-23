@@ -49,16 +49,13 @@ export const useUserStore = create<UserStateStore>()(
         isLoggedIn: false,
         setHydrated: (value: boolean) => set({ hydrated: value }),
         setLoginState: (loggedIn: boolean) => {
-          localStorage.setItem('isLoggedIn', loggedIn ? 'true' : 'false');
           set({ isLoggedIn: loggedIn });
         },
         setUser: (user: UserProfileInterface) => {
-          set({ user, isLoggedIn: true });
-          localStorage.setItem('isLoggedIn', 'true');
+          set({ user: { ...user, last_login: new Date() }, isLoggedIn: true });
         },
         removeUser: () => {
           set({ user: defaultUser, isLoggedIn: false });
-          localStorage.setItem('isLoggedIn', 'false');
         },
       }),
       {
