@@ -16,6 +16,16 @@ interface TitleSynonym {
   type: string;
 }
 
+interface Characters {
+  id: number;
+  poster: string;
+  name_surname_en: string;
+  name_surname_ua: string;
+  name_surname_jp: string;
+  role: any;
+  description: string;
+}
+
 interface AnimeDataInterface {
   id: number;
   title: string;
@@ -42,4 +52,5 @@ interface AnimeDataInterface {
   score_count: number;
   mal_score: number;
   description: string;
+  characters: Characters[];
 }

@@ -5,7 +5,15 @@ import { useState } from 'react';
 import descriptionCutter from '@/utils/custom/descriptionCutter';
 
 import styles from './InfoBlock.module.css';
-import { CustomButton, Dropdown, Section, Table, Typography } from '@/components/UI/UIComponents';
+import {
+  Card,
+  CustomButton,
+  Dropdown,
+  Section,
+  Slider,
+  Table,
+  Typography,
+} from '@/components/UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
 import { paths } from '@/constants/headersconst';
 import { useUserStore } from '@/stores/store';
@@ -113,6 +121,21 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
             </CustomButton>
           </Typography>
         </Section.Row>
+        {infoData.characters.length > 1 ? (
+          <Section.Row>
+            <Typography variant="h2">{i18n.t('info.Characters')}</Typography>
+            <Slider>
+              {infoData.characters.map((el: Characters, index: number) => (
+                <Card
+                  key={index}
+                  image={el.poster}
+                  title={el.name_surname_ua}
+                  slug={el.id.toString()}
+                />
+              ))}
+            </Slider>
+          </Section.Row>
+        ) : null}
       </Section.Col>
 
       <Section.Col widthState="1/4">
