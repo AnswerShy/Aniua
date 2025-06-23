@@ -17,14 +17,17 @@ export async function generateMetadata({
   const title = language === 'uk' ? data.title : data.title_en;
 
   return {
-    title: `${title} - Aniua`,
-    description: i18n.t('description.anime', { anime: title }),
+    title: `${title} - Aniua | ${data.title_jp}`,
+    description: `${i18n.t('description.anime', { anime: title })} \n ${data.description.split(' ').slice(0, 10).join(' ')}...`,
   };
 }
 
 export default async function AnimePage({ params }: { params: { slug: string } }) {
   const { slug } = await params;
-  const data = await FetchServiceInstance.fetchHelper(`api/anime/${slug}`, { to: 'self' });
+  const data = (await FetchServiceInstance.fetchHelper(`api/anime/${slug}`, {
+    to: 'self',
+    chache: 'no-store',
+  })) as AnimeDataInterface;
   const playerID = 'player-section';
 
   return (
@@ -33,6 +36,7 @@ export default async function AnimePage({ params }: { params: { slug: string } }
         bannerImage={data.poster}
         bannerChar={data.background_image_url}
         bannerTitle={data.title}
+        bannerJapaneese={data.title_jp}
         bannerDesc={data.description}
         bannerGenres={data.genres}
         bannerYear={data.year}

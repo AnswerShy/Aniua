@@ -23,6 +23,7 @@ interface Banner_props {
   bannerChar?: string | null;
   bannerTypeNews?: boolean;
   playerID?: string;
+  bannerJapaneese?: string;
 }
 
 const Banner: React.FC<Banner_props> = ({
@@ -33,6 +34,7 @@ const Banner: React.FC<Banner_props> = ({
   bannerGenres,
   bannerDesc,
   playerID,
+  bannerJapaneese,
 }) => {
   const usePicAsBg = false;
   return (
@@ -51,7 +53,7 @@ const Banner: React.FC<Banner_props> = ({
         width={250}
         height={350}
       />
-      <CreepingText text={bannerTitle} speed={20} />
+      <CreepingText text={bannerJapaneese || bannerTitle} speed={20} />
     </Section>
   );
 };
