@@ -20,3 +20,5 @@ export { default as CreepingText } from '@/components/UI/LineTextAnimation/Creep
 export { default as Modal } from '@/components/UI/Modal/Modal';
 
 export { default as Table } from '@/components/UI/Table/Table';
+
+export { default as Slider } from '@/components/UI/Slider/Slider';
