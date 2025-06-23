@@ -1,7 +1,7 @@
 .message {
   display: flex;
   gap: 15px;
-  padding: 15px;
+  padding: 5px;
   align-items: center;
   position: relative;
 }
@@ -20,6 +20,17 @@
   height: min-content;
   width: 88%;
   flex-direction: column;
+}
+
+.messageContainerSmall {
+  display: flex;
+  align-items: flex-start;
+  word-wrap: break-word;
+  height: -moz-min-content;
+  height: min-content;
+  width: 88%;
+  flex-direction: row;
+  gap: var(--gapVar);
 }
 
 .photo {

@@ -1,9 +1,6 @@
 .messagesContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  width: 100%;
-  height: 100%;
+  height: 525px;
+  overflow-y: auto;
 }
 
 .chat {
@@ -11,6 +8,7 @@
   flex-direction: column;
   max-width: 35%;
   width: 100%;
+  justify-content: flex-end;
 }
 
 .messageInputContainer {

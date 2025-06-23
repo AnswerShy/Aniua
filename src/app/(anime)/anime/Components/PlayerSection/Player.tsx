@@ -77,7 +77,7 @@ const Player = ({
               chooseStudio={playerState.chooseStudio}
               handleStudio={handleStudio}
             />
-            <CustomButton onClick={startW2G}>W2G</CustomButton>
+            {startW2G && <CustomButton onClick={startW2G}>W2G</CustomButton>}
           </div>
           <iframe
             ref={frameRef}

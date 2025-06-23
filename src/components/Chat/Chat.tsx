@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSocket } from '@/context/SocketContext';
 import { useUserStore } from '@/stores/store';
 
@@ -11,10 +11,11 @@ import { i18n } from '@/utils/customUtils';
 
 function Chat() {
   const socket = useSocket();
+  const containerRef = useRef<HTMLDivElement>(null);
   const userStoredData = useUserStore((state) => state.user);
-  const [messages, setMessages] = useState<{ username: string; avatar: string; message: string }[]>(
-    [],
-  );
+  const [messages, setMessages] = useState<
+    { username: string; avatar: string | null; message: string }[]
+  >([]);
   const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
@@ -41,7 +42,7 @@ function Chat() {
     if (newMessage.length < 1) return;
 
     const username = userStoredData.username || 'Unknown User';
-    const avatar = userStoredData.avatar || 'pfp.jpg';
+    const avatar = userStoredData.avatar || null;
 
     socket.emit('chat_message', {
       command: 'chat_message',
@@ -60,11 +61,39 @@ function Chat() {
     }
   };
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const children = container.children;
+    if (children.length === 0) return;
+
+    const singleMessageHeight = children[0].getBoundingClientRect().height;
+
+    const shouldOffset = messages.length <= 5;
+
+    if (shouldOffset) {
+      const totalMessagesHeight = singleMessageHeight * messages.length;
+      const paddingTop = Math.max(0, 525 - totalMessagesHeight);
+      container.style.paddingTop = `${paddingTop}px`;
+    } else {
+      container.style.paddingTop = '0px';
+    }
+
+    container.scrollTop = container.scrollHeight;
+  }, [messages]);
+
   return (
     <div className={style.chat + ` layer1`}>
-      <div className={style.messagesContainer}>
+      <div className={style.messagesContainer} ref={containerRef} style={{ paddingTop: '525px' }}>
         {messages.map((msg, idx) => (
-          <Message key={idx} username={msg.username} msgContent={msg.message} photo={msg.avatar} />
+          <Message
+            key={idx}
+            username={msg.username}
+            msgContent={msg.message}
+            photo={msg.avatar}
+            type="big"
+          />
         ))}
       </div>
       <div className={style.messageInputContainer}>
