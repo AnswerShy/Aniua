@@ -59,7 +59,7 @@ const CustomButton: React.FC<ButtonProps> = React.memo(
       <Link
         href={url}
         className={clsx(variants[variant], classString, `${TypographyType['button'].className}`)}
-        onClick={(event) => doLink(url, event)}
+        onClick={(event) => (isAnimate ? doLink(url, event) : null)}
       >
         {children}
       </Link>
