@@ -14,12 +14,14 @@ import { paths, pathsProfile } from '@/constants/headersconst';
 import { SearchBar } from '../IndexComponent';
 import React from 'react';
 import { useScrollDirection } from '@/hooks/useScrollDirection';
+import { useSettingsStore } from '@/stores/settings-store';
 
 export default function Header() {
   const pathname = usePathname();
   const [currentPaths, setCurrentPath] = useState<string[] | []>([]);
   const [isMenuOpened, setMenuOpened] = useState(false);
-  const scrollingDown = useScrollDirection(isMenuOpened);
+  const hideHeader = useSettingsStore((state) => state.settings.hide_header);
+  const scrollingDown = useScrollDirection(isMenuOpened) && hideHeader;
   const { userStoredData } = useUserProfile();
 
   useEffect(() => {

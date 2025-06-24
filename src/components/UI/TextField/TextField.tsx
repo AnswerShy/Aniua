@@ -1,6 +1,6 @@
 import styles from './TextField.module.css';
 import { ErrorIcon } from '@/utils/icons';
-import { ChangeEvent, forwardRef, HTMLInputTypeAttribute } from 'react';
+import { ChangeEvent, forwardRef, HTMLInputTypeAttribute, memo } from 'react';
 import { TypographyType } from '@/components/UI/UIComponents';
 import clsx from 'clsx';
 
@@ -67,4 +67,4 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
 TextField.displayName = 'TextField';
 
-export default TextField;
+export default memo(TextField);

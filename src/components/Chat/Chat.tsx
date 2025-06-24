@@ -8,11 +8,16 @@ import Message from './ChatMessage/Message';
 import style from './Chat.module.css';
 import { TextField } from '../UI/UIComponents';
 import { i18n } from '@/utils/customUtils';
+import { useSettingsStore } from '@/stores/settings-store';
 
 function Chat() {
   const socket = useSocket();
   const containerRef = useRef<HTMLDivElement>(null);
   const userStoredData = useUserStore((state) => state.user);
+  const chat_size = useSettingsStore((state) => state.settings.chat_size) as
+    | 'big'
+    | 'small'
+    | undefined;
   const [messages, setMessages] = useState<
     { username: string; avatar: string | null; message: string }[]
   >([]);
@@ -92,7 +97,7 @@ function Chat() {
             username={msg.username}
             msgContent={msg.message}
             photo={msg.avatar}
-            type="big"
+            type={chat_size || 'big'}
           />
         ))}
       </div>

@@ -69,5 +69,21 @@
     "TypeSmt": "Щоб шукати",
     "NoResults": "Нічого не знайдено",
     "SearchWithCommand": "Пошук з командою, після вводу натисніть Enter або кнопку Пошук"
+  },
+  "settings": {
+    "username": "Логін",
+    "description": "Опис",
+    "first_name": "Іʼмя",
+    "last_name": "Фамілія",
+    "chat_message_size": "Вигляд повідомлень в чаті",
+    "hide_header_on_scroll": "Скривати шапку при гортані",
+    "save": "Зберегти",
+    "options": {
+      "big": "Стандартний",
+      "small": "Компактний",
+      "true": "Так",
+      "false": "Ні"
+    }
+
   }
 }

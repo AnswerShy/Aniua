@@ -15,6 +15,12 @@ interface AnimeListInterface {
   prev_url?: any;
 }
 
+interface UserSettings {
+  theme?: 'light' | 'dark';
+  chat_size?: string;
+  hide_header?: boolean;
+}
+
 interface UserProfileInterface {
   id?: number;
   username?: string;
@@ -43,4 +49,5 @@ interface UserProfileInterface {
   anime_lists?: AnimeListInterface[];
   success?: boolean;
   referer?: null;
+  settings?: UserSettings;
 }
