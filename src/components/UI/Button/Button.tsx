@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import styles from './Button.module.css';
 import { TypographyType } from '@/components/UI/UIComponents';
 import React from 'react';
-import { useTransitionRouter } from 'next-view-transitions';
 
 const variants = {
   button: clsx(styles.ghost, styles.button),
@@ -22,29 +21,15 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   classString?: string;
   hideMenu?: () => void;
   variant?: VariantType;
-  isAnimate?: boolean;
 }
 
 const CustomButton: React.FC<ButtonProps> = React.memo(
-  ({
-    url,
-    hideMenu = null,
-    children,
-    classString,
-    variant = 'button',
-    isAnimate = true,
-    ...props
-  }) => {
-    const router = useTransitionRouter();
-
+  ({ url, hideMenu = null, children, classString, variant = 'button', ...props }) => {
     const doLink = async (url: string, event: React.MouseEvent) => {
       event.preventDefault();
       if (hideMenu) {
         hideMenu();
       }
-      router.push(url, {
-        onTransitionReady: isAnimate ? pageAnimation : undefined,
-      });
       window.location.href = url;
     };
 
@@ -59,7 +44,8 @@ const CustomButton: React.FC<ButtonProps> = React.memo(
       <Link
         href={url}
         className={clsx(variants[variant], classString, `${TypographyType['button'].className}`)}
-        onClick={(event) => (isAnimate ? doLink(url, event) : null)}
+        onClick={(event) => doLink(url, event)}
+        scroll={false}
       >
         {children}
       </Link>
@@ -67,46 +53,5 @@ const CustomButton: React.FC<ButtonProps> = React.memo(
   },
 );
 CustomButton.displayName = 'CustomButton';
-
-const pageAnimation = () => {
-  document.documentElement.animate(
-    [
-      {
-        opacity: 1,
-        scale: 1,
-        transform: 'translateY(0)',
-      },
-      {
-        opacity: 0,
-        scale: 1,
-      },
-    ],
-    {
-      duration: 500,
-      easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
-      fill: 'forwards',
-      pseudoElement: '::view-transition-old(root)',
-    },
-  );
-
-  document.documentElement.animate(
-    [
-      {
-        opacity: 0,
-        scale: 1,
-      },
-      {
-        opacity: 1,
-        scale: 1,
-      },
-    ],
-    {
-      duration: 500,
-      easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
-      fill: 'forwards',
-      pseudoElement: '::view-transition-new(root)',
-    },
-  );
-};
 
 export default CustomButton;

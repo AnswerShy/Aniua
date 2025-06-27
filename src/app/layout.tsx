@@ -5,7 +5,6 @@ import './globals.css';
 import Header from '@/components/Header/Header';
 import { i18n } from '@/utils/customUtils';
 import { Toaster } from 'react-hot-toast';
-import { ViewTransitions } from 'next-view-transitions';
 
 const roboto = Roboto_Condensed({
   weight: '400',
@@ -26,21 +25,22 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <ViewTransitions>
-        <body className={`${roboto.className} antialiased`}>
-          <Toaster
-            toastOptions={{
-              style: {
-                background: 'var(--03dp)',
-                color: '#fff',
-              },
-            }}
-          />
-          <Header />
+      <body className={`${roboto.className} antialiased`}>
+        <Toaster
+          toastOptions={{
+            style: {
+              background: 'var(--03dp)',
+              color: '#fff',
+            },
+          }}
+        />
+        <Header />
+
+        <main>
+          {children}
           {modal}
-          <main>{children}</main>
-        </body>
-      </ViewTransitions>
+        </main>
+      </body>
     </html>
   );
 }

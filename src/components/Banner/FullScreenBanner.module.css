@@ -60,7 +60,7 @@
 .load {
   background-color: var(--02dp);
   color: transparent;
-  background: var(loadingGradient);
+  background: var(--loadingGradient);
   background-size: 200% 100%;
   animation: var(--loadingAnim);
 }
