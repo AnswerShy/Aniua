@@ -1,8 +1,7 @@
 export const paths = {
   home: '/',
   list: '/list',
-  onepiece: '/anime/one-piece',
-}; // Paths for navigation dropdown menu
+}; // Paths for navigation
 
 export const pathsProfile = {
   profile: '/profile',
@@ -12,3 +11,8 @@ export const pathsProfile = {
 export const pathsMoney = {
   add: '/money/Add',
 };
+
+export const getAccount = {
+  registration: '/registration',
+  login: '/login',
+}; // Paths for get account

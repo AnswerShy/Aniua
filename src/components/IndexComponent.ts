@@ -4,6 +4,6 @@ export { default as FullScreenBannerSkeleton } from '@/components/Banner/FullScr
 export { default as Header } from '@/components/Header/Header';
 export { default as Chat } from '@/components/Chat/Chat';
 
-export { default as SearchBar } from '@/components/Header/Search/SearchBar';
+export { default as SearchBar } from '@/components/Header/SearchBar/SearchBar';
 
 export { default as Message } from '@/components/Chat/ChatMessage/Message';

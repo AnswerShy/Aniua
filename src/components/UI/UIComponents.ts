@@ -22,3 +22,4 @@ export { default as Modal } from '@/components/UI/Modal/Modal';
 export { default as Table } from '@/components/UI/Table/Table';
 
 export { default as Slider } from '@/components/UI/Slider/Slider';
+export { default as ProfilePicture } from '@/components/UI/ProfilePicture/pfp';
