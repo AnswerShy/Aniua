@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import styles from './Button.module.css';
 import { TypographyType } from '@/components/UI/UIComponents';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 const variants = {
   button: clsx(styles.ghost, styles.button),
@@ -26,10 +27,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const CustomButton: React.FC<ButtonProps> = React.memo(
   ({ url, hideMenu = null, children, classString, variant = 'button', ...props }) => {
     const doLink = async (url: string, event: React.MouseEvent) => {
+      const router = useRouter();
       event.preventDefault();
       if (hideMenu) {
         hideMenu();
       }
+      router.push(url);
       window.location.href = url;
     };
 
