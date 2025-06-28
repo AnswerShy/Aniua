@@ -89,7 +89,7 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
           height={350}
           width={250}
         />
-        <CustomButton variant="primary" isAnimate={false} url={`#${playerID}`}>
+        <CustomButton variant="primary" url={`#${playerID}`}>
           {i18n.t('info.Watch')}
         </CustomButton>
         {userStoredData.anime_lists && (

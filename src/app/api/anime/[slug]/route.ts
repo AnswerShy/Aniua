@@ -9,14 +9,14 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
     const anime = await FetchServiceInstance.fetchHelper(animeAPIConstant.animeByTitle(slug), {
       to: 'out',
       method: 'GET',
-      chache: 'force-cache',
+      cache: 'force-cache',
       requestReturn: true,
     });
 
     const character = await FetchServiceInstance.fetchHelper(animeAPIConstant.charsByTitle(slug), {
       to: 'out',
       method: 'GET',
-      chache: 'force-cache',
+      cache: 'force-cache',
       requestReturn: true,
       params: {
         page: '1',

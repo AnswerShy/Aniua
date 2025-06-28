@@ -20,7 +20,7 @@ const useUserProfile = () => {
       const data = await FetchServiceInstance.fetchHelper(userAPIConstant['profile'], {
         to: 'self',
         method: 'GET',
-        chache: 'no-store',
+        cache: 'no-store',
       });
 
       if (data.success !== true) {

@@ -62,14 +62,14 @@ class AnimeService {
       params,
       method = 'GET',
       body = null,
-      chache,
+      cache,
       requestReturn = false,
     }: {
       to?: 'self' | 'out' | 'search';
       params?: Record<string, string>;
       method?: 'GET' | 'POST';
       body?: Record<string, string | number> | null;
-      chache?: RequestCache;
+      cache?: RequestCache;
       requestReturn?: boolean;
     } = {},
   ) {
@@ -85,7 +85,7 @@ class AnimeService {
     const url = this.constructUrl(`${baseURL}${endpoint}`, params);
 
     try {
-      const options = this.getFetchOptions(method, body, chache);
+      const options = this.getFetchOptions(method, body, cache);
 
       const request = await fetch(url, options);
 

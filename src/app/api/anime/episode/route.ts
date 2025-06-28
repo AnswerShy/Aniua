@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
       {
         to: 'out',
         method: 'GET',
-        chache: 'no-store',
+        cache: 'no-store',
         requestReturn: true,
       },
     );

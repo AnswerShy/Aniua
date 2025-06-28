@@ -13,7 +13,7 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
     const response = await FetchServiceInstance.fetchHelper(animeAPIConstant.episodeList(slug), {
       to: 'out',
       method: 'GET',
-      chache: 'no-store',
+      cache: 'no-store',
       requestReturn: true,
     });
 

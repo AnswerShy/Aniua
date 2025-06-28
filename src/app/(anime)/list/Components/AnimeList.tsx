@@ -24,7 +24,7 @@ function AnimeList() {
       const moreAnime = (await FetchServiceInstance.fetchHelper(animeAPIConstant['list'], {
         params: { page: page.toString(), limit: '28', filter: queryString ?? '' },
         to: 'self',
-        chache: 'no-store',
+        cache: 'no-store',
       })) as { page_count: number; titles: AnimeDataInterface[] };
 
       setLength(moreAnime.page_count);

@@ -20,7 +20,7 @@ export default function ProfileComponent() {
       const request = await FetchServiceInstance.fetchHelper(userAPIConstant['chart'], {
         to: 'self',
         method: 'GET',
-        chache: 'no-store',
+        cache: 'no-store',
       });
 
       const chart = chartDataExtractor(request);

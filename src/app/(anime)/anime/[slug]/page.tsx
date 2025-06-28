@@ -26,7 +26,7 @@ export default async function AnimePage({ params }: { params: { slug: string } }
   const { slug } = await params;
   const data = (await FetchServiceInstance.fetchHelper(`api/anime/${slug}`, {
     to: 'self',
-    chache: 'no-store',
+    cache: 'no-store',
   })) as AnimeDataInterface;
   const playerID = 'player-section';
 
