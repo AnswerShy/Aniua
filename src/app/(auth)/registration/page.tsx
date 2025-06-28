@@ -1,4 +1,4 @@
-import Registration from '@/components/Registration/Registration';
+import Registration from '@/components/Screens/Registration/Registration';
 import { Section } from '@/components/UI/UIComponents';
 
 export default function RegistrationPage() {

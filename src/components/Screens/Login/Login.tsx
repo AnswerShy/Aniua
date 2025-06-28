@@ -19,7 +19,7 @@ function Login() {
     control,
     formState: { errors, isValid },
   } = useForm<LoginForms>({
-    mode: 'all',
+    mode: 'onSubmit',
     defaultValues: {
       username: '',
       password: '',

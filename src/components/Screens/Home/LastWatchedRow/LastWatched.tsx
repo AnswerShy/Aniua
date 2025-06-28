@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePlayerStore } from '@/stores/playerHistory';
-import { Card, Section } from '@/components/UI/UIComponents';
+import { Card, Section, Slider } from '@/components/UI/UIComponents';
 import FetchServiceInstance from '@/app/api';
 import { animeAPIConstant } from '@/constants/api-endpoints.constant';
 import { i18n } from '@/utils/customUtils';
@@ -19,12 +19,11 @@ export default function LastWatchedSection() {
       const res = await FetchServiceInstance.fetchHelper(animeAPIConstant['filter'], {
         to: 'out',
         params: {
-          slug: slugs,
+          slug: `${slugs},`,
         },
       });
 
       const data = res.titles;
-      console.log(data);
       setAnimeList(data);
       if (res.ok) {
       } else {
@@ -41,18 +40,11 @@ export default function LastWatchedSection() {
   return (
     <Section.Row>
       <Section.Col title={i18n.t('home.Last watched')} widthState="1">
-        <div
-          style={{
-            width: '100%',
-            overflow: 'scroll hidden',
-            display: 'flex',
-            flexDirection: 'row',
-          }}
-        >
+        <Slider>
           {animeList.map((el, idx) => (
             <Card key={idx} image={el.poster} title={el.title} slug={el.slug} />
           ))}
-        </div>
+        </Slider>
       </Section.Col>
     </Section.Row>
   );

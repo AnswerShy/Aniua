@@ -20,7 +20,7 @@ function Registration() {
     formState: { errors, isValid },
     watch,
   } = useForm<RegistrationForms>({
-    mode: 'all',
+    mode: 'onSubmit',
   });
 
   const handleRegistration: SubmitHandler<RegistrationForms> = async (data) => {

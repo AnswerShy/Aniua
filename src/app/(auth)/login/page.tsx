@@ -1,4 +1,4 @@
-import Login from '@/components/Login/Login';
+import Login from '@/components/Screens/Login/Login';
 import { Section } from '@/components/UI/UIComponents';
 
 export default function LoginPage() {
