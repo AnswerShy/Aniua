@@ -26,14 +26,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const CustomButton: React.FC<ButtonProps> = React.memo(
   ({ url, hideMenu = null, children, classString, variant = 'button', ...props }) => {
+    const router = useRouter();
+
     const doLink = async (url: string, event: React.MouseEvent) => {
-      const router = useRouter();
       event.preventDefault();
       if (hideMenu) {
         hideMenu();
       }
       router.push(url);
-      window.location.href = url;
     };
 
     return !url ? (

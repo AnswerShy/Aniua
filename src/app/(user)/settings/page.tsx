@@ -64,7 +64,7 @@ export default function settings() {
       <Section.Col widthState="1/4">
         Settings
         {Object.entries(settingsConfig).map(([section]) => (
-          <CustomButton variant="link" isAnimate={false} key={section} url={`#settings-${section}`}>
+          <CustomButton variant="link" key={section} url={`#settings-${section}`}>
             {section}
           </CustomButton>
         ))}
@@ -82,11 +82,7 @@ export default function settings() {
                 settingsData={settingsData}
                 handleChange={handleChange}
               />
-              <CustomButton
-                variant="primary"
-                isAnimate={false}
-                onClick={() => handleSectionSubmit(section, options)}
-              >
+              <CustomButton variant="primary" onClick={() => handleSectionSubmit(section, options)}>
                 {i18n.t('settings.save')}
               </CustomButton>
             </div>

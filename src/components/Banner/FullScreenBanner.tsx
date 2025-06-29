@@ -88,7 +88,7 @@ const InfoBlockBanner = ({
     <div className={styles.bannerInfoContainer}>
       <div className="flex flex-row items-center gap-2">
         <Typography variant="h1">{bannerTitle}</Typography>
-        <CustomButton variant="primary" isAnimate={false} url={`#${playerID}`}>
+        <CustomButton variant="primary" url={`#${playerID}`}>
           {i18n.t('info.Watch')}
         </CustomButton>
       </div>

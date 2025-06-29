@@ -17,7 +17,7 @@ import { useSettingsStore } from '@/stores/settings-store';
 export default function Header() {
   const [isMenuOpened, setMenuOpened] = useState(false);
   const hideHeader = useSettingsStore((state) => state.settings.hide_header);
-  const scrollingDown = useScrollDirection(isMenuOpened) && hideHeader;
+  const scrollingDown = hideHeader && useScrollDirection(isMenuOpened);
   const { userStoredData } = useUserProfile();
 
   const menuHandler = () => {
