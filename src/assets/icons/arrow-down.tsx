@@ -1,20 +1,20 @@
 import React from 'react';
 
-const MenuIcon: React.FC<IconProps> = ({ size = 25, ...props }) => (
+const ArrowDownIcon: React.FC<IconProps> = ({ size = 25, ...props }) => (
   <svg
+    xmlns="http://www.w3.org/2000/svg"
     width={props.width ?? size}
     height={props.height ?? size}
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="2"
+    viewBox="0 0 24 24"
     {...props}
   >
-    <path d="M3 12h18M3 18h18M3 6h18" />
+    <path d="m18 15-6-6-6 6"></path>
   </svg>
 );
 
-export default React.memo(MenuIcon);
+export default React.memo(ArrowDownIcon);

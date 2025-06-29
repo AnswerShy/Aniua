@@ -4,7 +4,7 @@ import { ReactElement, useState } from 'react';
 import styles from './DropDown.module.css';
 import { CustomButton, TypographyType } from '../UIComponents';
 
-import { KeyboardArrowUp } from '@mui/icons-material';
+import { ArrowDownIcon } from '@/utils/icons';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -28,15 +28,14 @@ const Dropdown = ({
     setVision((prev) => !prev);
   };
   const hideDropdown = () => setVision(true);
-  const Icon = KeyboardArrowUp;
 
   return (
     <DropdownButton onClick={handleVisible} visible>
       {/*If children is not provided, then show the default dropdown*/}
       {customElement ?? (
-        <div role="select">
+        <div role="select" style={{ display: 'flex' }}>
           {currentState}
-          <Icon />
+          <ArrowDownIcon />
         </div>
       )}
 

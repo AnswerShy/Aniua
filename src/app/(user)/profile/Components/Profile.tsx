@@ -3,11 +3,9 @@
 import { Section, Typography } from '../../../../components/UI/UIComponents';
 import styles from './Profile.module.css';
 import Image from 'next/image';
-import { Telegram } from '@mui/icons-material';
 import useUserProfile from '@/hooks/useUserProfile';
 import FetchServiceInstance from '@/app/api';
 import { useEffect, useState } from 'react';
-import { PieChart } from '@mui/x-charts/PieChart';
 import { chartDataExtractor } from '@/utils/customUtils';
 import { userAPIConstant } from '@/constants/api-endpoints.constant';
 
@@ -24,6 +22,7 @@ export default function ProfileComponent() {
       });
 
       const chart = chartDataExtractor(request);
+      console.log(chart);
       setChart(chart);
     };
 
@@ -60,30 +59,8 @@ export default function ProfileComponent() {
           </div>
 
           <div className={styles.profileRowDown}>
-            <div>
-              <Telegram sx={{ fontSize: '5rem' }} />
-            </div>
-            {chart.length > 0 && (
-              <div className="size-64 rounded-xl">
-                <PieChart
-                  colors={['#fff']}
-                  slotProps={{ legend: { hidden: true } }}
-                  series={[
-                    {
-                      data: chart,
-                      innerRadius: 30,
-                      outerRadius: 100,
-                      paddingAngle: 5,
-                      cornerRadius: 5,
-                      startAngle: -45,
-                      endAngle: 225,
-                      cx: 150,
-                      cy: 150,
-                    },
-                  ]}
-                />
-              </div>
-            )}
+            <div></div>
+            {chart.length > 0 && <div className={`size-64 rounded-xl`}></div>}
           </div>
         </>
       ) : (
