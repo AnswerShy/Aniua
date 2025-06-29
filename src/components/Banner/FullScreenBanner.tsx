@@ -1,6 +1,6 @@
 'use client';
 
-import descriptionCutter from '@/utils/custom/descriptionCutter';
+import descriptionCutter from '@/utils/descriptionCutter';
 import styles from './FullScreenBanner.module.css';
 import Image from 'next/image';
 import {
@@ -11,7 +11,7 @@ import {
   CustomButton,
 } from '../UI/UIComponents';
 import clsx from 'clsx';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import { paths } from '@/constants/headersconst';
 
 interface Banner_props {
@@ -89,7 +89,7 @@ const InfoBlockBanner = ({
       <div className="flex flex-row items-center gap-2">
         <Typography variant="h1">{bannerTitle}</Typography>
         <CustomButton variant="primary" url={`#${playerID}`}>
-          {i18n.t('info.Watch')}
+          {getTranslatedText('info.Watch')}
         </CustomButton>
       </div>
 

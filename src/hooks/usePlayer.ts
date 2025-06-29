@@ -1,4 +1,4 @@
-import { handleEpisode, i18n } from '@/utils/customUtils';
+import { handleEpisode, getTranslatedText } from '@/utils';
 import FetchServiceInstance from '@/app/api';
 import { useCallback, useEffect, useState } from 'react';
 import { usePlayerStore } from '@/stores/playerHistory';
@@ -71,7 +71,7 @@ export const usePlayer = (slug: string | null) => {
       if (!playerState.isPlayerLoading) {
         setPlayerState((prevState) => ({
           ...prevState,
-          episodeTitle: i18n.t('info.EpisodesNotFound'),
+          episodeTitle: getTranslatedText('info.EpisodesNotFound'),
         }));
       }
     }

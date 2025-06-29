@@ -1,6 +1,6 @@
 import FetchServiceInstance from '@/app/api';
 import { animeAPIConstant } from '@/constants/api-endpoints.constant';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import debounce from 'lodash.debounce';
 import { useCallback, useState } from 'react';
 
@@ -10,7 +10,7 @@ function useSearchHook() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function fetchDBSearch(query: string) {
-    if (!query.trim()) return i18n.t('search.TypeSmt');
+    if (!query.trim()) return getTranslatedText('search.TypeSmt');
 
     const response = await FetchServiceInstance.fetchHelper(animeAPIConstant['search'], {
       to: 'search',
@@ -19,7 +19,7 @@ function useSearchHook() {
     const titles = response?.titles;
 
     if (!Array.isArray(titles) || titles.length < 1) {
-      return i18n.t('search.NoResults');
+      return getTranslatedText('search.NoResults');
     }
 
     return titles;
@@ -32,7 +32,7 @@ function useSearchHook() {
       const res = await fetchDBSearch(q);
       setResults(res);
     } catch (e) {
-      setResults(i18n.t('toast.ServerError'));
+      setResults(getTranslatedText('toast.ServerError'));
       console.error(e);
     }
 
@@ -49,7 +49,7 @@ function useSearchHook() {
   const onQueryChange = (val: string) => {
     setQuery(val);
     if (val.startsWith('/')) {
-      setResults(i18n.t('search.SearchWithCommand'));
+      setResults(getTranslatedText('search.SearchWithCommand'));
     } else {
       debouncedSearch(val);
     }

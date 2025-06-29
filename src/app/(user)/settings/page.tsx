@@ -6,7 +6,7 @@ import { useSettingsStore } from '@/stores/settings-store';
 
 import { memo, useCallback, useMemo, useState } from 'react';
 import SettingField from './components/SettingField';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 
 export default function settings() {
   const setSetting = useSettingsStore((s) => s.setSetting);
@@ -83,7 +83,7 @@ export default function settings() {
                 handleChange={handleChange}
               />
               <CustomButton variant="primary" onClick={() => handleSectionSubmit(section, options)}>
-                {i18n.t('settings.save')}
+                {getTranslatedText('settings.save')}
               </CustomButton>
             </div>
           );

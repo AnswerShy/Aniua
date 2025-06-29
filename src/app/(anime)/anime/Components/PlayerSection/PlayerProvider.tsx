@@ -8,7 +8,7 @@ import { SocketProvider } from '@/context/SocketContext';
 import { useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 
 const PlayerProvider = ({ slug, playerID }: { slug?: string; playerID?: string }) => {
   const { playerState, setPlayerState, handleStudio, episodesList } = usePlayer(slug ?? null);
@@ -31,7 +31,7 @@ const PlayerProvider = ({ slug, playerID }: { slug?: string; playerID?: string }
         window.location.href = newUrl;
       })
       .catch(() => {
-        toast.error(i18n.t('toast.copy_error') || 'Failed to copy link');
+        toast.error(getTranslatedText('toast.copy_error') || 'Failed to copy link');
         window.location.href = newUrl;
       });
   }, []);
@@ -44,7 +44,7 @@ const PlayerProvider = ({ slug, playerID }: { slug?: string; playerID?: string }
     }
 
     if (localStorage.getItem('roomLinkCopied') === 'true') {
-      toast.success(i18n.t('toast.copied'));
+      toast.success(getTranslatedText('toast.copied'));
       localStorage.removeItem('roomLinkCopied');
     }
   }, []);

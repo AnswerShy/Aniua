@@ -11,8 +11,8 @@ i18next.init({
   },
 });
 
-const getTranslatedText = (path: string) => {
-  const translated = i18next.t(path);
+const getTranslatedText = (path: string, option?: Record<string, string | number>) => {
+  const translated = i18next.t(path, option);
   return translated !== path ? translated : path.charAt(0).toUpperCase() + path.slice(1);
 };
 

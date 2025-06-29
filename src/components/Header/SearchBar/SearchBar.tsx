@@ -1,6 +1,6 @@
 'use client';
 
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import { TextField } from '@/components/UI/UIComponents';
 import { SearchIcon } from '@/utils/icons';
 import { useRouter } from 'next/navigation';
@@ -24,17 +24,16 @@ function SearchBar({ variant = 'input', handle }: SearchBarProps) {
       <TextField
         type="text"
         readonly
-        aria-label={i18n.t('header.search')}
+        aria-label={getTranslatedText('header.search')}
         onClick={() => {
           router.push('/search');
         }}
         onKeyDown={handleKeyDown}
-        value={i18n.t('header.search')}
+        value={getTranslatedText('header.search')}
       />
     </>
   ) : (
     <SearchIcon
-      sx={{ fontSize: '30px' }}
       onClick={() => {
         router.push('/search');
         handle?.();

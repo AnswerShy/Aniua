@@ -5,7 +5,7 @@ import { usePlayerStore } from '@/stores/playerHistory';
 import { Card, Section, Slider } from '@/components/UI/UIComponents';
 import FetchServiceInstance from '@/app/api';
 import { animeAPIConstant } from '@/constants/api-endpoints.constant';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 
 export default function LastWatchedSection() {
   const session = usePlayerStore((state) => state.session);
@@ -39,7 +39,7 @@ export default function LastWatchedSection() {
 
   return (
     <Section.Row>
-      <Section.Col title={i18n.t('home.Last watched')} widthState="1">
+      <Section.Col title={getTranslatedText('home.Last watched')} widthState="1">
         <Slider>
           {animeList.map((el, idx) => (
             <Card key={idx} image={el.poster} title={el.title} slug={el.slug} />

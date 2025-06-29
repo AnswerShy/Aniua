@@ -1,6 +1,6 @@
 import { TextField } from '@/components/UI/UIComponents';
 import { setting } from '@/constants/settings-constant';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import { ChangeEvent, memo } from 'react';
 
 interface SettingFieldProps {
@@ -16,7 +16,9 @@ const SettingField = ({ section, keyName, config, value, onChange }: SettingFiel
 
   return (
     <div className="flex flex-col gap-2 mb-4">
-      <label className="text-sm font-medium">{i18n.t(`settings.${config.label}`) || keyName}</label>
+      <label className="text-sm font-medium">
+        {getTranslatedText(`settings.${config.label}`) || keyName}
+      </label>
 
       {fieldType === 'radio' ? (
         <div className="flex gap-4">
@@ -29,7 +31,7 @@ const SettingField = ({ section, keyName, config, value, onChange }: SettingFiel
                 checked={value === opt}
                 onChange={() => onChange(section, keyName, opt)}
               />
-              {i18n.t(`settings.options.${opt}`)}
+              {getTranslatedText(`settings.options.${opt}`)}
             </label>
           ))}
         </div>
@@ -37,7 +39,7 @@ const SettingField = ({ section, keyName, config, value, onChange }: SettingFiel
         <select value={value} onChange={(e) => onChange(section, keyName, e.target.value)}>
           {config?.options?.map((opt: string) => (
             <option key={opt} value={opt}>
-              {i18n.t(`settings.options.${opt}`)}
+              {getTranslatedText(`settings.options.${opt}`)}
             </option>
           ))}
         </select>
@@ -47,7 +49,7 @@ const SettingField = ({ section, keyName, config, value, onChange }: SettingFiel
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             onChange(section, keyName, e.target.value)
           }
-          placeholder={i18n.t(`settings.${config.label}`)}
+          placeholder={getTranslatedText(`settings.${config.label}`)}
         />
       )}
     </div>

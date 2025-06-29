@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 import PlayerProvider from '../../Components/PlayerSection/PlayerProvider';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `Room - Aniua`,
-    description: i18n.t('description.anime'),
+    description: getTranslatedText('description.anime'),
   };
 }
 

@@ -4,7 +4,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { CustomButton } from '@/components/UI/UIComponents';
 import { TextField } from '@/components/UI/UIComponents';
 import { useRouter } from 'next/navigation';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import FetchServiceInstance from '@/app/api/index';
 import useUserProfile from '@/hooks/useUserProfile';
 import { userAPIConstant } from '@/constants/api-endpoints.constant';
@@ -40,10 +40,10 @@ function Registration() {
         await fetchUserProfile();
         router.push('/');
       } else {
-        toast.error(i18n.t('toast.RegistrationFailedUser'));
+        toast.error(getTranslatedText('toast.RegistrationFailedUser'));
       }
     } catch (error) {
-      toast.error(i18n.t('toast.fetchRegistrationError'));
+      toast.error(getTranslatedText('toast.fetchRegistrationError'));
       console.error(error);
     }
   };
@@ -57,14 +57,14 @@ function Registration() {
         control={control}
         name="username"
         rules={{
-          required: i18n.t('login.Required field'),
+          required: getTranslatedText('login.Required field'),
           minLength: { value: 2, message: 'More than 2 symbols' },
         }}
         render={({ field: { ref, value, ...field } }) => (
           <TextField
             {...field}
             value={value}
-            label={i18n.t('login.username')}
+            label={getTranslatedText('login.username')}
             errorString={errors.username?.message}
             ref={ref}
             type={'username'}
@@ -79,13 +79,13 @@ function Registration() {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             message: 'invalid email address',
           },
-          required: i18n.t('login.Required field'),
+          required: getTranslatedText('login.Required field'),
         }}
         render={({ field: { ref, value, ...field } }) => (
           <TextField
             {...field}
             value={value}
-            label={i18n.t('login.email')}
+            label={getTranslatedText('login.email')}
             errorString={errors.email?.message}
             ref={ref}
             type={'email'}
@@ -96,14 +96,14 @@ function Registration() {
         control={control}
         name="password1"
         rules={{
-          required: i18n.t('login.Required field'),
-          minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
+          required: getTranslatedText('login.Required field'),
+          minLength: { value: 8, message: getTranslatedText('login.More than', { count: 8 }) },
         }}
         render={({ field: { ref, value, ...field } }) => (
           <TextField
             {...field}
             value={value}
-            label={i18n.t('login.password')}
+            label={getTranslatedText('login.password')}
             errorString={errors.password1?.message}
             ref={ref}
             type={'password'}
@@ -116,17 +116,17 @@ function Registration() {
         rules={{
           validate: (val: string) => {
             if (watch('password1') !== val) {
-              return i18n.t('login.No math');
+              return getTranslatedText('login.No math');
             }
           },
-          required: i18n.t('login.Required field'),
-          minLength: { value: 8, message: i18n.t('login.More than', { count: 8 }) },
+          required: getTranslatedText('login.Required field'),
+          minLength: { value: 8, message: getTranslatedText('login.More than', { count: 8 }) },
         }}
         render={({ field: { ref, value, ...field } }) => (
           <TextField
             {...field}
             value={value}
-            label={i18n.t('login.passwordRepeat')}
+            label={getTranslatedText('login.passwordRepeat')}
             errorString={errors.password2?.message}
             ref={ref}
             type={'password'}
@@ -134,7 +134,7 @@ function Registration() {
         )}
       />
       <CustomButton type="submit" variant="primary" disabled={!isValid}>
-        {i18n.t('login.SubmitRegistration')}
+        {getTranslatedText('login.SubmitRegistration')}
       </CustomButton>
     </form>
   );

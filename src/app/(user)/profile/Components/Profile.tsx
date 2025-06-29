@@ -6,7 +6,7 @@ import Image from 'next/image';
 import useUserProfile from '@/hooks/useUserProfile';
 import FetchServiceInstance from '@/app/api';
 import { useEffect, useState } from 'react';
-import { chartDataExtractor } from '@/utils/customUtils';
+import { chartDataExtractor } from '@/utils';
 import { userAPIConstant } from '@/constants/api-endpoints.constant';
 
 export default function ProfileComponent() {

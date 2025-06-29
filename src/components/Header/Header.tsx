@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { CustomButton, Dropdown, ProfilePicture } from '../UI/UIComponents';
 import clsx from 'clsx';
 
-import { getTranslatedText } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import { MenuIcon } from '@/utils/icons';
 import useUserProfile from '@/hooks/useUserProfile';
 import { getAccount, paths, pathsProfile } from '@/constants/headersconst';

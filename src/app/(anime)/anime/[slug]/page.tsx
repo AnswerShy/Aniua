@@ -3,7 +3,7 @@ import InfoBlock from '../Components/AnimeDataSection/InfoBlock';
 import { Metadata } from 'next';
 import FetchServiceInstance from '@/app/api';
 import PlayerProvider from '../Components/PlayerSection/PlayerProvider';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 
 export async function generateMetadata({
   params,
@@ -13,12 +13,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const data = await FetchServiceInstance.fetchHelper(`api/anime/${slug}`, { to: 'self' });
 
-  const language = i18n.language;
+  const language = 'uk';
   const title = language === 'uk' ? data.title : data.title_en;
 
   return {
     title: `${title} - Aniua | ${data.title_jp}`,
-    description: `${i18n.t('description.anime', { anime: title })} \n ${data.description.split(' ').slice(0, 10).join(' ')}...`,
+    description: `${getTranslatedText('description.anime', { anime: title })} \n ${data.description.split(' ').slice(0, 10).join(' ')}...`,
   };
 }
 

@@ -1,6 +1,6 @@
 import FetchServiceInstance from '@/app/api';
 import { animeAPIConstant } from '@/constants/api-endpoints.constant';
-import { sleep } from './customUtils';
+import { sleep } from '@/utils';
 
 async function getAllAnimeSlugs(): Promise<string[]> {
   const allSlugs: string[] = [];

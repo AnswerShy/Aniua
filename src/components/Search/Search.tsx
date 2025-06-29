@@ -1,5 +1,5 @@
 import React from 'react';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import useSearchHook from '@/hooks/useSearch';
 import { Card, TextField } from '../UI/UIComponents';
 
@@ -19,7 +19,7 @@ function Search() {
       <TextField
         value={query}
         type="text"
-        placeholder={i18n.t('header.search')}
+        placeholder={getTranslatedText('header.search')}
         onChange={(e) => onQueryChange(e.target.value)}
         onKeyDown={handleKeyDown}
       />

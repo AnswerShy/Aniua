@@ -5,9 +5,8 @@ import styles from './Player.module.css';
 import { CustomButton, Dropdown, Typography } from '@/components/UI/UIComponents';
 import { usePlayerSocket } from '@/hooks/usePlayerSocket';
 
-import { handleEpisode } from '@/utils/customUtils';
+import { handleEpisode } from '@/utils';
 import clsx from 'clsx';
-import i18next from 'i18next';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 const Player = ({
@@ -121,10 +120,11 @@ const EpisodeInfo = ({
         textAlign: 'center',
       }}
     >
-      <Typography variant="h2">
-        {i18next.language === 'uk' ? episodeTitle : episodeENTitle}
+      <Typography variant="h2">{episodeTitle}</Typography>
+      <Typography variant="h4">
+        {episodeJPTitle}
+        {episodeENTitle}
       </Typography>
-      <Typography variant="h4">{episodeJPTitle}</Typography>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { Roboto_Condensed } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header/Header';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import { Toaster } from 'react-hot-toast';
 import sitemeta from '@/constants/site-metadata';
 
@@ -15,7 +15,7 @@ const roboto = Roboto_Condensed({
 export const metadata: Metadata = {
   title: sitemeta.title,
   keywords: sitemeta.keywords,
-  description: i18n.t('description.home'),
+  description: getTranslatedText('description.home'),
   metadataBase: sitemeta.url,
   openGraph: {
     url: sitemeta.url,

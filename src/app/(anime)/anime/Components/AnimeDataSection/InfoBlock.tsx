@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import descriptionCutter from '@/utils/custom/descriptionCutter';
+import descriptionCutter from '@/utils/descriptionCutter';
 
 import styles from './InfoBlock.module.css';
 import {
@@ -14,7 +14,7 @@ import {
   Table,
   Typography,
 } from '@/components/UI/UIComponents';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import { paths } from '@/constants/headersconst';
 import { useUserStore } from '@/stores/user-profile-store';
 import FetchServiceInstance from '@/app/api';
@@ -90,10 +90,10 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
           width={250}
         />
         <CustomButton variant="primary" url={`#${playerID}`}>
-          {i18n.t('info.Watch')}
+          {getTranslatedText('info.Watch')}
         </CustomButton>
         {userStoredData.anime_lists && (
-          <Dropdown currentState={i18n.t('info.addToList')}>
+          <Dropdown currentState={getTranslatedText('info.addToList')}>
             {userStoredData.anime_lists.map((e) => {
               return (
                 <Dropdown.optionAction
@@ -113,17 +113,19 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
           {genres(infoData.year, infoData.genres)}
         </Section.Row>
         <Section.Row>
-          <Typography variant="h2">{i18n.t('info.Description')}</Typography>
+          <Typography variant="h2">{getTranslatedText('info.Description')}</Typography>
           <Typography variant="p" id="desc">
             {displayedText}
             <CustomButton variant="link" onClick={descHandler} id="descriptionButton">
-              {!isFullTextDisplayed ? ` ...${i18n.t('info.more')}` : ` ...${i18n.t('info.less')}`}
+              {!isFullTextDisplayed
+                ? ` ...${getTranslatedText('info.more')}`
+                : ` ...${getTranslatedText('info.less')}`}
             </CustomButton>
           </Typography>
         </Section.Row>
         {infoData.characters.length > 1 ? (
           <Section.Row>
-            <Typography variant="h2">{i18n.t('info.Characters')}</Typography>
+            <Typography variant="h2">{getTranslatedText('info.Characters')}</Typography>
             <Slider>
               {infoData.characters.map((el: Characters, index: number) => (
                 <Card
@@ -139,32 +141,32 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
       </Section.Col>
 
       <Section.Col widthState="1/4">
-        <Table title={i18n.t('info.Details')}>
+        <Table title={getTranslatedText('info.Details')}>
           <Table.row
-            title={i18n.t('info.Type')}
+            title={getTranslatedText('info.Type')}
             data={infoData.type.title}
             url={`${paths.list}/?type=${infoData.type.slug}`}
           />
           <Table.row
-            title={i18n.t('info.Status')}
+            title={getTranslatedText('info.Status')}
             data={infoData.status}
             url={`${paths.list}/?status=${infoData.status}`}
           />
           <Table.row
-            title={i18n.t('info.Episodes')}
+            title={getTranslatedText('info.Episodes')}
             data={episodesInfo(infoData.episode.present, infoData.episode.last)}
           />
           <Table.row
-            title={i18n.t('info.Rate')}
+            title={getTranslatedText('info.Rate')}
             data={infoData.mal_score.toString()}
             url={`${paths.list}/?mal_score=${infoData.mal_score}`}
           />
           <Table.row
-            title={i18n.t('info.Year')}
+            title={getTranslatedText('info.Year')}
             data={infoData.year.toString()}
             url={`${paths.list}/?year=${infoData.year}`}
           />
-          <Table.row title={i18n.t('info.Genres')} data={infoData.genres} />
+          <Table.row title={getTranslatedText('info.Genres')} data={infoData.genres} />
         </Table>
       </Section.Col>
     </Section>

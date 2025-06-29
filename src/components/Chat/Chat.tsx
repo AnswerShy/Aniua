@@ -7,7 +7,7 @@ import { useUserStore } from '@/stores/user-profile-store';
 import Message from './ChatMessage/Message';
 import style from './Chat.module.css';
 import { TextField } from '../UI/UIComponents';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import { useSettingsStore } from '@/stores/settings-store';
 
 function Chat() {
@@ -105,12 +105,12 @@ function Chat() {
         <TextField
           placeholder="Enter message"
           type="text"
-          label={i18n.t(`chat.enterMessage`)}
+          label={getTranslatedText(`chat.enterMessage`)}
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyDown={handleKeyPress}
         />
-        <button onClick={sendMessage}>{i18n.t(`chat.send`)}</button>
+        <button onClick={sendMessage}>{getTranslatedText(`chat.send`)}</button>
       </div>
     </div>
   );

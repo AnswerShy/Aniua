@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useUserStore } from '@/stores/user-profile-store';
 import FetchServiceInstance from '@/app/api';
 import toast from 'react-hot-toast';
-import { i18n } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 import { userAPIConstant } from '@/constants/api-endpoints.constant';
 
 const useUserProfile = () => {
@@ -34,7 +34,7 @@ const useUserProfile = () => {
       console.error(error);
 
       if (isLoggedIn) {
-        toast.error(i18n.t('toast.fetchUserProfileError'));
+        toast.error(getTranslatedText('toast.fetchUserProfileError'));
       }
 
       removeUserFromStore();

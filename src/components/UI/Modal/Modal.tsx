@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { CustomButton } from '../UIComponents';
-import { sleep } from '@/utils/customUtils';
+import { sleep } from '@/utils';
 
 function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();

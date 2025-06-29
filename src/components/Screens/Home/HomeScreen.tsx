@@ -1,7 +1,7 @@
 import { Card, Section, Slider } from '@/components/UI/UIComponents';
 import React from 'react';
 import LastWatchedSection from './LastWatchedRow/LastWatched';
-import { getTranslatedText } from '@/utils/customUtils';
+import { getTranslatedText } from '@/utils';
 
 function HomeScreen({ community }: { community: AnimeDataInterface[] }) {
   return (
