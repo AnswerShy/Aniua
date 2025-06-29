@@ -5,6 +5,7 @@ import './globals.css';
 import Header from '@/components/Header/Header';
 import { i18n } from '@/utils/customUtils';
 import { Toaster } from 'react-hot-toast';
+import sitemeta from '@/constants/site-metadata';
 
 const roboto = Roboto_Condensed({
   weight: '400',
@@ -12,8 +13,26 @@ const roboto = Roboto_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: 'Aniua',
+  title: sitemeta.title,
+  keywords: sitemeta.keywords,
   description: i18n.t('description.home'),
+  metadataBase: sitemeta.url,
+  openGraph: {
+    url: sitemeta.url,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({

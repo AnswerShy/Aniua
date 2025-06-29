@@ -30,6 +30,8 @@ elif echo "$commit_msg" | grep -q "^BUILD FIXES"; then
   modified_msg=$(echo "$commit_msg" | sed -E 's/^BUILD FIXES/:package:BUILD FIXES/')
 elif echo "$commit_msg" | grep -q "^UPDATE"; then
   modified_msg=$(echo "$commit_msg" | sed -E 's/^UPDATE/:zap:UPDATE/')
+elif echo "$commit_msg" | grep -q "^SEO"; then
+  modified_msg=$(echo "$commit_msg" | sed -E 's/^SEO/:mag:SEO/')
 else
   echo "Error: Commit message must start with 'FIX', 'COSMETIC', 'BUILD FIXES', 'UPDATE' or 'NEW'. Please rewrite the message."
   exit 1
