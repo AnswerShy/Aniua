@@ -46,7 +46,9 @@ const CustomButton: React.FC<ButtonProps> = React.memo(
     ) : (
       <Link
         href={url}
-        className={clsx(variants[variant], classString, `${TypographyType['button'].className}`)}
+        className={clsx(
+          !classString ? `${variants[variant]} ${TypographyType['button'].className}` : classString,
+        )}
         onClick={(event) => doLink(url, event)}
         scroll={false}
       >
