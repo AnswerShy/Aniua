@@ -6,9 +6,9 @@ const CardSkeletonBlock = ({ countOfCards = 1 }: { countOfCards?: number }) => {
   return (
     <>
       {Array.from({ length: countOfCards }).map((_, i) => (
-        <div className={styles.card + ' w-[150px]'} key={i}>
-          <div className={clsx(styles.cardImage, styles.load)} />
-          <p className={clsx(styles.cardTitle, TypographyType['button'].className)}>Load</p>
+        <div className={clsx(styles.cardcontainer, 'w-[400px]')} key={i}>
+          <div className={clsx('w-[400px] h-[750px]', styles.cardImage, styles.load)} />
+          <p className={clsx(styles.cardText, TypographyType['button'].className)}>Load</p>
         </div>
       ))}
     </>

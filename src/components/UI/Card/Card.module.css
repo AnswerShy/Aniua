@@ -1,40 +1,22 @@
-.card {
-  min-width: var(--cardMinWidth);
-  max-width: var(--cardMaxWidth);
-  min-height: var(--cardMinHeight);
-  max-height: var(--cardMaxHeight);
-  cursor: pointer;
-  transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
-  padding: 5px;
-  border-radius: 12px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
+.cardcontainer {
+  min-width: 100px;
+  @apply flex flex-col relative gap-0 overflow-hidden p-0 w-full rounded-xl border border-transparent01dp;
+}
+
+.cardText {
+  @apply text-center w-full text-sm leading-6 font-light tracking-[0] text-textCol truncate px-4 py-2;
 }
 
 .cardImage {
-  width: 100%;
-  height: 100%;
-  border-radius: calc(var(--borderRad) - 5px);
-  background-size: cover;
-  background-position: 50% 50%;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  @apply size-full aspect-[9/12] object-cover;
 }
 
-.card:hover,
-.card:focus {
+.cardcontainer:hover,
+.cardcontainer:focus {
   background-color: var(--03dp);
   box-shadow: var(--shadow03dp);
   transform: scale(1.02);
   z-index: 2;
-}
-
-.cardTitle {
-  text-align: center;
-  text-wrap: nowrap;
-  width: 100%;
-  overflow-x: clip;
-  margin-top: 5px;
 }
 
 .load,
