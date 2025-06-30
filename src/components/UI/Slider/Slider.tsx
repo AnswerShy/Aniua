@@ -6,16 +6,7 @@ interface SliderProps {
 
 function Slider({ children }: SliderProps) {
   return (
-    <div
-      style={{
-        width: '100%',
-        overflow: 'scroll hidden',
-        display: 'flex',
-        flexDirection: 'row',
-      }}
-    >
-      {children}
-    </div>
+    <div className="w-full overflow-x-scroll overflow-y-hidden flex flex-row gap-2">{children}</div>
   );
 }
 
