@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: 'No results found' }, { status: 404 });
     }
 
-    return NextResponse.json(filteredResults);
+    return NextResponse.json({ titles: filteredResults });
   } catch (e) {
     return NextResponse.json({ message: 'Internal server error', error: e }, { status: 500 });
   }

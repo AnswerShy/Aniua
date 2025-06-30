@@ -95,7 +95,7 @@ class AnimeService {
 
       return requestReturn ? request : await request.json();
     } catch (error) {
-      console.error(`Error fetching ${url}\n<${baseURL}---${endpoint}>: ${error}`);
+      console.error(`Error fetching ${url}\n<${baseURL}${endpoint}>: ${error}`);
       return null;
     }
   }

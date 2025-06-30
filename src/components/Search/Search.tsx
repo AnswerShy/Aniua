@@ -31,16 +31,15 @@ function Search() {
 type SearchResultsProps = {
   results: AnimeDataInterface[] | string;
   isLoading: boolean;
-  click?: () => void;
 };
 
-export function SearchResults({ results, isLoading, click }: SearchResultsProps) {
+export function SearchResults({ results, isLoading }: SearchResultsProps) {
   if (isLoading) return <p>Loading...</p>;
   if (typeof results === 'string') return <p>{results}</p>;
   if (!results || results.length === 0) return <p>No results found.</p>;
 
   return (
-    <div onClick={click}>
+    <div>
       {results.map((item, i) => (
         <Card
           key={i}
