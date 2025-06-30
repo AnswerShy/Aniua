@@ -13,8 +13,12 @@ export async function generateMetadata(): Promise<Metadata> {
 const listPage = async () => {
   return (
     <Section typeOfSection="TwoColSection" classname="justify-evenly">
-      <AnimeList />
-      <Filters />
+      <Section.Col widthState="3/4">
+        <AnimeList />
+      </Section.Col>
+      <Section.Col widthState="1/4">
+        <Filters />
+      </Section.Col>
     </Section>
   );
 };

@@ -22,13 +22,13 @@ function AnimeList() {
       const queryString = searchParams.toString();
 
       const moreAnime = (await FetchServiceInstance.fetchHelper(animeAPIConstant['list'], {
-        params: { page: page.toString(), limit: '28', filter: queryString ?? '' },
+        params: { page: page.toString(), limit: '15', filter: queryString ?? '' },
         to: 'self',
         cache: 'no-store',
       })) as { page_count: number; titles: AnimeDataInterface[] };
+      setAnime([...moreAnime.titles]);
 
       setLength(moreAnime.page_count);
-      setAnime([...moreAnime.titles]);
       if (moreAnime.titles.length < 18) {
         setEnd(true);
       } else {
@@ -58,7 +58,7 @@ function AnimeList() {
     <div>
       {isLoad ? (
         <Section typeOfSection={'grid'}>
-          <CardSkeleton countOfCards={28} />
+          <CardSkeleton countOfCards={15} />
         </Section>
       ) : (
         <Section typeOfSection={'grid'}>
