@@ -38,11 +38,7 @@ const Card: React.FC<cardProps> = ({ image, title, slug, variant = 'default', ad
       <p className={styles.cardText}>{title}</p>
     </CustomButton>
   ) : (
-    <CustomButton
-      onClick={additional?.onClick}
-      url={`/anime/${slug}`}
-      classString={styles.cardHorizontal}
-    >
+    <CustomButton url={`/anime/${slug}`} classString={styles.cardHorizontal}>
       <div
         className={styles.cardImageHorizontal}
         style={{ backgroundImage: `url(${image})` }}
