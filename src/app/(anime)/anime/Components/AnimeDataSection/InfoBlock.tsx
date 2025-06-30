@@ -144,27 +144,27 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
         <Table title={getTranslatedText('info.Details')}>
           <Table.row
             title={getTranslatedText('info.Type')}
-            data={infoData.type.title}
-            url={`${paths.list}/?type=${infoData.type.slug}`}
+            data={infoData?.type?.title}
+            url={`${paths.list}/?type=${infoData?.type?.slug}`}
           />
           <Table.row
             title={getTranslatedText('info.Status')}
-            data={infoData.status}
-            url={`${paths.list}/?status=${infoData.status}`}
+            data={infoData?.status}
+            url={`${paths.list}/?status=${infoData?.status}`}
           />
           <Table.row
             title={getTranslatedText('info.Episodes')}
-            data={episodesInfo(infoData.episode.present, infoData.episode.last)}
+            data={episodesInfo(infoData?.episode?.present, infoData?.episode?.last)}
           />
           <Table.row
             title={getTranslatedText('info.Rate')}
-            data={infoData.mal_score.toString()}
-            url={`${paths.list}/?mal_score=${infoData.mal_score}`}
+            data={infoData?.mal_score?.toString()}
+            url={`${paths.list}/?mal_score=${infoData?.mal_score}`}
           />
           <Table.row
             title={getTranslatedText('info.Year')}
-            data={infoData.year.toString()}
-            url={`${paths.list}/?year=${infoData.year}`}
+            data={infoData?.year?.toString()}
+            url={`${paths.list}/?year=${infoData?.year}`}
           />
           <Table.row title={getTranslatedText('info.Genres')} data={infoData.genres} />
         </Table>

@@ -23,6 +23,7 @@ interface RowProps {
 }
 
 const Row = ({ title, data, url }: RowProps) => {
+  if (!data) return;
   return (
     <div className="flex flex-row w-full items-center justify-between border-b-2 border-dashed border-c02dp">
       <span className="py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
