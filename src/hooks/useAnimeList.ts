@@ -1,59 +1,37 @@
 import FetchServiceInstance from '@/app/api';
 import { animeAPIConstant } from '@/constants/api-endpoints.constant';
-import { useEffect, useState } from 'react';
 
-const useAnimeList = (
-  queryString: Record<string, string>,
-  addition?: { limit?: string; initialData?: AnimeDataInterface[] },
-) => {
-  const [anime, setAnime] = useState<AnimeDataInterface[]>(addition?.initialData || []);
-  const [isEnd, setEnd] = useState(false);
-  const [isLoad, setLoad] = useState(false);
-  const [page, setPage] = useState(1);
-  const [listLength, setLength] = useState(0);
+const useAnimeList = async (query: Record<string, string | string[] | undefined>) => {
+  const result = (await FetchServiceInstance.fetchHelper(animeAPIConstant['list'], {
+    params: { page: '1', limit: '15', ...query },
+    to: 'self',
+    cache: 'force-cache',
+  })) as AnimeDataListInterface;
 
-  const fetchMore = async () => {
-    try {
-      setLoad(true);
-      console.log(queryString);
-      const moreAnime = (await FetchServiceInstance.fetchHelper(animeAPIConstant['list'], {
-        params: {
-          page: page.toString(),
-          limit: addition?.limit || '15',
-          ...queryString,
-        },
-        to: 'self',
-        cache: 'no-store',
-      })) as { page_count: number; titles: AnimeDataInterface[] };
-      setAnime([...moreAnime.titles]);
+  const titles = result.titles;
+  const isNextPage = result.next_page;
+  const isPrevPage = result.previous_page;
+  const page = result.page;
+  const pageCount = result.page_count;
 
-      setLength(moreAnime.page_count);
-      if (moreAnime.titles.length < 18) {
-        setEnd(true);
-      } else {
-        setEnd(false);
+  const createPageUrl = (page: number) => {
+    const params = new URLSearchParams();
+
+    for (const key in query) {
+      const value = query[key];
+      if (Array.isArray(value)) {
+        value.forEach((v) => v && params.append(key, v));
+      } else if (typeof value === 'string') {
+        params.set(key, value);
       }
-      setLoad(false);
-    } catch (err) {
-      console.error(err);
     }
+
+    params.set('page', page.toString());
+
+    return `?${params.toString()}`;
   };
 
-  useEffect(() => {
-    fetchMore();
-  }, [page, queryString]);
-
-  const handleLeft = () => {
-    if (page > 1) {
-      setPage((prev) => prev - 1);
-    }
-  };
-
-  const handleRight = () => {
-    setPage((prev) => prev + 1);
-  };
-
-  return { handleLeft, handleRight, anime, isEnd, isLoad, listLength, page, setPage };
+  return { titles, isNextPage, isPrevPage, page, pageCount, createPageUrl };
 };
 
 export default useAnimeList;

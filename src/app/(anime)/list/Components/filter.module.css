@@ -1,28 +1,32 @@
 .filterBlock {
   max-width: 300px;
   width: 100%;
+  gap: var(--gapVar);
   display: flex;
   flex-wrap: wrap;
 }
 
 .filterBlock > div {
-  background-color: var(--01dp);
+  border-width: 1px;
+  border-color: var(--01dp);
   width: 100%;
   height: fit-content;
   padding: 5%;
-  margin: 5%;
   border-radius: var(--borderRad);
   display: flex;
   flex-wrap: wrap;
 }
 
 .range {
-  padding: 8px 16px;
-  border-radius: var(--borderRad);
-  display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  border: 1px var(--02dp) solid;
-  background-color: var(--01dp);
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+}
+
+.range > input {
   width: fit-content;
+  border-radius: var(--borderRad);
+  padding: 5px;
+  background: var(--00dp);
 }

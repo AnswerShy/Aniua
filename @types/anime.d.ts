@@ -5,7 +5,7 @@ interface AnimeEpisodes {
 
 interface AnimeGenres {
   title: string;
-  id?: number;
+  id: number;
   slug: string;
   title_en?: string;
   description?: string;
@@ -53,4 +53,12 @@ interface AnimeDataInterface {
   mal_score: number;
   description: string;
   characters: Characters[];
+}
+
+interface AnimeDataListInterface {
+  titles: AnimeDataInterface[];
+  page: number;
+  page_count: number;
+  next_page: boolean;
+  previous_page: boolean;
 }
