@@ -17,6 +17,7 @@
     ]
   },
   "dependencies": {
+    "@bprogress/next": "^3.2.12",
     "clsx": "^2.1.1",
     "i18next": "^24.2.0",
     "lodash.debounce": "^4.0.8",

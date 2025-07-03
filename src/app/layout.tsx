@@ -6,6 +6,7 @@ import Header from '@/components/Header/Header';
 import { getTranslatedText } from '@/utils';
 import { Toaster } from 'react-hot-toast';
 import sitemeta from '@/constants/site-metadata';
+import { LoadProvider } from '@/components/IndexComponent';
 
 const roboto = Roboto_Condensed({
   weight: '400',
@@ -45,20 +46,22 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${roboto.className} antialiased`}>
-        <Toaster
-          toastOptions={{
-            style: {
-              background: 'var(--03dp)',
-              color: '#fff',
-            },
-          }}
-        />
-        <Header />
+        <LoadProvider>
+          <Toaster
+            toastOptions={{
+              style: {
+                background: 'var(--03dp)',
+                color: '#fff',
+              },
+            }}
+          />
+          <Header />
 
-        <main>
-          {children}
-          {modal}
-        </main>
+          <main>
+            {children}
+            {modal}
+          </main>
+        </LoadProvider>
       </body>
     </html>
   );

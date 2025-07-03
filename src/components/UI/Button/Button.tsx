@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import styles from './Button.module.css';
 import { TypographyType } from '@/components/UI/UIComponents';
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@bprogress/next/app';
 
 const variants = {
   button: clsx(styles.ghost, styles.button),

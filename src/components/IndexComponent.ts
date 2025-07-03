@@ -1,3 +1,4 @@
+export { default as LoadProvider } from '@/components/LoadProvider/LoadProvider';
 export { default as Banner } from '@/components/Banner/FullScreenBanner';
 export { default as FullScreenBannerSkeleton } from '@/components/Banner/FullScreenBannerSkeleton';
 
