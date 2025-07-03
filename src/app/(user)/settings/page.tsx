@@ -23,18 +23,7 @@ export default function settings() {
     }));
   }, []);
 
-  const handleSectionSubmit = async (
-    section: string,
-    options: Record<
-      string,
-      {
-        way: 'api' | 'local';
-        postbodykey?: string;
-        change: string;
-        options?: string[];
-      }
-    >,
-  ) => {
+  const handleSectionSubmit = async (section: string, options: Record<string, setting>) => {
     const changes = formState[section];
     if (!changes) return;
     const apiPayload: Record<string, string> = {};
@@ -46,7 +35,15 @@ export default function settings() {
       if (config.way === 'api' && config.postbodykey) {
         apiPayload[config.postbodykey] = value;
       } else if (config.way === 'local') {
-        setSetting(config.change as keyof UserSettings, value as string);
+        let parsedValue: string | boolean = value;
+
+        if (config.type == 'radio') {
+          parsedValue = value === 'true';
+        } else {
+          parsedValue = value;
+        }
+
+        setSetting(config.change as keyof UserSettings, parsedValue);
       }
     }
 

@@ -56,7 +56,7 @@ const settingsConfig: SettingsConfig = {
     hide_header_on_scroll: {
       way: 'local' as const,
       type: 'radio',
-      change: 'hide_header_on_scroll',
+      change: 'hide_header',
       label: 'hide_header_on_scroll',
     },
   },
