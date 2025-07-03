@@ -27,6 +27,7 @@ function SearchBar({ variant = 'input', handle }: SearchBarProps) {
         aria-label={getTranslatedText('header.search')}
         onClick={() => {
           router.push('/search');
+          handle?.();
         }}
         onKeyDown={handleKeyDown}
         value={getTranslatedText('header.search')}

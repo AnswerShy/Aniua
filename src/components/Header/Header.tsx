@@ -25,9 +25,14 @@ export default function Header() {
     setMenuOpened((prev) => !prev);
   };
 
+  const menuHide = () => {
+    document.body.classList.remove('body-shifted');
+    setMenuOpened(false);
+  };
+
   const objectToButtons = (obj: Record<string, string>, namespace = 'header') => {
     return Object.entries(obj).map(([key, action]) => (
-      <CustomButton variant="link" url={action} key={key} hideMenu={menuHandler}>
+      <CustomButton variant="link" url={action} key={key} hideMenu={menuHide}>
         {getTranslatedText(`${namespace}.${key}`)}
       </CustomButton>
     ));
@@ -51,7 +56,7 @@ export default function Header() {
         <CustomButton variant="link" url={paths.list}>
           {getTranslatedText(`paths.list`)}
         </CustomButton>
-        <SearchBar />
+        <SearchBar handle={menuHide} />
         <div className="hidden md:flex ml-auto flex gap-[20px] items-center flex-row justify-center">
           <AccountBlock userStoredData={userStoredData} />
         </div>
@@ -64,7 +69,7 @@ export default function Header() {
               menuHandler();
             }}
           />
-          <SearchBar variant="icon" handle={menuHandler} />
+          <SearchBar variant="icon" handle={menuHide} />
         </div>
         {objectToButtons({ ...paths, ...pathsProfile }, 'paths')}
         <div className="flex justify-between w-full mt-auto p-2">
