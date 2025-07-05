@@ -16,9 +16,11 @@ import { useSettingsStore } from '@/stores/settings-store';
 
 export default function Header() {
   const [isMenuOpened, setMenuOpened] = useState(false);
-  const hideHeader = useSettingsStore((state) => state.settings.hide_header);
-  const scrollingDown = hideHeader && useScrollDirection(isMenuOpened);
   const { userStoredData } = useUserProfile();
+
+  const hideHeader = useSettingsStore((state) => state.settings?.hide_header);
+  const scrollingDown = useScrollDirection(!hideHeader);
+  const shouldHideHeader = hideHeader && scrollingDown && !isMenuOpened;
 
   const menuHandler = () => {
     document.body.classList.toggle('body-shifted');
@@ -43,8 +45,10 @@ export default function Header() {
     : () => <>{objectToButtons(getAccount, 'header')}</>;
 
   return (
-    <header className={clsx(styles.header, scrollingDown ? '-translate-y-full' : '-translate-y-0')}>
-      <nav>
+    <header
+      className={clsx(styles.header, shouldHideHeader ? '-translate-y-full' : '-translate-y-0')}
+    >
+      <nav className={styles.headerTop}>
         <MenuIcon
           onClick={() => {
             menuHandler();

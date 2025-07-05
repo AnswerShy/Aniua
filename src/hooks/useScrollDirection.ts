@@ -1,37 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export function useScrollDirection(disabled = false) {
   const [scrollingDown, setScrollingDown] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
     if (disabled) return;
 
-    let ticking = false;
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const isScrollingDown = currentScrollY > lastScrollY;
 
-      if (!ticking) {
+      if (!ticking.current) {
         window.requestAnimationFrame(() => {
+          const isScrollingDown = currentScrollY > lastScrollY.current;
+
           setScrollingDown((prev) => {
             if (prev !== isScrollingDown) return isScrollingDown;
             return prev;
           });
 
-          setLastScrollY(currentScrollY);
-          ticking = false;
+          lastScrollY.current = currentScrollY;
+          ticking.current = false;
         });
 
-        ticking = true;
+        ticking.current = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, disabled]);
+  }, [disabled]);
 
   return scrollingDown;
 }

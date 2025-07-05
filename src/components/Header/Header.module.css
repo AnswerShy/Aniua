@@ -5,8 +5,11 @@
   transition: 0.5s;
 }
 
-.header nav:first-child {
+.headerTop {
   padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+
   display: flex;
   align-items: center;
   gap: 20px;
