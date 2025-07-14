@@ -123,7 +123,7 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
             </CustomButton>
           </Typography>
         </Section.Row>
-        {infoData.characters.length > 1 ? (
+        {infoData.characters?.length > 1 ? (
           <Section.Row>
             <Typography variant="h2">{getTranslatedText('info.Characters')}</Typography>
             <Slider>
