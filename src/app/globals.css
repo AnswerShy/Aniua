@@ -51,7 +51,7 @@
   --cardMaxHeight: 220px;
 
   --blurredFilter: blur(5px);
-  --borderRad: 12px;
+  --borderRad: 0.375rem;
 
   --loadGradient: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%);
 
@@ -59,7 +59,7 @@
   --minButtonWidth: 40px;
 
   --borderSize: 2px;
-  --border: var(--borderSize) solid var(--frontColor);
+  --border: var(--borderSize) solid var(--02dp);
 
   --gapVar: 15px;
 
@@ -81,14 +81,6 @@
 
 .body-shifted {
   transform: translate(var(--sideMenuWidth), 0px);
-}
-
-svg {
-  fill: var(--textSemiColor);
-}
-
-svg:hover {
-  fill: var(--textColor);
 }
 
 body {
