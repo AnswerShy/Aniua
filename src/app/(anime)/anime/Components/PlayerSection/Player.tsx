@@ -143,11 +143,9 @@ const StudioDropdown = ({
   return (
     <Dropdown currentState={studiosList[chooseStudio]}>
       {studiosList.map((studio, index) => (
-        <Dropdown.optionAction
-          key={index}
-          handleOptionSelectAction={() => handleStudio(index)}
-          state={studio}
-        />
+        <CustomButton key={index} onClick={() => handleStudio(index)}>
+          {studio}
+        </CustomButton>
       ))}
     </Dropdown>
   );

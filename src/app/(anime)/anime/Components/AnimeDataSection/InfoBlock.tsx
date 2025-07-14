@@ -93,14 +93,12 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
           {getTranslatedText('info.Watch')}
         </CustomButton>
         {userStoredData.anime_lists && (
-          <Dropdown currentState={getTranslatedText('info.addToList')}>
+          <Dropdown currentState={getTranslatedText('info.addToList')} position="center">
             {userStoredData.anime_lists.map((e) => {
               return (
-                <Dropdown.optionAction
-                  handleOptionSelectAction={() => addToList({ list: e.id || '' })}
-                  key={e.id}
-                  state={e.title}
-                ></Dropdown.optionAction>
+                <CustomButton onClick={() => addToList({ list: e.id || '' })} key={e.id}>
+                  {e.title}
+                </CustomButton>
               );
             })}
           </Dropdown>

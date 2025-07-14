@@ -1,19 +1,15 @@
 'use client';
 
-import { ReactElement, useState } from 'react';
-import styles from './DropDown.module.css';
-import { CustomButton, TypographyType } from '../UIComponents';
-
-import { ArrowDownIcon } from '@/utils/icons';
-import clsx from 'clsx';
+import { useState } from 'react';
 import React from 'react';
+import DropDownButton from './DropDownButton/DropDownButton';
+import DropDownMenu from './DropDownMenu/DropDownMenu';
+import styles from './DropDown.module.css';
 
 interface DropdownProps {
   currentState?: string; //For show current state
   children?: React.ReactNode; //For show current state as Node
-
   customElement?: React.ReactNode; //For show custom element
-
   position?: 'left' | 'right' | 'center'; //For change position of dropdown options menu
 }
 
@@ -30,105 +26,18 @@ const Dropdown = ({
   const hideDropdown = () => setVision(true);
 
   return (
-    <DropdownButton onClick={handleVisible} visible>
-      {/*If children is not provided, then show the default dropdown*/}
-      {customElement ?? (
-        <div role="select" style={{ display: 'flex' }}>
-          {currentState}
-          <ArrowDownIcon />
-        </div>
-      )}
-
-      {/*Options for the dropdown*/}
-      <div
-        className={`${styles.optionsWrap} ${!visible ? styles.hideOptions : null}`}
-        style={{
-          left: position === 'left' ? '0' : position === 'center' ? 'auto' : 'auto',
-          right: position === 'right' ? '0' : 'auto',
-        }}
-      >
-        {React.Children.map(children, (child) =>
-          React.isValidElement(child)
-            ? React.cloneElement(child as ReactElement<{ hideDropdown?: () => void }>, {
-                hideDropdown,
-              })
-            : child,
-        )}
-      </div>
-    </DropdownButton>
+    <div
+      aria-haspopup="listbox"
+      aria-expanded={visible}
+      onClick={handleVisible}
+      aria-controls="dropdown-options"
+      className={styles.dropdownWrapper}
+    >
+      <DropDownButton handle={handleVisible} state={customElement || currentState} />
+      <DropDownMenu hideDropdown={hideDropdown} isVisible={visible} position={position}>
+        {children}
+      </DropDownMenu>
+    </div>
   );
 };
 export default Dropdown;
-
-const DropdownButton = ({
-  children,
-  onClick,
-  visible,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-  visible: boolean;
-}) => (
-  <button
-    className={clsx(
-      `${styles.dropdownButton}`,
-      `${TypographyType['button'].className}`,
-      `${children ? styles.dropdownChildren : null}`,
-    )}
-    onClick={onClick}
-    aria-haspopup="listbox"
-    aria-expanded={visible}
-    aria-controls="dropdown-options"
-  >
-    {children}
-  </button>
-);
-
-const optionUrl = ({
-  href,
-  state,
-  hideDropdown,
-}: {
-  href: string;
-  state: string;
-  hideDropdown?: () => void;
-}) => {
-  return (
-    <>
-      <CustomButton hideMenu={hideDropdown} url={href} classString={styles.option}>
-        {state}
-      </CustomButton>
-    </>
-  );
-};
-
-const optionAction = React.memo(
-  ({
-    handleOptionSelectAction,
-    state,
-    hideDropdown,
-  }: {
-    handleOptionSelectAction: () => void;
-    state?: string;
-    hideDropdown?: () => void;
-  }) => {
-    return (
-      <>
-        <div
-          role="option"
-          className={styles.option}
-          onClick={() => {
-            handleOptionSelectAction();
-            if (hideDropdown) hideDropdown();
-          }}
-        >
-          {state && state.charAt(0).toUpperCase() + state.slice(1)}
-        </div>
-      </>
-    );
-  },
-);
-optionAction.displayName = 'OptionAction';
-
-Dropdown.optionUrl = optionUrl;
-Dropdown.optionAction = optionAction;

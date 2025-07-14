@@ -1,0 +1,24 @@
+.dropdownButton {
+  display: flex;
+  align-items: center;
+  background-color: var(--01dp);
+  padding: 0.137rem;
+  border-radius: var(--borderRad);
+  position: relative;
+  gap: 0;
+  justify-content: center;
+}
+
+.dropdownButton label {
+  padding-left: 0.313rem;
+}
+
+/* animation */
+
+.dropdownButton svg {
+  transition: transform 0.3s;
+}
+
+.dropdownButton:hover svg {
+  transform: rotate(180deg);
+}

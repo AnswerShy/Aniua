@@ -1,0 +1,31 @@
+.dropdownMenu {
+  border-radius: var(--borderRad);
+  position: absolute;
+  top: 100%;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--00dp);
+  margin-top: 15px;
+  border: var(--border);
+}
+
+/* border radius */
+
+.dropdownMenu .option:only-child {
+  border-radius: var(--borderRad);
+}
+
+.dropdownMenu .option:first-child:not(:only-child) {
+  border-radius: var(--borderRad) var(--borderRad) 0 0;
+}
+
+.dropdownMenu .option:last-child:not(:only-child) {
+  border-radius: 0 0 var(--borderRad) var(--borderRad);
+}
+
+.invisible {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}

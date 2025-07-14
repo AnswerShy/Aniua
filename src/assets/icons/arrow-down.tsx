@@ -7,13 +7,13 @@ const ArrowDownIcon: React.FC<IconProps> = ({ size = 25, ...props }) => (
     height={props.height ?? size}
     fill="none"
     stroke="currentColor"
+    strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    strokeWidth="2"
     viewBox="0 0 24 24"
     {...props}
   >
-    <path d="m18 15-6-6-6 6"></path>
+    <path d="m6 9 6 6 6-6"></path>
   </svg>
 );
 
