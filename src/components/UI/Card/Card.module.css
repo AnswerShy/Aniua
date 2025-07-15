@@ -1,6 +1,7 @@
 .cardcontainer {
   max-width: var(--cardMaxWidth);
-  @apply flex flex-col relative gap-0 overflow-hidden p-0 w-full rounded-xl border border-transparent01dp;
+  min-width: var(--cardMinWidth);
+  @apply flex flex-col relative gap-0 overflow-hidden p-0 rounded-xl border border-transparent01dp;
 }
 
 .cardText {
