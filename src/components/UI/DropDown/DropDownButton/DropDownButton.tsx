@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import styles from './dropdownButton.module.css';
 import { ArrowDownIcon } from '@/utils/icons';
+import { CustomButton } from '../../UIComponents';
 
 interface dropdown_button extends HTMLAttributes<HTMLDivElement> {
   state: string | React.ReactNode;
@@ -10,16 +11,21 @@ interface dropdown_button extends HTMLAttributes<HTMLDivElement> {
 function DropDownButton({ state, handle }: dropdown_button) {
   return (
     <>
-      <div className={styles.dropdownButton} onClick={() => handle}>
+      <CustomButton
+        role="button"
+        aria-haspopup="listbox"
+        className={styles.dropdownButton}
+        onClick={() => handle}
+      >
         {typeof state == 'string' ? (
           <>
-            <label>{state}</label>
+            {state}
             <ArrowDownIcon />
           </>
         ) : (
           state
         )}
-      </div>
+      </CustomButton>
     </>
   );
 }

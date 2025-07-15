@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 import DropDownButton from './DropDownButton/DropDownButton';
 import DropDownMenu from './DropDownMenu/DropDownMenu';
@@ -20,13 +20,29 @@ const Dropdown = ({
   position = 'center',
 }: DropdownProps) => {
   const [visible, setVision] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
   const handleVisible = () => {
     setVision((prev) => !prev);
   };
-  const hideDropdown = () => setVision(true);
+  const hideDropdown = () => setVision(false);
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      setVision(false);
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener('click', handleClickOutside);
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div
+      ref={wrapperRef}
       aria-haspopup="listbox"
       aria-expanded={visible}
       onClick={handleVisible}

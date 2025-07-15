@@ -13,6 +13,7 @@ function DropDownMenu({ position, hideDropdown, isVisible, children }: DropDownM
   return (
     <div
       onClick={hideDropdown}
+      role="listbox"
       className={clsx(
         'transition-all duration-200',
         isVisible ? undefined : styles.invisible,

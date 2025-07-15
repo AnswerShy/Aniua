@@ -7,6 +7,13 @@
   position: relative;
   gap: 0;
   justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.dropdownButton:hover {
+  cursor: pointer;
+  background-color: var(--front-900);
 }
 
 .dropdownButton label {
