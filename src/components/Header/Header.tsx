@@ -77,7 +77,7 @@ export default function Header() {
         </div>
         {objectToButtons({ ...paths, ...pathsProfile }, 'paths')}
         <div className="flex justify-between w-full mt-auto p-2">
-          {objectToButtons(getAccount, 'header')}
+          <AccountBlock userStoredData={userStoredData} />
         </div>
       </nav>
     </header>

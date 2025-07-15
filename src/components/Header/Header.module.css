@@ -22,12 +22,6 @@
   cursor: pointer;
 }
 
-@media (max-width: 450px) {
-  .header nav > *:last-child {
-    display: none;
-  }
-}
-
 .hidden {
   pointer-events: none;
   display: none !important;
