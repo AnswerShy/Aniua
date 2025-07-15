@@ -51,10 +51,11 @@
   --cardMinHeight: 200px;
   --cardMaxHeight: 220px;
 
+  --cardPadding: 0.25rem;
+  --borderRadius: 0.75rem;
+
   --blurredFilter: blur(5px);
   --borderRad: 0.375rem;
-
-  --loadGradient: linear-gradient(90deg, var(--00dp) 25%, var(--02dp) 50%, var(--01dp) 75%);
 
   --minButtonHeight: 40px;
   --minButtonWidth: 40px;
@@ -64,20 +65,15 @@
 
   --gapVar: 15px;
 
-  --loadingGradient: linear-gradient(
-    90deg,
-    var(--00dp) 25%,
-    var(--02dp) 50%,
-    var(--01dp) 75%,
-    var(--00dp) 100%
-  );
-  --loadingAnim: shimmer 1s infinite linear !important;
-
   --mdMaxWidth: 768px;
 
   --sideMenuWidth: 250px;
 
   --borderAnimSize: 5px;
+
+  /* LOADING VARS */
+  --loadGradient: linear-gradient(-45deg, var(--00dp) 40%, var(--02dp) 50%, var(--00dp) 60%);
+  --loadingAnim: shimmer 1s infinite linear !important;
 }
 
 .body-shifted {

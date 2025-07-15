@@ -17,8 +17,8 @@ function AnimeList({ anime }: AnimeListProps) {
         </Section>
       ) : (
         <Section typeOfSection={'grid'}>
-          {anime.map((el: AnimeDataInterface, index: number) => (
-            <Card key={index} image={el.poster} title={el.title} slug={el.slug}></Card>
+          {anime.map((el: AnimeDataInterface) => (
+            <Card key={el.slug} image={el.poster} title={el.title} slug={el.slug}></Card>
           ))}
         </Section>
       )}

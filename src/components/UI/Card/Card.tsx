@@ -34,7 +34,15 @@ const genres = (year: number, genres: AnimeGenres[] | []) => {
 const Card: React.FC<cardProps> = ({ image, title, slug, variant = 'default', additional }) => {
   return variant == 'default' ? (
     <CustomButton url={`/anime/${slug}`} classString={styles.cardcontainer}>
-      <Image src={image} alt={title} width={500} height={750} className={styles.cardImage} />
+      <Image
+        src={image}
+        alt={title}
+        width={500}
+        height={750}
+        className={styles.cardImage}
+        loading="eager"
+        quality={50}
+      />
       <p className={styles.cardText}>{title}</p>
     </CustomButton>
   ) : (
