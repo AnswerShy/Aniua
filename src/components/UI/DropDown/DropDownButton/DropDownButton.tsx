@@ -11,8 +11,14 @@ function DropDownButton({ state, handle }: dropdown_button) {
   return (
     <>
       <div className={styles.dropdownButton} onClick={() => handle}>
-        <label>{state}</label>
-        {typeof state == 'string' && <ArrowDownIcon />}
+        {typeof state == 'string' ? (
+          <>
+            <label>{state}</label>
+            <ArrowDownIcon />
+          </>
+        ) : (
+          state
+        )}
       </div>
     </>
   );
