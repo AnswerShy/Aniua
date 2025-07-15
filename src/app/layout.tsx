@@ -50,7 +50,7 @@ export default function RootLayout({
           <Toaster
             toastOptions={{
               style: {
-                background: 'var(--03dp)',
+                background: 'var(--front-800)',
                 color: '#fff',
               },
             }}

@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border: 1px var(--02dp) solid;
+  border: 1px var(--front-900) solid;
   width: fit-content;
 }
 
 .checkbox:hover,
 .checkbox:has(.checkinput:focus-visible) {
-  background-color: var(--04dp);
+  background-color: var(--front-700);
   cursor: pointer;
 }
 
@@ -20,5 +20,5 @@
 }
 
 .checkbox:has(.checkinput:checked) {
-  background-color: var(--04dp);
+  background-color: var(--front-700);
 }

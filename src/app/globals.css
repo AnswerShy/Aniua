@@ -7,33 +7,20 @@
 :root {
   color-scheme: light dark;
 
-  --backColor: light-dark(#ffffff, #121212);
   --frontColor: light-dark(#121212, #ffffff);
+  --backColor: light-dark(#ffffff, #121212);
 
-  --00dp: color-mix(in oklab, var(--frontColor) 0%, var(--backColor));
-  --01dp: color-mix(in oklab, var(--frontColor) 5%, var(--backColor));
-  --02dp: color-mix(in oklab, var(--frontColor) 7%, var(--backColor));
-  --03dp: color-mix(in oklab, var(--frontColor) 8%, var(--backColor));
-  --04dp: color-mix(in oklab, var(--frontColor) 9%, var(--backColor));
-  --06dp: color-mix(in oklab, var(--frontColor) 11%, var(--backColor));
-  --08dp: color-mix(in oklab, var(--frontColor) 12%, var(--backColor));
-  --12dp: color-mix(in oklab, var(--frontColor) 14%, var(--backColor));
-  --16dp: color-mix(in oklab, var(--frontColor) 15%, var(--backColor));
-  --24dp: color-mix(in oklab, var(--frontColor) 16%, var(--backColor));
-
-  --primary00dp: color-mix(in oklab, var(--backColor) 0%, var(--frontColor));
-  --primary01dp: color-mix(in oklab, var(--backColor) 5%, var(--frontColor));
-  --primary02dp: color-mix(in oklab, var(--backColor) 7%, var(--frontColor));
-  --primary03dp: color-mix(in oklab, var(--backColor) 8%, var(--frontColor));
-  --primary04dp: color-mix(in oklab, var(--backColor) 9%, var(--frontColor));
-  --primary06dp: color-mix(in oklab, var(--backColor) 11%, var(--frontColor));
-  --primary08dp: color-mix(in oklab, var(--backColor) 12%, var(--frontColor));
-  --primary12dp: color-mix(in oklab, var(--backColor) 14%, var(--frontColor));
-  --primary16dp: color-mix(in oklab, var(--backColor) 15%, var(--frontColor));
-  --primary24dp: color-mix(in oklab, var(--backColor) 16%, var(--frontColor));
-
-  --t00dp: color-mix(in oklab, var(--backColor) 85%, transparent);
-  --t01dp: color-mix(in oklab, var(--01dp) 75%, transparent);
+  --front-50: color-mix(in oklab, var(--frontColor) 95%, var(--backColor));
+  --front-100: color-mix(in oklab, var(--frontColor) 90%, var(--backColor));
+  --front-200: color-mix(in oklab, var(--frontColor) 80%, var(--backColor));
+  --front-300: color-mix(in oklab, var(--frontColor) 70%, var(--backColor));
+  --front-400: color-mix(in oklab, var(--frontColor) 60%, var(--backColor));
+  --front-500: color-mix(in oklab, var(--frontColor) 50%, var(--backColor));
+  --front-600: color-mix(in oklab, var(--frontColor) 40%, var(--backColor));
+  --front-700: color-mix(in oklab, var(--frontColor) 15%, var(--backColor));
+  --front-800: color-mix(in oklab, var(--frontColor) 12.5%, var(--backColor));
+  --front-900: color-mix(in oklab, var(--frontColor) 10%, var(--backColor));
+  --front-950: color-mix(in oklab, var(--frontColor) 5%, var(--backColor));
 
   --textColor: light-dark(#121212, #ffffff);
   --textSemiColor: light-dark(#212121, #ffffffa5);
@@ -61,7 +48,7 @@
   --minButtonWidth: 40px;
 
   --borderSize: 2px;
-  --border: var(--borderSize) solid var(--02dp);
+  --border: var(--borderSize) solid var(--front-950);
 
   --gapVar: 15px;
 
@@ -72,11 +59,25 @@
   --borderAnimSize: 5px;
 
   /* Shine VARS */
-  --shineGradient: linear-gradient(-45deg, var(--01dp) 40%, var(--06dp) 50%, var(--01dp) 60%);
-  --shineAnimation: shimmer 1s infinite linear !important;
+  --shineGradient: linear-gradient(
+    60deg,
+    var(--front-950) 45%,
+    var(--front-800) 50%,
+    var(--front-950) 55%
+  );
+  --shineAnimation: shimmer 5s infinite linear !important;
 
   /* Loading var */
   --pulseAnimation: pulse-animation 1s linear forwards infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200%;
+  }
+  100% {
+    background-position: -200%;
+  }
 }
 
 .body-shifted {
@@ -119,19 +120,10 @@ form {
 }
 
 .layer1 {
-  background-color: var(--01dp);
+  background-color: var(--front-50);
   border-radius: var(--borderRad);
   box-shadow: var(--shadowHover);
   padding: 15px;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 100%;
-  }
-  100% {
-    background-position: -100%;
-  }
 }
 
 /* Buttons and Inputs */
@@ -187,14 +179,14 @@ kbd {
 @keyframes pulse-animation {
   0% {
     opacity: 0.1;
-    background-color: var(--02dp);
+    background-color: var(--front-800);
   }
   50% {
-    background-color: var(--04dp);
+    background-color: var(----front-300);
     opacity: 1;
   }
   100% {
-    background-color: var(--02dp);
+    background-color: var(--front-800);
     opacity: 0.1;
   }
 }

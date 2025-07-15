@@ -4,5 +4,5 @@
   height: var(--minButtonHeight);
   text-align: left;
   border-radius: var(--borderRad);
-  background-color: var(--00dp);
+  background-color: var(--backColor);
 }

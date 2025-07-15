@@ -8,7 +8,7 @@
 
 .filterBlock > div {
   border-width: 1px;
-  border-color: var(--01dp);
+  border-color: var(--front-950);
   width: 100%;
   height: fit-content;
   padding: 5%;
@@ -28,5 +28,5 @@
   width: fit-content;
   border-radius: var(--borderRad);
   padding: 5px;
-  background: var(--00dp);
+  background: var(--backColor);
 }

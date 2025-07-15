@@ -15,19 +15,17 @@
 
 .cardcontainer:hover,
 .cardcontainer:focus {
-  background-color: var(--03dp);
   box-shadow: var(--shadow03dp);
-
-  background-color: var(--02dp);
-  color: transparent;
+  background-color: var(--front-900);
   background: var(--shineGradient);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite linear;
+  color: transparent;
+  background-size: 400%;
+  animation: var(--shineAnimation);
 }
 
 .load,
 .load * {
-  background-color: var(--02dp);
+  background-color: var(--front-900);
   color: transparent;
   background: var(--shineGradient);
   background-size: 200% 100%;
@@ -36,7 +34,7 @@
 
 @keyframes shimmer {
   0% {
-    background-position: 100%;
+    background-position: 200%;
   }
   100% {
     background-position: -100%;
@@ -72,7 +70,7 @@
 
 .cardHorizontal:hover,
 .cardHorizontal:focus {
-  background-color: var(--03dp);
+  background-color: var(--front-800);
   box-shadow: var(--shadow03dp);
   transform: scale(1.02);
   z-index: 2;

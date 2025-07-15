@@ -8,7 +8,7 @@
 
 .message:hover {
   cursor: pointer;
-  background-color: var(--02dp);
+  background-color: var(--front-900);
   border-radius: var(--borderRad);
 }
 

@@ -20,12 +20,12 @@
 
 .button:not(:disabled):hover {
   cursor: pointer;
-  background-color: var(--01dp);
+  background-color: var(--front-950);
 }
 
 .button:not(:disabled):focus {
   cursor: pointer;
-  background-color: var(--03dp);
+  background-color: var(--front-800);
 }
 
 .button:disabled {
@@ -53,11 +53,11 @@
 }
 
 .ghost:not(:disabled):hover {
-  background-color: var(--01dp);
+  background-color: var(--front-950);
 }
 
 .ghost:not(:disabled):focus {
-  background-color: var(--03dp);
+  background-color: var(--front-800);
 }
 
 /* Primary button */
@@ -69,41 +69,41 @@
 
 .primary:not(:disabled):hover {
   cursor: pointer;
-  background-color: var(--primary24dp);
+  background-color: var(--front-200);
 }
 
 .primary:not(:disabled):focus {
-  background-color: var(--primary16dp);
+  background-color: var(--front-50);
 }
 /* Secondary button */
 
 .secondary {
-  background-color: var(--01dp);
+  background-color: var(--front-950);
 }
 
 .secondary:not(:disabled):hover {
   cursor: pointer;
-  background-color: var(--02dp);
+  background-color: var(--front-900);
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.25),
     0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .secondary:not(:disabled):focus {
-  background-color: var(--06dp);
+  background-color: var(--front-500);
 }
 /* Outline button */
 
 .outline {
-  border: 1px var(--01dp) solid;
+  border: 1px var(--front-950) solid;
 }
 
 .outline:not(:disabled):hover {
-  background-color: var(--01dp);
+  background-color: var(--front-950);
 }
 
 .outline:focus {
-  background-color: var(--02dp);
+  background-color: var(--front-900);
 }
 
 /* Link button variant */

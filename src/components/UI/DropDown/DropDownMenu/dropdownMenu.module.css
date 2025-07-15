@@ -5,7 +5,7 @@
   width: fit-content;
   display: flex;
   flex-direction: column;
-  background-color: var(--00dp);
+  background-color: var(--backColor);
   margin-top: 15px;
   border: var(--border);
 }

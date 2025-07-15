@@ -58,7 +58,7 @@
 }
 
 .load {
-  background-color: var(--02dp);
+  background-color: var(--front-900);
   color: transparent;
   background-size: 200% 100%;
   animation: var(--pulseAnimation);
