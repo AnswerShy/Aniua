@@ -22,6 +22,9 @@
   --front-900: color-mix(in oklab, var(--frontColor) 10%, var(--backColor));
   --front-950: color-mix(in oklab, var(--frontColor) 5%, var(--backColor));
 
+  --front-transparent-950: color-mix(in oklab, var(--front-950) 75%, transparent);
+  --front-transparent-1000: color-mix(in oklab, var(--backColor) 75%, transparent);
+
   --textColor: light-dark(#121212, #ffffff);
   --textSemiColor: light-dark(#212121, #ffffffa5);
 

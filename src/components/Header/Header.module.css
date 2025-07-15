@@ -14,7 +14,7 @@
   align-items: center;
   gap: 20px;
   border-bottom: 2px var(--front-950) solid;
-  background-color: var(--backColor);
+  background-color: var(--front-transparent-1000);
   backdrop-filter: var(--blurredFilter);
 }
 
