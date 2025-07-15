@@ -60,9 +60,8 @@
 .load {
   background-color: var(--02dp);
   color: transparent;
-  background: var(--loadingGradient);
   background-size: 200% 100%;
-  animation: var(--loadingAnim);
+  animation: var(--pulseAnimation);
 }
 
 .bannerBaseInfo,
@@ -75,13 +74,4 @@
 .bannerDescriptionLoad {
   height: 100px;
   width: 75%;
-}
-
-@keyframes text-animate {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }

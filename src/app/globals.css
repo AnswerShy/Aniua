@@ -71,9 +71,12 @@
 
   --borderAnimSize: 5px;
 
-  /* LOADING VARS */
-  --loadGradient: linear-gradient(-45deg, var(--00dp) 40%, var(--02dp) 50%, var(--00dp) 60%);
-  --loadingAnim: shimmer 1s infinite linear !important;
+  /* Shine VARS */
+  --shineGradient: linear-gradient(-45deg, var(--01dp) 40%, var(--06dp) 50%, var(--01dp) 60%);
+  --shineAnimation: shimmer 1s infinite linear !important;
+
+  /* Loading var */
+  --pulseAnimation: pulse-animation 1s linear forwards infinite;
 }
 
 .body-shifted {
@@ -178,5 +181,20 @@ kbd {
   .border-animate:focus::after {
     transform: scaleX(1);
     transform-origin: left;
+  }
+}
+
+@keyframes pulse-animation {
+  0% {
+    opacity: 0.1;
+    background-color: var(--02dp);
+  }
+  50% {
+    background-color: var(--04dp);
+    opacity: 1;
+  }
+  100% {
+    background-color: var(--02dp);
+    opacity: 0.1;
   }
 }

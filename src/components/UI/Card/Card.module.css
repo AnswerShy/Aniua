@@ -20,7 +20,7 @@
 
   background-color: var(--02dp);
   color: transparent;
-  background: var(--loadGradient);
+  background: var(--shineGradient);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite linear;
 }
@@ -29,7 +29,7 @@
 .load * {
   background-color: var(--02dp);
   color: transparent;
-  background: var(--loadGradient);
+  background: var(--shineGradient);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite linear;
 }

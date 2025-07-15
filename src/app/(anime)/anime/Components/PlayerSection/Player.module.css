@@ -30,7 +30,7 @@
 .playerLoad {
   background: var(--loadingGradient);
   background-size: 200% 100%;
-  animation: var(--loadingAnim);
+  animation: var(--shineAnimation);
   border-radius: 12px;
 }
 
