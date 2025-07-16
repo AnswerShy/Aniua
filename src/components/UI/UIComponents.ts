@@ -2,9 +2,11 @@ export { default as Dropdown } from '@/components/UI/DropDown/DropDown';
 
 export { default as CustomButton } from '@/components/UI/Button/Button';
 export { default as CustomButtonStyles } from '@/components/UI/Button/Button.module.css';
+export { default as Range } from './Range/Range';
 
 export { default as Checkbox } from '@/components/UI/Checkbox/Checkbox';
 
+export { default as Collapsible } from './Collapsible/Collapsible';
 export { default as TextField } from '@/components/UI/TextField/TextField';
 
 export { default as Card } from '@/components/UI/Card/Card';

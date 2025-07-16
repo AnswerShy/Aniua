@@ -57,7 +57,7 @@ const Col: React.FC<ColProps> = ({ children, title, widthState = '1', className 
   return (
     <>
       <div className={clsx(widthClasses[widthState], styles.col, className)}>
-        <Typography variant="h2">{title}</Typography>
+        {title && <Typography variant="h2">{title}</Typography>}
         {children}
       </div>
     </>
