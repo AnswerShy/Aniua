@@ -81,11 +81,11 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
   };
   return (
     <Section typeOfSection={'ThreeColsSection'}>
-      <Section.Col className="lg:w-[13%]">
+      <Section.Col widthState="1/5">
         <Image
           src={infoData.poster}
           alt={infoData.title}
-          className="rounded-xl self-center"
+          className="rounded-xl self-center w-full"
           height={350}
           width={250}
         />
@@ -138,7 +138,7 @@ const InfoBlock: React.FC<Props> = ({ infoData, playerID }) => {
         ) : null}
       </Section.Col>
 
-      <Section.Col widthState="1/4">
+      <Section.Col widthState="1/5">
         <Table title={getTranslatedText('info.Details')}>
           <Table.row
             title={getTranslatedText('info.Type')}
