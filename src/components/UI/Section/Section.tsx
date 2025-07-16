@@ -39,6 +39,7 @@ const Row: React.FC<RowProps> = ({ children }) => {
 };
 
 const widthClasses: Record<string, string> = {
+  '1/5': 'lg:w-1/5',
   '1/4': 'lg:w-1/4',
   '2/4': 'lg:w-2/4',
   '3/4': 'lg:w-3/4',
