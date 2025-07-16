@@ -4,16 +4,21 @@ import { useAnimeFilters } from '@/hooks/useFilter';
 import React from 'react';
 
 import styles from './filter.module.css';
-import { Checkbox } from '@/components/UI/UIComponents';
+import { Checkbox, Collapsible, Range } from '@/components/UI/UIComponents';
 import { getTranslatedText } from '@/utils';
 
 function Filters() {
   const { filters, selected, doChange, doChangeRange } = useAnimeFilters();
+  console.log(selected);
   return (
-    <nav className={styles.filterBlock}>
-      {Object.entries(filters ?? {}).map(([key, value]) => {
+    <>
+      {Object.entries(filters ?? {}).map(([key, value], index) => {
         return (
-          <FilterBlock label={getTranslatedText(`filters.${key}`)} key={key}>
+          <Collapsible
+            label={getTranslatedText(`filters.${key}`)}
+            hidden={index < 2 ? true : false}
+            key={key}
+          >
             {value.type_of_filter == 'option' ? (
               <>
                 {(value.values ?? []).map((e: string | AnimeGenres) => {
@@ -40,7 +45,7 @@ function Filters() {
                     placeholder={String(value.minValue)}
                     min={value.minValue ?? 0}
                     max={value.maxValue ?? 2000}
-                    value={selected[`${key}:min`]}
+                    value={selected[`${key}`]?.[0]}
                   />
                   <input
                     key={`${key}:max`}
@@ -50,25 +55,33 @@ function Filters() {
                     placeholder={String(value.maxValue)}
                     min={value.minValue}
                     max={value.maxValue}
-                    value={selected[`${key}:max`]}
+                    value={selected[`${key}`]?.[1]}
                   />
                 </div>
+                <Range
+                  minValue={value.minValue || 1980}
+                  maxValue={value.maxValue || 2025}
+                  value={[
+                    Number(selected[`${key}`]?.[0] || value.minValue),
+                    Number(selected[`${key}`]?.[1] || value.maxValue),
+                  ]}
+                >
+                  <Range.Thumb
+                    index={0}
+                    onChange={(val) => doChangeRange(key, val.toString(), 0)}
+                  />
+                  <Range.Thumb
+                    index={1}
+                    onChange={(val) => doChangeRange(key, val.toString(), 1)}
+                  />
+                </Range>
               </>
             )}
-          </FilterBlock>
+          </Collapsible>
         );
       })}
-    </nav>
+    </>
   );
 }
-
-const FilterBlock = ({ label, children }: { label: string; children: React.ReactNode }) => {
-  return (
-    <div className="flex flex-col gap-2">
-      <label>{label}</label>
-      <div className="flex flex-wrap gap-2">{children}</div>
-    </div>
-  );
-};
 
 export default Filters;
