@@ -1,0 +1,18 @@
+.block {
+  border-width: 1px;
+  border-color: var(--front-950);
+  width: 100%;
+  height: fit-content;
+  border-radius: var(--borderRad);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  @apply p-1;
+}
+
+.block:hover {
+  background-color: var(--front-950);
+}
+.block:focus {
+  border-color: var(--front-800);
+}
