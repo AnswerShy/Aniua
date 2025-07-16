@@ -1,6 +1,7 @@
 import React from 'react';
 import { CustomButton, Typography } from '../UIComponents';
 import { paths } from '@/constants/headersconst';
+import styles from './Table.module.css';
 
 interface TableProps {
   title?: string;
@@ -11,7 +12,7 @@ function Table({ title, children }: TableProps) {
   return (
     <div className="flex flex-col gap-4">
       <Typography variant="h2">{title}</Typography>
-      <div className="bg-c01dp p-4 min-w-[250px] rounded-xl">{children}</div>
+      <div className={styles.table}>{children}</div>
     </div>
   );
 }
@@ -25,11 +26,9 @@ interface RowProps {
 const Row = ({ title, data, url }: RowProps) => {
   if (!data) return;
   return (
-    <div className="flex flex-row w-full items-center justify-between border-b-2 border-dashed border-c02dp">
-      <span className="py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-        {title}:
-      </span>
-      <div className="flex flex-col">
+    <div className={styles.tableRow}>
+      <span className="">{title}:</span>
+      <div className={styles.tableRowRight}>
         {typeof data !== 'string' ? (
           Object.entries(data).map((element, key) => {
             return (

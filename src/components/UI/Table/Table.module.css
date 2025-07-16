@@ -1,0 +1,32 @@
+.table {
+  @apply p-1 min-w-[150px] rounded-xl border border-c02dp;
+  overflow: hidden;
+}
+
+.tableRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.tableRow:hover {
+  background-color: var(--front-950);
+}
+
+.tableRowRight {
+  display: flex;
+  gap: 5px;
+}
+
+.table .tableRow:only-child {
+  border-radius: var(--borderRad);
+}
+
+.table .tableRow:first-child:not(:only-child) {
+  @apply rounded-t-xl;
+}
+.table .tableRow:last-child:not(:only-child) {
+  @apply rounded-b-xl;
+}
