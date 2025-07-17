@@ -1,0 +1,38 @@
+.popoverCard {
+  position: absolute;
+  width: 250px;
+  border-radius: var(--borderRad);
+  background-color: var(--backColor);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 4px;
+  border: 1px solid var(--front-950);
+}
+
+.popover-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.popover-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.popoverDetails {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.popoverDescription {
+  color: var(--front-300);
+}
