@@ -9,6 +9,7 @@ export { default as Checkbox } from '@/components/UI/Checkbox/Checkbox';
 export { default as Collapsible } from './Collapsible/Collapsible';
 export { default as TextField } from '@/components/UI/TextField/TextField';
 
+export { default as CardStyles } from '@/components/UI/Card/Card.module.css';
 export { default as Card } from '@/components/UI/Card/Card';
 export { default as CardSkeletonBlock } from '@/components/UI/Card/CardSkeleton';
 
@@ -25,3 +26,6 @@ export { default as Table } from '@/components/UI/Table/Table';
 
 export { default as Slider } from '@/components/UI/Slider/Slider';
 export { default as ProfilePicture } from '@/components/UI/ProfilePicture/pfp';
+
+export { default as Tooltip } from '@/components/UI/Tooltip/Tooltip';
+export { default as Popover } from '@/components/UI/Popover/Popover';
