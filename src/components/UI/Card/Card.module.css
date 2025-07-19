@@ -1,5 +1,7 @@
 .cardcontainer {
   min-width: var(--cardMinWidth);
+  max-width: var(--cardMaxWidth);
+  height: 100%;
   @apply flex flex-col relative gap-0 overflow-hidden p-1 rounded-xl border border-transparent01dp;
 }
 
