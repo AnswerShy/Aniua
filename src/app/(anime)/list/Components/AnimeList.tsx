@@ -16,7 +16,7 @@ interface AnimeListProps {
 
 function AnimeList({ anime }: AnimeListProps) {
   return (
-    <div>
+    <>
       {anime == null ? null : (
         <Section typeOfSection={'grid'}>
           {anime.map((el: AnimeDataInterface) => (
@@ -39,7 +39,7 @@ function AnimeList({ anime }: AnimeListProps) {
           ))}
         </Section>
       )}
-    </div>
+    </>
   );
 }
 
