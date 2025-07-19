@@ -1,7 +1,7 @@
 .tooltip-wrapper {
   display: flex;
   flex-shrink: 0;
-  width: 100%;
+  width: fit-content;
   height: 100%;
   position: relative;
 }
