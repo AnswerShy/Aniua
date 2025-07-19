@@ -5,6 +5,7 @@ export { default as CustomButtonStyles } from '@/components/UI/Button/Button.mod
 export { default as Range } from './Range/Range';
 
 export { default as Checkbox } from '@/components/UI/Checkbox/Checkbox';
+export { default as CheckboxStyles } from '@/components/UI/Checkbox/Checkbox.module.css';
 
 export { default as Collapsible } from './Collapsible/Collapsible';
 export { default as TextField } from '@/components/UI/TextField/TextField';
