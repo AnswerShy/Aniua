@@ -75,3 +75,31 @@
   height: 100px;
   width: 75%;
 }
+
+.heroTrailerContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: clip;
+  left: 0;
+  bottom: 0;
+}
+
+.heroTrailerContainer::after {
+  content: ' ';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 100%);
+  z-index: -1;
+}
+
+.heroTrailer {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

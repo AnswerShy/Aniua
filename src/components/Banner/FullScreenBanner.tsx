@@ -1,18 +1,18 @@
 'use client';
 
+import { paths } from '@/constants/headersconst';
+import { getTranslatedText } from '@/utils';
 import descriptionCutter from '@/utils/descriptionCutter';
-import styles from './FullScreenBanner.module.css';
+import clsx from 'clsx';
 import Image from 'next/image';
 import {
+  CreepingText,
+  CustomButton,
   Section,
   Typography,
   TypographyType,
-  CreepingText,
-  CustomButton,
 } from '../UI/UIComponents';
-import clsx from 'clsx';
-import { getTranslatedText } from '@/utils';
-import { paths } from '@/constants/headersconst';
+import styles from './FullScreenBanner.module.css';
 
 interface Banner_props {
   bannerImage?: string | null;
@@ -39,6 +39,14 @@ const Banner: React.FC<Banner_props> = ({
   const usePicAsBg = false;
   return (
     <Section typeOfSection={'BannerSection'}>
+      <div className={styles.heroTrailerContainer}>
+        <iframe
+          className={styles.heroTrailer}
+          width="560"
+          height="315"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        ></iframe>
+      </div>
       <InfoBlockBanner
         bannerTitle={bannerTitle}
         bannerYear={bannerYear}
@@ -104,7 +112,9 @@ const InfoBlockBanner = ({
           <Typography variant="p">unknow genres</Typography>
         )}
       </div>
-      <p className={`${styles.bannerDescription}`}>{descriptionCutter(bannerDesc, 25)}...</p>
+      <p className={`${styles.bannerDescription}`}>
+        {descriptionCutter(bannerDesc, 25)}... <a href="#data-section">більше...</a>
+      </p>
     </div>
   );
 };

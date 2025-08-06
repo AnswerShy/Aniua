@@ -1,8 +1,11 @@
 .BannerSection {
   display: flex;
-  height: 100vh;
+  height: 90svh;
   align-items: flex-end;
-  padding: 100px 50px;
+  margin: 0 50px;
+  padding: 50px 50px;
+  position: relative;
+  overflow: clip;
 }
 
 .ThreeColsSection {
